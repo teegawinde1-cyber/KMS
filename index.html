@@ -499,6 +499,231 @@
   .payment-list{display:flex; flex-direction:column; gap:10px; margin-top:10px;}
   .payment-link{display:inline-block; text-decoration:none; font-weight:800;}
 
+  /* ==================== LOGO STUDIO PRO ==================== */
+  :root{
+    --studio-bg:#0a0c10;
+    --studio-panel:#141821;
+    --studio-input:#1a1f2b;
+    --studio-border:rgba(255,255,255,0.07);
+    --studio-hover:rgba(255,255,255,0.04);
+    --studio-gold:#e0b15c;
+    --studio-indigo:#5b6cf0;
+    --studio-green:#3fb68b;
+    --studio-red:#e25555;
+  }
+  .studio-section{ background:var(--studio-bg); padding:0; }
+  .studio-hero-bar{
+    background: linear-gradient(135deg, rgba(91,108,240,0.15), rgba(224,177,92,0.08));
+    border-bottom:1px solid var(--studio-border);
+    padding:40px 24px 30px; text-align:center;
+  }
+  .studio-hero-bar h2{
+    font-size:clamp(1.6rem, 4vw, 2.6rem); margin-bottom:8px;
+    background:linear-gradient(135deg, var(--studio-gold), #f0d090);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .studio-hero-bar p{ color:var(--muted); max-width:600px; margin:0 auto; font-size:.95rem; }
+  .studio-badge-row{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:18px; }
+  .studio-badge{ font-size:.72rem; padding:4px 12px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid var(--studio-border); color:var(--muted); }
+  .studio-badge b{ color:var(--studio-gold); }
+
+  .studio-wrap{ max-width:1200px; margin:0 auto; padding:24px; display:grid; gap:0; grid-template-columns:1fr; }
+  @media(min-width:920px){ .studio-wrap{ grid-template-columns:380px 1fr; gap:0; } }
+
+  .studio-controls{ background:var(--studio-panel); border:1px solid var(--studio-border); border-radius:14px; overflow:hidden; }
+  @media(min-width:920px){ .studio-controls{ border-radius:14px 0 0 14px; border-right:none; } }
+  .studio-tabs{ display:flex; border-bottom:1px solid var(--studio-border); background:rgba(0,0,0,0.2); overflow-x:auto; }
+  .studio-tab{ flex:1; min-width:64px; padding:14px 6px; text-align:center; cursor:pointer; font-size:.78rem; font-weight:600; color:var(--muted); border:none; background:none; border-bottom:2px solid transparent; transition:all .2s; white-space:nowrap; }
+  .studio-tab:hover{ color:var(--text); }
+  .studio-tab.active{ color:var(--studio-gold); border-bottom-color:var(--studio-gold); }
+  .studio-tab svg{ width:18px; height:18px; display:block; margin:0 auto 4px; }
+
+  .studio-panel-body{ padding:20px; max-height:620px; overflow-y:auto; }
+  .studio-panel-body::-webkit-scrollbar{ width:6px; }
+  .studio-panel-body::-webkit-scrollbar-thumb{ background:rgba(255,255,255,0.1); border-radius:3px; }
+
+  .studio-field{ margin-bottom:18px; }
+  .studio-field label{ display:block; font-size:.8rem; color:var(--muted); margin-bottom:6px; font-weight:500; }
+  .studio-input, .studio-select, .studio-textarea{ width:100%; padding:10px 14px; border-radius:10px; border:1px solid var(--studio-border); background:var(--studio-input); color:var(--text); font-family:inherit; font-size:.9rem; transition:border-color .2s; }
+  .studio-input:focus, .studio-select:focus, .studio-textarea:focus{ border-color:var(--studio-gold); outline:none; }
+  .studio-textarea{ resize:vertical; min-height:60px; }
+
+  .template-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .template-card{ aspect-ratio:1; border:1px solid var(--studio-border); border-radius:10px; background:var(--studio-input); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; position:relative; overflow:hidden; }
+  .template-card:hover{ border-color:var(--studio-gold); background:var(--studio-hover); }
+  .template-card.active{ border-color:var(--studio-gold); box-shadow:0 0 0 2px rgba(224,177,92,0.3); }
+  .template-card svg{ width:80%; height:80%; }
+  .template-card .tpl-name{ position:absolute; bottom:0; left:0; right:0; font-size:.6rem; text-align:center; padding:2px; background:rgba(0,0,0,0.5); color:var(--muted); }
+  .template-card.active .tpl-name{ color:var(--studio-gold); }
+
+  .icon-category-row{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+  .icon-cat-btn{ padding:5px 12px; border-radius:999px; border:1px solid var(--studio-border); background:var(--studio-input); color:var(--muted); font-size:.75rem; cursor:pointer; transition:all .2s; }
+  .icon-cat-btn:hover{ color:var(--text); }
+  .icon-cat-btn.active{ background:var(--studio-gold); color:#1a1305; border-color:var(--studio-gold); }
+  .icon-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:6px; max-height:240px; overflow-y:auto; }
+  .icon-grid::-webkit-scrollbar{ width:5px; }
+  .icon-grid::-webkit-scrollbar-thumb{ background:rgba(255,255,255,0.1); border-radius:3px; }
+  .icon-item{ aspect-ratio:1; border:1px solid var(--studio-border); border-radius:8px; background:var(--studio-input); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .15s; color:var(--muted); }
+  .icon-item:hover{ border-color:var(--studio-gold); color:var(--text); }
+  .icon-item.active{ border-color:var(--studio-gold); background:rgba(224,177,92,0.12); color:var(--studio-gold); }
+  .icon-item svg{ width:60%; height:60%; }
+
+  .palette-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px; }
+  .palette-card{ cursor:pointer; border-radius:10px; overflow:hidden; border:2px solid transparent; transition:all .2s; }
+  .palette-card:hover{ transform:scale(1.05); }
+  .palette-card.active{ border-color:var(--studio-gold); }
+  .palette-swatches{ display:flex; height:32px; }
+  .palette-swatches div{ flex:1; }
+  .palette-name{ font-size:.65rem; text-align:center; padding:3px; background:var(--studio-input); color:var(--muted); }
+
+  .color-row{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .color-row label{ flex:1; font-size:.82rem; color:var(--muted); }
+  .color-picker-wrap{ width:44px; height:44px; border-radius:10px; border:2px solid var(--studio-border); overflow:hidden; cursor:pointer; position:relative; flex:none; }
+  .color-picker-wrap input[type=color]{ position:absolute; top:-4px; left:-4px; width:56px; height:56px; border:none; cursor:pointer; }
+  .color-hex{ width:90px; padding:8px 10px; border-radius:8px; border:1px solid var(--studio-border); background:var(--studio-input); color:var(--text); font-size:.82rem; font-family:monospace; }
+
+  .font-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .font-card{ padding:12px 10px; border:1px solid var(--studio-border); border-radius:10px; background:var(--studio-input); cursor:pointer; text-align:center; transition:all .2s; }
+  .font-card:hover{ border-color:var(--studio-gold); }
+  .font-card.active{ border-color:var(--studio-gold); background:rgba(224,177,92,0.08); }
+  .font-card .font-sample{ font-size:1.4rem; line-height:1; margin-bottom:4px; }
+  .font-card .font-name{ font-size:.68rem; color:var(--muted); }
+
+  .studio-slider{ width:100%; -webkit-appearance:none; appearance:none; height:6px; border-radius:3px; background:var(--studio-input); outline:none; }
+  .studio-slider::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:18px; height:18px; border-radius:50%; background:var(--studio-gold); cursor:pointer; border:2px solid var(--studio-panel); }
+  .studio-slider::-moz-range-thumb{ width:18px; height:18px; border-radius:50%; background:var(--studio-gold); cursor:pointer; border:2px solid var(--studio-panel); }
+  .slider-row{ display:flex; align-items:center; gap:12px; }
+  .slider-row .slider-val{ font-size:.82rem; color:var(--studio-gold); font-weight:600; min-width:36px; text-align:right; }
+
+  .toggle-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+  .toggle-row label{ font-size:.85rem; color:var(--muted); }
+  .toggle-switch{ width:42px; height:24px; border-radius:12px; background:var(--studio-input); border:1px solid var(--studio-border); cursor:pointer; position:relative; transition:background .2s; }
+  .toggle-switch.on{ background:var(--studio-gold); }
+  .toggle-switch::after{ content:''; position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:#fff; transition:transform .2s; }
+  .toggle-switch.on::after{ transform:translateX(18px); }
+
+  .variation-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:12px; }
+  .variation-card{ padding:10px; border:1px solid var(--studio-border); border-radius:10px; background:var(--studio-input); cursor:pointer; text-align:center; font-size:.78rem; color:var(--muted); transition:all .2s; }
+  .variation-card:hover{ border-color:var(--studio-gold); color:var(--text); }
+  .variation-card.active{ border-color:var(--studio-gold); color:var(--studio-gold); background:rgba(224,177,92,0.06); }
+
+  .studio-preview{ background:var(--studio-panel); border:1px solid var(--studio-border); border-radius:0 14px 14px 0; border-left:none; min-height:600px; display:flex; flex-direction:column; }
+  @media(max-width:919px){ .studio-preview{ border-radius:0 0 14px 14px; border:1px solid var(--studio-border); border-top:none; } .studio-controls{ border-radius:14px 14px 0 0; border-bottom:none; } }
+
+  .preview-toolbar{ display:flex; align-items:center; justify-content:space-between; padding:12px 18px; border-bottom:1px solid var(--studio-border); flex-wrap:wrap; gap:10px; }
+  .preview-toolbar-left{ display:flex; align-items:center; gap:10px; }
+  .preview-toolbar-right{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .toolbar-btn{ padding:7px 14px; border-radius:8px; border:1px solid var(--studio-border); background:var(--studio-input); color:var(--text); font-size:.8rem; cursor:pointer; transition:all .2s; display:inline-flex; align-items:center; gap:6px; }
+  .toolbar-btn:hover{ border-color:var(--studio-gold); color:var(--studio-gold); }
+  .toolbar-btn.primary{ background:var(--studio-gold); color:#1a1305; border-color:var(--studio-gold); }
+  .toolbar-btn.primary:hover{ opacity:.9; }
+  .toolbar-btn.danger:hover{ border-color:var(--studio-red); color:var(--studio-red); }
+  .toolbar-btn svg{ width:15px; height:15px; }
+
+  .preview-stage{ flex:1; display:flex; align-items:center; justify-content:center; padding:30px; background:radial-gradient(ellipse at 50% 50%, rgba(91,108,240,0.06), transparent 70%), repeating-conic-gradient(rgba(255,255,255,0.015) 0% 25%, transparent 0% 50%) 50% / 24px 24px; position:relative; overflow:hidden; }
+  .preview-stage-bg-toggle{ position:absolute; top:12px; right:12px; display:flex; gap:4px; }
+  .bg-btn{ width:32px; height:32px; border-radius:8px; border:1px solid var(--studio-border); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:.7rem; color:var(--muted); transition:all .2s; }
+  .bg-btn:hover{ border-color:var(--studio-gold); }
+  .bg-btn.active{ border-color:var(--studio-gold); color:var(--studio-gold); }
+
+  #logoSvgContainer{ max-width:100%; display:flex; align-items:center; justify-content:center; transition:transform .3s ease; }
+  #logoSvgContainer svg{ max-width:100%; height:auto; filter:drop-shadow(0 8px 24px rgba(0,0,0,0.3)); }
+
+  .variation-thumbs{ display:flex; gap:10px; padding:14px 18px; border-top:1px solid var(--studio-border); overflow-x:auto; }
+  .variation-thumbs::-webkit-scrollbar{ height:5px; }
+  .variation-thumbs::-webkit-scrollbar-thumb{ background:rgba(255,255,255,0.1); border-radius:3px; }
+  .vthumb{ flex:0 0 110px; height:90px; border:1px solid var(--studio-border); border-radius:10px; background:var(--studio-input); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s; position:relative; overflow:hidden; }
+  .vthumb:hover{ border-color:var(--studio-gold); transform:translateY(-2px); }
+  .vthumb.active{ border-color:var(--studio-gold); box-shadow:0 0 0 2px rgba(224,177,92,0.25); }
+  .vthumb svg{ width:90%; height:90%; }
+  .vthumb-label{ position:absolute; bottom:0; left:0; right:0; font-size:.55rem; text-align:center; padding:1px; background:rgba(0,0,0,0.6); color:var(--muted); }
+
+  .mockup-bar{ display:flex; gap:8px; padding:12px 18px; border-top:1px solid var(--studio-border); flex-wrap:wrap; }
+  .mockup-btn{ padding:6px 14px; border-radius:999px; border:1px solid var(--studio-border); background:var(--studio-input); color:var(--muted); font-size:.78rem; cursor:pointer; transition:all .2s; }
+  .mockup-btn:hover{ color:var(--text); }
+  .mockup-btn.active{ background:var(--studio-gold); color:#1a1305; border-color:var(--studio-gold); }
+
+  .studio-modal{ position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:200; display:none; align-items:center; justify-content:center; padding:24px; backdrop-filter:blur(4px); }
+  .studio-modal.open{ display:flex; }
+  .studio-modal-card{ width:min(480px,100%); background:var(--studio-panel); border:1px solid var(--studio-border); border-radius:16px; padding:28px; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+  .studio-modal-card h3{ margin-bottom:6px; font-size:1.2rem; }
+  .studio-modal-card p{ color:var(--muted); font-size:.88rem; margin:0 0 18px; }
+  .export-options{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+  .export-option{ padding:16px; border:1px solid var(--studio-border); border-radius:12px; background:var(--studio-input); cursor:pointer; text-align:center; transition:all .2s; }
+  .export-option:hover{ border-color:var(--studio-gold); transform:translateY(-2px); }
+  .export-option .eo-icon{ font-size:1.8rem; margin-bottom:6px; }
+  .export-option .eo-title{ font-size:.88rem; font-weight:600; color:var(--text); }
+  .export-option .eo-desc{ font-size:.72rem; color:var(--muted); margin-top:3px; }
+  .export-sizes{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
+  .export-size-btn{ padding:8px 16px; border-radius:8px; border:1px solid var(--studio-border); background:var(--studio-input); color:var(--text); font-size:.82rem; cursor:pointer; transition:all .2s; }
+  .export-size-btn:hover{ border-color:var(--studio-gold); }
+  .export-size-btn.active{ border-color:var(--studio-gold); background:rgba(224,177,92,0.1); color:var(--studio-gold); }
+
+  .mockup-display{ position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; padding:30px; gap:20px; background:radial-gradient(ellipse at 50% 50%, rgba(91,108,240,0.06), transparent 70%); }
+  .mockup-display.active{ display:flex; }
+  .mockup-card{ width:320px; max-width:90vw; background:#1a1f2b; border-radius:12px; padding:24px; box-shadow:0 12px 40px rgba(0,0,0,0.4); }
+  .mockup-card .mc-top{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+  .mockup-card .mc-info h5{ margin:0; font-size:.95rem; }
+  .mockup-card .mc-info p{ margin:0; font-size:.72rem; color:var(--muted); }
+  .mockup-card .mc-divider{ height:1px; background:rgba(255,255,255,0.06); margin:12px 0; }
+  .mockup-card .mc-bottom{ display:flex; justify-content:space-between; align-items:center; }
+  .mockup-card .mc-bottom span{ font-size:.72rem; color:var(--muted); }
+  .mockup-app-icon{ width:120px; height:120px; border-radius:26px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.4); }
+  .mockup-app-icon svg{ width:100%; height:100%; }
+  .mockup-social{ width:300px; max-width:90vw; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.4); }
+  .mockup-back-btn{ position:absolute; top:12px; left:12px; }
+
+  .studio-toast{ position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--studio-panel); border:1px solid var(--studio-gold); border-radius:12px; padding:12px 24px; color:var(--studio-gold); font-size:.88rem; font-weight:500; box-shadow:0 8px 30px rgba(0,0,0,0.4); z-index:300; opacity:0; transition:opacity .3s, transform .3s; pointer-events:none; }
+  .studio-toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  @keyframes glow-pulse{ 0%, 100%{ box-shadow:0 0 0 0 rgba(224,177,92,0.3); } 50%{ box-shadow:0 0 0 6px rgba(224,177,92,0); } }
+  .toolbar-btn.primary{ animation:glow-pulse 2.5s infinite; }
+
+  @media(max-width:600px){
+    .template-grid{ grid-template-columns:repeat(2,1fr); }
+    .icon-grid{ grid-template-columns:repeat(4,1fr); }
+    .palette-grid{ grid-template-columns:repeat(3,1fr); }
+    .font-grid{ grid-template-columns:1fr; }
+    .studio-panel-body{ max-height:none; padding:16px; }
+    .preview-stage{ padding:16px; min-height:260px; }
+    .vthumb{ flex:0 0 90px; height:74px; }
+  }
+
+
+  /* ---------- Auth Modals ---------- */
+  .auth-modal{
+    position:fixed; inset:0; background:rgba(0,0,0,0.68); z-index:120;
+    display:none; align-items:center; justify-content:center; padding:24px;
+  }
+  .auth-modal.open{display:flex;}
+  .auth-modal-card{
+    width:min(420px, 100%); background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); padding:32px; box-shadow:0 18px 50px rgba(0,0,0,0.45);
+    position:relative;
+  }
+  .auth-modal-card h2{margin-bottom:8px;}
+  .auth-modal-card p{color:var(--muted); margin:0 0 24px;}
+  .auth-method-toggle{display:flex; gap:8px; margin-bottom:2px;}
+  .auth-method-btn{
+    flex:1; padding:9px 10px; border-radius:10px; border:1px solid var(--line);
+    background:transparent; color:var(--muted); font-size:.85rem; font-weight:600;
+    cursor:pointer; transition:all .15s;
+  }
+  .auth-method-btn.active{background:var(--gold); color:#1a1206; border-color:var(--gold);}
+  .auth-form{display:flex; flex-direction:column; gap:14px;}
+  .auth-form input{
+    width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line);
+    background:var(--bg-soft); color:var(--text); font-family:inherit; font-size:.95rem;
+  }
+  .auth-form input::placeholder{color:var(--muted);}
+  .auth-form input:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(224,177,92,0.1);}
+  .auth-form button{width:100%; margin-top:8px;}
+  .auth-toggle{text-align:center; margin-top:16px; font-size:.9rem; color:var(--muted);}
+  .auth-toggle a{color:var(--gold); text-decoration:none; cursor:pointer;}
+  .auth-close{position:absolute; top:16px; right:16px; background:none; border:none; color:var(--muted); font-size:1.5rem; cursor:pointer;}
+  .auth-close:hover{color:var(--text);}
+  .auth-error{color:#e25555; font-size:.85rem; margin-top:8px;}
+
 </style>
 </head>
 <body>
@@ -516,7 +741,15 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <a href="#contact" class="btn btn-primary btn-sm nav-cta">Demander un service</a>
+    <div class="nav-cta" id="authButtons" style="display:flex; gap:12px; align-items:center;">
+      <button class="btn btn-outline btn-sm" onclick="showAuthModal('login')" style="cursor:pointer;">Se connecter</button>
+      <button class="btn btn-primary btn-sm" onclick="showAuthModal('register')" style="cursor:pointer;">Créer un compte</button>
+    </div>
+    <div class="nav-cta" id="userMenu" style="display:none; gap:12px; align-items:center;">
+      <span id="userName" style="font-size:0.95rem; font-weight:500;"></span>
+      <button class="btn btn-outline btn-sm" onclick="goToProfile()" style="cursor:pointer;">Profil</button>
+      <button class="btn btn-outline btn-sm" onclick="handleLogout()" style="cursor:pointer;">Déconnexion</button>
+    </div>
     <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">☰</button>
   </div>
 </header>
@@ -569,7 +802,7 @@
         <div class="icon" data-cms="services.logo.icon">🎨</div>
         <h3 data-cms="services.logo.title">Création d'affiches & logos</h3>
         <p data-cms="services.logo.desc">Conception de logos, affiches d'événements, flyers et visuels publicitaires adaptés à votre image.</p>
-        <div class="service-action"><a href="#ia-logo" class="btn btn-primary btn-sm">Lancer l'outil IA</a></div>
+        <div class="service-action"><a href="#ia-logo" class="btn btn-primary btn-sm">Lancer le Studio Pro</a></div>
       </div>
       <div class="service-card reveal" data-service="Modification de photos" data-flow="photo">
         <div class="icon" data-cms="services.photo.icon">🖼️</div>
@@ -589,72 +822,224 @@
         <p data-cms="services.compte.desc">Création et configuration de comptes sur diverses plateformes en ligne, avec accompagnement étape par étape.</p>
         <div class="service-action"><a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Création de comptes" data-flow="generic">Commander</a></div>
       </div>
+      <div class="service-card reveal" data-service="Livraison d'autres produits commerciaux" data-flow="delivery">
+        <div class="icon" data-cms="services.livraison.icon">🚚</div>
+        <h3 data-cms="services.livraison.title">Livraison d'autres produits commerciaux</h3>
+        <p data-cms="services.livraison.desc">Commandez un produit (autre que films/applications) et faites-vous livrer directement via WhatsApp, avec votre position Google Maps envoyée automatiquement.</p>
+        <div class="service-action"><a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Livraison d'autres produits commerciaux" data-flow="delivery">Commander</a></div>
+      </div>
+      <div class="service-card reveal" data-service="Service de lavage" data-flow="wash">
+        <div class="icon" data-cms="services.lavage.icon">🧼</div>
+        <h3 data-cms="services.lavage.title">Service de lavage</h3>
+        <p data-cms="services.lavage.desc">Lavage à domicile (linge, véhicule, moto) réservé directement via WhatsApp, avec votre position Google Maps envoyée automatiquement.</p>
+        <div class="service-action"><a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Service de lavage" data-flow="wash">Commander</a></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= IA LOGO & AFFICHE ================= -->
-<section id="ia-logo" class="alt">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <h2>Assistant IA pour logos & affiches</h2>
-      <p>Décrivez votre besoin, générez un aperçu flouté, puis débloquez l'aperçu après paiement avant de finaliser votre commande sur WhatsApp.</p>
+<!-- ================= LOGO STUDIO PRO ================= -->
+<section id="ia-logo" class="studio-section">
+  <div class="studio-hero-bar">
+    <h2>🎨 Logo Studio Pro</h2>
+    <p>Le studio de création de logo le plus avancé — 9 modèles professionnels, 30+ icônes vectorielles, 12 palettes, couleurs personnalisées, aperçu en temps réel, mockups et export PNG/SVG.</p>
+    <div class="studio-badge-row">
+      <span class="studio-badge"><b>9</b> modèles</span>
+      <span class="studio-badge"><b>30+</b> icônes</span>
+      <span class="studio-badge"><b>12</b> palettes</span>
+      <span class="studio-badge"><b>6</b> polices</span>
+      <span class="studio-badge">Export <b>PNG</b>/<b>SVG</b></span>
+      <span class="studio-badge">Mockups <b>3D</b></span>
     </div>
-    <div class="ia-builder-grid">
-      <div class="contact-card reveal">
-        <h3>Décrire votre création</h3>
-        <form class="contact-form" onsubmit="return generateDesignPreview(event)">
-          <label for="brandName">Nom de l'activité / marque</label>
-          <input id="brandName" type="text" placeholder="Ex. Salon Aïcha" required>
-          <label for="designType">Type de visuel</label>
-          <select id="designType" required>
-            <option value="Logo professionnel">Logo professionnel</option>
-            <option value="Affiche publicitaire">Affiche publicitaire</option>
-            <option value="Flyer événementiel">Flyer événementiel</option>
-            <option value="Visuel réseaux sociaux">Visuel réseaux sociaux</option>
-          </select>
-          <label for="designActivity">Activité / secteur</label>
-          <input id="designActivity" type="text" placeholder="Ex. coiffure, restauration, commerce" required>
-          <label for="designColors">Couleurs souhaitées</label>
-          <input id="designColors" type="text" placeholder="Ex. noir et or" required>
-          <label for="designStyle">Style souhaité</label>
-          <select id="designStyle" required>
-            <option>Moderne</option>
-            <option>Élégant</option>
-            <option>Minimaliste</option>
-            <option>Professionnel</option>
-            <option>Énergique</option>
-          </select>
-          <label for="designText">Texte à intégrer</label>
-          <textarea id="designText" rows="4" placeholder="Slogan, numéro, offre spéciale, date, lieu..." required></textarea>
-          <button type="submit" class="btn btn-primary">Générer un aperçu</button>
-        </form>
+  </div>
+
+  <div class="studio-wrap">
+    <!-- ===== LEFT: CONTROLS ===== -->
+    <div class="studio-controls">
+      <div class="studio-tabs">
+        <button class="studio-tab active" data-tab="text"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>Texte</button>
+        <button class="studio-tab" data-tab="template"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Modèles</button>
+        <button class="studio-tab" data-tab="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>Icônes</button>
+        <button class="studio-tab" data-tab="color"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20M2 12h20"/></svg>Couleurs</button>
+        <button class="studio-tab" data-tab="font"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Police</button>
+        <button class="studio-tab" data-tab="layout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="1"/><rect x="2" y="14" width="20" height="8" rx="1"/></svg>Options</button>
       </div>
-      <div class="preview-shell reveal">
-        <h3>Aperçu généré</h3>
-        <div class="preview-box blurred" id="previewBox">
-          <div class="preview-content" id="previewContent" style="display:flex; align-items:center; justify-content:center; padding:26px; text-align:center; color:#fff;">
-            <div>
-              <div style="font-family:'Fraunces',serif; font-size:1.4rem; margin-bottom:10px;">Votre aperçu apparaîtra ici</div>
-              <div style="color:var(--muted); max-width:320px;">Remplissez le formulaire pour simuler une génération assistée et obtenir un aperçu flouté avant paiement.</div>
+
+      <div class="studio-panel-body">
+        <!-- TAB: TEXT -->
+        <div class="studio-tab-content" id="stab-text">
+          <div class="studio-field">
+            <label>Nom de la marque / activité</label>
+            <input class="studio-input" id="studioName" type="text" placeholder="Ex. Salon Aïcha" maxlength="30">
+          </div>
+          <div class="studio-field">
+            <label>Tagline / slogan (optionnel)</label>
+            <input class="studio-input" id="studioTagline" type="text" placeholder="Ex. Beauté & élégance" maxlength="40">
+          </div>
+          <div class="studio-field">
+            <label>Taille du texte</label>
+            <div class="slider-row">
+              <input type="range" class="studio-slider" id="fontSizeSlider" min="20" max="64" value="44">
+              <span class="slider-val" id="fontSizeVal">44</span>
             </div>
           </div>
-          <div class="preview-lock" id="previewLock">
-            <div style="font-size:2rem; margin-bottom:10px;">🔒</div>
-            <strong>Aperçu protégé</strong>
-            <p class="mini-note" style="max-width:320px; margin-top:10px;">L'aperçu est volontairement flouté. Après paiement, cliquez sur « Débloquer l'aperçu » et ajoutez votre référence de paiement.</p>
+        </div>
+
+        <!-- TAB: TEMPLATE -->
+        <div class="studio-tab-content" id="stab-template">
+          <div class="studio-field">
+            <label>Choisir un modèle de logo</label>
+            <div class="template-grid">
+              <div class="template-card active" data-tpl="horizontal"><span class="tpl-name">Horizontal</span></div>
+              <div class="template-card" data-tpl="stacked"><span class="tpl-name">Empilé</span></div>
+              <div class="template-card" data-tpl="badge"><span class="tpl-name">Badge</span></div>
+              <div class="template-card" data-tpl="circle"><span class="tpl-name">Cercle</span></div>
+              <div class="template-card" data-tpl="iconOnly"><span class="tpl-name">Icône</span></div>
+              <div class="template-card" data-tpl="split"><span class="tpl-name">Scindé</span></div>
+              <div class="template-card" data-tpl="minimal"><span class="tpl-name">Minimal</span></div>
+              <div class="template-card" data-tpl="duo"><span class="tpl-name">Duo</span></div>
+              <div class="template-card" data-tpl="retro"><span class="tpl-name">Rétro</span></div>
+            </div>
           </div>
         </div>
-        <div class="service-note">Le visuel affiché ici est un aperçu commercial dans le site. Il peut ensuite être finalisé et livré par KK après validation sur WhatsApp.</div>
-        <div class="service-modal-actions">
-          <button class="btn btn-outline" onclick="unlockPreview()">Débloquer l'aperçu</button>
-          <button class="btn btn-primary" onclick="sendDesignToWhatsApp()">Finaliser sur WhatsApp</button>
+
+        <!-- TAB: ICON -->
+        <div class="studio-tab-content" id="stab-icon">
+          <div class="studio-field">
+            <label>Catégorie d'icônes</label>
+            <div class="icon-category-row">
+              <button class="icon-cat-btn active" data-cat="général">Général</button>
+              <button class="icon-cat-btn" data-cat="tech">Tech</button>
+              <button class="icon-cat-btn" data-cat="business">Business</button>
+              <button class="icon-cat-btn" data-cat="nature">Nature</button>
+              <button class="icon-cat-btn" data-cat="créatif">Créatif</button>
+            </div>
+          </div>
+          <div class="studio-field">
+            <label>Choisir une icône</label>
+            <div class="icon-grid" id="iconGrid"></div>
+          </div>
+          <div class="studio-field">
+            <label>Taille de l'icône</label>
+            <div class="slider-row">
+              <input type="range" class="studio-slider" id="iconSizeSlider" min="30" max="80" value="52">
+              <span class="slider-val" id="iconSizeVal">52</span>
+            </div>
+          </div>
         </div>
-        <div class="mini-note">Vous pourrez transmettre votre référence de paiement et vos précisions finales dans WhatsApp.</div>
+
+        <!-- TAB: COLOR -->
+        <div class="studio-tab-content" id="stab-color">
+          <div class="studio-field">
+            <label>Palettes prédéfinies</label>
+            <div class="palette-grid" id="paletteGrid"></div>
+          </div>
+          <div class="studio-field">
+            <label>Couleurs personnalisées</label>
+            <div class="color-row"><label>Couleur principale</label><div class="color-picker-wrap"><input type="color" id="color-primary" value="#e0b15c"></div><input class="color-hex" id="colorhex-primary" value="#e0b15c"></div>
+            <div class="color-row"><label>Couleur secondaire</label><div class="color-picker-wrap"><input type="color" id="color-secondary" value="#5b6cf0"></div><input class="color-hex" id="colorhex-secondary" value="#5b6cf0"></div>
+            <div class="color-row"><label>Arrière-plan</label><div class="color-picker-wrap"><input type="color" id="color-bg" value="#0f1115"></div><input class="color-hex" id="colorhex-bg" value="#0f1115"></div>
+            <div class="color-row"><label>Texte</label><div class="color-picker-wrap"><input type="color" id="color-text" value="#ffffff"></div><input class="color-hex" id="colorhex-text" value="#ffffff"></div>
+            <div class="color-row"><label>Accent</label><div class="color-picker-wrap"><input type="color" id="color-accent" value="#3fb68b"></div><input class="color-hex" id="colorhex-accent" value="#3fb68b"></div>
+          </div>
+        </div>
+
+        <!-- TAB: FONT -->
+        <div class="studio-tab-content" id="stab-font">
+          <div class="studio-field">
+            <label>Police du logo</label>
+            <div class="font-grid">
+              <div class="font-card active" data-font="Fraunces"><div class="font-sample" style="font-family:Fraunces,Georgia,serif">Ff</div><div class="font-name">Fraunces</div></div>
+              <div class="font-card" data-font="Georgia"><div class="font-sample" style="font-family:Georgia,serif">Gg</div><div class="font-name">Georgia</div></div>
+              <div class="font-card" data-font="Arial Black"><div class="font-sample" style="font-family:'Arial Black',sans-serif;font-weight:900">Ii</div><div class="font-name">Impact</div></div>
+              <div class="font-card" data-font="Trebuchet MS"><div class="font-sample" style="font-family:'Trebuchet MS',sans-serif">Mm</div><div class="font-name">Moderne</div></div>
+              <div class="font-card" data-font="Inter"><div class="font-sample" style="font-family:Inter,sans-serif">Aa</div><div class="font-name">Inter</div></div>
+              <div class="font-card" data-font="Courier New"><div class="font-sample" style="font-family:'Courier New',monospace">Cc</div><div class="font-name">Mono</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: LAYOUT -->
+        <div class="studio-tab-content" id="stab-layout">
+          <div class="studio-field">
+            <label>Affichage</label>
+            <div class="toggle-row"><label>Afficher l'icône</label><div class="toggle-switch on" id="toggleIcon"></div></div>
+            <div class="toggle-row"><label>Afficher le tagline</label><div class="toggle-switch on" id="toggleTagline"></div></div>
+            <div class="toggle-row"><label>Afficher le fond</label><div class="toggle-switch on" id="toggleBg"></div></div>
+          </div>
+          <div class="studio-field">
+            <label>Coins</label>
+            <div class="variation-grid">
+              <div class="variation-card corner-btn active" data-corner="rounded">Arrondis</div>
+              <div class="variation-card corner-btn" data-corner="sharp">Droits</div>
+              <div class="variation-card corner-btn" data-corner="pill">Pilule</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== RIGHT: PREVIEW ===== -->
+    <div class="studio-preview">
+      <div class="preview-toolbar">
+        <div class="preview-toolbar-left">
+          <button class="toolbar-btn" id="inspireBtn">🎲 Inspirer-moi</button>
+          <button class="toolbar-btn danger" id="resetBtn">↻ Réinitialiser</button>
+        </div>
+        <div class="preview-toolbar-right">
+          <button class="toolbar-btn" id="copySvgBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>SVG</button>
+          <button class="toolbar-btn" id="openExportBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Télécharger</button>
+          <button class="toolbar-btn primary" id="studioWhatsAppBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C22.95 6.45 18.5 2 12.04 2z"/></svg>Commander</button>
+        </div>
+      </div>
+
+      <div class="preview-stage" id="previewStage">
+        <div class="preview-stage-bg-toggle">
+          <button class="bg-btn active" data-bg="dark" title="Fond sombre">🌙</button>
+          <button class="bg-btn" data-bg="light" title="Fond clair">☀️</button>
+          <button class="bg-btn" data-bg="white" title="Fond blanc">⬜</button>
+          <button class="bg-btn" data-bg="transparent" title="Transparent">🔲</button>
+        </div>
+        <div id="logoMainDisplay" style="display:flex;flex-direction:column;align-items:center;gap:10px;width:100%">
+          <div id="logoSvgContainer"></div>
+        </div>
+        <div class="mockup-display" id="mockupDisplay"></div>
+      </div>
+
+      <div class="variation-thumbs" id="variationThumbs"></div>
+
+      <div class="mockup-bar">
+        <button class="mockup-btn active" data-mockup="none">Aperçu normal</button>
+        <button class="mockup-btn" data-mockup="card">💳 Carte de visite</button>
+        <button class="mockup-btn" data-mockup="app">📱 Icône d'app</button>
+        <button class="mockup-btn" data-mockup="social">🌐 Réseaux sociaux</button>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Export Modal -->
+<div class="studio-modal" id="studioExportModal">
+  <div class="studio-modal-card">
+    <h3>📥 Télécharger le logo</h3>
+    <p>Choisissez le format et la résolution de votre logo.</p>
+    <div class="export-sizes">
+      <button class="export-size-btn" data-size="256">256 px</button>
+      <button class="export-size-btn active" data-size="512">512 px</button>
+      <button class="export-size-btn" data-size="1024">1024 px</button>
+      <button class="export-size-btn" data-size="2048">2048 px</button>
+    </div>
+    <div class="export-options">
+      <div class="export-option" data-export="png"><div class="eo-icon">🖼️</div><div class="eo-title">PNG</div><div class="eo-desc">Image transparente HD</div></div>
+      <div class="export-option" data-export="svg"><div class="eo-icon">📐</div><div class="eo-title">SVG</div><div class="eo-desc">Vectoriel infini</div></div>
+      <div class="export-option" data-export="whatsapp" style="grid-column:span 2"><div class="eo-icon">💬</div><div class="eo-title">Envoyer à KK sur WhatsApp</div><div class="eo-desc">Finaliser la commande avec votre logo</div></div>
+    </div>
+    <button class="toolbar-btn" id="closeExportModal" style="width:100%;justify-content:center">Fermer</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="studio-toast" id="studioToast"></div>
 
 <!-- ================= TARIFS ================= -->
 <section id="tarifs" class="alt">
@@ -682,7 +1067,7 @@
           <li>1 retouche gratuite incluse</li>
           <li>Fichiers HD livrés</li>
         </ul>
-        <a href="#ia-logo" class="btn btn-primary btn-sm">Commander</a>
+        <a href="#ia-logo" class="btn btn-primary btn-sm">Créer mon logo</a>
       </div>
       <div class="price-card reveal">
         <h3 data-cms="services.photo.title">Retouche photo</h3>
@@ -713,6 +1098,26 @@
           <li>Support après création</li>
         </ul>
         <a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Création de compte" data-flow="generic">Commander</a>
+      </div>
+      <div class="price-card reveal">
+        <h3 data-cms="services.livraison.title">Livraison de produits</h3>
+        <div class="price"><span class="price" data-cms="tarifs.livraison.price">Sur devis</span> <span class="unit" data-cms="tarifs.livraison.unit"></span></div>
+        <ul>
+          <li>Produit hors films/applications</li>
+          <li>Position Google Maps envoyée automatiquement</li>
+          <li>Livraison via WhatsApp</li>
+        </ul>
+        <a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Livraison d'autres produits commerciaux" data-flow="delivery">Commander</a>
+      </div>
+      <div class="price-card reveal">
+        <h3 data-cms="services.lavage.title">Service de lavage</h3>
+        <div class="price"><span class="price" data-cms="tarifs.lavage.price">Sur devis</span> <span class="unit" data-cms="tarifs.lavage.unit"></span></div>
+        <ul>
+          <li>Linge, véhicule ou moto</li>
+          <li>Position Google Maps envoyée automatiquement</li>
+          <li>Réservation via WhatsApp</li>
+        </ul>
+        <a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Service de lavage" data-flow="wash">Commander</a>
       </div>
     </div>
     <p class="price-note">Pour les modifications de polycopiés et les demandes spécifiques, contactez-nous pour un devis adapté à votre document.</p>
@@ -896,6 +1301,7 @@
       <div class="contact-card reveal">
         <h3>Envoyer une demande</h3>
         <form class="contact-form" onsubmit="return handleContact(event)">
+      <input type="text" name="b_phone" style="display:none" tabindex="-1" autocomplete="off">
           <label for="cname">Nom</label>
           <input id="cname" type="text" placeholder="Votre nom" required>
           <label for="cservice">Service souhaité</label>
@@ -1001,6 +1407,497 @@
   let previewUnlocked = false;
   let lastDesignSummary = '';
 
+  // ======================= LOGO STUDIO PRO =======================
+  const LS = (() => {
+    // ---- State ----
+    const state = {
+      name: '', tagline: '', icon: 'star', iconCat: 'général',
+      template: 'horizontal', variation: 0,
+      font: 'Fraunces', fontSize: 44, iconSize: 52,
+      colors: { primary:'#e0b15c', secondary:'#5b6cf0', bg:'#0f1115', text:'#ffffff', accent:'#3fb68b' },
+      showIcon: true, showTagline: true, showBg: true,
+      layout: 'horizontal', corners: 'rounded',
+      previewBg: 'dark', mockup: null
+    };
+
+    // ---- Icon library ----
+    const icons = {
+      'général': {
+        star:     '<polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        diamond:  '<path d="M2.7 7.11l9.3-5 9.3 5-9.3 10z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>',
+        crown:    '<path d="M2 20h20M4 20l2-8 6 5 6-5 2 8" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        bolt:     '<path d="M13 2L3 14h9l-1 8 10-12h-9z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        flame:    '<path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 01-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        leaf:     '<path d="M11 20A7 7 0 015 9c0-4.36 3.57-7.12 7-7 3.43.12 7 2.64 7 7a7 7 0 01-7 7h-1zM2 21s2-1 5-1" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+      },
+      'tech': {
+        code:     '<polyline points="16 18 22 12 16 6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="8 6 2 12 8 18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        cpu:      '<rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><rect x="9" y="9" width="6" height="6" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+        wifi:     '<path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        settings: '<circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="1.5" fill="none"/>',
+        shield:   '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        eye:      '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>',
+      },
+      'business': {
+        briefcase:'<rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16M2 14h20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+        chart:    '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        globe:    '<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>',
+        target:   '<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>',
+        award:    '<circle cx="12" cy="8" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        key:      '<path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+      },
+      'nature': {
+        sun:      '<circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+        moon:     '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        tree:     '<path d="M5 22V12M12 22V5M19 22V12M5 12l7-7 7 7M5 17l7-7 7 7" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        water:    '<path d="M12 2c-5.33 4.55-8 8.48-8 11.8A8 8 0 0012 22a8 8 0 008-8.2c0-3.32-2.67-7.25-8-11.8z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>',
+        mountain: '<path d="M3 20l6-12 4 7 2-3 5 8H3z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        bird:     '<path d="M16 7h.01M3.534 12.17l7.066 7.34 9.4-9.51M12.07 6.17c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+      },
+      'créatif': {
+        palette:  '<circle cx="13.5" cy="6.5" r=".5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="10.5" r=".5" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="7.5" r=".5" stroke="currentColor" stroke-width="1.5"/><circle cx="6.5" cy="12.5" r=".5" stroke="currentColor" stroke-width="1.5"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10a2.5 2.5 0 002.45-3.02C14.15 17.58 14 16.8 14 16c0-2.21 1.79-4 4-4h1.97C21.43 8.33 17.14 2 12 2z" stroke="currentColor" stroke-width="1.5" fill="none"/>',
+        pen:      '<path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        camera:   '<path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>',
+        music:    '<path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>',
+        sparkle:  '<path d="M12 3l1.5 4.5H18l-3.5 2.5 1.5 4.5L12 12l-4 2.5 1.5-4.5L6 7.5h4.5z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 3v2M3 5h2M19 19v2M17 21h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+        layers:   '<polygon points="12,2 2,7 12,12 22,7" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
+      }
+    };
+
+    // ---- Palettes ----
+    const palettes = [
+      { name:'Or Royal',   colors:['#e0b15c','#c9913c','#1a1305','#ffffff','#f0d090'] },
+      { name:'Bleu Nuit',  colors:['#5b6cf0','#3748e0','#0a0e1a','#ffffff','#90a0f8'] },
+      { name:'Vert Jade',  colors:['#3fb68b','#2a8a64','#071811','#ffffff','#7fe0bc'] },
+      { name:'Feu',        colors:['#e25555','#c23030','#150505','#ffffff','#ff9090'] },
+      { name:'Violet',     colors:['#a855f7','#8230e0','#0e0518','#ffffff','#d090ff'] },
+      { name:'Terre',      colors:['#d97a55','#b05530','#180c04','#ffffff','#f0b090'] },
+      { name:'Argent',     colors:['#c8d4e0','#8899aa','#101418','#ffffff','#e8f0f8'] },
+      { name:'Rose',       colors:['#e879a8','#c04075','#1a0510','#ffffff','#ffaad0'] },
+      { name:'Cyan',       colors:['#1DC1F0','#0899c0','#030e14','#ffffff','#90e8f8'] },
+      { name:'Citron',     colors:['#d4e020','#a0a810','#0e1000','#ffffff','#f0f870'] },
+      { name:'Bois',       colors:['#c49a6c','#8b6340','#110a04','#ffffff','#e8ccaa'] },
+      { name:'Nuit',       colors:['#8899bb','#556688','#080c14','#ffffff','#bbccee'] },
+    ];
+
+    // ---- Helper functions ----
+    function escapeXml(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+    }
+    function hex2rgb(hex) {
+      hex = hex.replace('#','');
+      if(hex.length === 3) hex = hex.split('').map(c=>c+c).join('');
+      const n = parseInt(hex,16);
+      return [(n>>16)&255,(n>>8)&255,n&255];
+    }
+    function rgb2hex(r,g,b) { return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join(''); }
+    function lighten(hex, amount) { const [r,g,b]=hex2rgb(hex); return rgb2hex(Math.min(255,r+amount),Math.min(255,g+amount),Math.min(255,b+amount)); }
+    function darken(hex, amount) { const [r,g,b]=hex2rgb(hex); return rgb2hex(Math.max(0,r-amount),Math.max(0,g-amount),Math.max(0,b-amount)); }
+
+    // ---- SVG generators per template ----
+    const templates = {
+      horizontal: (s) => {
+        const W=500, H=160; const allIcons=Object.assign({},...Object.values(icons));
+        const r = s.corners==='sharp' ? 0 : s.corners==='pill' ? 30 : 14;
+        const iconPaths = allIcons[s.icon] || allIcons.star;
+        const iSz = s.iconSize || 52; const iX=24; const iY=(H-iSz)/2;
+        const nameX = s.showIcon ? iX+iSz+18 : 24;
+        const fontFam = s.font||'Fraunces';
+        const tgY = H/2 + (s.fontSize*0.4 || 18) + 14;
+        const bg = s.showBg ? `<rect width="${W}" height="${H}" rx="${r}" fill="${s.colors.bg}" opacity="0.95"/><rect width="${W}" height="${H}" rx="${r}" fill="url(#hgrad)" opacity="0.12"/>` : '';
+        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="hgrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${lighten(s.colors.primary,60)}" stop-opacity="0.3"/><stop offset="100%" stop-color="${s.colors.secondary}" stop-opacity="0.1"/></linearGradient></defs>${bg}${s.showIcon ? `<rect x="${iX-6}" y="${iY-6}" width="${iSz+12}" height="${iSz+12}" rx="12" fill="${s.colors.primary}" opacity="0.15"/><g transform="translate(${iX},${iY})" style="color:${s.colors.primary}" fill="none" stroke="${s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${nameX}" y="${H/2 - (s.showTagline?8:0) + (s.fontSize||44)*0.38}" font-family="${escapeXml(fontFam)},Georgia,serif" font-size="${s.fontSize||44}" font-weight="700" fill="${s.colors.text}" dominant-baseline="auto">${escapeXml(s.name||'Mon Logo')}</text>${s.showTagline && s.tagline ? `<text x="${nameX}" y="${tgY}" font-family="${escapeXml(fontFam)},Georgia,serif" font-size="14" fill="${s.colors.primary}" letter-spacing="0.1">${escapeXml(s.tagline)}</text>` : ''}</svg>`;
+      },
+      stacked: (s) => {
+        const W=320, H=280; const allIcons=Object.assign({},...Object.values(icons));
+        const r = s.corners==='sharp' ? 0 : s.corners==='pill' ? 40 : 18;
+        const iconPaths = allIcons[s.icon] || allIcons.star;
+        const iSz = s.iconSize || 60; const iX=(W-iSz)/2; const iY=36;
+        const fsz = Math.min(s.fontSize||44, 38); const nameY = iY+iSz+42;
+        const bg = s.showBg ? `<rect width="${W}" height="${H}" rx="${r}" fill="${s.colors.bg}" opacity="0.95"/><circle cx="${W/2}" cy="${iY+iSz/2}" r="${iSz*1.1}" fill="${s.colors.primary}" opacity="0.08"/>` : '';
+        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><radialGradient id="sgrad" cx="50%" cy="35%" r="60%"><stop offset="0%" stop-color="${lighten(s.colors.secondary,30)}" stop-opacity="0.2"/><stop offset="100%" stop-color="${s.colors.bg}" stop-opacity="0"/></radialGradient></defs>${bg}${s.showBg ? `<rect width="${W}" height="${H}" rx="${r}" fill="url(#sgrad)"/>` : ''}${s.showIcon ? `<circle cx="${W/2}" cy="${iY+iSz/2}" r="${iSz/2+10}" fill="${s.colors.primary}" opacity="0.18"/><g transform="translate(${iX},${iY})" style="color:${s.colors.primary}" fill="none" stroke="${s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${W/2}" y="${nameY}" font-family="${escapeXml(s.font||'Fraunces')},Georgia,serif" font-size="${fsz}" font-weight="700" fill="${s.colors.text}" text-anchor="middle">${escapeXml(s.name||'Mon Logo')}</text>${s.showTagline && s.tagline ? `<text x="${W/2}" y="${nameY+26}" font-family="${escapeXml(s.font||'Fraunces')},sans-serif" font-size="13" fill="${s.colors.primary}" text-anchor="middle" letter-spacing="0.12">${escapeXml(s.tagline)}</text>` : ''}</svg>`;
+      },
+      badge: (s) => {
+        const W=300, H=300; const allIcons=Object.assign({},...Object.values(icons));
+        const iconPaths = allIcons[s.icon] || allIcons.star;
+        const iSz=50; const cx=W/2; const cy=W/2;
+        const fsz = Math.min(s.fontSize||44,30);
+        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="badgeG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${s.colors.primary}"/><stop offset="100%" stop-color="${s.colors.secondary}"/></linearGradient></defs>${s.showBg ? `<polygon points="${cx},10 ${W-10},${cx-40} ${W-10},${cy+40} ${cx},${H-10} 10,${cy+40} 10,${cy-40}" fill="${s.colors.bg}" stroke="url(#badgeG)" stroke-width="3"/><polygon points="${cx},24 ${W-24},${cy-34} ${W-24},${cy+34} ${cx},${H-24} 24,${cy+34} 24,${cy-34}" fill="none" stroke="${s.colors.primary}" stroke-width="1" opacity="0.3"/>` : ''}${s.showIcon ? `<g transform="translate(${cx-iSz/2},${cy-iSz/2-22})" fill="none" stroke="${s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${cx}" y="${cy+32}" font-family="${escapeXml(s.font||'Fraunces')},serif" font-size="${fsz}" font-weight="800" fill="${s.colors.text}" text-anchor="middle">${escapeXml(s.name||'LOGO')}</text>${s.showTagline && s.tagline ? `<text x="${cx}" y="${cy+54}" font-family="sans-serif" font-size="11" fill="${s.colors.primary}" text-anchor="middle" letter-spacing="0.15">${escapeXml(s.tagline.toUpperCase())}</text>` : ''}</svg>`;
+      },
+      circle: (s) => {
+        const W=300,H=300; const allIcons=Object.assign({},...Object.values(icons));
+        const iconPaths = allIcons[s.icon] || allIcons.star;
+        const iSz=52; const cx=W/2; const cy=H/2; const R=130;
+        const fsz = Math.min(s.fontSize||44,28);
+        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="circG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${s.colors.primary}"/><stop offset="100%" stop-color="${s.colors.secondary}"/></linearGradient></defs>${s.showBg ? `<circle cx="${cx}" cy="${cy}" r="${R}" fill="${s.colors.bg}"/><circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="url(#circG)" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="${R-12}" fill="none" stroke="${s.colors.primary}" stroke-width="0.5" opacity="0.3"/>` : ''}${s.showIcon ? `<g transform="translate(${cx-iSz/2},${cy-iSz/2-26})" fill="none" stroke="${s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${cx}" y="${cy+28}" font-family="${escapeXml(s.font||'Fraunces')},serif" font-size="${fsz}" font-weight="700" fill="${s.colors.text}" text-anchor="middle">${escapeXml(s.name||'LOGO')}</text>${s.showTagline && s.tagline ? `<text x="${cx}" y="${cy+50}" font-family="sans-serif" font-size="11" fill="${s.colors.primary}" text-anchor="middle" letter-spacing="0.18">${escapeXml(s.tagline.toUpperCase())}</text>` : ''}</svg>`;
+      },
+      iconOnly: (s) => {
+        const W=200,H=200; const allIcons=Object.assign({},...Object.values(icons));
+        const iconPaths = allIcons[s.icon] || allIcons.star;
+        const iSz=100; const r = s.corners==='sharp' ? 0 : s.corners==='pill' ? 100 : 32;
+        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="ioG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${s.colors.primary}"/><stop offset="100%" stop-color="${s.colors.secondary}"/></linearGradient></defs>${s.showBg ? `<rect width="${W}" height="${H}" rx="${r}" fill="url(#ioG)"/><rect width="${W}" height="${H}" rx="${r}" fill="${s.colors.bg}" opacity="0.7"/><rect x="8" y="8" width="${W-16}" height="${H-16}" rx="${Math.max(0,r-6)}" fill="none" stroke="${s.colors.primary}" stroke-width="1" opacity="0.3"/>` : ''}<g transform="translate(${(W-iSz)/2},${(H-iSz)/2})" fill="none" stroke="${s.colors.primary}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g></svg>`;
+      },
+      split: (s) => {
+        const W=500,H=200; const allIcons=Object.assign({},...Object.values(icons));
+        const iconPaths = allIcons[s.icon] || allIcons.star;
+        const iSz=s.iconSize||64; const r = s.corners==='sharp' ? 0 : s.corners==='pill' ? 20 : 14;
+        const fsz = Math.min(s.fontSize||44,40);
+        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="spG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${s.colors.primary}"/><stop offset="100%" stop-color="${s.colors.secondary}"/></linearGradient></defs>${s.showBg ? `<rect width="${W/2}" height="${H}" rx="0" fill="url(#spG)"/><rect x="${W/2}" width="${W/2}" height="${H}" rx="0" fill="${s.colors.bg}"/><rect width="${W}" height="${H}" rx="${r}" fill="transparent" stroke="${s.colors.primary}" stroke-width="1.5"/>` : ''}${s.showIcon ? `<g transform="translate(${W/4-iSz/2},${(H-iSz)/2})" fill="none" stroke="${s.showBg ? s.colors.bg : s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${W/2+20}" y="${H/2+fsz*0.38 - (s.showTagline&&s.tagline?8:0)}" font-family="${escapeXml(s.font||'Fraunces')},serif" font-size="${fsz}" font-weight="700" fill="${s.colors.text}" dominant-baseline="auto">${escapeXml(s.name||'Mon Logo')}</text>${s.showTagline && s.tagline ? `<text x="${W/2+20}" y="${H/2+fsz*0.38+20}" font-family="sans-serif" font-size="13" fill="${s.colors.primary}" letter-spacing="0.1">${escapeXml(s.tagline)}</text>` : ''}</svg>`;
+      },
+      minimal: (s) => {
+        const W=420,H=120; const allIcons=Object.assign({},...Object.values(icons));
+        const iconPaths = allIcons[s.icon] || allIcons.star;
+        const iSz=36; const fsz = Math.min(s.fontSize||44,36);
+        const gap=14; const nameX = s.showIcon ? iSz+gap+8 : 8;
+        const r = s.corners==='pill' ? 60 : s.corners==='sharp' ? 0 : 10;
+        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${s.showBg ? `<rect width="${W}" height="${H}" rx="${r}" fill="${s.colors.bg}" opacity="0.5"/>` : ''}${s.showIcon ? `<g transform="translate(8,${(H-iSz)/2})" fill="none" stroke="${s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${nameX}" y="${H/2 - (s.showTagline&&s.tagline ? 6 : 0) + fsz*0.38}" font-family="${escapeXml(s.font||'Inter')},sans-serif" font-size="${fsz}" font-weight="700" fill="${s.colors.text}">${escapeXml(s.name||'Mon Logo')}</text>${s.showTagline && s.tagline ? `<text x="${nameX}" y="${H/2+fsz*0.38+18}" font-family="sans-serif" font-size="12" fill="${s.colors.primary}" letter-spacing="0.14">${escapeXml(s.tagline)}</text>` : ''}<line x1="${nameX}" y1="${H-18}" x2="${nameX+60}" y2="${H-18}" stroke="${s.colors.primary}" stroke-width="1.5" opacity="0.5"/></svg>`;
+      },
+      duo: (s) => {
+        const W=320,H=320; const allIcons=Object.assign({},...Object.values(icons));
+        const iconPaths = allIcons[s.icon] || allIcons.star;
+        const iSz=70; const W2=W/2; const H2=H/2; const fsz=Math.min(s.fontSize||44,26);
+        const r = s.corners==='sharp' ? 0 : s.corners==='pill' ? W2 : 20;
+        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="duoG1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${s.colors.primary}"/><stop offset="50%" stop-color="${darken(s.colors.primary,20)}"/></linearGradient><linearGradient id="duoG2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${s.colors.secondary}"/><stop offset="100%" stop-color="${darken(s.colors.secondary,20)}"/></linearGradient></defs>${s.showBg ? `<rect width="${W2}" height="${H}" rx="0" fill="url(#duoG1)" opacity="0.9"/><rect x="${W2}" width="${W2}" height="${H}" rx="0" fill="url(#duoG2)" opacity="0.9"/><rect width="${W}" height="${H}" rx="${r}" fill="transparent" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>` : ''}${s.showIcon ? `<g transform="translate(${W2-iSz/2},${H2-iSz/2-28})" fill="none" stroke="${s.showBg?'rgba(255,255,255,0.9)':s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${W2}" y="${H2+fsz*0.4+12}" font-family="${escapeXml(s.font||'Fraunces')},serif" font-size="${fsz}" font-weight="800" fill="${s.showBg?'#fff':s.colors.text}" text-anchor="middle">${escapeXml(s.name||'LOGO')}</text>${s.showTagline && s.tagline ? `<text x="${W2}" y="${H2+fsz*0.4+34}" font-family="sans-serif" font-size="10" fill="${s.showBg?'rgba(255,255,255,0.7)':s.colors.primary}" text-anchor="middle" letter-spacing="0.18">${escapeXml(s.tagline.toUpperCase())}</text>` : ''}</svg>`;
+      },
+      retro: (s) => {
+        const W=360,H=240; const allIcons=Object.assign({},...Object.values(icons));
+        const iconPaths = allIcons[s.icon] || allIcons.star;
+        const iSz=48; const cx=W/2; const fsz=Math.min(s.fontSize||44,32);
+        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${s.showBg ? `<rect width="${W}" height="${H}" rx="8" fill="${s.colors.bg}"/><rect x="6" y="6" width="${W-12}" height="${H-12}" rx="4" fill="none" stroke="${s.colors.primary}" stroke-width="2"/><rect x="14" y="14" width="${W-28}" height="${H-28}" rx="2" fill="none" stroke="${s.colors.primary}" stroke-width="0.5" opacity="0.4"/>` : ''}<rect x="${cx-80}" y="22" width="160" height="28" rx="0" fill="${s.colors.primary}" opacity="0.9"/><text x="${cx}" y="42" font-family="'Arial Black','Impact',sans-serif" font-size="14" font-weight="900" fill="${s.colors.bg}" text-anchor="middle" letter-spacing="0.3">${escapeXml((s.tagline||'EST. 2025').toUpperCase())}</text>${s.showIcon ? `<g transform="translate(${cx-iSz/2},60)" fill="none" stroke="${s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${cx}" y="${s.showIcon?150:110}" font-family="${escapeXml(s.font||'Fraunces')},Georgia,serif" font-size="${fsz}" font-weight="800" fill="${s.colors.text}" text-anchor="middle">${escapeXml(s.name||'Mon Logo')}</text><line x1="20" y1="${H-36}" x2="${W-20}" y2="${H-36}" stroke="${s.colors.primary}" stroke-width="1.5"/><text x="${cx}" y="${H-22}" font-family="'Arial Black',sans-serif" font-size="9" fill="${s.colors.primary}" text-anchor="middle" letter-spacing="0.3">DÉDOUGOU · BURKINA FASO</text></svg>`;
+      },
+    };
+
+    function render() { const fn = templates[state.template] || templates.horizontal; return fn(state); }
+
+    function generateVariations() {
+      const varConfigs = [
+        { template:'horizontal', label:'Horizontal' },{ template:'stacked', label:'Empilé' },
+        { template:'badge', label:'Badge' },{ template:'circle', label:'Cercle' },
+        { template:'iconOnly', label:'Icône' },{ template:'split', label:'Scindé' },
+        { template:'minimal', label:'Minimal' },{ template:'duo', label:'Duo' },
+        { template:'retro', label:'Rétro' },
+      ];
+      return varConfigs.map(v => ({ svg: templates[v.template](state), label: v.label, template: v.template }));
+    }
+
+    return { state, icons, palettes, templates, render, generateVariations, escapeXml };
+  })();
+
+  // ======================== LOGO STUDIO DOM CONTROLLER ========================
+  (function(){
+    const tabs = document.querySelectorAll('.studio-tab');
+    tabs.forEach(t => {
+      t.addEventListener('click', () => {
+        tabs.forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        document.querySelectorAll('.studio-tab-content').forEach(p => p.style.display='none');
+        const target = document.getElementById('stab-' + t.dataset.tab);
+        if(target) target.style.display='';
+      });
+    });
+    document.querySelectorAll('.studio-tab-content').forEach((p,i) => { if(i>0) p.style.display='none'; });
+
+    function updatePreview() {
+      document.getElementById('logoSvgContainer').innerHTML = LS.render();
+      updateVariationThumbs();
+    }
+
+    function updateVariationThumbs() {
+      const vars = LS.generateVariations();
+      const container = document.getElementById('variationThumbs');
+      if(!container) return;
+      container.innerHTML = '';
+      vars.forEach((v,i) => {
+        const div = document.createElement('div');
+        div.className = 'vthumb' + (LS.state.template === v.template ? ' active' : '');
+        div.innerHTML = v.svg + `<span class="vthumb-label">${v.label}</span>`;
+        div.addEventListener('click', () => {
+          LS.state.template = v.template;
+          document.querySelectorAll('.vthumb').forEach(x => x.classList.remove('active'));
+          div.classList.add('active');
+          document.querySelectorAll('.template-card').forEach(x => x.classList.toggle('active', x.dataset.tpl === v.template));
+          updatePreview();
+        });
+        container.appendChild(div);
+      });
+    }
+
+    const nameInput = document.getElementById('studioName');
+    const taglineInput = document.getElementById('studioTagline');
+    if(nameInput) nameInput.addEventListener('input', () => { LS.state.name = nameInput.value; updatePreview(); });
+    if(taglineInput) taglineInput.addEventListener('input', () => { LS.state.tagline = taglineInput.value; updatePreview(); });
+
+    document.querySelectorAll('.template-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.template-card').forEach(x => x.classList.remove('active'));
+        card.classList.add('active');
+        LS.state.template = card.dataset.tpl;
+        updatePreview();
+      });
+    });
+
+    function renderIconGrid(cat) {
+      const grid = document.getElementById('iconGrid');
+      if(!grid) return;
+      const items = LS.icons[cat] || {};
+      grid.innerHTML = '';
+      Object.keys(items).forEach(key => {
+        const div = document.createElement('div');
+        div.className = 'icon-item' + (LS.state.icon === key ? ' active' : '');
+        div.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${items[key]}</svg>`;
+        div.title = key;
+        div.addEventListener('click', () => {
+          document.querySelectorAll('.icon-item').forEach(x => x.classList.remove('active'));
+          div.classList.add('active');
+          LS.state.icon = key;
+          updatePreview();
+        });
+        grid.appendChild(div);
+      });
+    }
+    document.querySelectorAll('.icon-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.icon-cat-btn').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        LS.state.iconCat = btn.dataset.cat;
+        renderIconGrid(btn.dataset.cat);
+      });
+    });
+    renderIconGrid(LS.state.iconCat);
+
+    const paletteGrid = document.getElementById('paletteGrid');
+    if(paletteGrid) {
+      LS.palettes.forEach((p,i) => {
+        const card = document.createElement('div');
+        card.className = 'palette-card' + (i===0?' active':'');
+        card.innerHTML = `<div class="palette-swatches">${p.colors.slice(0,4).map(c=>`<div style="background:${c}"></div>`).join('')}</div><div class="palette-name">${p.name}</div>`;
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.palette-card').forEach(x => x.classList.remove('active'));
+          card.classList.add('active');
+          LS.state.colors.primary = p.colors[0];
+          LS.state.colors.secondary = p.colors[1];
+          LS.state.colors.bg = p.colors[2];
+          LS.state.colors.text = p.colors[3];
+          LS.state.colors.accent = p.colors[4];
+          syncColorPickers();
+          updatePreview();
+        });
+        paletteGrid.appendChild(card);
+      });
+    }
+
+    function syncColorPickers(){
+      ['primary','secondary','bg','text','accent'].forEach(key => {
+        const pick = document.getElementById('color-'+key);
+        const hex = document.getElementById('colorhex-'+key);
+        if(pick) pick.value = LS.state.colors[key];
+        if(hex) hex.value = LS.state.colors[key];
+      });
+    }
+    ['primary','secondary','bg','text','accent'].forEach(key => {
+      const pick = document.getElementById('color-'+key);
+      const hex = document.getElementById('colorhex-'+key);
+      if(pick) { pick.value = LS.state.colors[key]; pick.addEventListener('input', () => { LS.state.colors[key] = pick.value; if(hex) hex.value = pick.value; updatePreview(); }); }
+      if(hex) { hex.value = LS.state.colors[key]; hex.addEventListener('input', () => { if(/^#[0-9a-fA-F]{6}$/.test(hex.value)) { LS.state.colors[key] = hex.value; if(pick) pick.value = hex.value; updatePreview(); } }); }
+    });
+
+    document.querySelectorAll('.font-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.font-card').forEach(x => x.classList.remove('active'));
+        card.classList.add('active');
+        LS.state.font = card.dataset.font;
+        updatePreview();
+      });
+    });
+
+    const fsSlider = document.getElementById('fontSizeSlider');
+    const fsVal = document.getElementById('fontSizeVal');
+    if(fsSlider) fsSlider.addEventListener('input', () => { LS.state.fontSize = parseInt(fsSlider.value); if(fsVal) fsVal.textContent = fsSlider.value; updatePreview(); });
+    const isSlider = document.getElementById('iconSizeSlider');
+    const isVal = document.getElementById('iconSizeVal');
+    if(isSlider) isSlider.addEventListener('input', () => { LS.state.iconSize = parseInt(isSlider.value); if(isVal) isVal.textContent = isSlider.value; updatePreview(); });
+
+    function makeToggle(id, stateKey) {
+      const el = document.getElementById(id);
+      if(!el) return;
+      if(LS.state[stateKey]) el.classList.add('on');
+      el.addEventListener('click', () => { LS.state[stateKey] = !LS.state[stateKey]; el.classList.toggle('on', LS.state[stateKey]); updatePreview(); });
+    }
+    makeToggle('toggleIcon','showIcon');
+    makeToggle('toggleTagline','showTagline');
+    makeToggle('toggleBg','showBg');
+
+    document.querySelectorAll('.corner-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.corner-btn').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        LS.state.corners = btn.dataset.corner;
+        updatePreview();
+      });
+    });
+
+    document.querySelectorAll('.bg-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.bg-btn').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        const stage = document.getElementById('previewStage');
+        if(!stage) return;
+        const bgs = {
+          dark:'radial-gradient(ellipse at 50% 50%, rgba(91,108,240,0.06), transparent 70%), repeating-conic-gradient(rgba(255,255,255,0.015) 0% 25%, transparent 0% 50%) 50% / 24px 24px',
+          light:'radial-gradient(ellipse at 50% 50%, rgba(200,220,255,0.15), transparent 70%), repeating-conic-gradient(rgba(0,0,0,0.04) 0% 25%, transparent 0% 50%) 50% / 24px 24px',
+          white:'#ffffff',
+          transparent:'repeating-conic-gradient(#d0d0d0 0% 25%, #f0f0f0 0% 50%) 50% / 20px 20px',
+        };
+        stage.style.background = bgs[btn.dataset.bg] || bgs.dark;
+        if(btn.dataset.bg === 'light' || btn.dataset.bg === 'white') { stage.style.backgroundColor = btn.dataset.bg === 'white' ? '#fff' : '#e8ecf4'; } else { stage.style.backgroundColor = ''; }
+      });
+    });
+
+    document.querySelectorAll('.mockup-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.mockup;
+        const mainDisplay = document.getElementById('logoMainDisplay');
+        const mockupArea = document.getElementById('mockupDisplay');
+        if(!mockupArea) return;
+        if(type === 'none' || LS.state.mockup === type) {
+          LS.state.mockup = null;
+          mockupArea.classList.remove('active');
+          if(mainDisplay) mainDisplay.style.display='';
+          document.querySelectorAll('.mockup-btn').forEach(x => x.classList.remove('active'));
+          return;
+        }
+        LS.state.mockup = type;
+        document.querySelectorAll('.mockup-btn').forEach(x => x.classList.toggle('active', x.dataset.mockup===type));
+        const svg = LS.render();
+        if(type === 'card') {
+          mockupArea.innerHTML = `<button class="bg-btn mockup-back-btn toolbar-btn" onclick="this.closest('.mockup-display').classList.remove('active'); document.getElementById('logoMainDisplay').style.display=''; document.querySelectorAll('.mockup-btn').forEach(x=>x.classList.remove('active'));">← Retour</button><div class="mockup-card"><div class="mc-top"><div style="width:52px;height:52px;overflow:hidden">${svg}</div><div class="mc-info"><h5>${LS.escapeXml(LS.state.name||'Mon Logo')}</h5><p>${LS.escapeXml(LS.state.tagline||'Votre tagline')}</p></div></div><div class="mc-divider"></div><div class="mc-bottom"><span>Carte de visite</span><span style="font-size:.75rem;color:var(--studio-gold)">★★★★★</span></div></div>`;
+        } else if(type === 'app') {
+          mockupArea.innerHTML = `<button class="bg-btn mockup-back-btn toolbar-btn" onclick="this.closest('.mockup-display').classList.remove('active'); document.getElementById('logoMainDisplay').style.display=''; document.querySelectorAll('.mockup-btn').forEach(x=>x.classList.remove('active'));">← Retour</button><p style="font-size:.78rem;color:var(--muted);margin-bottom:8px;">Icône d'application</p><div class="mockup-app-icon">${svg}</div><p style="font-size:.7rem;color:var(--muted);margin-top:6px;">${LS.escapeXml(LS.state.name||'Mon App')}</p>`;
+        } else if(type === 'social') {
+          mockupArea.innerHTML = `<button class="bg-btn mockup-back-btn toolbar-btn" onclick="this.closest('.mockup-display').classList.remove('active'); document.getElementById('logoMainDisplay').style.display=''; document.querySelectorAll('.mockup-btn').forEach(x=>x.classList.remove('active'));">← Retour</button><p style="font-size:.78rem;color:var(--muted);margin-bottom:8px;">Bannière réseaux sociaux</p><div class="mockup-social" style="background:${LS.state.colors.bg};padding:20px 30px;display:flex;align-items:center;gap:20px;">${svg}<div><div style="font-size:.9rem;font-weight:600;color:#eef0f4">${LS.escapeXml(LS.state.name||'Mon Logo')}</div><div style="font-size:.72rem;color:#9aa3b2">${LS.escapeXml(LS.state.tagline||'Votre tagline')}</div></div></div>`;
+        }
+        mockupArea.classList.add('active');
+        if(mainDisplay) mainDisplay.style.display = 'none';
+      });
+    });
+
+    let selectedExportSize = '512';
+    document.querySelectorAll('.export-size-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.export-size-btn').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        selectedExportSize = btn.dataset.size;
+      });
+    });
+
+    function downloadSVG() {
+      const svg = LS.render();
+      const blob = new Blob([svg], {type:'image/svg+xml'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url;
+      a.download = (LS.state.name||'logo').replace(/\s+/g,'-').toLowerCase()+'.svg';
+      a.click(); URL.revokeObjectURL(url);
+      showToast('Logo SVG téléchargé !');
+    }
+
+    function downloadPNG(size) {
+      const sz = parseInt(size||selectedExportSize||512);
+      const svg = LS.render();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(svg,'image/svg+xml');
+      const svgEl = doc.documentElement;
+      const vb = svgEl.getAttribute('viewBox')||'0 0 500 200';
+      const parts = vb.split(' ');
+      const vw=parseFloat(parts[2])||500; const vh=parseFloat(parts[3])||200;
+      const ratio = vw/vh;
+      const pw = sz; const ph = Math.round(sz/ratio);
+      const canvas = document.createElement('canvas');
+      canvas.width=pw; canvas.height=ph;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = () => {
+        ctx.clearRect(0,0,pw,ph);
+        ctx.drawImage(img,0,0,pw,ph);
+        canvas.toBlob(blob => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a'); a.href=url;
+          a.download=(LS.state.name||'logo').replace(/\s+/g,'-').toLowerCase()+`-${pw}x${ph}.png`;
+          a.click(); URL.revokeObjectURL(url);
+          showToast('Logo PNG '+pw+'×'+ph+' téléchargé !');
+        },'image/png');
+      };
+      const encoded = encodeURIComponent(svg);
+      img.src = 'data:image/svg+xml;charset=utf-8,'+encoded;
+    }
+
+    function sendLogoToWhatsApp() {
+      const name = LS.state.name || 'mon logo';
+      const msg = `Bonjour bienvenue Merci de la confiance accordée. Je veux commander la création de ce logo : Nom : "${name}", Tagline : "${LS.state.tagline||''}", Style : ${LS.state.template}, Couleur principale : ${LS.state.colors.primary}. Veuillez me fournir le fichier final en haute résolution.`;
+      window.open(`https://wa.me/22606121297?text=${encodeURIComponent(msg)}`,'_blank');
+      showToast('Ouverture de WhatsApp...');
+    }
+
+    document.querySelectorAll('.export-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        const type = opt.dataset.export;
+        if(type==='svg') downloadSVG();
+        else if(type==='png') downloadPNG();
+        else if(type==='whatsapp') sendLogoToWhatsApp();
+      });
+    });
+
+    function openExportModal() { document.getElementById('studioExportModal')?.classList.add('open'); }
+    function closeExportModal() { document.getElementById('studioExportModal')?.classList.remove('open'); }
+    document.getElementById('openExportBtn')?.addEventListener('click', openExportModal);
+    document.getElementById('closeExportModal')?.addEventListener('click', closeExportModal);
+    document.getElementById('studioExportModal')?.addEventListener('click', e => { if(e.target.id==='studioExportModal') closeExportModal(); });
+    document.getElementById('studioWhatsAppBtn')?.addEventListener('click', sendLogoToWhatsApp);
+
+    document.getElementById('copySvgBtn')?.addEventListener('click', () => {
+      const svg = LS.render();
+      navigator.clipboard.writeText(svg).then(() => showToast('Code SVG copié !'));
+    });
+
+    document.getElementById('inspireBtn')?.addEventListener('click', () => {
+      const allIconKeys = Object.keys(Object.assign({},...Object.values(LS.icons)));
+      LS.state.icon = allIconKeys[Math.floor(Math.random()*allIconKeys.length)];
+      const tpls = ['horizontal','stacked','badge','circle','split','minimal','duo','retro'];
+      LS.state.template = tpls[Math.floor(Math.random()*tpls.length)];
+      const p = LS.palettes[Math.floor(Math.random()*LS.palettes.length)];
+      LS.state.colors = { primary:p.colors[0], secondary:p.colors[1], bg:p.colors[2], text:p.colors[3], accent:p.colors[4] };
+      syncColorPickers();
+      document.querySelectorAll('.palette-card').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.template-card').forEach(c => c.classList.toggle('active', c.dataset.tpl===LS.state.template));
+      updatePreview();
+      showToast('🎲 Nouveau style généré !');
+    });
+
+    document.getElementById('resetBtn')?.addEventListener('click', () => {
+      if(!confirm('Réinitialiser tous les paramètres du logo ?')) return;
+      Object.assign(LS.state, {
+        name:'', tagline:'', icon:'star', template:'horizontal', font:'Fraunces',
+        fontSize:44, iconSize:52, showIcon:true, showTagline:true, showBg:true, corners:'rounded',
+        colors:{ primary:'#e0b15c', secondary:'#5b6cf0', bg:'#0f1115', text:'#ffffff', accent:'#3fb68b' }
+      });
+      if(nameInput) nameInput.value='';
+      if(taglineInput) taglineInput.value='';
+      syncColorPickers();
+      updatePreview();
+      showToast('Logo réinitialisé');
+    });
+
+    function showToast(msg) {
+      const t = document.getElementById('studioToast');
+      if(!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'), 2500);
+    }
+
+    updatePreview();
+    syncColorPickers();
+  })();
+  // ===================== END LOGO STUDIO PRO =====================
+
   function pickWhatsAppNumber(service){
     return WHATSAPP_NUMBERS[Math.floor(Math.random() * WHATSAPP_NUMBERS.length)];
   }
@@ -1015,7 +1912,7 @@
     openWhatsApp(WHATSAPP_NUMBERS[0], text);
   }
 
-  function getServiceMessage(service, flow, subtype){
+  function getServiceMessage(service, flow, subtype, mapsLink){
     const base = "Bonjour bienvenue Merci de la confiance accordée.";
     if(flow === 'film'){
       return "Salut je voudrais";
@@ -1028,6 +1925,16 @@
         return "Salut je voudrais modifier ce document";
       }
       return "Salut je voudrais saisir ce document";
+    }
+    if(flow === 'delivery'){
+      let msg = "Bonjour, je voudrais me faire livrer un produit (hors films/applications).\n- Produit : \n- Quantité : \n- Lieu de livraison : ";
+      msg += mapsLink ? `\n📍 Ma position : ${mapsLink}` : "\n📍 Ma position : (à partager manuellement dans WhatsApp via 📎 > Position)";
+      return msg;
+    }
+    if(flow === 'wash'){
+      let msg = "Bonjour, je voudrais réserver un service de lavage.\n- Type (linge / véhicule / moto) : \n- Quantité ou description : \n- Lieu du lavage : ";
+      msg += mapsLink ? `\n📍 Ma position : ${mapsLink}` : "\n📍 Ma position : (à partager manuellement dans WhatsApp via 📎 > Position)";
+      return msg;
     }
     return `${base} Pour ${service}, envoyez-nous les détails de votre besoin.`;
   }
@@ -1064,9 +1971,36 @@
   function openServiceFlow(service, flow, subtype){
     const modal = ensureServiceModal();
     const number = pickWhatsAppNumber(service);
+    modal.querySelector('#serviceModalTitle').textContent = service;
+
+    if(flow === 'delivery' || flow === 'wash'){
+      currentServicePayload = { number, message: getServiceMessage(service, flow, subtype) };
+      modal.querySelector('#serviceModalIntro').textContent = 'Votre position Google Maps sera jointe automatiquement pour faciliter le service.';
+      modal.querySelector('#serviceModalNote').textContent = 'Récupération de votre position…';
+      modal.classList.add('open');
+
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const lat = pos.coords.latitude.toFixed(6);
+            const lng = pos.coords.longitude.toFixed(6);
+            const mapsLink = `https://www.google.com/maps?q=${lat},${lng}`;
+            currentServicePayload.message = getServiceMessage(service, flow, subtype, mapsLink);
+            modal.querySelector('#serviceModalNote').textContent = 'Position récupérée ✓ — elle sera incluse dans votre message WhatsApp.';
+          },
+          () => {
+            modal.querySelector('#serviceModalNote').textContent = "Position indisponible (accès refusé ou introuvable). Vous pourrez la partager manuellement dans WhatsApp via 📎 > Position.";
+          },
+          { timeout: 8000 }
+        );
+      } else {
+        modal.querySelector('#serviceModalNote').textContent = "Géolocalisation non disponible sur cet appareil. Partagez votre position manuellement dans WhatsApp via 📎 > Position.";
+      }
+      return;
+    }
+
     const message = getServiceMessage(service, flow, subtype);
     currentServicePayload = { number, message };
-    modal.querySelector('#serviceModalTitle').textContent = service;
     if(flow === 'film'){
       modal.querySelector('#serviceModalIntro').textContent = 'Un message prêt à envoyer va s’ouvrir dans WhatsApp.';
       modal.querySelector('#serviceModalNote').textContent = '';
@@ -1108,81 +2042,20 @@
       const amount = prompt('Entrez le montant à payer en FCFA :');
       if(!amount) return;
       const cleanAmount = String(amount).replace(/\s+/g, '');
+      const confirmPay = confirm(`Voulez-vous initier un paiement de ${cleanAmount} FCFA vers KK ?`);
+      if(!confirmPay) return;
+
       window.location.href = `tel:*144*2*1*${link.dataset.payNumber}*${cleanAmount}%23`;
     });
   });
 
-  function generateDesignPreview(e){
-    e.preventDefault();
-    previewUnlocked = false;
-    const brand = document.getElementById('brandName').value.trim();
-    const type = document.getElementById('designType').value;
-    const activity = document.getElementById('designActivity').value.trim();
-    const colors = document.getElementById('designColors').value.trim();
-    const style = document.getElementById('designStyle').value;
-    const text = document.getElementById('designText').value.trim();
-    lastDesignSummary = `${type} pour ${brand} · activité : ${activity} · couleurs : ${colors} · style : ${style} · texte : ${text}`;
-
-    const initials = brand.split(/\s+/).filter(Boolean).slice(0,2).map(p => p[0].toUpperCase()).join('') || 'SK';
-    const palette = colors.toLowerCase();
-    let grad1 = '#5b6cf0';
-    let grad2 = '#e0b15c';
-    if(palette.includes('vert')) { grad1 = '#1f8f68'; grad2 = '#76e2b7'; }
-    else if(palette.includes('rouge')) { grad1 = '#812c2c'; grad2 = '#f08b63'; }
-    else if(palette.includes('noir')) { grad1 = '#0e1015'; grad2 = '#d9b86f'; }
-    else if(palette.includes('bleu')) { grad1 = '#173a7a'; grad2 = '#3db8ff'; }
-
-    const htmlPreview = `
-      <div style="min-height:320px; padding:30px; background:linear-gradient(135deg, ${grad1}, ${grad2}); display:flex; flex-direction:column; justify-content:space-between; color:#fff;">
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:16px;">
-          <div style="width:78px; height:78px; border-radius:20px; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-size:2rem; font-weight:800;">${initials}</div>
-          <div style="text-align:right; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase;">${type}</div>
-        </div>
-        <div>
-          <div style="font-family:'Fraunces',serif; font-size:2rem; line-height:1.1; margin-bottom:10px;">${brand}</div>
-          <div style="font-size:1rem; opacity:.95; margin-bottom:8px;">${activity} · style ${style.toLowerCase()}</div>
-          <div style="max-width:420px; font-size:.95rem; line-height:1.45; opacity:.92;">${text.replace(/\n/g, '<br>')}</div>
-        </div>
-        <div style="display:flex; justify-content:space-between; gap:12px; font-size:.8rem; opacity:.92;">
-          <span>Couleurs : ${colors}</span>
-          <span>Aperçu commercial</span>
-        </div>
-      </div>`;
-
-    const previewBox = document.getElementById('previewBox');
-    document.getElementById('previewContent').innerHTML = htmlPreview;
-    previewBox.classList.add('blurred');
-    previewBox.classList.remove('unlocked');
-    document.getElementById('previewLock').style.display = 'flex';
-    return false;
-  }
-
-  function unlockPreview(){
-    if(!lastDesignSummary){
-      alert('Générez d’abord un aperçu.');
-      return;
-    }
-    const ref = prompt('Entrez votre référence ou confirmation de paiement :');
-    if(!ref) return;
-    previewUnlocked = true;
-    const previewBox = document.getElementById('previewBox');
-    previewBox.classList.remove('blurred');
-    previewBox.classList.add('unlocked');
-    document.getElementById('previewLock').style.display = 'none';
-  }
-
-  function sendDesignToWhatsApp(){
-    if(!lastDesignSummary){
-      alert('Veuillez d’abord générer un aperçu.');
-      return;
-    }
-    const message = `Bonjour bienvenue Merci de la confiance accordée. Je veux finaliser cette demande de création : ${lastDesignSummary}. Merci de me dire le délai, le prix final et la procédure de livraison.`;
-    openWhatsApp(WHATSAPP_NUMBERS[0], message);
-  }
+  // Anciennes fonctions de logo remplacées par Logo Studio Pro (voir ci-dessus)
 
   // Formulaire de contact -> ouvre WhatsApp avec message pré-rempli
   function handleContact(e){
     e.preventDefault();
+    
+    if(e.target.elements.b_phone && e.target.elements.b_phone.value !== "") return false;
     const name = document.getElementById('cname').value.trim();
     const service = document.getElementById('cservice').value;
     const msg = document.getElementById('cmsg').value.trim();
@@ -1203,7 +2076,11 @@
   aiClose.addEventListener('click', () => aiPanel.classList.remove('open'));
 
   const aiResponses = {
-    services: "KK propose la saisie, la modification de polycopiés, la création de logos et d'affiches avec aperçu IA, la retouche photo, les films/applications et la création de comptes.",
+    services: "KK propose une large gamme de services : saisie ultra-rapide, création de logos professionnels, affiches publicitaires, retouche photo haute qualité, vente d'applications et de films, et création de comptes sécurisés.",
+    prix: "Nos tarifs sont très compétitifs. Par exemple : Saisie à partir de 200F, Logo Pro à 2500F, Affiche à 1500F. Consultez la section 'Nos Tarifs' pour le détail complet.",
+    paiement: "Nous acceptons Orange Money (+226 06121297) et Wave (+226 56761864). Cliquez sur les numéros dans la section paiement pour lancer l'opération.",
+    delai: "La plupart de nos services (saisie, logos simples) sont livrés en moins de 24h. Les projets complexes peuvent prendre 48h.",
+    localisation: "Nous sommes basés à Dédougou, Burkina Faso, mais nous servons des clients partout dans le monde via WhatsApp.",
     prix: "Les tarifs sont affichés dans la section Tarifs. Pour un devis précis ou une demande spéciale, cliquez sur le service ou écrivez-nous sur WhatsApp.",
     paiement: "Vous pouvez payer en cliquant sur l'un des numéros de paiement. Votre téléphone composera automatiquement le code avec le montant saisi.",
     contact: "Deux WhatsApp sont disponibles : +226 06 12 12 97 et +226 56 76 18 64. Vous pouvez aussi écrire à teegawinde1@gmail.com."
@@ -1282,6 +2159,269 @@
     .then(r => r.ok ? r.json() : Promise.reject(r.status))
     .then(data => applyContent(data))
     .catch(err => console.warn('content.json introuvable ou invalide, contenu par défaut conservé.', err));
+</script>
+
+
+<!-- AUTH MODALS -->
+<div class="auth-modal" id="loginModal">
+  <div class="auth-modal-card">
+    <button class="auth-close" onclick="closeAuthModal('login')">✕</button>
+    <h2>Se connecter</h2>
+    <p>Accédez à votre compte KK</p>
+    <div class="auth-method-toggle">
+      <button type="button" class="auth-method-btn active" id="loginMethodEmailBtn" onclick="setAuthMethod('login','email')">Email</button>
+      <button type="button" class="auth-method-btn" id="loginMethodPhoneBtn" onclick="setAuthMethod('login','phone')">Numéro mobile</button>
+    </div>
+    <form class="auth-form" onsubmit="handleLogin(event)">
+      <input type="email" id="loginEmail" placeholder="Votre email" required>
+      <input type="tel" id="loginPhone" placeholder="Votre numéro mobile (ex. 70 12 34 56)" style="display:none;">
+      <input type="password" id="loginPassword" placeholder="Mot de passe" required>
+      <button type="submit" class="btn btn-primary">Se connecter</button>
+      <div class="auth-error" id="loginError"></div>
+    </form>
+    <div class="auth-toggle">Pas encore de compte ? <a onclick="switchAuthModal('login', 'register')">Créer un compte</a></div>
+  </div>
+</div>
+
+<div class="auth-modal" id="registerModal">
+  <div class="auth-modal-card">
+    <button class="auth-close" onclick="closeAuthModal('register')">✕</button>
+    <h2>Créer un compte</h2>
+    <p>Rejoignez KK en quelques secondes</p>
+    <div class="auth-method-toggle">
+      <button type="button" class="auth-method-btn active" id="registerMethodEmailBtn" onclick="setAuthMethod('register','email')">Email</button>
+      <button type="button" class="auth-method-btn" id="registerMethodPhoneBtn" onclick="setAuthMethod('register','phone')">Numéro mobile</button>
+    </div>
+    <form class="auth-form" onsubmit="handleRegister(event)">
+      <input type="text" id="registerName" placeholder="Votre nom complet" required>
+      <input type="email" id="registerEmail" placeholder="Votre email" required>
+      <input type="tel" id="registerPhone" placeholder="Votre numéro mobile (ex. 70 12 34 56)" style="display:none;">
+      <input type="password" id="registerPassword" placeholder="Mot de passe (min. 8 caractères)" minlength="8" required>
+      <button type="submit" class="btn btn-primary">Créer un compte</button>
+      <div class="auth-error" id="registerError"></div>
+    </form>
+    <div class="auth-toggle">Vous avez déjà un compte ? <a onclick="switchAuthModal('register', 'login')">Se connecter</a></div>
+  </div>
+</div>
+
+<script>
+
+function escapeHTML(str) {
+  if (!str) return "";
+  return str.replace(/[&<>"']/g, function(m) {
+    return {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[m];
+  });
+}
+
+// ===== AUTHENTICATION SYSTEM =====
+let currentUserAuth = null;
+
+function loadUserAuth() {
+  const stored = localStorage.getItem('kkUser');
+  if (stored) {
+    try {
+      currentUserAuth = JSON.parse(stored);
+      updateAuthUI();
+    if (currentUserAuth && !sessionStorage.getItem('kkWelcomeShown')) {
+      setTimeout(() => {
+        addMsg(`Ravi de vous revoir, ${currentUserAuth.name} ! Comment KK peut vous aider aujourd'hui ?`, 'bot');
+        aiPanel.classList.add('open');
+        sessionStorage.setItem('kkWelcomeShown', 'true');
+      }, 2000);
+    }
+
+    } catch(e) {
+      console.error('Erreur chargement utilisateur:', e);
+    }
+  }
+}
+
+function saveUserAuth(user) {
+  currentUserAuth = user;
+  localStorage.setItem('kkUser', JSON.stringify(user));
+  updateAuthUI();
+    if (currentUserAuth && !sessionStorage.getItem('kkWelcomeShown')) {
+      setTimeout(() => {
+        addMsg(`Ravi de vous revoir, ${currentUserAuth.name} ! Comment KK peut vous aider aujourd'hui ?`, 'bot');
+        aiPanel.classList.add('open');
+        sessionStorage.setItem('kkWelcomeShown', 'true');
+      }, 2000);
+    }
+
+}
+
+function updateAuthUI() {
+  const authButtons = document.getElementById('authButtons');
+  const userMenu = document.getElementById('userMenu');
+  
+  if (currentUserAuth) {
+    if(authButtons) authButtons.style.display = 'none';
+    if(userMenu) userMenu.style.display = 'flex';
+    const userNameEl = document.getElementById('userName');
+    if(userNameEl) userNameEl.textContent = escapeHTML(currentUserAuth.name);
+  } else {
+    if(authButtons) authButtons.style.display = 'flex';
+    if(userMenu) userMenu.style.display = 'none';
+  }
+}
+
+function showAuthModal(type) {
+  const modal = document.getElementById(type + 'Modal');
+  if(modal) modal.classList.add('open');
+}
+
+function closeAuthModal(type) {
+  const modal = document.getElementById(type + 'Modal');
+  if(modal) modal.classList.remove('open');
+}
+
+function switchAuthModal(from, to) {
+  closeAuthModal(from);
+  showAuthModal(to);
+}
+
+// ===== EMAIL / PHONE METHOD SWITCH =====
+let authMethod = { login: 'email', register: 'email' };
+
+function setAuthMethod(modalType, method) {
+  authMethod[modalType] = method;
+
+  const emailInput = document.getElementById(modalType + 'Email');
+  const phoneInput = document.getElementById(modalType + 'Phone');
+  const emailBtn = document.getElementById(modalType + 'MethodEmailBtn');
+  const phoneBtn = document.getElementById(modalType + 'MethodPhoneBtn');
+
+  if (method === 'phone') {
+    emailInput.style.display = 'none';
+    emailInput.required = false;
+    phoneInput.style.display = '';
+    phoneInput.required = true;
+    phoneBtn.classList.add('active');
+    emailBtn.classList.remove('active');
+  } else {
+    phoneInput.style.display = 'none';
+    phoneInput.required = false;
+    emailInput.style.display = '';
+    emailInput.required = true;
+    emailBtn.classList.add('active');
+    phoneBtn.classList.remove('active');
+  }
+}
+
+function normalizePhone(phone) {
+  return phone.replace(/[\s.\-]/g, '');
+}
+
+function handleRegister(e) {
+  e.preventDefault();
+  const name = document.getElementById('registerName').value;
+  const method = authMethod.register;
+  const email = method === 'email' ? document.getElementById('registerEmail').value : '';
+  const phone = method === 'phone' ? normalizePhone(document.getElementById('registerPhone').value) : '';
+  const identifier = method === 'email' ? email : phone;
+  const password = document.getElementById('registerPassword').value;
+  const errorDiv = document.getElementById('registerError');
+  
+  errorDiv.textContent = '';
+  
+  if (password.length < 8) {
+    errorDiv.textContent = 'Le mot de passe doit contenir au moins 8 caractères';
+    return;
+  }
+
+  if (method === 'phone' && phone.replace(/\D/g,'').length < 8) {
+    errorDiv.textContent = 'Numéro mobile invalide';
+    return;
+  }
+  
+  const users = JSON.parse(localStorage.getItem('kkUsers') || '[]');
+  if (users.find(u => (method === 'email' ? u.email === email : u.phone === phone))) {
+    errorDiv.textContent = method === 'email' ? 'Cet email est déjà utilisé' : 'Ce numéro mobile est déjà utilisé';
+    return;
+  }
+  
+  const user = {
+    id: Date.now(),
+    name,
+    email: email || null,
+    phone: phone || null,
+    authMethod: method,
+    password: btoa(password),
+    createdAt: new Date().toISOString()
+  };
+  
+  users.push(user);
+  localStorage.setItem('kkUsers', JSON.stringify(users));
+  
+  saveUserAuth({ id: user.id, name: user.name, email: user.email, phone: user.phone, createdAt: user.createdAt });
+  closeAuthModal('register');
+  alert('Compte créé avec succès !');
+  document.getElementById('registerName').value = '';
+  document.getElementById('registerEmail').value = '';
+  document.getElementById('registerPhone').value = '';
+  document.getElementById('registerPassword').value = '';
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const method = authMethod.login;
+  const email = method === 'email' ? document.getElementById('loginEmail').value : '';
+  const phone = method === 'phone' ? normalizePhone(document.getElementById('loginPhone').value) : '';
+  const password = document.getElementById('loginPassword').value;
+  const errorDiv = document.getElementById('loginError');
+  
+  errorDiv.textContent = '';
+  
+  const users = JSON.parse(localStorage.getItem('kkUsers') || '[]');
+  const user = users.find(u =>
+    (method === 'email' ? u.email === email : u.phone === phone) && u.password === btoa(password)
+  );
+  
+  if (!user) {
+    errorDiv.textContent = method === 'email' ? 'Email ou mot de passe incorrect' : 'Numéro mobile ou mot de passe incorrect';
+    return;
+  }
+  
+  saveUserAuth({ id: user.id, name: user.name, email: user.email, phone: user.phone, createdAt: user.createdAt });
+  closeAuthModal('login');
+  alert('Connexion réussie !');
+  document.getElementById('loginEmail').value = '';
+  document.getElementById('loginPhone').value = '';
+  document.getElementById('loginPassword').value = '';
+}
+
+function handleLogout() {
+  if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+    currentUserAuth = null;
+    localStorage.removeItem('kkUser');
+    updateAuthUI();
+    if (currentUserAuth && !sessionStorage.getItem('kkWelcomeShown')) {
+      setTimeout(() => {
+        addMsg(`Ravi de vous revoir, ${currentUserAuth.name} ! Comment KK peut vous aider aujourd'hui ?`, 'bot');
+        aiPanel.classList.add('open');
+        sessionStorage.setItem('kkWelcomeShown', 'true');
+      }, 2000);
+    }
+
+    alert('Déconnexion réussie');
+  }
+}
+
+function goToProfile() {
+  if (currentUserAuth) {
+    const createdDate = new Date(currentUserAuth.createdAt).toLocaleDateString('fr-FR');
+    const contact = currentUserAuth.email ? ('Email: ' + currentUserAuth.email) : ('Téléphone: ' + currentUserAuth.phone);
+    alert('Profil de ' + currentUserAuth.name + '\n' + contact + '\nInscrit depuis: ' + createdDate);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadUserAuth);
 </script>
 
 </body>
