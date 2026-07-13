@@ -110,6 +110,12 @@
     font-weight:500; transition:color .2s;
   }
   nav ul li a:hover{color:var(--gold);}
+  nav ul li a.active{color:var(--gold);}
+  nav ul li a{position:relative;}
+  nav ul li a.active::after{
+    content:""; position:absolute; left:0; right:0; bottom:-6px;
+    height:2px; background:var(--gold); border-radius:2px;
+  }
   .nav-cta{
     display:none;
   }
@@ -199,7 +205,7 @@
   .stat .lbl{font-size:.75rem; color:var(--muted); margin-top:4px;}
 
   /* ---------- Sections ---------- */
-  section{padding:70px 0;}
+  section{padding:70px 0; scroll-margin-top:84px;}
   .section-head{margin-bottom:40px; max-width:640px;}
   .section-head h2{font-size:clamp(1.7rem,4vw,2.4rem);}
   .section-head p{color:var(--muted); margin:0;}
@@ -383,6 +389,18 @@
   }
   .float-whatsapp:hover{transform:scale(1.08);}
 
+  .back-to-top{
+    position:fixed; bottom:92px; right:22px; z-index:60;
+    width:42px; height:42px; border-radius:50%; background:var(--card);
+    border:1px solid var(--line); color:var(--text); font-size:1.2rem;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    box-shadow:0 8px 24px rgba(0,0,0,0.35);
+    opacity:0; pointer-events:none; transform:translateY(10px);
+    transition:opacity .25s, transform .25s, border-color .2s;
+  }
+  .back-to-top.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+  .back-to-top:hover{border-color:var(--gold); color:var(--gold);}
+
   /* ---------- Publicité flottante (non encombrante) ---------- */
   .float-ad{
     position:fixed; top:18px; right:18px; z-index:59;
@@ -523,6 +541,11 @@
     -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
   }
   .studio-hero-bar p{ color:var(--muted); max-width:600px; margin:0 auto; font-size:.95rem; }
+  .studio-back-link{
+    display:inline-flex; align-items:center; gap:6px; margin-bottom:14px;
+    font-size:.85rem; color:var(--muted); text-decoration:none; transition:color .2s;
+  }
+  .studio-back-link:hover{ color:var(--studio-gold); }
   .studio-badge-row{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:18px; }
   .studio-badge{ font-size:.72rem; padding:4px 12px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid var(--studio-border); color:var(--muted); }
   .studio-badge b{ color:var(--studio-gold); }
@@ -734,11 +757,13 @@
     <div class="logo"><span class="mark">KK</span> KK</div>
     <nav id="mainNav">
       <ul>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#tarifs">Tarifs</a></li>
-        <li><a href="#paiement">Paiement</a></li>
-        <li><a href="#partenaires">Annonceurs</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#services" data-navlink="services">Services</a></li>
+        <li><a href="#ia-logo" data-navlink="ia-logo">Logo Studio</a></li>
+        <li><a href="#tarifs" data-navlink="tarifs">Tarifs</a></li>
+        <li><a href="#process" data-navlink="process">Comment ça marche</a></li>
+        <li><a href="#paiement" data-navlink="paiement">Paiement</a></li>
+        <li><a href="#partenaires" data-navlink="partenaires">Annonceurs</a></li>
+        <li><a href="#contact" data-navlink="contact">Contact</a></li>
       </ul>
     </nav>
     <div class="nav-cta" id="authButtons" style="display:flex; gap:12px; align-items:center;">
@@ -750,7 +775,7 @@
       <button class="btn btn-outline btn-sm" onclick="goToProfile()" style="cursor:pointer;">Profil</button>
       <button class="btn btn-outline btn-sm" onclick="handleLogout()" style="cursor:pointer;">Déconnexion</button>
     </div>
-    <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
   </div>
 </header>
 
@@ -841,6 +866,7 @@
 <!-- ================= LOGO STUDIO PRO ================= -->
 <section id="ia-logo" class="studio-section">
   <div class="studio-hero-bar">
+    <a href="#services" class="studio-back-link">← Retour aux services</a>
     <h2>🎨 Logo Studio Pro</h2>
     <p>Le studio de création de logo le plus avancé — 9 modèles professionnels, 30+ icônes vectorielles, 12 palettes, couleurs personnalisées, aperçu en temps réel, mockups et export PNG/SVG.</p>
     <div class="studio-badge-row">
@@ -1333,7 +1359,9 @@
       </div>
       <div class="footer-links">
         <a href="#services">Services</a>
+        <a href="#ia-logo">Logo Studio</a>
         <a href="#tarifs">Tarifs</a>
+        <a href="#process">Comment ça marche</a>
         <a href="#paiement">Paiement</a>
         <a href="#partenaires">Annonceurs</a>
         <a href="#contact">Contact</a>
@@ -1348,6 +1376,7 @@
 
 <!-- ================= FLOATING BUTTONS ================= -->
 <a class="float-whatsapp" href="#contact" onclick="openGeneralWhatsApp(); return false;" aria-label="Contacter sur WhatsApp">💬</a>
+<button class="back-to-top" id="backToTop" aria-label="Retour en haut de page">↑</button>
 
 <div class="float-ad" id="floatAd">
   <span class="ad-tag">Pub</span>
@@ -1379,8 +1408,43 @@
   // Menu mobile
   const menuToggle = document.getElementById('menuToggle');
   const mainNav = document.getElementById('mainNav');
-  menuToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
-  mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+  menuToggle.addEventListener('click', () => {
+    const isOpen = mainNav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    menuToggle.textContent = isOpen ? '✕' : '☰';
+  });
+  mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mainNav.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.textContent = '☰';
+  }));
+
+  // Surbrillance du lien actif dans le menu (scrollspy)
+  const navLinks = document.querySelectorAll('[data-navlink]');
+  const navSections = Array.from(navLinks)
+    .map(link => document.getElementById(link.getAttribute('data-navlink')))
+    .filter(Boolean);
+  if(navSections.length){
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`[data-navlink="${entry.target.id}"]`);
+          if(active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    navSections.forEach(sec => navObserver.observe(sec));
+  }
+
+  // Bouton retour en haut
+  const backToTop = document.getElementById('backToTop');
+  if(backToTop){
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('show', window.scrollY > 600);
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  }
 
   // Publicité flottante
   const floatAd = document.getElementById('floatAd');
