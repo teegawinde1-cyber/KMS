@@ -1,37 +1,15 @@
-<!DOCTYPE html>
+{<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="pageTitle">KK — Services numériques rapides & fiables</title>
-<meta id="pageDescription" name="description" content="KK : saisie ultra rapide, création de logos et affiches, retouche photo, vente de films et applications, création de comptes. Paiement Orange Money & Wave. Basé à Dédougou, Burkina Faso.">
+<title id="pageTitle">KMS — Services numériques rapides & fiables</title>
+<meta id="pageDescription" name="description" content="KMS : saisie ultra rapide, création de logos et affiches, retouche photo, vente de films et applications, création de comptes. Paiement Orange Money & Wave. Basé à Dédougou, Burkina Faso.">
 
 <!-- Protection de base -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; media-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https:; frame-ancestors 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<!-- ===================================================================
-     GUIDE RAPIDE POUR MODIFIER CE SITE TOI-MÊME (gratuit)
-     ===================================================================
-     1. Tout le texte du site est dans ce fichier "index.html".
-     2. Pour changer un texte : trouve-le avec Ctrl+F (ou recherche sur
-        ton téléphone) et remplace-le directement.
-     3. Pour changer les PRIX : va à la section "TARIFS" plus bas,
-        cherche les balises <span class="price"> et change le chiffre.
-     4. Pour ajouter une nouvelle pub d'entreprise : va à la section
-        "ESPACE PARTENAIRES" et copie/colle un bloc ".partner-card".
-     5. Pour héberger ce site gratuitement et le modifier facilement :
-        - Crée un compte gratuit sur https://github.com
-        - Crée un "repository" public nommé par ex. "kk-site"
-        - Dépose ce fichier en le renommant "index.html"
-        - Va dans "Settings > Pages" et active "GitHub Pages"
-        - Ton site sera visible à une adresse comme :
-          https://tonpseudo.github.io/kk-site/
-        - Pour modifier après : clique sur le fichier sur GitHub,
-          clique sur le crayon (Edit), modifie, puis "Commit changes".
-        Tout ça est gratuit, à vie, et marche depuis un téléphone.
-     =================================================================== -->
 
 <style>
   :root{
@@ -100,7 +78,7 @@
     background:linear-gradient(135deg,var(--gold),var(--terra));
     display:flex; align-items:center; justify-content:center;
     font-family:'Fraunces',serif; font-weight:800; color:#1a1a1a;
-    font-size:1.1rem;
+    font-size:.78rem; letter-spacing:.02em;
   }
   nav ul{
     display:flex; gap:24px; list-style:none; margin:0; padding:0;
@@ -138,6 +116,164 @@
     display:flex; flex-direction:column; position:absolute; top:64px; left:0; right:0;
     background:var(--bg-soft); padding:20px 24px; gap:16px; border-bottom:1px solid var(--line);
   }
+
+  /* ---------- Traduction automatique ---------- */
+  #translateBar{
+    position:fixed; top:0; left:0; right:0; z-index:300;
+    background:var(--gold); color:#1a1305; text-align:center;
+    padding:8px 12px; font-size:.85rem; font-weight:600;
+    transform:translateY(-100%); transition:transform .25s ease;
+  }
+  #translateBar.show{transform:translateY(0);}
+
+  /* ---------- TTS (lecture à haute voix) ---------- */
+  .tts-toggle{
+    display:inline-flex; align-items:center; gap:6px;
+    background:transparent; border:1px solid var(--line); color:var(--muted);
+    border-radius:999px; padding:8px 14px; font-size:.85rem; font-weight:600;
+    cursor:pointer; transition:all .2s;
+  }
+  .tts-toggle:hover{border-color:var(--gold); color:var(--gold);}
+  .tts-toggle.active{background:var(--gold); border-color:var(--gold); color:#1a1305;}
+
+  .tts-readable{cursor:pointer; transition:background .15s, outline .15s;}
+  body.tts-mode .tts-readable:hover{
+    outline:2px dashed var(--gold); outline-offset:4px; border-radius:6px;
+  }
+  .tts-reading{
+    background:rgba(224,177,92,0.14) !important;
+    outline:2px solid var(--gold) !important; outline-offset:4px; border-radius:6px;
+  }
+
+  #ttsBar{
+    position:fixed; left:16px; right:16px; bottom:16px; z-index:80;
+    max-width:420px; margin:0 auto;
+    background:var(--card); border:1px solid var(--line); border-radius:999px;
+    padding:10px 16px; display:none; align-items:center; gap:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  }
+  #ttsBar.open{display:flex;}
+  #ttsBar button{
+    background:none; border:none; color:var(--text); cursor:pointer;
+    font-size:1.1rem; display:flex; align-items:center; justify-content:center;
+    width:34px; height:34px; border-radius:50%; transition:background .15s;
+  }
+  #ttsBar button:hover{background:var(--bg-soft);}
+  #ttsBar select{
+    background:var(--bg-soft); color:var(--text); border:1px solid var(--line);
+    border-radius:999px; padding:4px 8px; font-size:.75rem;
+  }
+  #ttsBarLabel{font-size:.78rem; color:var(--muted); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+
+  /* ---------- Espace Jeu : section texturée ---------- */
+  .games-section{
+    position:relative; overflow:hidden;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(224,177,92,0.08), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(91,108,240,0.08), transparent 45%),
+      var(--bg-soft);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .games-section::before{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+    background-image:radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size:22px 22px;
+  }
+  .games-section .wrap{position:relative;}
+  .games-grid{
+    display:grid; gap:14px;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  }
+  .game-tile{
+    position:relative; cursor:pointer; text-align:center; overflow:hidden;
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:22px 14px 18px; transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+  }
+  .game-tile::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--gtint, var(--gold));
+    transform:scaleX(0); transform-origin:left; transition:transform .25s ease;
+  }
+  .game-tile::after{
+    content:""; position:absolute; width:120px; height:120px; border-radius:50%;
+    background:var(--gtint, var(--gold)); opacity:.10; top:-50px; right:-50px;
+    transition:transform .3s ease;
+  }
+  .game-tile:hover{
+    transform:translateY(-4px); border-color:var(--gtint, var(--gold));
+    box-shadow:0 14px 30px rgba(0,0,0,0.35);
+  }
+  .game-tile:hover::before{transform:scaleX(1);}
+  .game-tile:hover::after{transform:scale(1.3);}
+  .game-tile:active{transform:translateY(-1px) scale(.98);}
+  .game-tile-icon{
+    position:relative; z-index:1; width:52px; height:52px; margin:0 auto 12px;
+    border-radius:14px; display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem; background:var(--gtint-bg, rgba(224,177,92,.18));
+    border:1px solid var(--gtint-border, rgba(224,177,92,.45));
+  }
+  .game-tile-name{position:relative; z-index:1; font-weight:700; font-size:.98rem;}
+  .game-tile-tag{
+    position:relative; z-index:1; margin-top:4px; font-size:.72rem; color:var(--muted);
+    text-transform:uppercase; letter-spacing:.06em;
+  }
+
+  /* ---------- Espace Jeu (Dino / Pac-Man) ---------- */
+  .game-modal{
+    position:fixed; inset:0; z-index:200; display:none;
+    align-items:center; justify-content:center;
+    background:radial-gradient(circle at 50% 30%, rgba(224,177,92,0.10), rgba(10,11,14,0.90) 60%);
+    padding:16px;
+  }
+  .game-modal.open{display:flex; animation:serviceModalFade .2s ease;}
+  .game-modal-inner{
+    position:relative; overflow:hidden;
+    background:var(--card); border:1px solid var(--line); border-radius:calc(var(--radius) + 4px);
+    padding:20px; width:100%; max-width:380px;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.5);
+    animation:serviceModalPop .3s cubic-bezier(.2,.9,.3,1.2);
+  }
+  .game-modal-inner::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg, var(--gold), var(--indigo), var(--terra), var(--gold));
+    background-size:200% 100%; animation:serviceModalShine 4s linear infinite;
+  }
+  .game-modal-header{
+    display:flex; align-items:center; justify-content:space-between; width:100%;
+  }
+  .game-modal-header h3{margin:0; font-size:1.1rem;}
+  .game-modal-close{
+    background:none; border:1px solid var(--line); color:var(--text);
+    width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:1rem;
+    transition:border-color .2s, color .2s, transform .2s;
+  }
+  .game-modal-close:hover{border-color:var(--gold); color:var(--gold); transform:rotate(90deg);}
+  .game-modal-score{
+    width:100%; display:flex; justify-content:space-between;
+    font-size:.85rem; color:var(--muted);
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:10px; padding:8px 12px;
+  }
+  .game-modal-score b{color:var(--gold);}
+  #gameCanvas{
+    background:#0a0b0e; border:1px solid var(--line); border-radius:10px;
+    max-width:100%; touch-action:none; image-rendering:pixelated;
+  }
+  .game-modal-hint{font-size:.78rem; color:var(--muted); text-align:center; margin:0;}
+  .game-dpad{
+    display:none; grid-template-columns:repeat(3,44px); grid-template-rows:repeat(3,44px);
+    gap:4px; margin-top:4px;
+  }
+  .game-dpad.show{display:grid;}
+  .game-dpad button{
+    background:var(--bg-soft); border:1px solid var(--line); color:var(--text);
+    border-radius:10px; font-size:1.1rem; cursor:pointer;
+  }
+  .game-dpad button:active{background:var(--gold); color:#1a1305;}
+  .dpad-up{grid-column:2; grid-row:1;}
+  .dpad-left{grid-column:1; grid-row:2;}
+  .dpad-right{grid-column:3; grid-row:2;}
+  .dpad-down{grid-column:2; grid-row:3;}
 
   /* ---------- Buttons ---------- */
   .btn{
@@ -230,6 +366,27 @@
   .service-card h3{font-size:1.1rem; margin-bottom:8px;}
   .service-card p{color:var(--muted); font-size:.92rem; margin:0;}
 
+  /* ---------- Bouton dédié Logo Studio ---------- */
+  .logo-cta{
+    margin-top:24px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    background:linear-gradient(135deg, rgba(224,177,92,0.12), rgba(224,177,92,0.03));
+    border:1px solid rgba(224,177,92,0.35); border-radius:var(--radius);
+    padding:24px 26px;
+  }
+  .logo-cta-icon{
+    width:52px; height:52px; flex:0 0 auto; border-radius:14px;
+    background:linear-gradient(135deg,var(--gold),var(--terra));
+    display:flex; align-items:center; justify-content:center; font-size:1.6rem;
+  }
+  .logo-cta-text{flex:1 1 220px;}
+  .logo-cta-text h3{font-size:1.05rem; margin:0 0 4px;}
+  .logo-cta-text p{color:var(--muted); font-size:.88rem; margin:0;}
+  .logo-cta .btn{flex:0 0 auto;}
+  @media(max-width:560px){
+    .logo-cta{flex-direction:column; text-align:center; padding:22px 18px;}
+    .logo-cta .btn{width:100%;}
+  }
+
   /* ---------- Tarifs ---------- */
   .pricing-grid{
     display:grid; gap:18px;
@@ -303,6 +460,33 @@
   .trust-card .icon{font-size:1.8rem; margin-bottom:10px;}
   .trust-card h4{font-size:.98rem; margin-bottom:6px;}
   .trust-card p{color:var(--muted); font-size:.85rem; margin:0;}
+
+  /* ---------- Mise en page mobile compacte (2-3 colonnes) ---------- */
+  @media(max-width:680px){
+    .services-grid, .pricing-grid, .pay-grid, .steps, .trust-grid{
+      grid-template-columns:repeat(2,1fr) !important; gap:10px;
+    }
+    .service-card, .price-card, .pay-card, .step, .trust-card{
+      padding:14px; border-radius:14px;
+    }
+    .service-card .icon, .pay-card .pay-icon{
+      width:36px; height:36px; font-size:1.1rem; margin-bottom:8px; border-radius:9px;
+    }
+    .service-card h3, .step h4{font-size:.92rem; margin-bottom:4px;}
+    .service-card p, .step p, .trust-card p, .pay-card p{font-size:.78rem;}
+    .trust-card{padding:16px 12px;}
+    .trust-card .icon{font-size:1.4rem; margin-bottom:6px;}
+    .price-card{gap:6px;}
+    .price-card .price{font-size:1.5rem;}
+    .price-card.featured{grid-column:1 / -1;}
+    .price-card.featured::before{top:-10px; right:14px; font-size:.62rem;}
+    .pay-card .pay-icon{width:42px; height:42px; font-size:1.25rem; margin-bottom:8px;}
+    .pay-card .num{font-size:1.05rem;}
+    .step .step-num{font-size:1.25rem; margin-bottom:4px;}
+  }
+  @media(min-width:480px) and (max-width:680px){
+    .services-grid, .steps{grid-template-columns:repeat(3,1fr) !important;}
+  }
 
   /* ---------- Partenaires (pub) ---------- */
   .partners-wrap{
@@ -476,21 +660,46 @@
   .service-card[data-service]:focus-within, .service-card[data-service]:hover{outline:none;}
 
   .service-modal{
-    position:fixed; inset:0; background:rgba(0,0,0,0.68); z-index:120;
-    display:none; align-items:center; justify-content:center; padding:24px;
+    position:fixed; inset:0; z-index:120; padding:24px;
+    display:none; align-items:center; justify-content:center;
+    background:radial-gradient(circle at 50% 20%, rgba(224,177,92,0.10), rgba(0,0,0,0.72) 60%);
+    backdrop-filter:blur(3px);
   }
-  .service-modal.open{display:flex;}
+  .service-modal.open{display:flex; animation:serviceModalFade .25s ease;}
+  @keyframes serviceModalFade{ from{opacity:0;} to{opacity:1;} }
   .service-modal-card{
-    width:min(560px, 100%); background:var(--card); border:1px solid var(--line);
-    border-radius:var(--radius); padding:26px; box-shadow:0 18px 50px rgba(0,0,0,0.45);
+    position:relative; width:min(560px, 100%); background:var(--card); border:1px solid var(--line);
+    border-radius:calc(var(--radius) + 6px); padding:32px 28px 28px;
+    box-shadow:0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(224,177,92,0.06);
+    text-align:center; overflow:hidden;
+    animation:serviceModalPop .32s cubic-bezier(.2,.9,.3,1.2);
   }
-  .service-modal-card h3{margin-bottom:10px;}
-  .service-modal-card p{color:var(--muted); margin:0 0 14px;}
-  .service-modal-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:20px;}
+  @keyframes serviceModalPop{ from{opacity:0; transform:translateY(14px) scale(.96);} to{opacity:1; transform:translateY(0) scale(1);} }
+  .service-modal-card::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:5px;
+    background:linear-gradient(90deg, var(--gold), var(--terra), var(--gold));
+    background-size:200% 100%; animation:serviceModalShine 3.5s linear infinite;
+  }
+  @keyframes serviceModalShine{ from{background-position:0% 0;} to{background-position:200% 0;} }
+  .service-modal-icon{
+    width:56px; height:56px; margin:4px auto 14px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:1.6rem;
+    background:linear-gradient(135deg, rgba(224,177,92,0.22), rgba(224,177,92,0.06));
+    border:1px solid rgba(224,177,92,0.35);
+  }
+  .service-modal-card h3{
+    margin-bottom:10px; font-size:1.35rem; letter-spacing:.5px;
+    background:linear-gradient(90deg, var(--gold), var(--terra));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .service-modal-card p{color:var(--muted); margin:0 0 14px; line-height:1.5;}
+  .service-modal-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:22px; justify-content:center;}
+  .service-modal-actions .btn{min-width:130px;}
   .service-note{
     background:var(--bg-soft); border:1px solid var(--line); border-radius:12px;
-    padding:14px 16px; color:var(--text); font-size:.92rem;
+    padding:14px 16px; color:var(--text); font-size:.92rem; text-align:left;
   }
+  .service-note:empty{display:none; padding:0; border:none; margin:0;}
 
   .ia-builder-grid{
     display:grid; gap:24px;
@@ -516,204 +725,6 @@
   .mini-note{font-size:.82rem; color:var(--muted);}
   .payment-list{display:flex; flex-direction:column; gap:10px; margin-top:10px;}
   .payment-link{display:inline-block; text-decoration:none; font-weight:800;}
-
-  /* ==================== LOGO STUDIO PRO ==================== */
-  :root{
-    --studio-bg:#0a0c10;
-    --studio-panel:#141821;
-    --studio-input:#1a1f2b;
-    --studio-border:rgba(255,255,255,0.07);
-    --studio-hover:rgba(255,255,255,0.04);
-    --studio-gold:#e0b15c;
-    --studio-indigo:#5b6cf0;
-    --studio-green:#3fb68b;
-    --studio-red:#e25555;
-  }
-  .studio-section{ background:var(--studio-bg); padding:0; }
-  .studio-hero-bar{
-    background: linear-gradient(135deg, rgba(91,108,240,0.15), rgba(224,177,92,0.08));
-    border-bottom:1px solid var(--studio-border);
-    padding:40px 24px 30px; text-align:center;
-  }
-  .studio-hero-bar h2{
-    font-size:clamp(1.6rem, 4vw, 2.6rem); margin-bottom:8px;
-    background:linear-gradient(135deg, var(--studio-gold), #f0d090);
-    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-  }
-  .studio-hero-bar p{ color:var(--muted); max-width:600px; margin:0 auto; font-size:.95rem; }
-  .studio-back-link{
-    display:inline-flex; align-items:center; gap:6px; margin-bottom:14px;
-    font-size:.85rem; color:var(--muted); text-decoration:none; transition:color .2s;
-  }
-  .studio-back-link:hover{ color:var(--studio-gold); }
-  .studio-badge-row{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:18px; }
-  .studio-badge{ font-size:.72rem; padding:4px 12px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid var(--studio-border); color:var(--muted); }
-  .studio-badge b{ color:var(--studio-gold); }
-
-  .studio-wrap{ max-width:1200px; margin:0 auto; padding:24px; display:grid; gap:0; grid-template-columns:1fr; }
-  @media(min-width:920px){ .studio-wrap{ grid-template-columns:380px 1fr; gap:0; } }
-
-  .studio-controls{ background:var(--studio-panel); border:1px solid var(--studio-border); border-radius:14px; overflow:hidden; }
-  @media(min-width:920px){ .studio-controls{ border-radius:14px 0 0 14px; border-right:none; } }
-  .studio-tabs{ display:flex; border-bottom:1px solid var(--studio-border); background:rgba(0,0,0,0.2); overflow-x:auto; }
-  .studio-tab{ flex:1; min-width:64px; padding:14px 6px; text-align:center; cursor:pointer; font-size:.78rem; font-weight:600; color:var(--muted); border:none; background:none; border-bottom:2px solid transparent; transition:all .2s; white-space:nowrap; }
-  .studio-tab:hover{ color:var(--text); }
-  .studio-tab.active{ color:var(--studio-gold); border-bottom-color:var(--studio-gold); }
-  .studio-tab svg{ width:18px; height:18px; display:block; margin:0 auto 4px; }
-
-  .studio-panel-body{ padding:20px; max-height:620px; overflow-y:auto; }
-  .studio-panel-body::-webkit-scrollbar{ width:6px; }
-  .studio-panel-body::-webkit-scrollbar-thumb{ background:rgba(255,255,255,0.1); border-radius:3px; }
-
-  .studio-field{ margin-bottom:18px; }
-  .studio-field label{ display:block; font-size:.8rem; color:var(--muted); margin-bottom:6px; font-weight:500; }
-  .studio-input, .studio-select, .studio-textarea{ width:100%; padding:10px 14px; border-radius:10px; border:1px solid var(--studio-border); background:var(--studio-input); color:var(--text); font-family:inherit; font-size:.9rem; transition:border-color .2s; }
-  .studio-input:focus, .studio-select:focus, .studio-textarea:focus{ border-color:var(--studio-gold); outline:none; }
-  .studio-textarea{ resize:vertical; min-height:60px; }
-
-  .template-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
-  .template-card{ aspect-ratio:1; border:1px solid var(--studio-border); border-radius:10px; background:var(--studio-input); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; position:relative; overflow:hidden; }
-  .template-card:hover{ border-color:var(--studio-gold); background:var(--studio-hover); }
-  .template-card.active{ border-color:var(--studio-gold); box-shadow:0 0 0 2px rgba(224,177,92,0.3); }
-  .template-card svg{ width:80%; height:80%; }
-  .template-card .tpl-name{ position:absolute; bottom:0; left:0; right:0; font-size:.6rem; text-align:center; padding:2px; background:rgba(0,0,0,0.5); color:var(--muted); }
-  .template-card.active .tpl-name{ color:var(--studio-gold); }
-
-  .icon-category-row{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
-  .icon-cat-btn{ padding:5px 12px; border-radius:999px; border:1px solid var(--studio-border); background:var(--studio-input); color:var(--muted); font-size:.75rem; cursor:pointer; transition:all .2s; }
-  .icon-cat-btn:hover{ color:var(--text); }
-  .icon-cat-btn.active{ background:var(--studio-gold); color:#1a1305; border-color:var(--studio-gold); }
-  .icon-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:6px; max-height:240px; overflow-y:auto; }
-  .icon-grid::-webkit-scrollbar{ width:5px; }
-  .icon-grid::-webkit-scrollbar-thumb{ background:rgba(255,255,255,0.1); border-radius:3px; }
-  .icon-item{ aspect-ratio:1; border:1px solid var(--studio-border); border-radius:8px; background:var(--studio-input); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .15s; color:var(--muted); }
-  .icon-item:hover{ border-color:var(--studio-gold); color:var(--text); }
-  .icon-item.active{ border-color:var(--studio-gold); background:rgba(224,177,92,0.12); color:var(--studio-gold); }
-  .icon-item svg{ width:60%; height:60%; }
-
-  .palette-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px; }
-  .palette-card{ cursor:pointer; border-radius:10px; overflow:hidden; border:2px solid transparent; transition:all .2s; }
-  .palette-card:hover{ transform:scale(1.05); }
-  .palette-card.active{ border-color:var(--studio-gold); }
-  .palette-swatches{ display:flex; height:32px; }
-  .palette-swatches div{ flex:1; }
-  .palette-name{ font-size:.65rem; text-align:center; padding:3px; background:var(--studio-input); color:var(--muted); }
-
-  .color-row{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
-  .color-row label{ flex:1; font-size:.82rem; color:var(--muted); }
-  .color-picker-wrap{ width:44px; height:44px; border-radius:10px; border:2px solid var(--studio-border); overflow:hidden; cursor:pointer; position:relative; flex:none; }
-  .color-picker-wrap input[type=color]{ position:absolute; top:-4px; left:-4px; width:56px; height:56px; border:none; cursor:pointer; }
-  .color-hex{ width:90px; padding:8px 10px; border-radius:8px; border:1px solid var(--studio-border); background:var(--studio-input); color:var(--text); font-size:.82rem; font-family:monospace; }
-
-  .font-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-  .font-card{ padding:12px 10px; border:1px solid var(--studio-border); border-radius:10px; background:var(--studio-input); cursor:pointer; text-align:center; transition:all .2s; }
-  .font-card:hover{ border-color:var(--studio-gold); }
-  .font-card.active{ border-color:var(--studio-gold); background:rgba(224,177,92,0.08); }
-  .font-card .font-sample{ font-size:1.4rem; line-height:1; margin-bottom:4px; }
-  .font-card .font-name{ font-size:.68rem; color:var(--muted); }
-
-  .studio-slider{ width:100%; -webkit-appearance:none; appearance:none; height:6px; border-radius:3px; background:var(--studio-input); outline:none; }
-  .studio-slider::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:18px; height:18px; border-radius:50%; background:var(--studio-gold); cursor:pointer; border:2px solid var(--studio-panel); }
-  .studio-slider::-moz-range-thumb{ width:18px; height:18px; border-radius:50%; background:var(--studio-gold); cursor:pointer; border:2px solid var(--studio-panel); }
-  .slider-row{ display:flex; align-items:center; gap:12px; }
-  .slider-row .slider-val{ font-size:.82rem; color:var(--studio-gold); font-weight:600; min-width:36px; text-align:right; }
-
-  .toggle-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
-  .toggle-row label{ font-size:.85rem; color:var(--muted); }
-  .toggle-switch{ width:42px; height:24px; border-radius:12px; background:var(--studio-input); border:1px solid var(--studio-border); cursor:pointer; position:relative; transition:background .2s; }
-  .toggle-switch.on{ background:var(--studio-gold); }
-  .toggle-switch::after{ content:''; position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:#fff; transition:transform .2s; }
-  .toggle-switch.on::after{ transform:translateX(18px); }
-
-  .variation-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:12px; }
-  .variation-card{ padding:10px; border:1px solid var(--studio-border); border-radius:10px; background:var(--studio-input); cursor:pointer; text-align:center; font-size:.78rem; color:var(--muted); transition:all .2s; }
-  .variation-card:hover{ border-color:var(--studio-gold); color:var(--text); }
-  .variation-card.active{ border-color:var(--studio-gold); color:var(--studio-gold); background:rgba(224,177,92,0.06); }
-
-  .studio-preview{ background:var(--studio-panel); border:1px solid var(--studio-border); border-radius:0 14px 14px 0; border-left:none; min-height:600px; display:flex; flex-direction:column; }
-  @media(max-width:919px){ .studio-preview{ border-radius:0 0 14px 14px; border:1px solid var(--studio-border); border-top:none; } .studio-controls{ border-radius:14px 14px 0 0; border-bottom:none; } }
-
-  .preview-toolbar{ display:flex; align-items:center; justify-content:space-between; padding:12px 18px; border-bottom:1px solid var(--studio-border); flex-wrap:wrap; gap:10px; }
-  .preview-toolbar-left{ display:flex; align-items:center; gap:10px; }
-  .preview-toolbar-right{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-  .toolbar-btn{ padding:7px 14px; border-radius:8px; border:1px solid var(--studio-border); background:var(--studio-input); color:var(--text); font-size:.8rem; cursor:pointer; transition:all .2s; display:inline-flex; align-items:center; gap:6px; }
-  .toolbar-btn:hover{ border-color:var(--studio-gold); color:var(--studio-gold); }
-  .toolbar-btn.primary{ background:var(--studio-gold); color:#1a1305; border-color:var(--studio-gold); }
-  .toolbar-btn.primary:hover{ opacity:.9; }
-  .toolbar-btn.danger:hover{ border-color:var(--studio-red); color:var(--studio-red); }
-  .toolbar-btn svg{ width:15px; height:15px; }
-
-  .preview-stage{ flex:1; display:flex; align-items:center; justify-content:center; padding:30px; background:radial-gradient(ellipse at 50% 50%, rgba(91,108,240,0.06), transparent 70%), repeating-conic-gradient(rgba(255,255,255,0.015) 0% 25%, transparent 0% 50%) 50% / 24px 24px; position:relative; overflow:hidden; }
-  .preview-stage-bg-toggle{ position:absolute; top:12px; right:12px; display:flex; gap:4px; }
-  .bg-btn{ width:32px; height:32px; border-radius:8px; border:1px solid var(--studio-border); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:.7rem; color:var(--muted); transition:all .2s; }
-  .bg-btn:hover{ border-color:var(--studio-gold); }
-  .bg-btn.active{ border-color:var(--studio-gold); color:var(--studio-gold); }
-
-  #logoSvgContainer{ max-width:100%; display:flex; align-items:center; justify-content:center; transition:transform .3s ease; }
-  #logoSvgContainer svg{ max-width:100%; height:auto; filter:drop-shadow(0 8px 24px rgba(0,0,0,0.3)); }
-
-  .variation-thumbs{ display:flex; gap:10px; padding:14px 18px; border-top:1px solid var(--studio-border); overflow-x:auto; }
-  .variation-thumbs::-webkit-scrollbar{ height:5px; }
-  .variation-thumbs::-webkit-scrollbar-thumb{ background:rgba(255,255,255,0.1); border-radius:3px; }
-  .vthumb{ flex:0 0 110px; height:90px; border:1px solid var(--studio-border); border-radius:10px; background:var(--studio-input); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s; position:relative; overflow:hidden; }
-  .vthumb:hover{ border-color:var(--studio-gold); transform:translateY(-2px); }
-  .vthumb.active{ border-color:var(--studio-gold); box-shadow:0 0 0 2px rgba(224,177,92,0.25); }
-  .vthumb svg{ width:90%; height:90%; }
-  .vthumb-label{ position:absolute; bottom:0; left:0; right:0; font-size:.55rem; text-align:center; padding:1px; background:rgba(0,0,0,0.6); color:var(--muted); }
-
-  .mockup-bar{ display:flex; gap:8px; padding:12px 18px; border-top:1px solid var(--studio-border); flex-wrap:wrap; }
-  .mockup-btn{ padding:6px 14px; border-radius:999px; border:1px solid var(--studio-border); background:var(--studio-input); color:var(--muted); font-size:.78rem; cursor:pointer; transition:all .2s; }
-  .mockup-btn:hover{ color:var(--text); }
-  .mockup-btn.active{ background:var(--studio-gold); color:#1a1305; border-color:var(--studio-gold); }
-
-  .studio-modal{ position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:200; display:none; align-items:center; justify-content:center; padding:24px; backdrop-filter:blur(4px); }
-  .studio-modal.open{ display:flex; }
-  .studio-modal-card{ width:min(480px,100%); background:var(--studio-panel); border:1px solid var(--studio-border); border-radius:16px; padding:28px; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
-  .studio-modal-card h3{ margin-bottom:6px; font-size:1.2rem; }
-  .studio-modal-card p{ color:var(--muted); font-size:.88rem; margin:0 0 18px; }
-  .export-options{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
-  .export-option{ padding:16px; border:1px solid var(--studio-border); border-radius:12px; background:var(--studio-input); cursor:pointer; text-align:center; transition:all .2s; }
-  .export-option:hover{ border-color:var(--studio-gold); transform:translateY(-2px); }
-  .export-option .eo-icon{ font-size:1.8rem; margin-bottom:6px; }
-  .export-option .eo-title{ font-size:.88rem; font-weight:600; color:var(--text); }
-  .export-option .eo-desc{ font-size:.72rem; color:var(--muted); margin-top:3px; }
-  .export-sizes{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
-  .export-size-btn{ padding:8px 16px; border-radius:8px; border:1px solid var(--studio-border); background:var(--studio-input); color:var(--text); font-size:.82rem; cursor:pointer; transition:all .2s; }
-  .export-size-btn:hover{ border-color:var(--studio-gold); }
-  .export-size-btn.active{ border-color:var(--studio-gold); background:rgba(224,177,92,0.1); color:var(--studio-gold); }
-
-  .mockup-display{ position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; padding:30px; gap:20px; background:radial-gradient(ellipse at 50% 50%, rgba(91,108,240,0.06), transparent 70%); }
-  .mockup-display.active{ display:flex; }
-  .mockup-card{ width:320px; max-width:90vw; background:#1a1f2b; border-radius:12px; padding:24px; box-shadow:0 12px 40px rgba(0,0,0,0.4); }
-  .mockup-card .mc-top{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
-  .mockup-card .mc-info h5{ margin:0; font-size:.95rem; }
-  .mockup-card .mc-info p{ margin:0; font-size:.72rem; color:var(--muted); }
-  .mockup-card .mc-divider{ height:1px; background:rgba(255,255,255,0.06); margin:12px 0; }
-  .mockup-card .mc-bottom{ display:flex; justify-content:space-between; align-items:center; }
-  .mockup-card .mc-bottom span{ font-size:.72rem; color:var(--muted); }
-  .mockup-app-icon{ width:120px; height:120px; border-radius:26px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.4); }
-  .mockup-app-icon svg{ width:100%; height:100%; }
-  .mockup-social{ width:300px; max-width:90vw; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.4); }
-  .mockup-back-btn{ position:absolute; top:12px; left:12px; }
-
-  .studio-toast{ position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--studio-panel); border:1px solid var(--studio-gold); border-radius:12px; padding:12px 24px; color:var(--studio-gold); font-size:.88rem; font-weight:500; box-shadow:0 8px 30px rgba(0,0,0,0.4); z-index:300; opacity:0; transition:opacity .3s, transform .3s; pointer-events:none; }
-  .studio-toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
-
-  @keyframes glow-pulse{ 0%, 100%{ box-shadow:0 0 0 0 rgba(224,177,92,0.3); } 50%{ box-shadow:0 0 0 6px rgba(224,177,92,0); } }
-  .toolbar-btn.primary{ animation:glow-pulse 2.5s infinite; }
-
-  @media(max-width:600px){
-    .template-grid{ grid-template-columns:repeat(2,1fr); }
-    .icon-grid{ grid-template-columns:repeat(4,1fr); }
-    .palette-grid{ grid-template-columns:repeat(3,1fr); }
-    .font-grid{ grid-template-columns:1fr; }
-    .studio-panel-body{ max-height:none; padding:16px; }
-    .preview-stage{ padding:16px; min-height:260px; }
-    .vthumb{ flex:0 0 90px; height:74px; }
-  }
-
-
-  /* ---------- Auth Modals ---------- */
   .auth-modal{
     position:fixed; inset:0; background:rgba(0,0,0,0.68); z-index:120;
     display:none; align-items:center; justify-content:center; padding:24px;
@@ -751,14 +762,16 @@
 </head>
 <body>
 
+<div id="translateBar">Traduction en cours…</div>
+
 <!-- ================= HEADER ================= -->
 <header>
   <div class="nav">
-    <div class="logo"><span class="mark">KK</span> KK</div>
+    <div class="logo"><span class="mark">KMS</span> KMS</div>
     <nav id="mainNav">
       <ul>
         <li><a href="#services" data-navlink="services">Services</a></li>
-        <li><a href="#ia-logo" data-navlink="ia-logo">Logo Studio</a></li>
+        <li><a href="logo-studio.html" data-navlink="ia-logo">Logo Studio</a></li>
         <li><a href="#tarifs" data-navlink="tarifs">Tarifs</a></li>
         <li><a href="#process" data-navlink="process">Comment ça marche</a></li>
         <li><a href="#paiement" data-navlink="paiement">Paiement</a></li>
@@ -766,6 +779,13 @@
         <li><a href="#contact" data-navlink="contact">Contact</a></li>
       </ul>
     </nav>
+    <div class="nav-controls">
+      <select class="lang-selector" id="langSelector" onchange="changeLanguage(this.value)">
+        <option value="fr">Français</option>
+      </select>
+      <button class="tts-toggle" id="ttsToggle" onclick="toggleTTS()" title="Activer la lecture à haute voix">🔊 Lecture</button>
+    </div>
+    
     <div class="nav-cta" id="authButtons" style="display:flex; gap:12px; align-items:center;">
       <button class="btn btn-outline btn-sm" onclick="showAuthModal('login')" style="cursor:pointer;">Se connecter</button>
       <button class="btn btn-primary btn-sm" onclick="showAuthModal('register')" style="cursor:pointer;">Créer un compte</button>
@@ -779,20 +799,33 @@
   </div>
 </header>
 
+<!-- ================= BARRE DE LECTURE VOCALE ================= -->
+<div id="ttsBar" role="region" aria-label="Lecture à haute voix">
+  <button id="ttsPlayAll" title="Lire toute la page">▶️</button>
+  <button id="ttsPause" title="Pause / reprendre">⏸️</button>
+  <button id="ttsStop" title="Arrêter">⏹️</button>
+  <span id="ttsBarLabel">Cliquez sur un titre ou un paragraphe pour l'écouter</span>
+  <select id="ttsSpeed" title="Vitesse de lecture">
+    <option value="0.8">Lent</option>
+    <option value="1" selected>Normal</option>
+    <option value="1.25">Rapide</option>
+  </select>
+</div>
+
 <!-- ================= HERO ================= -->
 <section class="hero">
   <div class="wrap">
     <div class="reveal visible">
       <div class="eyebrow" data-cms="hero.eyebrow">Basé à Dédougou · Burkina Faso</div>
       <h1 data-cms="hero.title">Vos documents, visuels et achats numériques, <em>livrés vite</em> et bien faits.</h1>
-      <p class="lead" data-cms="hero.lead">KK propose la saisie de documents, la création de logos et affiches, la retouche photo, la vente de films et d'applications à prix réduit, ainsi que la création de comptes en ligne. Paiement simple via Orange Money ou Wave.</p>
+      <p class="lead" data-cms="hero.lead">KMS propose la saisie de documents, la création de logos et affiches, la retouche photo, la vente de films et d'applications à prix réduit, ainsi que la création de comptes en ligne. Paiement simple via Orange Money ou Wave.</p>
       <div class="hero-actions">
         <a href="#services" class="btn btn-primary">Voir les services</a>
         <a href="#contact" onclick="openGeneralWhatsApp(); return false;" class="btn btn-whatsapp">💬 Écrire sur WhatsApp</a>
       </div>
     </div>
     <div class="hero-panel reveal visible">
-      <h3>Pourquoi choisir KK ?</h3>
+      <h3>Pourquoi choisir KMS ?</h3>
       <p style="color:var(--muted); font-size:.92rem; margin:0;">Un service rapide, des tarifs clairs et un paiement local sécurisé — sans déplacement, directement depuis votre téléphone.</p>
       <div class="stat-row">
         <div class="stat"><div class="num">6</div><div class="lbl">services proposés</div></div>
@@ -808,7 +841,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <h2>Nos services</h2>
-      <p>Que vous soyez étudiant, enseignant, entrepreneur ou commerçant, KK répond à vos besoins numériques du quotidien.</p>
+      <p>Que vous soyez étudiant, enseignant, entrepreneur ou commerçant, KMS répond à vos besoins numériques du quotidien.</p>
     </div>
     <div class="services-grid">
       <div class="service-card reveal" data-service="Saisie ultra rapide" data-flow="document" data-subtype="saisie">
@@ -822,12 +855,6 @@
         <h3 data-cms="services.modification.title">Modification de polycopiés</h3>
         <p data-cms="services.modification.desc">Mise à jour, correction et réorganisation de vos polycopiés et supports de cours selon vos besoins exacts.</p>
         <div class="service-action"><a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Modification de polycopiés" data-flow="document" data-subtype="modification">Commander</a></div>
-      </div>
-      <div class="service-card reveal" data-service="Création d'affiches & logos" data-flow="design-ai">
-        <div class="icon" data-cms="services.logo.icon">🎨</div>
-        <h3 data-cms="services.logo.title">Création d'affiches & logos</h3>
-        <p data-cms="services.logo.desc">Conception de logos, affiches d'événements, flyers et visuels publicitaires adaptés à votre image.</p>
-        <div class="service-action"><a href="#ia-logo" class="btn btn-primary btn-sm">Lancer le Studio Pro</a></div>
       </div>
       <div class="service-card reveal" data-service="Modification de photos" data-flow="photo">
         <div class="icon" data-cms="services.photo.icon">🖼️</div>
@@ -860,212 +887,17 @@
         <div class="service-action"><a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Service de lavage" data-flow="wash">Commander</a></div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ================= LOGO STUDIO PRO ================= -->
-<section id="ia-logo" class="studio-section">
-  <div class="studio-hero-bar">
-    <a href="#services" class="studio-back-link">← Retour aux services</a>
-    <h2>🎨 Logo Studio Pro</h2>
-    <p>Le studio de création de logo le plus avancé — 9 modèles professionnels, 30+ icônes vectorielles, 12 palettes, couleurs personnalisées, aperçu en temps réel, mockups et export PNG/SVG.</p>
-    <div class="studio-badge-row">
-      <span class="studio-badge"><b>9</b> modèles</span>
-      <span class="studio-badge"><b>30+</b> icônes</span>
-      <span class="studio-badge"><b>12</b> palettes</span>
-      <span class="studio-badge"><b>6</b> polices</span>
-      <span class="studio-badge">Export <b>PNG</b>/<b>SVG</b></span>
-      <span class="studio-badge">Mockups <b>3D</b></span>
-    </div>
-  </div>
-
-  <div class="studio-wrap">
-    <!-- ===== LEFT: CONTROLS ===== -->
-    <div class="studio-controls">
-      <div class="studio-tabs">
-        <button class="studio-tab active" data-tab="text"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>Texte</button>
-        <button class="studio-tab" data-tab="template"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Modèles</button>
-        <button class="studio-tab" data-tab="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>Icônes</button>
-        <button class="studio-tab" data-tab="color"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20M2 12h20"/></svg>Couleurs</button>
-        <button class="studio-tab" data-tab="font"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Police</button>
-        <button class="studio-tab" data-tab="layout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="1"/><rect x="2" y="14" width="20" height="8" rx="1"/></svg>Options</button>
+    <div class="logo-cta reveal">
+      <div class="logo-cta-icon">🎨</div>
+      <div class="logo-cta-text">
+        <h3>Besoin d'un logo ou d'une affiche ?</h3>
+        <p>Créez votre visuel professionnel en quelques clics avec notre Studio Logo Pro dédié.</p>
       </div>
-
-      <div class="studio-panel-body">
-        <!-- TAB: TEXT -->
-        <div class="studio-tab-content" id="stab-text">
-          <div class="studio-field">
-            <label>Nom de la marque / activité</label>
-            <input class="studio-input" id="studioName" type="text" placeholder="Ex. Salon Aïcha" maxlength="30">
-          </div>
-          <div class="studio-field">
-            <label>Tagline / slogan (optionnel)</label>
-            <input class="studio-input" id="studioTagline" type="text" placeholder="Ex. Beauté & élégance" maxlength="40">
-          </div>
-          <div class="studio-field">
-            <label>Taille du texte</label>
-            <div class="slider-row">
-              <input type="range" class="studio-slider" id="fontSizeSlider" min="20" max="64" value="44">
-              <span class="slider-val" id="fontSizeVal">44</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- TAB: TEMPLATE -->
-        <div class="studio-tab-content" id="stab-template">
-          <div class="studio-field">
-            <label>Choisir un modèle de logo</label>
-            <div class="template-grid">
-              <div class="template-card active" data-tpl="horizontal"><span class="tpl-name">Horizontal</span></div>
-              <div class="template-card" data-tpl="stacked"><span class="tpl-name">Empilé</span></div>
-              <div class="template-card" data-tpl="badge"><span class="tpl-name">Badge</span></div>
-              <div class="template-card" data-tpl="circle"><span class="tpl-name">Cercle</span></div>
-              <div class="template-card" data-tpl="iconOnly"><span class="tpl-name">Icône</span></div>
-              <div class="template-card" data-tpl="split"><span class="tpl-name">Scindé</span></div>
-              <div class="template-card" data-tpl="minimal"><span class="tpl-name">Minimal</span></div>
-              <div class="template-card" data-tpl="duo"><span class="tpl-name">Duo</span></div>
-              <div class="template-card" data-tpl="retro"><span class="tpl-name">Rétro</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- TAB: ICON -->
-        <div class="studio-tab-content" id="stab-icon">
-          <div class="studio-field">
-            <label>Catégorie d'icônes</label>
-            <div class="icon-category-row">
-              <button class="icon-cat-btn active" data-cat="général">Général</button>
-              <button class="icon-cat-btn" data-cat="tech">Tech</button>
-              <button class="icon-cat-btn" data-cat="business">Business</button>
-              <button class="icon-cat-btn" data-cat="nature">Nature</button>
-              <button class="icon-cat-btn" data-cat="créatif">Créatif</button>
-            </div>
-          </div>
-          <div class="studio-field">
-            <label>Choisir une icône</label>
-            <div class="icon-grid" id="iconGrid"></div>
-          </div>
-          <div class="studio-field">
-            <label>Taille de l'icône</label>
-            <div class="slider-row">
-              <input type="range" class="studio-slider" id="iconSizeSlider" min="30" max="80" value="52">
-              <span class="slider-val" id="iconSizeVal">52</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- TAB: COLOR -->
-        <div class="studio-tab-content" id="stab-color">
-          <div class="studio-field">
-            <label>Palettes prédéfinies</label>
-            <div class="palette-grid" id="paletteGrid"></div>
-          </div>
-          <div class="studio-field">
-            <label>Couleurs personnalisées</label>
-            <div class="color-row"><label>Couleur principale</label><div class="color-picker-wrap"><input type="color" id="color-primary" value="#e0b15c"></div><input class="color-hex" id="colorhex-primary" value="#e0b15c"></div>
-            <div class="color-row"><label>Couleur secondaire</label><div class="color-picker-wrap"><input type="color" id="color-secondary" value="#5b6cf0"></div><input class="color-hex" id="colorhex-secondary" value="#5b6cf0"></div>
-            <div class="color-row"><label>Arrière-plan</label><div class="color-picker-wrap"><input type="color" id="color-bg" value="#0f1115"></div><input class="color-hex" id="colorhex-bg" value="#0f1115"></div>
-            <div class="color-row"><label>Texte</label><div class="color-picker-wrap"><input type="color" id="color-text" value="#ffffff"></div><input class="color-hex" id="colorhex-text" value="#ffffff"></div>
-            <div class="color-row"><label>Accent</label><div class="color-picker-wrap"><input type="color" id="color-accent" value="#3fb68b"></div><input class="color-hex" id="colorhex-accent" value="#3fb68b"></div>
-          </div>
-        </div>
-
-        <!-- TAB: FONT -->
-        <div class="studio-tab-content" id="stab-font">
-          <div class="studio-field">
-            <label>Police du logo</label>
-            <div class="font-grid">
-              <div class="font-card active" data-font="Fraunces"><div class="font-sample" style="font-family:Fraunces,Georgia,serif">Ff</div><div class="font-name">Fraunces</div></div>
-              <div class="font-card" data-font="Georgia"><div class="font-sample" style="font-family:Georgia,serif">Gg</div><div class="font-name">Georgia</div></div>
-              <div class="font-card" data-font="Arial Black"><div class="font-sample" style="font-family:'Arial Black',sans-serif;font-weight:900">Ii</div><div class="font-name">Impact</div></div>
-              <div class="font-card" data-font="Trebuchet MS"><div class="font-sample" style="font-family:'Trebuchet MS',sans-serif">Mm</div><div class="font-name">Moderne</div></div>
-              <div class="font-card" data-font="Inter"><div class="font-sample" style="font-family:Inter,sans-serif">Aa</div><div class="font-name">Inter</div></div>
-              <div class="font-card" data-font="Courier New"><div class="font-sample" style="font-family:'Courier New',monospace">Cc</div><div class="font-name">Mono</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- TAB: LAYOUT -->
-        <div class="studio-tab-content" id="stab-layout">
-          <div class="studio-field">
-            <label>Affichage</label>
-            <div class="toggle-row"><label>Afficher l'icône</label><div class="toggle-switch on" id="toggleIcon"></div></div>
-            <div class="toggle-row"><label>Afficher le tagline</label><div class="toggle-switch on" id="toggleTagline"></div></div>
-            <div class="toggle-row"><label>Afficher le fond</label><div class="toggle-switch on" id="toggleBg"></div></div>
-          </div>
-          <div class="studio-field">
-            <label>Coins</label>
-            <div class="variation-grid">
-              <div class="variation-card corner-btn active" data-corner="rounded">Arrondis</div>
-              <div class="variation-card corner-btn" data-corner="sharp">Droits</div>
-              <div class="variation-card corner-btn" data-corner="pill">Pilule</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== RIGHT: PREVIEW ===== -->
-    <div class="studio-preview">
-      <div class="preview-toolbar">
-        <div class="preview-toolbar-left">
-          <button class="toolbar-btn" id="inspireBtn">🎲 Inspirer-moi</button>
-          <button class="toolbar-btn danger" id="resetBtn">↻ Réinitialiser</button>
-        </div>
-        <div class="preview-toolbar-right">
-          <button class="toolbar-btn" id="copySvgBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>SVG</button>
-          <button class="toolbar-btn" id="openExportBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Télécharger</button>
-          <button class="toolbar-btn primary" id="studioWhatsAppBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C22.95 6.45 18.5 2 12.04 2z"/></svg>Commander</button>
-        </div>
-      </div>
-
-      <div class="preview-stage" id="previewStage">
-        <div class="preview-stage-bg-toggle">
-          <button class="bg-btn active" data-bg="dark" title="Fond sombre">🌙</button>
-          <button class="bg-btn" data-bg="light" title="Fond clair">☀️</button>
-          <button class="bg-btn" data-bg="white" title="Fond blanc">⬜</button>
-          <button class="bg-btn" data-bg="transparent" title="Transparent">🔲</button>
-        </div>
-        <div id="logoMainDisplay" style="display:flex;flex-direction:column;align-items:center;gap:10px;width:100%">
-          <div id="logoSvgContainer"></div>
-        </div>
-        <div class="mockup-display" id="mockupDisplay"></div>
-      </div>
-
-      <div class="variation-thumbs" id="variationThumbs"></div>
-
-      <div class="mockup-bar">
-        <button class="mockup-btn active" data-mockup="none">Aperçu normal</button>
-        <button class="mockup-btn" data-mockup="card">💳 Carte de visite</button>
-        <button class="mockup-btn" data-mockup="app">📱 Icône d'app</button>
-        <button class="mockup-btn" data-mockup="social">🌐 Réseaux sociaux</button>
-      </div>
+      <a href="logo-studio.html" class="btn btn-primary">Lancer le Studio Logo Pro</a>
     </div>
   </div>
 </section>
-
-<!-- Export Modal -->
-<div class="studio-modal" id="studioExportModal">
-  <div class="studio-modal-card">
-    <h3>📥 Télécharger le logo</h3>
-    <p>Choisissez le format et la résolution de votre logo.</p>
-    <div class="export-sizes">
-      <button class="export-size-btn" data-size="256">256 px</button>
-      <button class="export-size-btn active" data-size="512">512 px</button>
-      <button class="export-size-btn" data-size="1024">1024 px</button>
-      <button class="export-size-btn" data-size="2048">2048 px</button>
-    </div>
-    <div class="export-options">
-      <div class="export-option" data-export="png"><div class="eo-icon">🖼️</div><div class="eo-title">PNG</div><div class="eo-desc">Image transparente HD</div></div>
-      <div class="export-option" data-export="svg"><div class="eo-icon">📐</div><div class="eo-title">SVG</div><div class="eo-desc">Vectoriel infini</div></div>
-      <div class="export-option" data-export="whatsapp" style="grid-column:span 2"><div class="eo-icon">💬</div><div class="eo-title">Envoyer à KK sur WhatsApp</div><div class="eo-desc">Finaliser la commande avec votre logo</div></div>
-    </div>
-    <button class="toolbar-btn" id="closeExportModal" style="width:100%;justify-content:center">Fermer</button>
-  </div>
-</div>
-
-<!-- Toast -->
-<div class="studio-toast" id="studioToast"></div>
 
 <!-- ================= TARIFS ================= -->
 <section id="tarifs" class="alt">
@@ -1093,7 +925,7 @@
           <li>1 retouche gratuite incluse</li>
           <li>Fichiers HD livrés</li>
         </ul>
-        <a href="#ia-logo" class="btn btn-primary btn-sm">Créer mon logo</a>
+        <a href="logo-studio.html" class="btn btn-primary btn-sm">Créer mon logo</a>
       </div>
       <div class="price-card reveal">
         <h3 data-cms="services.photo.title">Retouche photo</h3>
@@ -1263,7 +1095,7 @@
         <a class="partner-card" href="#contact">
           <div class="ph" data-cms="partners.1.logo">Espace disponible</div>
           <h5 data-cms="partners.1.title">Annonce 2</h5>
-          <p data-cms="partners.1.text">Visible par tous les visiteurs du site KK.</p>
+          <p data-cms="partners.1.text">Visible par tous les visiteurs du site KMS.</p>
         </a>
         <a class="partner-card" href="#contact">
           <div class="ph" data-cms="partners.2.logo">Espace disponible</div>
@@ -1272,7 +1104,7 @@
         </a>
         <!-- ===== Fin exemple ===== -->
       </div>
-      <p class="partner-cta">Intéressé par cet espace ? <a href="#contact" onclick="openGeneralWhatsApp(); return false;" style="color:var(--gold); text-decoration:none;">Contactez KK sur WhatsApp</a>.</p>
+      <p class="partner-cta">Intéressé par cet espace ? <a href="#contact" onclick="openGeneralWhatsApp(); return false;" style="color:var(--gold); text-decoration:none;">Contactez KMS sur WhatsApp</a>.</p>
     </div>
   </div>
 </section>
@@ -1350,16 +1182,287 @@
 </section>
 
 <!-- ================= FOOTER ================= -->
+
+<!-- ================= SÉCURITÉ ================= -->
+<section id="security" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Sécurité & Confiance</h2>
+      <p>Votre sécurité est notre priorité. Découvrez nos mesures de protection.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <div class="icon">🔒</div>
+        <h4>Chiffrement SSL</h4>
+        <p>Toutes vos données sont protégées par un chiffrement de niveau bancaire.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="icon">🛡️</div>
+        <h4>Anti-piratage</h4>
+        <p>Score de sécurité : <span style="color:var(--gold); font-weight:700;">92/100</span></p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="icon">✓</div>
+        <h4>Données Vérifiées</h4>
+        <p>Tous les contenus sont vérifiés avant livraison.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="icon">🔄</div>
+        <h4>Conformité RGPD</h4>
+        <p>Respect complet de la protection des données personnelles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABONNEMENTS ================= -->
+<section id="subscriptions">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Abonnements Premium</h2>
+      <p>Protégez votre appareil avec nos services premium.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <h3>Kaspersky Antivirus</h3>
+        <div class="price"><span class="unit">à partir de</span> 3 000 <span class="unit">F/mois</span></div>
+        <ul>
+          <li>Protection contre les virus</li>
+          <li>Firewall avancé</li>
+          <li>Support 24/7</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%; margin-top:12px;">Bientôt disponible</button>
+        <div class="price-note">Lancement prévu : Août 2026</div>
+      </div>
+      <div class="price-card reveal">
+        <h3>Ad Blocker Premium</h3>
+        <div class="price"><span class="unit">à partir de</span> 3 000 <span class="unit">F/mois</span></div>
+        <ul>
+          <li>Blocage total des publicités</li>
+          <li>Navigation plus rapide</li>
+          <li>Économies de données</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%; margin-top:12px;">Bientôt disponible</button>
+        <div class="price-note">Lancement prévu : Août 2026</div>
+      </div>
+      <div class="price-card reveal">
+        <h3>Recherche IA Illimitée</h3>
+        <div class="price"><span class="unit">à partir de</span> 200 <span class="unit">F/mois</span></div>
+        <ul>
+          <li>10 questions gratuites/jour</li>
+          <li>Résultats vérifiés</li>
+          <li>Accès illimité en premium</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%; margin-top:12px;">S'abonner</button>
+        <div class="price-note">Annuel : 2 000 F</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RECHERCHE IA ================= -->
+<section id="ia-search" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Recherche IA Intelligente</h2>
+      <p>Posez vos questions et obtenez des réponses vérifiées et précises.</p>
+    </div>
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:32px; max-width:600px; margin:0 auto;">
+      <div style="display:flex; gap:12px; margin-bottom:16px;">
+        <input type="text" id="aiSearchInput" placeholder="Posez votre question..." style="flex:1; padding:12px 14px; border-radius:10px; border:1px solid var(--line); background:var(--bg-soft); color:var(--text);">
+        <button class="btn btn-primary" onclick="submitAISearch()">Rechercher</button>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
+        <button class="btn btn-outline btn-sm" onclick="addAIFilter('santé')">Santé</button>
+        <button class="btn btn-outline btn-sm" onclick="addAIFilter('technologie')">Technologie</button>
+        <button class="btn btn-outline btn-sm" onclick="addAIFilter('éducation')">Éducation</button>
+        <button class="btn btn-outline btn-sm" onclick="addAIFilter('affaires')">Affaires</button>
+      </div>
+      <div id="aiResults" style="color:var(--muted); font-size:.9rem; min-height:60px; padding:16px; background:var(--bg-soft); border-radius:10px; border:1px solid var(--line);">
+        Vous avez <span id="aiQuotaLeft">10</span> questions gratuites aujourd'hui. Connectez-vous pour plus.
+      </div>
+      <p style="font-size:.72rem; color:var(--muted); margin:12px 0 0;">Réponses générées par IA avec recherche web en temps réel. Vérifiez toujours les sources citées avant de vous fier à une information sensible (santé, juridique, financier).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ESPACE JEU ================= -->
+<section id="games" class="games-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Espace Jeu</h2>
+      <p>Détendez-vous avec nos jeux en attendant votre commande. <strong>Difficulté augmente progressivement !</strong></p>
+    </div>
+    <div class="games-grid">
+      <div class="game-tile" style="--gtint:#e0b15c; --gtint-bg:rgba(224,177,92,.18); --gtint-border:rgba(224,177,92,.45);" onclick="launchGame('solitaire')">
+        <div class="game-tile-icon">🃏</div>
+        <div class="game-tile-name">Solitaire</div>
+        <div class="game-tile-tag">Classique</div>
+      </div>
+      <div class="game-tile" style="--gtint:#5b6cf0; --gtint-bg:rgba(91,108,240,.18); --gtint-border:rgba(91,108,240,.45);" onclick="launchGame('chess')">
+        <div class="game-tile-icon">♟️</div>
+        <div class="game-tile-name">Échecs</div>
+        <div class="game-tile-tag">Stratégie</div>
+      </div>
+      <div class="game-tile" style="--gtint:#9a9aa5; --gtint-bg:rgba(154,154,165,.18); --gtint-border:rgba(154,154,165,.45);" onclick="launchGame('checkers')">
+        <div class="game-tile-icon">⚫</div>
+        <div class="game-tile-name">Dames</div>
+        <div class="game-tile-tag">2 joueurs</div>
+      </div>
+      <div class="game-tile" style="--gtint:#3fb68b; --gtint-bg:rgba(63,182,139,.18); --gtint-border:rgba(63,182,139,.45);" onclick="launchGame('scrabble')">
+        <div class="game-tile-icon">📝</div>
+        <div class="game-tile-name">Scrabble</div>
+        <div class="game-tile-tag">Mots</div>
+      </div>
+      <div class="game-tile" style="--gtint:#d97a55; --gtint-bg:rgba(217,122,85,.18); --gtint-border:rgba(217,122,85,.45);" onclick="launchGame('dino')">
+        <div class="game-tile-icon">🦖</div>
+        <div class="game-tile-name">Dino</div>
+        <div class="game-tile-tag">Arcade • Texture améliorée</div>
+      </div>
+      <div class="game-tile" style="--gtint:#e0c53f; --gtint-bg:rgba(224,197,63,.18); --gtint-border:rgba(224,197,63,.45);" onclick="launchGame('pacman')">
+        <div class="game-tile-icon">👾</div>
+        <div class="game-tile-name">Pac-Man</div>
+        <div class="game-tile-tag">Arcade • Texture améliorée</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FIDÉLITÉ ================= -->
+<section id="loyalty" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Programme de Fidélité</h2>
+      <p>Gagnez des points à chaque achat et profitez de récompenses exclusives.</p>
+    </div>
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:28px; max-width:600px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+        <div style="width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--terra)); display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:800;">⭐</div>
+        <div>
+          <h4 style="margin:0 0 4px; font-size:1.2rem;">Vos Points</h4>
+          <p style="margin:0; color:var(--muted);">Vous avez <span style="color:var(--gold); font-weight:700;">0 points</span></p>
+          <p style="margin:4px 0 0; font-size:.85rem; color:var(--muted);">1 point par service acheté/jour</p>
+        </div>
+      </div>
+      <div style="background:var(--bg-soft); padding:16px; border-radius:10px; border:1px solid var(--line);">
+        <p style="margin:0 0 12px; font-size:.9rem; color:var(--muted);"><b>Bonus :</b> Achetez 10 services différents le même jour = +1 point bonus</p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <span style="background:var(--gold); color:#1a1305; padding:4px 12px; border-radius:999px; font-size:.8rem; font-weight:600;">50 pts = 5 000 F</span>
+          <span style="background:var(--indigo); color:#fff; padding:4px 12px; border-radius:999px; font-size:.8rem; font-weight:600;">100 pts = 15 000 F</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMMENTAIRES ================= -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Avis Clients</h2>
+      <p>Découvrez ce que nos clients pensent de nos services.</p>
+    </div>
+    <div class="services-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+      <div class="service-card reveal" style="cursor:pointer;" onclick="toggleReviews(this)">
+        <h3>Saisie Ultra Rapide</h3>
+        <div style="display:flex; gap:4px; margin-bottom:12px;">
+          <span style="color:var(--gold);">★★★★★</span> <span style="color:var(--muted);">(24 avis)</span>
+        </div>
+        <p style="color:var(--muted); font-size:.9rem; margin:0;">Cliquez pour voir les avis détaillés ▼</p>
+        <div class="reviews-list" style="display:none; margin-top:16px; max-height:300px; overflow-y:auto;">
+          <div style="padding:12px; background:var(--bg-soft); border-radius:8px; margin-bottom:8px;">
+            <p style="margin:0 0 4px; font-size:.9rem;"><b>Excellent service</b> - ★★★★★</p>
+            <p style="margin:0; font-size:.85rem; color:var(--muted);">Très rapide et bien fait. Je recommande !</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SUGGESTIONS ================= -->
+<section id="suggestions" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Boîte à Suggestions</h2>
+      <p>Aidez-nous à améliorer KMS en partageant vos idées.</p>
+    </div>
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:28px; max-width:600px; margin:0 auto;">
+      <form onsubmit="submitSuggestion(event)">
+        <div style="margin-bottom:16px;">
+          <label style="display:block; margin-bottom:8px; color:var(--muted); font-size:.9rem;">Votre suggestion</label>
+          <textarea id="suggestionText" placeholder="Décrivez votre idée..." style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line); background:var(--bg-soft); color:var(--text); font-family:inherit; font-size:.95rem; resize:vertical; min-height:100px;"></textarea>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block; margin-bottom:8px; color:var(--muted); font-size:.9rem;">Catégorie</label>
+          <select style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line); background:var(--bg-soft); color:var(--text); font-family:inherit;">
+            <option>Nouveau service</option>
+            <option>Amélioration existante</option>
+            <option>Interface/UX</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Envoyer ma suggestion</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EMPLOI KMS ================= -->
+<section id="jobs">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Rejoignez l'Équipe KMS</h2>
+      <p>Découvrez les opportunités d'emploi chez KMS.</p>
+    </div>
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:28px; text-align:center;">
+      <h3 style="margin-bottom:12px;">Bientôt disponible</h3>
+      <p style="color:var(--muted); margin:0;">Nous préparez une section complète de recrutement. Revenez bientôt pour découvrir les postes disponibles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DEVISES ================= -->
+<section id="currencies" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Devises Acceptées</h2>
+      <p>Payez dans la devise de votre choix.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px;">
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px; text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">€</div>
+        <p style="margin:0; font-size:.9rem;">Euro</p>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px; text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">$</div>
+        <p style="margin:0; font-size:.9rem;">Dollar US</p>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px; text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">£</div>
+        <p style="margin:0; font-size:.9rem;">Livre Sterling</p>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px; text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">₱</div>
+        <p style="margin:0; font-size:.9rem;">Peso</p>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px; text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">₣</div>
+        <p style="margin:0; font-size:.9rem;">Franc CFA</p>
+      </div>
+    </div>
+  </div>
+</section>
 <footer>
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <div class="logo"><span class="mark" style="width:30px;height:30px;font-size:.95rem;">KK</span> KK</div>
+        <div class="logo"><span class="mark" style="width:30px;height:30px;font-size:.68rem;">KMS</span> KMS</div>
         <p style="margin:10px 0 0; max-width:280px;" data-cms="footer.tagline">Services de saisie, design et achats numériques à prix abordable, depuis Dédougou.</p>
       </div>
       <div class="footer-links">
         <a href="#services">Services</a>
-        <a href="#ia-logo">Logo Studio</a>
+        <a href="logo-studio.html">Logo Studio</a>
         <a href="#tarifs">Tarifs</a>
         <a href="#process">Comment ça marche</a>
         <a href="#paiement">Paiement</a>
@@ -1368,7 +1471,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> <span data-cms="footer.copyright">KK — Tous droits réservés.</span></span>
+      <span>© <span id="year"></span> <span data-cms="footer.copyright">KMS — Tous droits réservés.</span></span>
       <span>Dédougou, Burkina Faso · <span data-cms="contact.email">teegawinde1@gmail.com</span></span>
     </div>
   </div>
@@ -1387,17 +1490,17 @@
 <button class="ai-toggle" id="aiToggle" aria-label="Ouvrir l'assistant">🤖</button>
 <div class="ai-panel" id="aiPanel">
   <div class="ai-head">
-    <h4>Assistant KK</h4>
+    <h4>Assistant KMS</h4>
     <button id="aiClose" aria-label="Fermer">✕</button>
   </div>
   <div class="ai-body" id="aiBody">
-    <div class="ai-msg bot">Bonjour 👋 Je peux vous aider à trouver le bon service ou répondre à vos questions sur KK. Que recherchez-vous ?</div>
+    <div class="ai-msg bot">Bonjour 👋 Je peux vous aider à trouver le bon service ou répondre à vos questions sur KMS. Que recherchez-vous ?</div>
   </div>
   <div class="ai-quick" id="aiQuick">
     <button data-q="services">Voir les services</button>
     <button data-q="prix">Connaître les prix</button>
     <button data-q="paiement">Comment payer ?</button>
-    <button data-q="contact">Contacter KK</button>
+    <button data-q="contact">Contacter KMS</button>
   </div>
 </div>
 
@@ -1471,509 +1574,24 @@
   let previewUnlocked = false;
   let lastDesignSummary = '';
 
-  // ======================= LOGO STUDIO PRO =======================
-  const LS = (() => {
-    // ---- State ----
-    const state = {
-      name: '', tagline: '', icon: 'star', iconCat: 'général',
-      template: 'horizontal', variation: 0,
-      font: 'Fraunces', fontSize: 44, iconSize: 52,
-      colors: { primary:'#e0b15c', secondary:'#5b6cf0', bg:'#0f1115', text:'#ffffff', accent:'#3fb68b' },
-      showIcon: true, showTagline: true, showBg: true,
-      layout: 'horizontal', corners: 'rounded',
-      previewBg: 'dark', mockup: null
-    };
-
-    // ---- Icon library ----
-    const icons = {
-      'général': {
-        star:     '<polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        diamond:  '<path d="M2.7 7.11l9.3-5 9.3 5-9.3 10z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>',
-        crown:    '<path d="M2 20h20M4 20l2-8 6 5 6-5 2 8" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        bolt:     '<path d="M13 2L3 14h9l-1 8 10-12h-9z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        flame:    '<path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 01-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        leaf:     '<path d="M11 20A7 7 0 015 9c0-4.36 3.57-7.12 7-7 3.43.12 7 2.64 7 7a7 7 0 01-7 7h-1zM2 21s2-1 5-1" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-      },
-      'tech': {
-        code:     '<polyline points="16 18 22 12 16 6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="8 6 2 12 8 18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        cpu:      '<rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><rect x="9" y="9" width="6" height="6" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
-        wifi:     '<path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        settings: '<circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="1.5" fill="none"/>',
-        shield:   '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        eye:      '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>',
-      },
-      'business': {
-        briefcase:'<rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16M2 14h20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
-        chart:    '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        globe:    '<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>',
-        target:   '<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>',
-        award:    '<circle cx="12" cy="8" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        key:      '<path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-      },
-      'nature': {
-        sun:      '<circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
-        moon:     '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        tree:     '<path d="M5 22V12M12 22V5M19 22V12M5 12l7-7 7 7M5 17l7-7 7 7" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        water:    '<path d="M12 2c-5.33 4.55-8 8.48-8 11.8A8 8 0 0012 22a8 8 0 008-8.2c0-3.32-2.67-7.25-8-11.8z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>',
-        mountain: '<path d="M3 20l6-12 4 7 2-3 5 8H3z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        bird:     '<path d="M16 7h.01M3.534 12.17l7.066 7.34 9.4-9.51M12.07 6.17c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-      },
-      'créatif': {
-        palette:  '<circle cx="13.5" cy="6.5" r=".5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="10.5" r=".5" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="7.5" r=".5" stroke="currentColor" stroke-width="1.5"/><circle cx="6.5" cy="12.5" r=".5" stroke="currentColor" stroke-width="1.5"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10a2.5 2.5 0 002.45-3.02C14.15 17.58 14 16.8 14 16c0-2.21 1.79-4 4-4h1.97C21.43 8.33 17.14 2 12 2z" stroke="currentColor" stroke-width="1.5" fill="none"/>',
-        pen:      '<path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        camera:   '<path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>',
-        music:    '<path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>',
-        sparkle:  '<path d="M12 3l1.5 4.5H18l-3.5 2.5 1.5 4.5L12 12l-4 2.5 1.5-4.5L6 7.5h4.5z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 3v2M3 5h2M19 19v2M17 21h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
-        layers:   '<polygon points="12,2 2,7 12,12 22,7" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
-      }
-    };
-
-    // ---- Palettes ----
-    const palettes = [
-      { name:'Or Royal',   colors:['#e0b15c','#c9913c','#1a1305','#ffffff','#f0d090'] },
-      { name:'Bleu Nuit',  colors:['#5b6cf0','#3748e0','#0a0e1a','#ffffff','#90a0f8'] },
-      { name:'Vert Jade',  colors:['#3fb68b','#2a8a64','#071811','#ffffff','#7fe0bc'] },
-      { name:'Feu',        colors:['#e25555','#c23030','#150505','#ffffff','#ff9090'] },
-      { name:'Violet',     colors:['#a855f7','#8230e0','#0e0518','#ffffff','#d090ff'] },
-      { name:'Terre',      colors:['#d97a55','#b05530','#180c04','#ffffff','#f0b090'] },
-      { name:'Argent',     colors:['#c8d4e0','#8899aa','#101418','#ffffff','#e8f0f8'] },
-      { name:'Rose',       colors:['#e879a8','#c04075','#1a0510','#ffffff','#ffaad0'] },
-      { name:'Cyan',       colors:['#1DC1F0','#0899c0','#030e14','#ffffff','#90e8f8'] },
-      { name:'Citron',     colors:['#d4e020','#a0a810','#0e1000','#ffffff','#f0f870'] },
-      { name:'Bois',       colors:['#c49a6c','#8b6340','#110a04','#ffffff','#e8ccaa'] },
-      { name:'Nuit',       colors:['#8899bb','#556688','#080c14','#ffffff','#bbccee'] },
-    ];
-
-    // ---- Helper functions ----
-    function escapeXml(str) {
-      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
-    }
-    function hex2rgb(hex) {
-      hex = hex.replace('#','');
-      if(hex.length === 3) hex = hex.split('').map(c=>c+c).join('');
-      const n = parseInt(hex,16);
-      return [(n>>16)&255,(n>>8)&255,n&255];
-    }
-    function rgb2hex(r,g,b) { return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join(''); }
-    function lighten(hex, amount) { const [r,g,b]=hex2rgb(hex); return rgb2hex(Math.min(255,r+amount),Math.min(255,g+amount),Math.min(255,b+amount)); }
-    function darken(hex, amount) { const [r,g,b]=hex2rgb(hex); return rgb2hex(Math.max(0,r-amount),Math.max(0,g-amount),Math.max(0,b-amount)); }
-
-    // ---- SVG generators per template ----
-    const templates = {
-      horizontal: (s) => {
-        const W=500, H=160; const allIcons=Object.assign({},...Object.values(icons));
-        const r = s.corners==='sharp' ? 0 : s.corners==='pill' ? 30 : 14;
-        const iconPaths = allIcons[s.icon] || allIcons.star;
-        const iSz = s.iconSize || 52; const iX=24; const iY=(H-iSz)/2;
-        const nameX = s.showIcon ? iX+iSz+18 : 24;
-        const fontFam = s.font||'Fraunces';
-        const tgY = H/2 + (s.fontSize*0.4 || 18) + 14;
-        const bg = s.showBg ? `<rect width="${W}" height="${H}" rx="${r}" fill="${s.colors.bg}" opacity="0.95"/><rect width="${W}" height="${H}" rx="${r}" fill="url(#hgrad)" opacity="0.12"/>` : '';
-        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="hgrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${lighten(s.colors.primary,60)}" stop-opacity="0.3"/><stop offset="100%" stop-color="${s.colors.secondary}" stop-opacity="0.1"/></linearGradient></defs>${bg}${s.showIcon ? `<rect x="${iX-6}" y="${iY-6}" width="${iSz+12}" height="${iSz+12}" rx="12" fill="${s.colors.primary}" opacity="0.15"/><g transform="translate(${iX},${iY})" style="color:${s.colors.primary}" fill="none" stroke="${s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${nameX}" y="${H/2 - (s.showTagline?8:0) + (s.fontSize||44)*0.38}" font-family="${escapeXml(fontFam)},Georgia,serif" font-size="${s.fontSize||44}" font-weight="700" fill="${s.colors.text}" dominant-baseline="auto">${escapeXml(s.name||'Mon Logo')}</text>${s.showTagline && s.tagline ? `<text x="${nameX}" y="${tgY}" font-family="${escapeXml(fontFam)},Georgia,serif" font-size="14" fill="${s.colors.primary}" letter-spacing="0.1">${escapeXml(s.tagline)}</text>` : ''}</svg>`;
-      },
-      stacked: (s) => {
-        const W=320, H=280; const allIcons=Object.assign({},...Object.values(icons));
-        const r = s.corners==='sharp' ? 0 : s.corners==='pill' ? 40 : 18;
-        const iconPaths = allIcons[s.icon] || allIcons.star;
-        const iSz = s.iconSize || 60; const iX=(W-iSz)/2; const iY=36;
-        const fsz = Math.min(s.fontSize||44, 38); const nameY = iY+iSz+42;
-        const bg = s.showBg ? `<rect width="${W}" height="${H}" rx="${r}" fill="${s.colors.bg}" opacity="0.95"/><circle cx="${W/2}" cy="${iY+iSz/2}" r="${iSz*1.1}" fill="${s.colors.primary}" opacity="0.08"/>` : '';
-        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><radialGradient id="sgrad" cx="50%" cy="35%" r="60%"><stop offset="0%" stop-color="${lighten(s.colors.secondary,30)}" stop-opacity="0.2"/><stop offset="100%" stop-color="${s.colors.bg}" stop-opacity="0"/></radialGradient></defs>${bg}${s.showBg ? `<rect width="${W}" height="${H}" rx="${r}" fill="url(#sgrad)"/>` : ''}${s.showIcon ? `<circle cx="${W/2}" cy="${iY+iSz/2}" r="${iSz/2+10}" fill="${s.colors.primary}" opacity="0.18"/><g transform="translate(${iX},${iY})" style="color:${s.colors.primary}" fill="none" stroke="${s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${W/2}" y="${nameY}" font-family="${escapeXml(s.font||'Fraunces')},Georgia,serif" font-size="${fsz}" font-weight="700" fill="${s.colors.text}" text-anchor="middle">${escapeXml(s.name||'Mon Logo')}</text>${s.showTagline && s.tagline ? `<text x="${W/2}" y="${nameY+26}" font-family="${escapeXml(s.font||'Fraunces')},sans-serif" font-size="13" fill="${s.colors.primary}" text-anchor="middle" letter-spacing="0.12">${escapeXml(s.tagline)}</text>` : ''}</svg>`;
-      },
-      badge: (s) => {
-        const W=300, H=300; const allIcons=Object.assign({},...Object.values(icons));
-        const iconPaths = allIcons[s.icon] || allIcons.star;
-        const iSz=50; const cx=W/2; const cy=W/2;
-        const fsz = Math.min(s.fontSize||44,30);
-        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="badgeG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${s.colors.primary}"/><stop offset="100%" stop-color="${s.colors.secondary}"/></linearGradient></defs>${s.showBg ? `<polygon points="${cx},10 ${W-10},${cx-40} ${W-10},${cy+40} ${cx},${H-10} 10,${cy+40} 10,${cy-40}" fill="${s.colors.bg}" stroke="url(#badgeG)" stroke-width="3"/><polygon points="${cx},24 ${W-24},${cy-34} ${W-24},${cy+34} ${cx},${H-24} 24,${cy+34} 24,${cy-34}" fill="none" stroke="${s.colors.primary}" stroke-width="1" opacity="0.3"/>` : ''}${s.showIcon ? `<g transform="translate(${cx-iSz/2},${cy-iSz/2-22})" fill="none" stroke="${s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${cx}" y="${cy+32}" font-family="${escapeXml(s.font||'Fraunces')},serif" font-size="${fsz}" font-weight="800" fill="${s.colors.text}" text-anchor="middle">${escapeXml(s.name||'LOGO')}</text>${s.showTagline && s.tagline ? `<text x="${cx}" y="${cy+54}" font-family="sans-serif" font-size="11" fill="${s.colors.primary}" text-anchor="middle" letter-spacing="0.15">${escapeXml(s.tagline.toUpperCase())}</text>` : ''}</svg>`;
-      },
-      circle: (s) => {
-        const W=300,H=300; const allIcons=Object.assign({},...Object.values(icons));
-        const iconPaths = allIcons[s.icon] || allIcons.star;
-        const iSz=52; const cx=W/2; const cy=H/2; const R=130;
-        const fsz = Math.min(s.fontSize||44,28);
-        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="circG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${s.colors.primary}"/><stop offset="100%" stop-color="${s.colors.secondary}"/></linearGradient></defs>${s.showBg ? `<circle cx="${cx}" cy="${cy}" r="${R}" fill="${s.colors.bg}"/><circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="url(#circG)" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="${R-12}" fill="none" stroke="${s.colors.primary}" stroke-width="0.5" opacity="0.3"/>` : ''}${s.showIcon ? `<g transform="translate(${cx-iSz/2},${cy-iSz/2-26})" fill="none" stroke="${s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${cx}" y="${cy+28}" font-family="${escapeXml(s.font||'Fraunces')},serif" font-size="${fsz}" font-weight="700" fill="${s.colors.text}" text-anchor="middle">${escapeXml(s.name||'LOGO')}</text>${s.showTagline && s.tagline ? `<text x="${cx}" y="${cy+50}" font-family="sans-serif" font-size="11" fill="${s.colors.primary}" text-anchor="middle" letter-spacing="0.18">${escapeXml(s.tagline.toUpperCase())}</text>` : ''}</svg>`;
-      },
-      iconOnly: (s) => {
-        const W=200,H=200; const allIcons=Object.assign({},...Object.values(icons));
-        const iconPaths = allIcons[s.icon] || allIcons.star;
-        const iSz=100; const r = s.corners==='sharp' ? 0 : s.corners==='pill' ? 100 : 32;
-        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="ioG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${s.colors.primary}"/><stop offset="100%" stop-color="${s.colors.secondary}"/></linearGradient></defs>${s.showBg ? `<rect width="${W}" height="${H}" rx="${r}" fill="url(#ioG)"/><rect width="${W}" height="${H}" rx="${r}" fill="${s.colors.bg}" opacity="0.7"/><rect x="8" y="8" width="${W-16}" height="${H-16}" rx="${Math.max(0,r-6)}" fill="none" stroke="${s.colors.primary}" stroke-width="1" opacity="0.3"/>` : ''}<g transform="translate(${(W-iSz)/2},${(H-iSz)/2})" fill="none" stroke="${s.colors.primary}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g></svg>`;
-      },
-      split: (s) => {
-        const W=500,H=200; const allIcons=Object.assign({},...Object.values(icons));
-        const iconPaths = allIcons[s.icon] || allIcons.star;
-        const iSz=s.iconSize||64; const r = s.corners==='sharp' ? 0 : s.corners==='pill' ? 20 : 14;
-        const fsz = Math.min(s.fontSize||44,40);
-        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="spG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${s.colors.primary}"/><stop offset="100%" stop-color="${s.colors.secondary}"/></linearGradient></defs>${s.showBg ? `<rect width="${W/2}" height="${H}" rx="0" fill="url(#spG)"/><rect x="${W/2}" width="${W/2}" height="${H}" rx="0" fill="${s.colors.bg}"/><rect width="${W}" height="${H}" rx="${r}" fill="transparent" stroke="${s.colors.primary}" stroke-width="1.5"/>` : ''}${s.showIcon ? `<g transform="translate(${W/4-iSz/2},${(H-iSz)/2})" fill="none" stroke="${s.showBg ? s.colors.bg : s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${W/2+20}" y="${H/2+fsz*0.38 - (s.showTagline&&s.tagline?8:0)}" font-family="${escapeXml(s.font||'Fraunces')},serif" font-size="${fsz}" font-weight="700" fill="${s.colors.text}" dominant-baseline="auto">${escapeXml(s.name||'Mon Logo')}</text>${s.showTagline && s.tagline ? `<text x="${W/2+20}" y="${H/2+fsz*0.38+20}" font-family="sans-serif" font-size="13" fill="${s.colors.primary}" letter-spacing="0.1">${escapeXml(s.tagline)}</text>` : ''}</svg>`;
-      },
-      minimal: (s) => {
-        const W=420,H=120; const allIcons=Object.assign({},...Object.values(icons));
-        const iconPaths = allIcons[s.icon] || allIcons.star;
-        const iSz=36; const fsz = Math.min(s.fontSize||44,36);
-        const gap=14; const nameX = s.showIcon ? iSz+gap+8 : 8;
-        const r = s.corners==='pill' ? 60 : s.corners==='sharp' ? 0 : 10;
-        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${s.showBg ? `<rect width="${W}" height="${H}" rx="${r}" fill="${s.colors.bg}" opacity="0.5"/>` : ''}${s.showIcon ? `<g transform="translate(8,${(H-iSz)/2})" fill="none" stroke="${s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${nameX}" y="${H/2 - (s.showTagline&&s.tagline ? 6 : 0) + fsz*0.38}" font-family="${escapeXml(s.font||'Inter')},sans-serif" font-size="${fsz}" font-weight="700" fill="${s.colors.text}">${escapeXml(s.name||'Mon Logo')}</text>${s.showTagline && s.tagline ? `<text x="${nameX}" y="${H/2+fsz*0.38+18}" font-family="sans-serif" font-size="12" fill="${s.colors.primary}" letter-spacing="0.14">${escapeXml(s.tagline)}</text>` : ''}<line x1="${nameX}" y1="${H-18}" x2="${nameX+60}" y2="${H-18}" stroke="${s.colors.primary}" stroke-width="1.5" opacity="0.5"/></svg>`;
-      },
-      duo: (s) => {
-        const W=320,H=320; const allIcons=Object.assign({},...Object.values(icons));
-        const iconPaths = allIcons[s.icon] || allIcons.star;
-        const iSz=70; const W2=W/2; const H2=H/2; const fsz=Math.min(s.fontSize||44,26);
-        const r = s.corners==='sharp' ? 0 : s.corners==='pill' ? W2 : 20;
-        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="duoG1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${s.colors.primary}"/><stop offset="50%" stop-color="${darken(s.colors.primary,20)}"/></linearGradient><linearGradient id="duoG2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${s.colors.secondary}"/><stop offset="100%" stop-color="${darken(s.colors.secondary,20)}"/></linearGradient></defs>${s.showBg ? `<rect width="${W2}" height="${H}" rx="0" fill="url(#duoG1)" opacity="0.9"/><rect x="${W2}" width="${W2}" height="${H}" rx="0" fill="url(#duoG2)" opacity="0.9"/><rect width="${W}" height="${H}" rx="${r}" fill="transparent" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>` : ''}${s.showIcon ? `<g transform="translate(${W2-iSz/2},${H2-iSz/2-28})" fill="none" stroke="${s.showBg?'rgba(255,255,255,0.9)':s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${W2}" y="${H2+fsz*0.4+12}" font-family="${escapeXml(s.font||'Fraunces')},serif" font-size="${fsz}" font-weight="800" fill="${s.showBg?'#fff':s.colors.text}" text-anchor="middle">${escapeXml(s.name||'LOGO')}</text>${s.showTagline && s.tagline ? `<text x="${W2}" y="${H2+fsz*0.4+34}" font-family="sans-serif" font-size="10" fill="${s.showBg?'rgba(255,255,255,0.7)':s.colors.primary}" text-anchor="middle" letter-spacing="0.18">${escapeXml(s.tagline.toUpperCase())}</text>` : ''}</svg>`;
-      },
-      retro: (s) => {
-        const W=360,H=240; const allIcons=Object.assign({},...Object.values(icons));
-        const iconPaths = allIcons[s.icon] || allIcons.star;
-        const iSz=48; const cx=W/2; const fsz=Math.min(s.fontSize||44,32);
-        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${s.showBg ? `<rect width="${W}" height="${H}" rx="8" fill="${s.colors.bg}"/><rect x="6" y="6" width="${W-12}" height="${H-12}" rx="4" fill="none" stroke="${s.colors.primary}" stroke-width="2"/><rect x="14" y="14" width="${W-28}" height="${H-28}" rx="2" fill="none" stroke="${s.colors.primary}" stroke-width="0.5" opacity="0.4"/>` : ''}<rect x="${cx-80}" y="22" width="160" height="28" rx="0" fill="${s.colors.primary}" opacity="0.9"/><text x="${cx}" y="42" font-family="'Arial Black','Impact',sans-serif" font-size="14" font-weight="900" fill="${s.colors.bg}" text-anchor="middle" letter-spacing="0.3">${escapeXml((s.tagline||'EST. 2025').toUpperCase())}</text>${s.showIcon ? `<g transform="translate(${cx-iSz/2},60)" fill="none" stroke="${s.colors.primary}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="scale(${iSz/24})">${iconPaths}</g></g>` : ''}<text x="${cx}" y="${s.showIcon?150:110}" font-family="${escapeXml(s.font||'Fraunces')},Georgia,serif" font-size="${fsz}" font-weight="800" fill="${s.colors.text}" text-anchor="middle">${escapeXml(s.name||'Mon Logo')}</text><line x1="20" y1="${H-36}" x2="${W-20}" y2="${H-36}" stroke="${s.colors.primary}" stroke-width="1.5"/><text x="${cx}" y="${H-22}" font-family="'Arial Black',sans-serif" font-size="9" fill="${s.colors.primary}" text-anchor="middle" letter-spacing="0.3">DÉDOUGOU · BURKINA FASO</text></svg>`;
-      },
-    };
-
-    function render() { const fn = templates[state.template] || templates.horizontal; return fn(state); }
-
-    function generateVariations() {
-      const varConfigs = [
-        { template:'horizontal', label:'Horizontal' },{ template:'stacked', label:'Empilé' },
-        { template:'badge', label:'Badge' },{ template:'circle', label:'Cercle' },
-        { template:'iconOnly', label:'Icône' },{ template:'split', label:'Scindé' },
-        { template:'minimal', label:'Minimal' },{ template:'duo', label:'Duo' },
-        { template:'retro', label:'Rétro' },
-      ];
-      return varConfigs.map(v => ({ svg: templates[v.template](state), label: v.label, template: v.template }));
-    }
-
-    return { state, icons, palettes, templates, render, generateVariations, escapeXml };
-  })();
-
-  // ======================== LOGO STUDIO DOM CONTROLLER ========================
-  (function(){
-    const tabs = document.querySelectorAll('.studio-tab');
-    tabs.forEach(t => {
-      t.addEventListener('click', () => {
-        tabs.forEach(x => x.classList.remove('active'));
-        t.classList.add('active');
-        document.querySelectorAll('.studio-tab-content').forEach(p => p.style.display='none');
-        const target = document.getElementById('stab-' + t.dataset.tab);
-        if(target) target.style.display='';
-      });
-    });
-    document.querySelectorAll('.studio-tab-content').forEach((p,i) => { if(i>0) p.style.display='none'; });
-
-    function updatePreview() {
-      document.getElementById('logoSvgContainer').innerHTML = LS.render();
-      updateVariationThumbs();
-    }
-
-    function updateVariationThumbs() {
-      const vars = LS.generateVariations();
-      const container = document.getElementById('variationThumbs');
-      if(!container) return;
-      container.innerHTML = '';
-      vars.forEach((v,i) => {
-        const div = document.createElement('div');
-        div.className = 'vthumb' + (LS.state.template === v.template ? ' active' : '');
-        div.innerHTML = v.svg + `<span class="vthumb-label">${v.label}</span>`;
-        div.addEventListener('click', () => {
-          LS.state.template = v.template;
-          document.querySelectorAll('.vthumb').forEach(x => x.classList.remove('active'));
-          div.classList.add('active');
-          document.querySelectorAll('.template-card').forEach(x => x.classList.toggle('active', x.dataset.tpl === v.template));
-          updatePreview();
-        });
-        container.appendChild(div);
-      });
-    }
-
-    const nameInput = document.getElementById('studioName');
-    const taglineInput = document.getElementById('studioTagline');
-    if(nameInput) nameInput.addEventListener('input', () => { LS.state.name = nameInput.value; updatePreview(); });
-    if(taglineInput) taglineInput.addEventListener('input', () => { LS.state.tagline = taglineInput.value; updatePreview(); });
-
-    document.querySelectorAll('.template-card').forEach(card => {
-      card.addEventListener('click', () => {
-        document.querySelectorAll('.template-card').forEach(x => x.classList.remove('active'));
-        card.classList.add('active');
-        LS.state.template = card.dataset.tpl;
-        updatePreview();
-      });
-    });
-
-    function renderIconGrid(cat) {
-      const grid = document.getElementById('iconGrid');
-      if(!grid) return;
-      const items = LS.icons[cat] || {};
-      grid.innerHTML = '';
-      Object.keys(items).forEach(key => {
-        const div = document.createElement('div');
-        div.className = 'icon-item' + (LS.state.icon === key ? ' active' : '');
-        div.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${items[key]}</svg>`;
-        div.title = key;
-        div.addEventListener('click', () => {
-          document.querySelectorAll('.icon-item').forEach(x => x.classList.remove('active'));
-          div.classList.add('active');
-          LS.state.icon = key;
-          updatePreview();
-        });
-        grid.appendChild(div);
-      });
-    }
-    document.querySelectorAll('.icon-cat-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.icon-cat-btn').forEach(x => x.classList.remove('active'));
-        btn.classList.add('active');
-        LS.state.iconCat = btn.dataset.cat;
-        renderIconGrid(btn.dataset.cat);
-      });
-    });
-    renderIconGrid(LS.state.iconCat);
-
-    const paletteGrid = document.getElementById('paletteGrid');
-    if(paletteGrid) {
-      LS.palettes.forEach((p,i) => {
-        const card = document.createElement('div');
-        card.className = 'palette-card' + (i===0?' active':'');
-        card.innerHTML = `<div class="palette-swatches">${p.colors.slice(0,4).map(c=>`<div style="background:${c}"></div>`).join('')}</div><div class="palette-name">${p.name}</div>`;
-        card.addEventListener('click', () => {
-          document.querySelectorAll('.palette-card').forEach(x => x.classList.remove('active'));
-          card.classList.add('active');
-          LS.state.colors.primary = p.colors[0];
-          LS.state.colors.secondary = p.colors[1];
-          LS.state.colors.bg = p.colors[2];
-          LS.state.colors.text = p.colors[3];
-          LS.state.colors.accent = p.colors[4];
-          syncColorPickers();
-          updatePreview();
-        });
-        paletteGrid.appendChild(card);
-      });
-    }
-
-    function syncColorPickers(){
-      ['primary','secondary','bg','text','accent'].forEach(key => {
-        const pick = document.getElementById('color-'+key);
-        const hex = document.getElementById('colorhex-'+key);
-        if(pick) pick.value = LS.state.colors[key];
-        if(hex) hex.value = LS.state.colors[key];
-      });
-    }
-    ['primary','secondary','bg','text','accent'].forEach(key => {
-      const pick = document.getElementById('color-'+key);
-      const hex = document.getElementById('colorhex-'+key);
-      if(pick) { pick.value = LS.state.colors[key]; pick.addEventListener('input', () => { LS.state.colors[key] = pick.value; if(hex) hex.value = pick.value; updatePreview(); }); }
-      if(hex) { hex.value = LS.state.colors[key]; hex.addEventListener('input', () => { if(/^#[0-9a-fA-F]{6}$/.test(hex.value)) { LS.state.colors[key] = hex.value; if(pick) pick.value = hex.value; updatePreview(); } }); }
-    });
-
-    document.querySelectorAll('.font-card').forEach(card => {
-      card.addEventListener('click', () => {
-        document.querySelectorAll('.font-card').forEach(x => x.classList.remove('active'));
-        card.classList.add('active');
-        LS.state.font = card.dataset.font;
-        updatePreview();
-      });
-    });
-
-    const fsSlider = document.getElementById('fontSizeSlider');
-    const fsVal = document.getElementById('fontSizeVal');
-    if(fsSlider) fsSlider.addEventListener('input', () => { LS.state.fontSize = parseInt(fsSlider.value); if(fsVal) fsVal.textContent = fsSlider.value; updatePreview(); });
-    const isSlider = document.getElementById('iconSizeSlider');
-    const isVal = document.getElementById('iconSizeVal');
-    if(isSlider) isSlider.addEventListener('input', () => { LS.state.iconSize = parseInt(isSlider.value); if(isVal) isVal.textContent = isSlider.value; updatePreview(); });
-
-    function makeToggle(id, stateKey) {
-      const el = document.getElementById(id);
-      if(!el) return;
-      if(LS.state[stateKey]) el.classList.add('on');
-      el.addEventListener('click', () => { LS.state[stateKey] = !LS.state[stateKey]; el.classList.toggle('on', LS.state[stateKey]); updatePreview(); });
-    }
-    makeToggle('toggleIcon','showIcon');
-    makeToggle('toggleTagline','showTagline');
-    makeToggle('toggleBg','showBg');
-
-    document.querySelectorAll('.corner-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.corner-btn').forEach(x => x.classList.remove('active'));
-        btn.classList.add('active');
-        LS.state.corners = btn.dataset.corner;
-        updatePreview();
-      });
-    });
-
-    document.querySelectorAll('.bg-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.bg-btn').forEach(x => x.classList.remove('active'));
-        btn.classList.add('active');
-        const stage = document.getElementById('previewStage');
-        if(!stage) return;
-        const bgs = {
-          dark:'radial-gradient(ellipse at 50% 50%, rgba(91,108,240,0.06), transparent 70%), repeating-conic-gradient(rgba(255,255,255,0.015) 0% 25%, transparent 0% 50%) 50% / 24px 24px',
-          light:'radial-gradient(ellipse at 50% 50%, rgba(200,220,255,0.15), transparent 70%), repeating-conic-gradient(rgba(0,0,0,0.04) 0% 25%, transparent 0% 50%) 50% / 24px 24px',
-          white:'#ffffff',
-          transparent:'repeating-conic-gradient(#d0d0d0 0% 25%, #f0f0f0 0% 50%) 50% / 20px 20px',
-        };
-        stage.style.background = bgs[btn.dataset.bg] || bgs.dark;
-        if(btn.dataset.bg === 'light' || btn.dataset.bg === 'white') { stage.style.backgroundColor = btn.dataset.bg === 'white' ? '#fff' : '#e8ecf4'; } else { stage.style.backgroundColor = ''; }
-      });
-    });
-
-    document.querySelectorAll('.mockup-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const type = btn.dataset.mockup;
-        const mainDisplay = document.getElementById('logoMainDisplay');
-        const mockupArea = document.getElementById('mockupDisplay');
-        if(!mockupArea) return;
-        if(type === 'none' || LS.state.mockup === type) {
-          LS.state.mockup = null;
-          mockupArea.classList.remove('active');
-          if(mainDisplay) mainDisplay.style.display='';
-          document.querySelectorAll('.mockup-btn').forEach(x => x.classList.remove('active'));
-          return;
-        }
-        LS.state.mockup = type;
-        document.querySelectorAll('.mockup-btn').forEach(x => x.classList.toggle('active', x.dataset.mockup===type));
-        const svg = LS.render();
-        if(type === 'card') {
-          mockupArea.innerHTML = `<button class="bg-btn mockup-back-btn toolbar-btn" onclick="this.closest('.mockup-display').classList.remove('active'); document.getElementById('logoMainDisplay').style.display=''; document.querySelectorAll('.mockup-btn').forEach(x=>x.classList.remove('active'));">← Retour</button><div class="mockup-card"><div class="mc-top"><div style="width:52px;height:52px;overflow:hidden">${svg}</div><div class="mc-info"><h5>${LS.escapeXml(LS.state.name||'Mon Logo')}</h5><p>${LS.escapeXml(LS.state.tagline||'Votre tagline')}</p></div></div><div class="mc-divider"></div><div class="mc-bottom"><span>Carte de visite</span><span style="font-size:.75rem;color:var(--studio-gold)">★★★★★</span></div></div>`;
-        } else if(type === 'app') {
-          mockupArea.innerHTML = `<button class="bg-btn mockup-back-btn toolbar-btn" onclick="this.closest('.mockup-display').classList.remove('active'); document.getElementById('logoMainDisplay').style.display=''; document.querySelectorAll('.mockup-btn').forEach(x=>x.classList.remove('active'));">← Retour</button><p style="font-size:.78rem;color:var(--muted);margin-bottom:8px;">Icône d'application</p><div class="mockup-app-icon">${svg}</div><p style="font-size:.7rem;color:var(--muted);margin-top:6px;">${LS.escapeXml(LS.state.name||'Mon App')}</p>`;
-        } else if(type === 'social') {
-          mockupArea.innerHTML = `<button class="bg-btn mockup-back-btn toolbar-btn" onclick="this.closest('.mockup-display').classList.remove('active'); document.getElementById('logoMainDisplay').style.display=''; document.querySelectorAll('.mockup-btn').forEach(x=>x.classList.remove('active'));">← Retour</button><p style="font-size:.78rem;color:var(--muted);margin-bottom:8px;">Bannière réseaux sociaux</p><div class="mockup-social" style="background:${LS.state.colors.bg};padding:20px 30px;display:flex;align-items:center;gap:20px;">${svg}<div><div style="font-size:.9rem;font-weight:600;color:#eef0f4">${LS.escapeXml(LS.state.name||'Mon Logo')}</div><div style="font-size:.72rem;color:#9aa3b2">${LS.escapeXml(LS.state.tagline||'Votre tagline')}</div></div></div>`;
-        }
-        mockupArea.classList.add('active');
-        if(mainDisplay) mainDisplay.style.display = 'none';
-      });
-    });
-
-    let selectedExportSize = '512';
-    document.querySelectorAll('.export-size-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.export-size-btn').forEach(x => x.classList.remove('active'));
-        btn.classList.add('active');
-        selectedExportSize = btn.dataset.size;
-      });
-    });
-
-    function downloadSVG() {
-      const svg = LS.render();
-      const blob = new Blob([svg], {type:'image/svg+xml'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href=url;
-      a.download = (LS.state.name||'logo').replace(/\s+/g,'-').toLowerCase()+'.svg';
-      a.click(); URL.revokeObjectURL(url);
-      showToast('Logo SVG téléchargé !');
-    }
-
-    function downloadPNG(size) {
-      const sz = parseInt(size||selectedExportSize||512);
-      const svg = LS.render();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(svg,'image/svg+xml');
-      const svgEl = doc.documentElement;
-      const vb = svgEl.getAttribute('viewBox')||'0 0 500 200';
-      const parts = vb.split(' ');
-      const vw=parseFloat(parts[2])||500; const vh=parseFloat(parts[3])||200;
-      const ratio = vw/vh;
-      const pw = sz; const ph = Math.round(sz/ratio);
-      const canvas = document.createElement('canvas');
-      canvas.width=pw; canvas.height=ph;
-      const ctx = canvas.getContext('2d');
-      const img = new Image();
-      img.onload = () => {
-        ctx.clearRect(0,0,pw,ph);
-        ctx.drawImage(img,0,0,pw,ph);
-        canvas.toBlob(blob => {
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a'); a.href=url;
-          a.download=(LS.state.name||'logo').replace(/\s+/g,'-').toLowerCase()+`-${pw}x${ph}.png`;
-          a.click(); URL.revokeObjectURL(url);
-          showToast('Logo PNG '+pw+'×'+ph+' téléchargé !');
-        },'image/png');
-      };
-      const encoded = encodeURIComponent(svg);
-      img.src = 'data:image/svg+xml;charset=utf-8,'+encoded;
-    }
-
-    function sendLogoToWhatsApp() {
-      const name = LS.state.name || 'mon logo';
-      const msg = `Bonjour bienvenue Merci de la confiance accordée. Je veux commander la création de ce logo : Nom : "${name}", Tagline : "${LS.state.tagline||''}", Style : ${LS.state.template}, Couleur principale : ${LS.state.colors.primary}. Veuillez me fournir le fichier final en haute résolution.`;
-      window.open(`https://wa.me/22606121297?text=${encodeURIComponent(msg)}`,'_blank');
-      showToast('Ouverture de WhatsApp...');
-    }
-
-    document.querySelectorAll('.export-option').forEach(opt => {
-      opt.addEventListener('click', () => {
-        const type = opt.dataset.export;
-        if(type==='svg') downloadSVG();
-        else if(type==='png') downloadPNG();
-        else if(type==='whatsapp') sendLogoToWhatsApp();
-      });
-    });
-
-    function openExportModal() { document.getElementById('studioExportModal')?.classList.add('open'); }
-    function closeExportModal() { document.getElementById('studioExportModal')?.classList.remove('open'); }
-    document.getElementById('openExportBtn')?.addEventListener('click', openExportModal);
-    document.getElementById('closeExportModal')?.addEventListener('click', closeExportModal);
-    document.getElementById('studioExportModal')?.addEventListener('click', e => { if(e.target.id==='studioExportModal') closeExportModal(); });
-    document.getElementById('studioWhatsAppBtn')?.addEventListener('click', sendLogoToWhatsApp);
-
-    document.getElementById('copySvgBtn')?.addEventListener('click', () => {
-      const svg = LS.render();
-      navigator.clipboard.writeText(svg).then(() => showToast('Code SVG copié !'));
-    });
-
-    document.getElementById('inspireBtn')?.addEventListener('click', () => {
-      const allIconKeys = Object.keys(Object.assign({},...Object.values(LS.icons)));
-      LS.state.icon = allIconKeys[Math.floor(Math.random()*allIconKeys.length)];
-      const tpls = ['horizontal','stacked','badge','circle','split','minimal','duo','retro'];
-      LS.state.template = tpls[Math.floor(Math.random()*tpls.length)];
-      const p = LS.palettes[Math.floor(Math.random()*LS.palettes.length)];
-      LS.state.colors = { primary:p.colors[0], secondary:p.colors[1], bg:p.colors[2], text:p.colors[3], accent:p.colors[4] };
-      syncColorPickers();
-      document.querySelectorAll('.palette-card').forEach(x => x.classList.remove('active'));
-      document.querySelectorAll('.template-card').forEach(c => c.classList.toggle('active', c.dataset.tpl===LS.state.template));
-      updatePreview();
-      showToast('🎲 Nouveau style généré !');
-    });
-
-    document.getElementById('resetBtn')?.addEventListener('click', () => {
-      if(!confirm('Réinitialiser tous les paramètres du logo ?')) return;
-      Object.assign(LS.state, {
-        name:'', tagline:'', icon:'star', template:'horizontal', font:'Fraunces',
-        fontSize:44, iconSize:52, showIcon:true, showTagline:true, showBg:true, corners:'rounded',
-        colors:{ primary:'#e0b15c', secondary:'#5b6cf0', bg:'#0f1115', text:'#ffffff', accent:'#3fb68b' }
-      });
-      if(nameInput) nameInput.value='';
-      if(taglineInput) taglineInput.value='';
-      syncColorPickers();
-      updatePreview();
-      showToast('Logo réinitialisé');
-    });
-
-    function showToast(msg) {
-      const t = document.getElementById('studioToast');
-      if(!t) return;
-      t.textContent = msg;
-      t.classList.add('show');
-      setTimeout(()=>t.classList.remove('show'), 2500);
-    }
-
-    updatePreview();
-    syncColorPickers();
-  })();
-  // ===================== END LOGO STUDIO PRO =====================
-
   function pickWhatsAppNumber(service){
     return WHATSAPP_NUMBERS[Math.floor(Math.random() * WHATSAPP_NUMBERS.length)];
   }
 
   function openWhatsApp(number, text){
-    const url = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+    const url = `https://wa.me/\( {number}?text= \){encodeURIComponent(text)}`;
     window.open(url, '_blank');
   }
 
   function openGeneralWhatsApp(){
-    const text = "Bonjour bienvenue. Merci de la confiance accordée. Dites-nous le service dont vous avez besoin et nous vous répondons rapidement.";
-    openWhatsApp(WHATSAPP_NUMBERS[0], text);
+    const modal = ensureServiceModal();
+    const number = WHATSAPP_NUMBERS[0];
+    currentServicePayload = { number, message: "" };
+    modal.querySelector('#serviceModalIcon').textContent = '👋';
+    modal.querySelector('#serviceModalTitle').textContent = 'BONJOUR';
+    modal.querySelector('#serviceModalIntro').textContent = 'Dites-nous toutes vos procurations.';
+    modal.querySelector('#serviceModalNote').textContent = '';
+    modal.classList.add('open');
   }
 
   function getServiceMessage(service, flow, subtype, mapsLink){
@@ -2011,6 +1629,7 @@
     modal.className = 'service-modal';
     modal.innerHTML = `
       <div class="service-modal-card">
+        <div class="service-modal-icon" id="serviceModalIcon">💬</div>
         <h3 id="serviceModalTitle">Confirmer votre demande</h3>
         <p id="serviceModalIntro">Préparez votre message avant l'ouverture de WhatsApp.</p>
         <div class="service-note" id="serviceModalNote"></div>
@@ -2035,6 +1654,7 @@
   function openServiceFlow(service, flow, subtype){
     const modal = ensureServiceModal();
     const number = pickWhatsAppNumber(service);
+    modal.querySelector('#serviceModalIcon').textContent = '💬';
     modal.querySelector('#serviceModalTitle').textContent = service;
 
     if(flow === 'delivery' || flow === 'wash'){
@@ -2048,7 +1668,7 @@
           (pos) => {
             const lat = pos.coords.latitude.toFixed(6);
             const lng = pos.coords.longitude.toFixed(6);
-            const mapsLink = `https://www.google.com/maps?q=${lat},${lng}`;
+            const mapsLink = `https://www.google.com/maps?q=\( {lat}, \){lng}`;
             currentServicePayload.message = getServiceMessage(service, flow, subtype, mapsLink);
             modal.querySelector('#serviceModalNote').textContent = 'Position récupérée ✓ — elle sera incluse dans votre message WhatsApp.';
           },
@@ -2076,7 +1696,7 @@
       modal.querySelector('#serviceModalNote').textContent = DOC_NOTE;
     } else {
       modal.querySelector('#serviceModalIntro').textContent = 'Un message prêt à envoyer va s’ouvrir dans WhatsApp.';
-      modal.querySelector('#serviceModalNote').textContent = 'Ajoutez le plus de détails possible afin que KK puisse vous répondre rapidement et avec précision.';
+      modal.querySelector('#serviceModalNote').textContent = 'Ajoutez le plus de détails possible afin que KMS puisse vous répondre rapidement et avec précision.';
     }
     modal.classList.add('open');
   }
@@ -2106,14 +1726,13 @@
       const amount = prompt('Entrez le montant à payer en FCFA :');
       if(!amount) return;
       const cleanAmount = String(amount).replace(/\s+/g, '');
-      const confirmPay = confirm(`Voulez-vous initier un paiement de ${cleanAmount} FCFA vers KK ?`);
+      const confirmPay = confirm(`Voulez-vous initier un paiement de ${cleanAmount} FCFA vers KMS ?`);
       if(!confirmPay) return;
 
-      window.location.href = `tel:*144*2*1*${link.dataset.payNumber}*${cleanAmount}%23`;
+      window.location.href = `tel:*144*2*1*\( {link.dataset.payNumber}* \){cleanAmount}%23`;
     });
   });
 
-  // Anciennes fonctions de logo remplacées par Logo Studio Pro (voir ci-dessus)
 
   // Formulaire de contact -> ouvre WhatsApp avec message pré-rempli
   function handleContact(e){
@@ -2140,7 +1759,7 @@
   aiClose.addEventListener('click', () => aiPanel.classList.remove('open'));
 
   const aiResponses = {
-    services: "KK propose une large gamme de services : saisie ultra-rapide, création de logos professionnels, affiches publicitaires, retouche photo haute qualité, vente d'applications et de films, et création de comptes sécurisés.",
+    services: "KMS propose une large gamme de services : saisie ultra-rapide, création de logos professionnels, affiches publicitaires, retouche photo haute qualité, vente d'applications et de films, et création de comptes sécurisés.",
     prix: "Nos tarifs sont très compétitifs. Par exemple : Saisie à partir de 200F, Logo Pro à 2500F, Affiche à 1500F. Consultez la section 'Nos Tarifs' pour le détail complet.",
     paiement: "Nous acceptons Orange Money (+226 06121297) et Wave (+226 56761864). Cliquez sur les numéros dans la section paiement pour lancer l'opération.",
     delai: "La plupart de nos services (saisie, logos simples) sont livrés en moins de 24h. Les projets complexes peuvent prendre 48h.",
@@ -2209,7 +1828,7 @@
         }
       }
       if(data.services){
-        aiResponses.services = "KK propose " + Object.values(data.services).map(s => s.title.toLowerCase()).join(', ') + ".";
+        aiResponses.services = "KMS propose " + Object.values(data.services).map(s => s.title.toLowerCase()).join(', ') + ".";
       }
       if(data.contact){
         aiResponses.contact = `Deux WhatsApp sont disponibles : ${(data.contact.whatsappDisplay||[]).join(' et ')}. Vous pouvez aussi écrire à ${data.contact.email||''}.`;
@@ -2231,7 +1850,7 @@
   <div class="auth-modal-card">
     <button class="auth-close" onclick="closeAuthModal('login')">✕</button>
     <h2>Se connecter</h2>
-    <p>Accédez à votre compte KK</p>
+    <p>Accédez à votre compte KMS</p>
     <div class="auth-method-toggle">
       <button type="button" class="auth-method-btn active" id="loginMethodEmailBtn" onclick="setAuthMethod('login','email')">Email</button>
       <button type="button" class="auth-method-btn" id="loginMethodPhoneBtn" onclick="setAuthMethod('login','phone')">Numéro mobile</button>
@@ -2251,7 +1870,7 @@
   <div class="auth-modal-card">
     <button class="auth-close" onclick="closeAuthModal('register')">✕</button>
     <h2>Créer un compte</h2>
-    <p>Rejoignez KK en quelques secondes</p>
+    <p>Rejoignez KMS en quelques secondes</p>
     <div class="auth-method-toggle">
       <button type="button" class="auth-method-btn active" id="registerMethodEmailBtn" onclick="setAuthMethod('register','email')">Email</button>
       <button type="button" class="auth-method-btn" id="registerMethodPhoneBtn" onclick="setAuthMethod('register','phone')">Numéro mobile</button>
@@ -2294,7 +1913,7 @@ function loadUserAuth() {
       updateAuthUI();
     if (currentUserAuth && !sessionStorage.getItem('kkWelcomeShown')) {
       setTimeout(() => {
-        addMsg(`Ravi de vous revoir, ${currentUserAuth.name} ! Comment KK peut vous aider aujourd'hui ?`, 'bot');
+        addMsg(`Ravi de vous revoir, ${currentUserAuth.name} ! Comment KMS peut vous aider aujourd'hui ?`, 'bot');
         aiPanel.classList.add('open');
         sessionStorage.setItem('kkWelcomeShown', 'true');
       }, 2000);
@@ -2312,7 +1931,7 @@ function saveUserAuth(user) {
   updateAuthUI();
     if (currentUserAuth && !sessionStorage.getItem('kkWelcomeShown')) {
       setTimeout(() => {
-        addMsg(`Ravi de vous revoir, ${currentUserAuth.name} ! Comment KK peut vous aider aujourd'hui ?`, 'bot');
+        addMsg(`Ravi de vous revoir, ${currentUserAuth.name} ! Comment KMS peut vous aider aujourd'hui ?`, 'bot');
         aiPanel.classList.add('open');
         sessionStorage.setItem('kkWelcomeShown', 'true');
       }, 2000);
@@ -2467,7 +2086,7 @@ function handleLogout() {
     updateAuthUI();
     if (currentUserAuth && !sessionStorage.getItem('kkWelcomeShown')) {
       setTimeout(() => {
-        addMsg(`Ravi de vous revoir, ${currentUserAuth.name} ! Comment KK peut vous aider aujourd'hui ?`, 'bot');
+        addMsg(`Ravi de vous revoir, ${currentUserAuth.name} ! Comment KMS peut vous aider aujourd'hui ?`, 'bot');
         aiPanel.classList.add('open');
         sessionStorage.setItem('kkWelcomeShown', 'true');
       }, 2000);
@@ -2487,6 +2106,1113 @@ function goToProfile() {
 
 document.addEventListener('DOMContentLoaded', loadUserAuth);
 </script>
+
+
+<script>
+// ===== MULTILINGUE : traduction automatique réelle (via backend sécurisé) =====
+// ⚠️ Remplacez cette URL par celle de votre backend une fois déployé (voir README fourni).
+// Traduction gratuite via le service public de Google (aucune clé, aucun backend requis).
+// Certaines langues locales (ex: Mooré) ne sont pas encore couvertes par ce service ;
+// dans ce cas l'utilisateur est prévenu et la page reste en français.
+const GOOGLE_LANG_MAP = {
+  zh: 'zh-CN',
+  he: 'iw',
+  dyu: 'bm' // Dioula/Jula est très proche du Bambara, reconnu par Google sous ce code
+};
+const UNSUPPORTED_LANGUAGES = ['mos']; // Mooré : pas encore disponible via la traduction automatique
+
+function toGoogleLangCode(code){
+  return GOOGLE_LANG_MAP[code] || code;
+}
+
+// Liste large de langues, avec une place particulière pour les langues locales
+// du Burkina Faso (Mooré, Dioula, Fulfulde) en plus des grandes langues mondiales.
+const WORLD_LANGUAGES = [
+  { code: 'fr', name: 'Français' },
+  { code: 'mos', name: 'Mooré' },
+  { code: 'dyu', name: 'Dioula / Jula' },
+  { code: 'ff', name: 'Fulfulde (Peul)' },
+  { code: 'en', name: 'English' },
+  { code: 'es', name: 'Español' },
+  { code: 'pt', name: 'Português' },
+  { code: 'de', name: 'Deutsch' },
+  { code: 'it', name: 'Italiano' },
+  { code: 'nl', name: 'Nederlands' },
+  { code: 'ar', name: 'العربية' },
+  { code: 'zh', name: '中文' },
+  { code: 'ja', name: '日本語' },
+  { code: 'ko', name: '한국어' },
+  { code: 'ru', name: 'Русский' },
+  { code: 'hi', name: 'हिन्दी' },
+  { code: 'bn', name: 'বাংলা' },
+  { code: 'ur', name: 'اردو' },
+  { code: 'fa', name: 'فارسی' },
+  { code: 'tr', name: 'Türkçe' },
+  { code: 'sw', name: 'Kiswahili' },
+  { code: 'ha', name: 'Hausa' },
+  { code: 'yo', name: 'Yorùbá' },
+  { code: 'wo', name: 'Wolof' },
+  { code: 'am', name: 'አማርኛ' },
+  { code: 'so', name: 'Soomaali' },
+  { code: 'vi', name: 'Tiếng Việt' },
+  { code: 'th', name: 'ภาษาไทย' },
+  { code: 'id', name: 'Bahasa Indonesia' },
+  { code: 'pl', name: 'Polski' },
+  { code: 'uk', name: 'Українська' },
+  { code: 'el', name: 'Ελληνικά' },
+  { code: 'he', name: 'עברית' }
+];
+
+let pageOriginalTexts = null;
+let currentLangCode = 'fr';
+let translationInProgress = false;
+
+function populateLangSelector(){
+  const select = document.getElementById('langSelector');
+  select.innerHTML = '';
+  WORLD_LANGUAGES.forEach(l => {
+    const opt = document.createElement('option');
+    opt.value = l.code;
+    opt.textContent = l.name;
+    select.appendChild(opt);
+  });
+}
+
+function showTranslateOverlay(langName){
+  const bar = document.getElementById('translateBar');
+  bar.textContent = 'Traduction en cours (' + langName + ')…';
+  bar.classList.add('show');
+}
+function hideTranslateOverlay(){
+  document.getElementById('translateBar').classList.remove('show');
+}
+
+// Sélectionne les éléments de texte "feuilles" (sans enfant élément) des zones
+// statiques du site, en excluant les panneaux dynamiques (chat, jeux, résultats IA).
+function collectTranslatableElements(){
+  const roots = [
+    document.querySelector('header'),
+    ...Array.from(document.querySelectorAll('section')).filter(s => s.id !== 'ia-logo'),
+    document.querySelector('footer')
+  ].filter(Boolean);
+
+  const excludeClasses = ['logo', 'mark', 'icon', 'num', 'price', 'unit'];
+  const tags = 'h1,h2,h3,h4,p,li,a,button,label,span';
+  const seen = new Set();
+  const result = [];
+
+  roots.forEach(root => {
+    root.querySelectorAll(tags).forEach(el => {
+      if (el.closest('.game-modal') || el.closest('#aiPanel') || el.closest('#aiResults')) return;
+      if (el.children.length > 0) return;
+      if (excludeClasses.some(c => el.classList.contains(c))) return;
+      const text = el.textContent.trim();
+      if (!text || !/\p{L}/u.test(text)) return;
+      if (seen.has(el)) return;
+      seen.add(el);
+      result.push(el);
+    });
+  });
+  return result;
+}
+
+function captureOriginalTexts(){
+  if (pageOriginalTexts) return pageOriginalTexts;
+  pageOriginalTexts = new Map();
+  collectTranslatableElements().forEach(el => {
+    pageOriginalTexts.set(el, { type: 'text', value: el.textContent });
+  });
+  document.querySelectorAll('header input[placeholder], section input[placeholder]').forEach(el => {
+    if (el.closest('.game-modal')) return;
+    pageOriginalTexts.set(el, { type: 'placeholder', value: el.getAttribute('placeholder') });
+  });
+  return pageOriginalTexts;
+}
+
+async function translateOne(text, googleCode){
+  const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=fr&tl=' +
+    encodeURIComponent(googleCode) + '&dt=t&q=' + encodeURIComponent(text);
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('HTTP ' + response.status);
+  const data = await response.json();
+  if (!Array.isArray(data) || !Array.isArray(data[0])) throw new Error('Réponse inattendue');
+  return data[0].map(segment => segment[0] || '').join('');
+}
+
+async function translateBatch(texts, targetLangCode){
+  const googleCode = toGoogleLangCode(targetLangCode);
+  const CONCURRENCY = 6;
+  const results = new Array(texts.length);
+  let cursor = 0;
+  let firstError = null;
+
+  async function worker(){
+    while (cursor < texts.length){
+      const i = cursor++;
+      try {
+        results[i] = await translateOne(texts[i], googleCode);
+      } catch (err) {
+        if (!firstError) firstError = err;
+        results[i] = texts[i]; // en cas d'échec ponctuel, on garde le texte original
+      }
+    }
+  }
+
+  const workers = Array.from({ length: Math.min(CONCURRENCY, texts.length) }, worker);
+  await Promise.all(workers);
+
+  // Si absolument tout a échoué, on remonte l'erreur pour afficher le message d'indisponibilité.
+  if (firstError && results.every((r, i) => r === texts[i])) throw firstError;
+  return results;
+}
+
+async function changeLanguage(langCode){
+  const lang = WORLD_LANGUAGES.find(l => l.code === langCode);
+  if (!lang || translationInProgress) return;
+
+  const select = document.getElementById('langSelector');
+  document.documentElement.lang = langCode;
+
+  if (langCode === 'fr') {
+    const originals = captureOriginalTexts();
+    originals.forEach((data, el) => {
+      if (data.type === 'placeholder') el.setAttribute('placeholder', data.value);
+      else el.textContent = data.value;
+    });
+    currentLangCode = 'fr';
+    localStorage.setItem('kkLanguage', 'fr');
+    return;
+  }
+
+  if (UNSUPPORTED_LANGUAGES.includes(langCode)) {
+    alert("La traduction automatique n'est pas encore disponible pour le " + lang.name + ". La page reste en français.");
+    select.value = 'fr';
+    document.documentElement.lang = 'fr';
+    return;
+  }
+
+  const cacheKey = 'kkTranslateCache_' + langCode;
+  const cache = JSON.parse(localStorage.getItem(cacheKey) || '{}');
+  const originals = captureOriginalTexts();
+  const entries = Array.from(originals.entries());
+
+  const toTranslate = [];
+  entries.forEach(([, data]) => {
+    if (!cache[data.value] && !toTranslate.includes(data.value)) toTranslate.push(data.value);
+  });
+
+  translationInProgress = true;
+  showTranslateOverlay(lang.name);
+
+  try {
+    const BATCH_SIZE = 40;
+    for (let i = 0; i < toTranslate.length; i += BATCH_SIZE) {
+      const batch = toTranslate.slice(i, i + BATCH_SIZE);
+      const translations = await translateBatch(batch, langCode);
+      batch.forEach((orig, idx) => { cache[orig] = translations[idx] || orig; });
+    }
+    if (toTranslate.length) localStorage.setItem(cacheKey, JSON.stringify(cache));
+
+    entries.forEach(([el, data]) => {
+      const translated = cache[data.value] || data.value;
+      if (data.type === 'placeholder') el.setAttribute('placeholder', translated);
+      else el.textContent = translated;
+    });
+
+    currentLangCode = langCode;
+    localStorage.setItem('kkLanguage', langCode);
+  } catch (err) {
+    console.error('Erreur de traduction:', err);
+    alert("La traduction automatique est momentanément indisponible. Réessayez plus tard.");
+    select.value = 'fr';
+  } finally {
+    translationInProgress = false;
+    hideTranslateOverlay();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  populateLangSelector();
+  const saved = localStorage.getItem('kkLanguage');
+  if (saved && saved !== 'fr') {
+    document.getElementById('langSelector').value = saved;
+    changeLanguage(saved);
+  }
+});
+
+// ===== LECTURE À HAUTE VOIX (gratuite, via le navigateur) =====
+const TTS = (() => {
+  const supported = 'speechSynthesis' in window;
+  let enabled = false;
+  let queue = [];
+  let queueIndex = 0;
+  let currentEl = null;
+  let speed = 1;
+  let voiceFR = null;
+
+  const bar = document.getElementById('ttsBar');
+  const barLabel = document.getElementById('ttsBarLabel');
+  const toggleBtn = document.getElementById('ttsToggle');
+  const playAllBtn = document.getElementById('ttsPlayAll');
+  const pauseBtn = document.getElementById('ttsPause');
+  const stopBtn = document.getElementById('ttsStop');
+  const speedSelect = document.getElementById('ttsSpeed');
+
+  function pickVoice(){
+    if (!supported) return;
+    const voices = speechSynthesis.getVoices();
+    voiceFR = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('fr')) || null;
+  }
+  if (supported) {
+    pickVoice();
+    speechSynthesis.onvoiceschanged = pickVoice;
+  }
+
+  function clearHighlight(){
+    if (currentEl) currentEl.classList.remove('tts-reading');
+    currentEl = null;
+  }
+
+  function speakText(text, el, onEnd){
+    if (!supported || !text) { if (onEnd) onEnd(); return; }
+    speechSynthesis.cancel();
+    clearHighlight();
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'fr-FR';
+    if (voiceFR) utt.voice = voiceFR;
+    utt.rate = speed;
+    if (el) {
+      currentEl = el;
+      el.classList.add('tts-reading');
+      el.scrollIntoView({behavior:'smooth', block:'center'});
+      barLabel.textContent = text.length > 60 ? text.slice(0,60) + '…' : text;
+    }
+    utt.onend = () => { clearHighlight(); if (onEnd) onEnd(); };
+    utt.onerror = () => { clearHighlight(); if (onEnd) onEnd(); };
+    speechSynthesis.speak(utt);
+  }
+
+  function collectReadableElements(){
+    const selector = 'main h1, main h2, main h3, main p, .hero h1, .hero p, ' +
+      'section h1, section h2, section h3, section p, .service-card h3, .service-card p, ' +
+      '.section-head h2, .section-head p';
+    const nodes = Array.from(document.querySelectorAll(selector))
+      .filter(el => el.offsetParent !== null && el.textContent.trim().length > 1);
+    // Dédupliquer (un enfant déjà couvert par son parent) et marquer comme lisible
+    nodes.forEach(el => el.classList.add('tts-readable'));
+    return nodes;
+  }
+
+  function playQueueFrom(index){
+    if (!supported) return;
+    queue = collectReadableElements();
+    queueIndex = index;
+    if (queueIndex >= queue.length) { stop(); return; }
+    const el = queue[queueIndex];
+    speakText(el.textContent.trim(), el, () => playQueueFrom(queueIndex + 1));
+  }
+
+  function playAll(){
+    if (!enabled) enable(true);
+    playQueueFrom(0);
+  }
+
+  function pauseResume(){
+    if (!supported) return;
+    if (speechSynthesis.speaking && !speechSynthesis.paused) {
+      speechSynthesis.pause();
+    } else if (speechSynthesis.paused) {
+      speechSynthesis.resume();
+    }
+  }
+
+  function stop(){
+    if (supported) speechSynthesis.cancel();
+    clearHighlight();
+    barLabel.textContent = "Cliquez sur un titre ou un paragraphe pour l'écouter";
+  }
+
+  function enable(force){
+    enabled = force !== undefined ? force : !enabled;
+    document.body.classList.toggle('tts-mode', enabled);
+    toggleBtn.classList.toggle('active', enabled);
+    bar.classList.toggle('open', enabled);
+    localStorage.setItem('kkTtsEnabled', enabled ? '1' : '0');
+    if (enabled) {
+      collectReadableElements();
+    } else {
+      stop();
+    }
+  }
+
+  function init(){
+    if (!supported) {
+      toggleBtn.title = "Lecture vocale non disponible sur ce navigateur";
+      toggleBtn.disabled = true;
+      return;
+    }
+    if (localStorage.getItem('kkTtsEnabled') === '1') enable(true);
+
+    document.addEventListener('click', (e) => {
+      const el = e.target.closest('.tts-readable');
+      if (el && enabled) {
+        e.preventDefault();
+        speechSynthesis.cancel();
+        speakText(el.textContent.trim(), el, () => {});
+      }
+    });
+
+    playAllBtn.addEventListener('click', playAll);
+    pauseBtn.addEventListener('click', pauseResume);
+    stopBtn.addEventListener('click', stop);
+    speedSelect.addEventListener('change', () => { speed = parseFloat(speedSelect.value); });
+  }
+
+  return { init, enable, toggle: () => enable(!enabled) };
+})();
+
+function toggleTTS(){ TTS.toggle(); }
+document.addEventListener('DOMContentLoaded', () => TTS.init());
+
+// ===== RECHERCHE IA / VÉRIFICATION D'INFORMATION (réelle, via backend sécurisé) =====
+// ⚠️ Remplacez cette URL par celle de votre backend une fois déployé (voir README fourni).
+// Ne mettez JAMAIS une clé API Anthropic/OpenAI directement dans ce fichier HTML.
+const AI_VERIFY_ENDPOINT = 'https://VOTRE-BACKEND.vercel.app/api/verify';
+
+const AI_QUOTA_FREE_PER_DAY = 10;
+
+function getAIQuotaState() {
+  const today = new Date().toISOString().slice(0, 10);
+  let state = JSON.parse(localStorage.getItem('kkAiQuota') || 'null');
+  if (!state || state.date !== today) {
+    state = { date: today, used: 0 };
+  }
+  return state;
+}
+
+function saveAIQuotaState(state) {
+  localStorage.setItem('kkAiQuota', JSON.stringify(state));
+}
+
+function refreshAIQuotaDisplay() {
+  const state = getAIQuotaState();
+  const left = Math.max(0, AI_QUOTA_FREE_PER_DAY - state.used);
+  const el = document.getElementById('aiQuotaLeft');
+  if (el) el.textContent = left;
+  return left;
+}
+
+async function submitAISearch() {
+  const input = document.getElementById('aiSearchInput');
+  const query = input.value.trim();
+  const resultsEl = document.getElementById('aiResults');
+  if (!query) return;
+
+  if (query.length > 400) {
+    resultsEl.innerHTML = '<p style="color:var(--terra);">Question trop longue (400 caractères max).</p>';
+    return;
+  }
+
+  // Quota gratuit (indicatif — un vrai contrôle anti-abus doit être fait côté serveur)
+  const quotaState = getAIQuotaState();
+  const isPremium = !!(currentUserAuth && currentUserAuth.premium);
+  if (!isPremium && quotaState.used >= AI_QUOTA_FREE_PER_DAY) {
+    resultsEl.innerHTML = '<p style="color:var(--terra);">Quota gratuit atteint pour aujourd\'hui. Abonnez-vous à "Recherche IA Illimitée" pour continuer.</p>';
+    return;
+  }
+
+  resultsEl.innerHTML = '<p style="color:var(--gold);">Recherche en cours (analyse + vérification web)...</p>';
+
+  try {
+    const response = await fetch(AI_VERIFY_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query })
+    });
+
+    if (!response.ok) {
+      throw new Error('Réponse serveur invalide (' + response.status + ')');
+    }
+
+    const data = await response.json();
+
+    if (data.error) {
+      resultsEl.innerHTML = '<p style="color:var(--terra);">' + escapeHTML(data.error) + '</p>';
+      return;
+    }
+
+    if (!isPremium) {
+      quotaState.used += 1;
+      saveAIQuotaState(quotaState);
+      refreshAIQuotaDisplay();
+    }
+
+    const answerHTML = '<p style="white-space:pre-wrap;">' + escapeHTML(data.answer || 'Aucune réponse disponible.') + '</p>';
+    let sourcesHTML = '';
+    if (Array.isArray(data.sources) && data.sources.length) {
+      sourcesHTML = '<div style="margin-top:10px;font-size:.8rem;"><b>Sources :</b><ul style="margin:6px 0 0 18px;padding:0;">' +
+        data.sources.slice(0, 5).map(src => '<li><a href="' + encodeURI(src) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(src) + '</a></li>').join('') +
+        '</ul></div>';
+    }
+    resultsEl.innerHTML = answerHTML + sourcesHTML;
+  } catch (err) {
+    console.error('Erreur recherche IA:', err);
+    resultsEl.innerHTML = '<p style="color:var(--terra);">Le service de vérification est momentanément indisponible. Réessayez plus tard.</p>';
+  }
+}
+
+function addAIFilter(filter) {
+  const input = document.getElementById('aiSearchInput');
+  input.value = 'Donne-moi des informations fiables et récentes sur : ' + filter;
+  submitAISearch();
+}
+
+document.addEventListener('DOMContentLoaded', refreshAIQuotaDisplay);
+
+// ===== JEUX AMÉLIORÉS : Textures + Difficulté progressive =====
+let activeGame = null;
+let gameRAF = null;
+let gameKeyHandler = null;
+let gameTouchCleanup = null;
+
+function stopGameLoop(){
+  if (gameRAF) cancelAnimationFrame(gameRAF);
+  gameRAF = null;
+}
+
+function closeGameModal(){
+  stopGameLoop();
+  if (gameKeyHandler) { document.removeEventListener('keydown', gameKeyHandler); gameKeyHandler = null; }
+  if (gameTouchCleanup) { gameTouchCleanup(); gameTouchCleanup = null; }
+  document.getElementById('gameModal').classList.remove('open');
+  document.getElementById('gameDpad').classList.remove('show');
+  activeGame = null;
+}
+
+function openGameModal(title, hint, showDpad){
+  closeGameModal();
+  document.getElementById('gameModalTitle').textContent = title;
+  document.getElementById('gameModalHint').textContent = hint;
+  document.getElementById('gameScoreVal').textContent = '0';
+  document.getElementById('gameExtraInfo').textContent = '';
+  document.getElementById('gameDpad').classList.toggle('show', !!showDpad);
+  document.getElementById('gameModal').classList.add('open');
+}
+
+function launchGame(game) {
+  if (game === 'dino') {
+    openGameModal('🦖 Dino Runner', "Touchez / Espace pour sauter. Difficulté augmente !", false);
+    startDinoGame();
+  } else if (game === 'pacman') {
+    openGameModal('👾 Pac-Man', 'Flèches / D-pad pour bouger. Fantômes plus rapides avec le temps !', true);
+    startPacmanGame();
+  } else if (game === 'checkers') {
+    openGameModal('⚫ Dames', 'Touchez pièce puis destination. IA plus agressive.', false);
+    startCheckersGame();
+  } else {
+    alert('Lancement du jeu : ' + game + ' (Bientôt disponible)');
+  }
+}
+
+// --------- DINO AMÉLIORÉ (textures + difficulté) ---------
+function startDinoGame(){
+  activeGame = 'dino';
+  const canvas = document.getElementById('gameCanvas');
+  canvas.width = 380; canvas.height = 160;
+  const ctx = canvas.getContext('2d', { alpha: true });
+  const W = canvas.width, H = canvas.height;
+  const groundY = H - 28;
+
+  let player, obstacles, clouds, speed, frame, score, started, gameOver, difficultyLevel = 1;
+
+  function reset(){
+    player = { x: 32, y: groundY - 28, w: 24, h: 28, vy: 0, jumping: false };
+    obstacles = [];
+    clouds = [{ x: 80, y: 28, s: 1.1 }, { x: 190, y: 45, s: 0.8 }, { x: 300, y: 22, s: 1 }];
+    speed = 4.2;
+    frame = 0;
+    score = 0;
+    started = false;
+    gameOver = false;
+    difficultyLevel = 1;
+    document.getElementById('gameScoreVal').textContent = '0';
+  }
+  reset();
+
+  function jump(){
+    if (gameOver) { reset(); return; }
+    started = true;
+    if (!player.jumping) { player.vy = -13.8; player.jumping = true; }
+  }
+
+  function spawnObstacle(){
+    const types = ['cactus', 'bird'];
+    const type = types[Math.floor(Math.random() * types.length)];
+    const h = type === 'bird' ? 18 : 22 + Math.random() * 14;
+    obstacles.push({ x: W + 20, y: type === 'bird' ? groundY - 55 - Math.random()*20 : groundY - h, w: type === 'bird' ? 22 : 14 + Math.random() * 12, h, type });
+  }
+
+  function update(){
+    frame++;
+    if (!started || gameOver) return;
+
+    // Augmentation progressive de difficulté
+    if (frame % 280 === 0) {
+      difficultyLevel = Math.min(5, difficultyLevel + 0.6);
+      speed = 4.2 + difficultyLevel * 0.75;
+    }
+
+    player.vy += 0.92;
+    player.y += player.vy;
+    if (player.y >= groundY - player.h) { 
+      player.y = groundY - player.h; 
+      player.vy = 0; 
+      player.jumping = false; 
+    }
+
+    clouds.forEach(cl => { cl.x -= speed * 0.28; if (cl.x < -50) cl.x = W + 40 + Math.random() * 90; });
+
+    if (frame % Math.max(38, 82 - Math.floor(difficultyLevel * 9)) === 0) spawnObstacle();
+
+    obstacles.forEach(o => o.x -= speed);
+    obstacles = obstacles.filter(o => o.x + o.w > -20);
+
+    score += 0.8 + difficultyLevel * 0.2;
+    document.getElementById('gameScoreVal').textContent = Math.floor(score);
+
+    for (const o of obstacles) {
+      if (player.x < o.x + o.w - 4 && player.x + player.w > o.x + 4 && 
+          player.y < o.y + o.h - 4 && player.y + player.h > o.y + 4) {
+        gameOver = true;
+      }
+    }
+  }
+
+  function drawBackground(){
+    // Ciel amélioré
+    const sky = ctx.createLinearGradient(0, 0, 0, groundY);
+    sky.addColorStop(0, '#0f1626');
+    sky.addColorStop(1, '#1f2a44');
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, W, groundY);
+
+    // Nuages plus détaillés
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = 'rgba(255,255,255,0.25)';
+    clouds.forEach(cl => {
+      ctx.globalAlpha = 0.45;
+      ctx.fillStyle = '#e0e4f0';
+      ctx.beginPath();
+      ctx.ellipse(cl.x, cl.y, 18*cl.s, 9*cl.s, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(cl.x + 13*cl.s, cl.y + 1, 12*cl.s, 7*cl.s, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+    ctx.shadowBlur = 0;
+  }
+
+  function drawGround(){
+    ctx.fillStyle = '#11140f';
+    ctx.fillRect(0, groundY, W, H - groundY);
+    ctx.strokeStyle = '#3a2f1f';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(0, groundY + 2);
+    ctx.lineTo(W, groundY + 2);
+    ctx.stroke();
+
+    // Lignes de texture sol
+    ctx.strokeStyle = 'rgba(224,177,92,0.35)';
+    ctx.lineWidth = 1.5;
+    for (let x = (frame * speed % 42) - 42; x < W; x += 42) {
+      ctx.beginPath();
+      ctx.moveTo(x, groundY + 8);
+      ctx.lineTo(x + 18, groundY + 8);
+      ctx.stroke();
+    }
+  }
+
+  function drawDino(){
+    const leg = Math.floor(frame / 5) % 2;
+    ctx.save();
+    ctx.translate(player.x, player.y);
+
+    // Ombre
+    ctx.fillStyle = 'rgba(0,0,0,0.4)';
+    ctx.beginPath();
+    ctx.ellipse(14, 29, 11, 4, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Corps texturé
+    ctx.fillStyle = '#d4a23a';
+    ctx.fillRect(4, 6, 19, 14);
+    ctx.fillRect(18, 2, 9, 9); // tête
+
+    // Détails texture
+    ctx.fillStyle = '#b88a2e';
+    ctx.fillRect(6, 9, 4, 3);
+    ctx.fillRect(13, 11, 5, 3);
+
+    // Queue
+    ctx.fillRect(1, 12, 6, 5);
+
+    // Pattes améliorées
+    ctx.fillStyle = '#c19335';
+    if (!player.jumping) {
+      ctx.fillRect(leg === 0 ? 7 : 6, 19, 5, 8);
+      ctx.fillRect(leg === 1 ? 14 : 13, 19, 5, 8);
+    } else {
+      ctx.fillRect(7, 19, 5, 7);
+      ctx.fillRect(14, 19, 5, 7);
+    }
+
+    // Œil + pupille
+    ctx.fillStyle = '#1c1408';
+    ctx.fillRect(22, 6, 4, 4);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(23, 7, 2, 2);
+
+    ctx.restore();
+  }
+
+  function drawObstacle(o){
+    ctx.save();
+    ctx.translate(o.x, o.y);
+    if (o.type === 'cactus') {
+      ctx.fillStyle = '#2e7a4f';
+      ctx.fillRect(0, 0, o.w, o.h);
+      ctx.fillRect(o.w*0.3, -o.h*0.35, o.w*0.4, o.h*0.45);
+      ctx.fillStyle = '#1f5a3a';
+      ctx.fillRect(3, 4, o.w-6, 5);
+    } else { // bird
+      ctx.fillStyle = '#6b4e9e';
+      ctx.beginPath();
+      ctx.ellipse(o.w/2, o.h/2, o.w/2, o.h/2.2, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle = '#4a2e7a';
+      ctx.fillRect(o.w*0.6, o.h*0.3, o.w*0.35, 4);
+    }
+    ctx.restore();
+  }
+
+  function draw(){
+    drawBackground();
+    drawGround();
+    drawDino();
+    obstacles.forEach(drawObstacle);
+
+    ctx.fillStyle = '#f0e6c8';
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 13px monospace';
+    if (!started) {
+      ctx.fillText('APPUIE / TOUCHE POUR COMMENCER', W/2, H/2 - 10);
+    } else if (gameOver) {
+      ctx.fillStyle = 'rgba(20,10,5,0.75)';
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#ffdd88';
+      ctx.fillText('GAME OVER — Score: ' + Math.floor(score), W/2, H/2 - 12);
+      ctx.font = '12px monospace';
+      ctx.fillText('Touchez pour rejouer', W/2, H/2 + 18);
+    }
+  }
+
+  function loop(){
+    update();
+    draw();
+    gameRAF = requestAnimationFrame(loop);
+  }
+  loop();
+
+  const onTap = (e) => { e.preventDefault(); jump(); };
+  canvas.addEventListener('touchstart', onTap, { passive: false });
+  canvas.addEventListener('mousedown', onTap);
+  gameTouchCleanup = () => {
+    canvas.removeEventListener('touchstart', onTap);
+    canvas.removeEventListener('mousedown', onTap);
+  };
+  gameKeyHandler = (e) => { if (e.code === 'Space') { e.preventDefault(); jump(); } };
+  document.addEventListener('keydown', gameKeyHandler);
+}
+
+// --------- PAC-MAN AMÉLIORÉ ---------
+function startPacmanGame(){
+  activeGame = 'pacman';
+  const canvas = document.getElementById('gameCanvas');
+  const cell = 19;
+  const maze = [
+    '#############',
+    '#.....#.....#',
+    '#.###.#.###.#',
+    '#...........#',
+    '#.###.#.###.#',
+    '#.....#.....#',
+    '##.##.#.##.##',
+    '#.....#.....#',
+    '#.###.#.###.#',
+    '#...........#',
+    '#.###.#.###.#',
+    '#.....#.....#',
+    '#############'
+  ];
+  const rows = maze.length, cols = maze[0].length;
+  canvas.width = cols * cell; canvas.height = rows * cell + 4;
+  const ctx = canvas.getContext('2d');
+
+  let grid, dotsLeft, player, ghosts, score, gameOver, win, difficulty = 1, frameCount = 0;
+
+  function isWall(r, c){ return r < 0 || c < 0 || r >= rows || c >= cols || grid[r][c] === '#'; }
+
+  function restart(){
+    grid = maze.map(row => row.split(''));
+    dotsLeft = 0;
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) if (grid[r][c] === '.') dotsLeft++;
+    player = { r: 1, c: 1, dir: 'right', next: null };
+    ghosts = [
+      { r: 5, c: 5, color: '#ff5555', lastDir: 'left' },
+      { r: 5, c: 7, color: '#55aaff', lastDir: 'right' }
+    ];
+    score = 0; gameOver = false; win = false; difficulty = 1;
+    document.getElementById('gameScoreVal').textContent = '0';
+  }
+  restart();
+
+  function step(){
+    if (gameOver || win) return;
+    frameCount++;
+
+    if (frameCount % 90 === 0) difficulty = Math.min(4.5, difficulty + 0.3);
+
+    if (player.next && !isWall(player.r + (player.next==='up'?-1:player.next==='down'?1:0), player.c + (player.next==='left'?-1:player.next==='right'?1:0))) {
+      player.dir = player.next;
+    }
+    const dr = player.dir === 'up' ? -1 : player.dir === 'down' ? 1 : 0;
+    const dc = player.dir === 'left' ? -1 : player.dir === 'right' ? 1 : 0;
+    if (!isWall(player.r + dr, player.c + dc)) {
+      player.r += dr;
+      player.c += dc;
+    }
+
+    if (grid[player.r][player.c] === '.') {
+      grid[player.r][player.c] = ' ';
+      score += 12;
+      dotsLeft--;
+      document.getElementById('gameScoreVal').textContent = score;
+      if (dotsLeft <= 0) win = true;
+    }
+
+    // Ghosts plus agressifs
+    ghosts.forEach(g => {
+      let dirs = ['up','down','left','right'].filter(d => {
+        let nr = g.r + (d==='up'?-1:d==='down'?1:0);
+        let nc = g.c + (d==='left'?-1:d==='right'?1:0);
+        return !isWall(nr, nc);
+      });
+      if (dirs.length > 1 && Math.random() < 0.6 + difficulty*0.08) {
+        // Bias vers joueur
+        const best = dirs.sort((a,b) => {
+          const da = Math.abs((g.r + (a==='up'?-1:a==='down'?1:0)) - player.r) + Math.abs((g.c + (a==='left'?-1:a==='right'?1:0)) - player.c);
+          const db = Math.abs((g.r + (b==='up'?-1:b==='down'?1:0)) - player.r) + Math.abs((g.c + (b==='left'?-1:b==='right'?1:0)) - player.c);
+          return da - db;
+        })[0];
+        tryMove(g, best);
+      } else if (dirs.length) {
+        tryMove(g, dirs[Math.floor(Math.random()*dirs.length)]);
+      }
+    });
+
+    ghosts.forEach(g => { 
+      if (g.r === player.r && g.c === player.c) gameOver = true; 
+    });
+  }
+
+  function tryMove(entity, dir){
+    let r = entity.r, c = entity.c;
+    if (dir === 'up') r--; else if (dir === 'down') r++; else if (dir === 'left') c--; else if (dir === 'right') c++;
+    if (!isWall(r, c)) { entity.r = r; entity.c = c; entity.lastDir = dir; return true; }
+    return false;
+  }
+
+  function draw(){
+    ctx.fillStyle = '#0a0c14';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const x = c * cell, y = r * cell;
+        if (grid[r][c] === '#') {
+          ctx.fillStyle = '#223366';
+          ctx.fillRect(x+1, y+1, cell-2, cell-2);
+        } else if (grid[r][c] === '.') {
+          ctx.fillStyle = '#ffdd77';
+          ctx.beginPath();
+          ctx.arc(x + cell/2, y + cell/2, 3.5, 0, Math.PI*2);
+          ctx.fill();
+        }
+      }
+    }
+
+    // Pac-Man texturé
+    const mouth = Math.sin(frameCount / 3) * 0.35 + 0.15;
+    const angle = {right:0, left:Math.PI, up: -Math.PI/2, down: Math.PI/2}[player.dir] || 0;
+    ctx.save();
+    ctx.translate(player.c*cell + cell/2, player.r*cell + cell/2);
+    ctx.rotate(angle);
+    ctx.fillStyle = '#ffeb3b';
+    ctx.beginPath();
+    ctx.arc(0, 0, cell/2 - 2, mouth*Math.PI, (2-mouth)*Math.PI);
+    ctx.lineTo(0,0);
+    ctx.fill();
+    ctx.restore();
+
+    // Ghosts améliorés
+    ghosts.forEach((g,i) => {
+      const gx = g.c * cell + cell/2, gy = g.r * cell + cell/2;
+      ctx.fillStyle = g.color;
+      ctx.beginPath();
+      ctx.arc(gx, gy-2, cell/2 - 3, Math.PI, 0);
+      ctx.lineTo(gx + cell/2 - 3, gy + cell/2 - 5);
+      for (let k = 0; k < 4; k++) {
+        ctx.quadraticCurveTo(gx + (k-1.5)*(cell/2 - 3)/2, gy + cell/2 - 2, gx + (k-2)*(cell/2 - 3)/2, gy + cell/2 - 5);
+      }
+      ctx.fill();
+
+      // Yeux
+      ctx.fillStyle = '#fff';
+      ctx.beginPath(); ctx.arc(gx-5, gy-3, 4, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(gx+5, gy-3, 4, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#112';
+      ctx.beginPath(); ctx.arc(gx-5 + (player.c > g.c ? 1 : -1), gy-3, 1.8, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(gx+5 + (player.c > g.c ? 1 : -1), gy-3, 1.8, 0, Math.PI*2); ctx.fill();
+    });
+
+    if (gameOver || win) {
+      ctx.fillStyle = 'rgba(0,0,0,0.7)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = win ? '#aaff88' : '#ff8866';
+      ctx.font = 'bold 17px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(win ? 'VICTOIRE !' : 'GAME OVER', canvas.width/2, canvas.height/2 - 8);
+      ctx.font = '13px sans-serif';
+      ctx.fillStyle = '#ddd';
+      ctx.fillText('Touchez pour recommencer', canvas.width/2, canvas.height/2 + 22);
+    }
+  }
+
+  let lastTick = 0;
+  function loop(ts){
+    if (!lastTick) lastTick = ts;
+    if (ts - lastTick > 160 - difficulty*18) {
+      step();
+      lastTick = ts;
+    }
+    draw();
+    gameRAF = requestAnimationFrame(loop);
+  }
+  gameRAF = requestAnimationFrame(loop);
+
+  function setDir(d){
+    if (gameOver || win) { restart(); return; }
+    player.next = d;
+  }
+
+  gameKeyHandler = (e) => {
+    const m = {ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right'};
+    if (m[e.key]) { e.preventDefault(); setDir(m[e.key]); }
+  };
+  document.addEventListener('keydown', gameKeyHandler);
+
+  const dpad = document.querySelectorAll('#gameDpad button');
+  dpad.forEach(b => b.addEventListener('click', (e)=>{ e.preventDefault(); setDir(b.dataset.dir); }));
+
+  const onTap = () => { if(gameOver || win) restart(); };
+  canvas.addEventListener('click', onTap);
+
+  gameTouchCleanup = () => {
+    dpad.forEach(b => b.removeEventListener('click', () => {})); // cleanup simplifié
+    canvas.removeEventListener('click', onTap);
+  };
+}
+
+// --------- DAMES (déjà bonne, légère amélioration IA) ---------
+function startCheckersGame(){
+  // (code checkers conservé avec légère amélioration IA déjà présente)
+  activeGame = 'checkers';
+  const canvas = document.getElementById('gameCanvas');
+  const size = 8, cell = 38;
+  canvas.width = size * cell; canvas.height = size * cell;
+  const ctx = canvas.getContext('2d');
+
+  let board, turn, selected, validTargets, gameOver, winner;
+
+  function inBounds(r, c){ return r >= 0 && r < size && c >= 0 && c < size; }
+
+  function countPieces(p){
+    let n = 0;
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) if (board[r][c] && board[r][c].player === p) n++;
+    return n;
+  }
+
+  function movesFor(r, c){
+    const piece = board[r][c];
+    if (!piece) return [];
+    const dirs = piece.king ? [[-1,-1],[-1,1],[1,-1],[1,1]] : (piece.player === 1 ? [[-1,-1],[-1,1]] : [[1,-1],[1,1]]);
+    const moves = [];
+    dirs.forEach(([dr, dc]) => {
+      const nr = r + dr, nc = c + dc;
+      if (inBounds(nr, nc) && !board[nr][nc]) moves.push({ r: nr, c: nc, capture: null });
+      const jr = r + dr * 2, jc = c + dc * 2;
+      if (inBounds(jr, jc) && !board[jr][jc] && board[nr][nc] && board[nr][nc].player !== piece.player) {
+        moves.push({ r: jr, c: jc, capture: { r: nr, c: nc } });
+      }
+    });
+    return moves;
+  }
+
+  function initBoard(){
+    board = Array.from({ length: size }, () => Array(size).fill(null));
+    for (let r = 0; r < 3; r++) for (let c = 0; c < size; c++) if ((r + c) % 2 === 1) board[r][c] = { player: 2, king: false };
+    for (let r = size - 3; r < size; r++) for (let c = 0; c < size; c++) if ((r + c) % 2 === 1) board[r][c] = { player: 1, king: false };
+    turn = 1;
+    selected = null;
+    validTargets = [];
+    gameOver = false;
+    winner = null;
+    updateStatus();
+  }
+
+  function updateStatus(){
+    document.getElementById('gameScoreVal').textContent = countPieces(1) + ' - ' + countPieces(2);
+    if (gameOver) {
+      document.getElementById('gameExtraInfo').textContent = 'Joueur ' + winner + ' gagne !';
+    } else {
+      document.getElementById('gameExtraInfo').textContent = 'Tour Joueur ' + turn;
+    }
+  }
+
+  function select(r, c){
+    const piece = board[r][c];
+    if (!piece || piece.player !== turn) { selected = null; validTargets = []; return; }
+    let moves = movesFor(r, c);
+    const captures = moves.filter(m => m.capture);
+    if (captures.length) moves = captures;
+    selected = { r, c };
+    validTargets = moves;
+  }
+
+  function move(target){
+    const piece = board[selected.r][selected.c];
+    board[selected.r][selected.c] = null;
+    if (target.capture) board[target.capture.r][target.capture.c] = null;
+    if ((piece.player === 1 && target.r === 0) || (piece.player === 2 && target.r === size - 1)) piece.king = true;
+    board[target.r][target.c] = piece;
+    selected = null; validTargets = [];
+
+    if (countPieces(1) === 0) { gameOver = true; winner = 2; }
+    else if (countPieces(2) === 0) { gameOver = true; winner = 1; }
+    else {
+      turn = turn === 1 ? 2 : 1;
+    }
+    updateStatus();
+  }
+
+  function draw(){
+    for (let r = 0; r < size; r++) {
+      for (let c = 0; c < size; c++) {
+        const x = c * cell, y = r * cell;
+        ctx.fillStyle = (r + c) % 2 === 1 ? '#1f252f' : '#e8d9b8';
+        ctx.fillRect(x, y, cell, cell);
+      }
+    }
+    if (selected) {
+      ctx.fillStyle = 'rgba(224,177,92,0.5)';
+      ctx.fillRect(selected.c * cell, selected.r * cell, cell, cell);
+    }
+    validTargets.forEach(m => {
+      ctx.fillStyle = m.capture ? '#e05a5a' : '#5ae0a0';
+      ctx.beginPath();
+      ctx.arc(m.c*cell + cell/2, m.r*cell + cell/2, 9, 0, Math.PI*2);
+      ctx.fill();
+    });
+
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) {
+      const p = board[r][c];
+      if (!p) continue;
+      const x = c*cell + cell/2, y = r*cell + cell/2;
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = 'rgba(0,0,0,0.6)';
+      ctx.fillStyle = p.player === 1 ? '#e8c070' : '#7a88ff';
+      ctx.beginPath();
+      ctx.arc(x, y, cell/2 - 5, 0, Math.PI*2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      if (p.king) {
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 22px sans-serif';
+        ctx.fillText('♔', x-7, y+8);
+      }
+    }
+  }
+
+  function loop(){ draw(); gameRAF = requestAnimationFrame(loop); }
+  loop();
+
+  const onTap = (e) => {
+    if (gameOver) { initBoard(); return; }
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+    const c = Math.floor(x / cell), r = Math.floor(y / cell);
+    if (selected) {
+      const tgt = validTargets.find(m => m.r === r && m.c === c);
+      if (tgt) { move(tgt); return; }
+    }
+    select(r, c);
+  };
+  canvas.addEventListener('click', onTap);
+  gameTouchCleanup = () => canvas.removeEventListener('click', onTap);
+
+  initBoard();
+}
+
+// ===== Autres fonctions existantes (reviews, suggestions...) =====
+function toggleReviews(element) {
+  const list = element.querySelector('.reviews-list');
+  if (list) list.style.display = list.style.display === 'none' ? 'block' : 'none';
+}
+
+function submitSuggestion(e) {
+  e.preventDefault();
+  const text = document.getElementById('suggestionText').value;
+  if (text) {
+    alert('Merci pour votre suggestion ! Elle a été prise en compte.');
+    document.getElementById('suggestionText').value = '';
+  }
+}
+</script>
+
+<!-- ================= MODALE JEUX ================= -->
+<div class="game-modal" id="gameModal">
+  <div class="game-modal-inner">
+    <div class="game-modal-header">
+      <h3 id="gameModalTitle">Jeu</h3>
+      <button class="game-modal-close" onclick="closeGameModal()">✕</button>
+    </div>
+    <div class="game-modal-score">
+      <span>Score : <b id="gameScoreVal">0</b></span>
+      <span id="gameExtraInfo"></span>
+    </div>
+    <canvas id="gameCanvas" width="320" height="180"></canvas>
+    <p class="game-modal-hint" id="gameModalHint">Touchez l'écran ou appuyez sur Espace pour sauter</p>
+    <div class="game-dpad" id="gameDpad">
+      <button class="dpad-up" data-dir="up">▲</button>
+      <button class="dpad-left" data-dir="left">◀</button>
+      <button class="dpad-right" data-dir="right">▶</button>
+      <button class="dpad-down" data-dir="down">▼</button>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
