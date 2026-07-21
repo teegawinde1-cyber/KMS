@@ -1,0 +1,3599 @@
+{<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">KMS — Services numériques rapides & fiables</title>
+<meta id="pageDescription" name="description" content="KMS : saisie ultra rapide, création de logos et affiches, retouche photo, vente de films et applications, création de comptes. Paiement Orange Money & Wave. Basé à Dédougou, Burkina Faso.">
+
+<!-- Protection de base -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; media-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https:; frame-ancestors 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<style>
+  :root{
+    --bg:#0f1115;
+    --bg-soft:#171a21;
+    --card:#1d212b;
+    --line:rgba(255,255,255,0.08);
+    --text:#eef0f4;
+    --muted:#9aa3b2;
+    --gold:#e0b15c;
+    --indigo:#5b6cf0;
+    --terra:#d97a55;
+    --green:#3fb68b;
+    --radius:14px;
+    --max:1100px;
+    font-size:16px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter', system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0 0 .5em 0;
+  }
+
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(15,17,21,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+    max-width:var(--max); margin:0 auto;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces', serif;
+    font-weight:800; font-size:1.4rem;
+    letter-spacing:0.04em;
+  }
+  .logo .mark{
+    width:36px; height:36px; border-radius:10px;
+    background:linear-gradient(135deg,var(--gold),var(--terra));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:800; color:#1a1a1a;
+    font-size:.78rem; letter-spacing:.02em;
+  }
+  nav ul{
+    display:flex; gap:24px; list-style:none; margin:0; padding:0;
+  }
+  nav ul li a{
+    text-decoration:none; color:var(--muted); font-size:.95rem;
+    font-weight:500; transition:color .2s;
+  }
+  nav ul li a:hover{color:var(--gold);}
+  nav ul li a.active{color:var(--gold);}
+  nav ul li a{position:relative;}
+  nav ul li a.active::after{
+    content:""; position:absolute; left:0; right:0; bottom:-6px;
+    height:2px; background:var(--gold); border-radius:2px;
+  }
+  .nav-cta{
+    display:none;
+  }
+  @media(min-width:760px){
+    .nav-cta{display:inline-flex;}
+  }
+  .menu-toggle{
+    display:flex; background:none; border:1px solid var(--line);
+    border-radius:8px; color:var(--text); padding:8px 10px; cursor:pointer;
+  }
+  @media(min-width:760px){
+    .menu-toggle{display:none;}
+    nav ul{display:flex;}
+  }
+  nav ul{
+    display:none;
+  }
+  @media(min-width:760px){nav ul{display:flex;}}
+  nav.open ul{
+    display:flex; flex-direction:column; position:absolute; top:64px; left:0; right:0;
+    background:var(--bg-soft); padding:20px 24px; gap:16px; border-bottom:1px solid var(--line);
+  }
+
+  /* ---------- Traduction automatique ---------- */
+  #translateBar{
+    position:fixed; top:0; left:0; right:0; z-index:300;
+    background:var(--gold); color:#1a1305; text-align:center;
+    padding:8px 12px; font-size:.85rem; font-weight:600;
+    transform:translateY(-100%); transition:transform .25s ease;
+  }
+  #translateBar.show{transform:translateY(0);}
+
+  /* ---------- TTS (lecture à haute voix) ---------- */
+  .tts-toggle{
+    display:inline-flex; align-items:center; gap:6px;
+    background:transparent; border:1px solid var(--line); color:var(--muted);
+    border-radius:999px; padding:8px 14px; font-size:.85rem; font-weight:600;
+    cursor:pointer; transition:all .2s;
+  }
+  .tts-toggle:hover{border-color:var(--gold); color:var(--gold);}
+  .tts-toggle.active{background:var(--gold); border-color:var(--gold); color:#1a1305;}
+
+  .tts-readable{cursor:pointer; transition:background .15s, outline .15s;}
+  body.tts-mode .tts-readable:hover{
+    outline:2px dashed var(--gold); outline-offset:4px; border-radius:6px;
+  }
+  .tts-reading{
+    background:rgba(224,177,92,0.14) !important;
+    outline:2px solid var(--gold) !important; outline-offset:4px; border-radius:6px;
+  }
+
+  #ttsBar{
+    position:fixed; left:16px; right:16px; bottom:16px; z-index:80;
+    max-width:420px; margin:0 auto;
+    background:var(--card); border:1px solid var(--line); border-radius:999px;
+    padding:10px 16px; display:none; align-items:center; gap:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  }
+  #ttsBar.open{display:flex;}
+  #ttsBar button{
+    background:none; border:none; color:var(--text); cursor:pointer;
+    font-size:1.1rem; display:flex; align-items:center; justify-content:center;
+    width:34px; height:34px; border-radius:50%; transition:background .15s;
+  }
+  #ttsBar button:hover{background:var(--bg-soft);}
+  #ttsBar select{
+    background:var(--bg-soft); color:var(--text); border:1px solid var(--line);
+    border-radius:999px; padding:4px 8px; font-size:.75rem;
+  }
+  #ttsBarLabel{font-size:.78rem; color:var(--muted); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+
+  /* ---------- Espace Jeu : section texturée ---------- */
+  .games-section{
+    position:relative; overflow:hidden;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(224,177,92,0.08), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(91,108,240,0.08), transparent 45%),
+      var(--bg-soft);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .games-section::before{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+    background-image:radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size:22px 22px;
+  }
+  .games-section .wrap{position:relative;}
+  .games-grid{
+    display:grid; gap:14px;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  }
+  .game-tile{
+    position:relative; cursor:pointer; text-align:center; overflow:hidden;
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:22px 14px 18px; transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+  }
+  .game-tile::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--gtint, var(--gold));
+    transform:scaleX(0); transform-origin:left; transition:transform .25s ease;
+  }
+  .game-tile::after{
+    content:""; position:absolute; width:120px; height:120px; border-radius:50%;
+    background:var(--gtint, var(--gold)); opacity:.10; top:-50px; right:-50px;
+    transition:transform .3s ease;
+  }
+  .game-tile:hover{
+    transform:translateY(-4px); border-color:var(--gtint, var(--gold));
+    box-shadow:0 14px 30px rgba(0,0,0,0.35);
+  }
+  .game-tile:hover::before{transform:scaleX(1);}
+  .game-tile:hover::after{transform:scale(1.3);}
+  .game-tile:active{transform:translateY(-1px) scale(.98);}
+  .game-tile-icon{
+    position:relative; z-index:1; width:52px; height:52px; margin:0 auto 12px;
+    border-radius:14px; display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem; background:var(--gtint-bg, rgba(224,177,92,.18));
+    border:1px solid var(--gtint-border, rgba(224,177,92,.45));
+  }
+  .game-tile-name{position:relative; z-index:1; font-weight:700; font-size:.98rem;}
+  .game-tile-tag{
+    position:relative; z-index:1; margin-top:4px; font-size:.72rem; color:var(--muted);
+    text-transform:uppercase; letter-spacing:.06em;
+  }
+
+  /* ---------- Espace Jeu (Dino / Pac-Man) ---------- */
+  .game-modal{
+    position:fixed; inset:0; z-index:200; display:none;
+    align-items:center; justify-content:center;
+    background:radial-gradient(circle at 50% 30%, rgba(224,177,92,0.10), rgba(10,11,14,0.90) 60%);
+    padding:16px;
+  }
+  .game-modal.open{display:flex; animation:serviceModalFade .2s ease;}
+  .game-modal-inner{
+    position:relative; overflow:hidden;
+    background:var(--card); border:1px solid var(--line); border-radius:calc(var(--radius) + 4px);
+    padding:20px; width:100%; max-width:380px;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.5);
+    animation:serviceModalPop .3s cubic-bezier(.2,.9,.3,1.2);
+  }
+  .game-modal-inner::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg, var(--gold), var(--indigo), var(--terra), var(--gold));
+    background-size:200% 100%; animation:serviceModalShine 4s linear infinite;
+  }
+  .game-modal-header{
+    display:flex; align-items:center; justify-content:space-between; width:100%;
+  }
+  .game-modal-header h3{margin:0; font-size:1.1rem;}
+  .game-modal-close{
+    background:none; border:1px solid var(--line); color:var(--text);
+    width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:1rem;
+    transition:border-color .2s, color .2s, transform .2s;
+  }
+  .game-modal-close:hover{border-color:var(--gold); color:var(--gold); transform:rotate(90deg);}
+  .game-modal-score{
+    width:100%; display:flex; justify-content:space-between;
+    font-size:.85rem; color:var(--muted);
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:10px; padding:8px 12px;
+  }
+  .game-modal-score b{color:var(--gold);}
+  #gameCanvas{
+    background:#0a0b0e; border:1px solid var(--line); border-radius:10px;
+    max-width:100%; touch-action:none; image-rendering:pixelated;
+  }
+  .game-modal-hint{font-size:.78rem; color:var(--muted); text-align:center; margin:0;}
+
+  .game-mode-select{
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+    padding:18px 6px 24px;
+  }
+  .game-mode-select p{margin:0; color:var(--muted); font-size:.9rem;}
+  .game-mode-buttons{display:flex; gap:12px; flex-wrap:wrap; justify-content:center;}
+  .mode-btn{
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:14px;
+    padding:16px 20px; cursor:pointer; color:var(--text); font-weight:600; font-size:.88rem;
+    transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .mode-btn .mode-emoji{font-size:1.7rem;}
+  .mode-btn:hover{transform:translateY(-3px); border-color:var(--gold); box-shadow:0 10px 24px rgba(0,0,0,0.35);}
+  .mode-btn:active{transform:translateY(-1px) scale(.97);}
+
+  #gameCanvas{border-radius:10px;}
+  .game-dpad{
+    display:none; grid-template-columns:repeat(3,44px); grid-template-rows:repeat(3,44px);
+    gap:4px; margin-top:4px;
+  }
+  .game-dpad.show{display:grid;}
+  .game-dpad button{
+    background:var(--bg-soft); border:1px solid var(--line); color:var(--text);
+    border-radius:10px; font-size:1.1rem; cursor:pointer;
+  }
+  .game-dpad button:active{background:var(--gold); color:#1a1305;}
+  .dpad-up{grid-column:2; grid-row:1;}
+  .dpad-left{grid-column:1; grid-row:2;}
+  .dpad-right{grid-column:3; grid-row:2;}
+  .dpad-down{grid-column:2; grid-row:3;}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:999px;
+    font-weight:600; font-size:.95rem; text-decoration:none;
+    border:1px solid transparent; cursor:pointer;
+    transition:transform .18s ease, opacity .18s ease, box-shadow .18s ease;
+    position:relative; overflow:hidden;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:linear-gradient(135deg,#f0c477,var(--gold)); color:#1a1305; box-shadow:0 6px 18px rgba(224,177,92,0.28);}
+  .btn-primary:hover{opacity:1; transform:translateY(-2px); box-shadow:0 10px 24px rgba(224,177,92,0.4);}
+  .btn-outline{border-color:var(--line); color:var(--text); background:transparent;}
+  .btn-outline:hover{border-color:var(--gold); color:var(--gold); transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.25);}
+  .btn-whatsapp{background:linear-gradient(135deg,#2fe37e,#1fb866); color:#04220f; box-shadow:0 6px 18px rgba(37,211,102,0.3);}
+  .btn-whatsapp:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(37,211,102,0.42);}
+  .btn-sm{padding:9px 16px; font-size:.85rem;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:90px 0 70px;
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse at 70% -10%, rgba(91,108,240,0.25), transparent 55%),
+      radial-gradient(ellipse at 10% 110%, rgba(224,177,92,0.18), transparent 55%);
+  }
+  .hero .wrap{
+    display:grid; gap:40px;
+  }
+  @media(min-width:860px){
+    .hero .wrap{grid-template-columns:1.1fr .9fr; align-items:center;}
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--gold); font-weight:600; font-size:.85rem;
+    letter-spacing:.12em; text-transform:uppercase; margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:""; width:8px; height:8px; border-radius:50%; background:var(--gold);
+  }
+  .hero h1{
+    font-size:clamp(2.2rem, 5.5vw, 3.6rem);
+    line-height:1.08;
+  }
+  .hero h1 em{
+    font-style:italic; color:var(--gold);
+  }
+  .hero p.lead{
+    color:var(--muted); font-size:1.1rem; max-width:520px; margin:18px 0 28px;
+  }
+  .hero-actions{display:flex; flex-wrap:wrap; gap:12px;}
+
+  .hero-panel{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.35);
+  }
+  .hero-panel h3{font-size:1.05rem; margin-bottom:14px;}
+  .stat-row{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:18px;
+  }
+  .stat{
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:10px;
+    padding:14px 10px; text-align:center;
+  }
+  .stat .num{font-family:'Fraunces',serif; font-size:1.4rem; font-weight:800; color:var(--gold);}
+  .stat .lbl{font-size:.75rem; color:var(--muted); margin-top:4px;}
+
+  /* ---------- Sections ---------- */
+  section{padding:70px 0; scroll-margin-top:84px;}
+  .section-head{margin-bottom:40px; max-width:640px;}
+  .section-head h2{font-size:clamp(1.7rem,4vw,2.4rem); position:relative; padding-bottom:14px;}
+  .section-head h2::after{
+    content:""; position:absolute; left:0; bottom:0; height:3px; width:56px;
+    background:linear-gradient(90deg,var(--gold),var(--terra)); border-radius:3px;
+  }
+  .section-head p{color:var(--muted); margin:0;}
+  .alt{background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+
+  /* ---------- Services Grid ---------- */
+  .services-grid{
+    display:grid; gap:18px;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  }
+  .service-card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px; transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+    cursor:pointer;
+  }
+  .service-card:hover{border-color:var(--gold); transform:translateY(-5px); box-shadow:0 16px 34px rgba(0,0,0,0.35);}
+  .service-card .icon{
+    width:46px; height:46px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; margin-bottom:16px;
+    background:linear-gradient(135deg, rgba(224,177,92,0.22), rgba(224,177,92,0.06));
+    color:var(--gold); border:1px solid rgba(224,177,92,0.25);
+  }
+  .service-card h3{font-size:1.1rem; margin-bottom:8px;}
+  .service-card p{color:var(--muted); font-size:.92rem; margin:0;}
+
+  /* ---------- Bouton dédié Logo Studio ---------- */
+  .logo-cta{
+    margin-top:24px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    background:linear-gradient(135deg, rgba(224,177,92,0.12), rgba(224,177,92,0.03));
+    border:1px solid rgba(224,177,92,0.35); border-radius:var(--radius);
+    padding:24px 26px;
+  }
+  .logo-cta-icon{
+    width:52px; height:52px; flex:0 0 auto; border-radius:14px;
+    background:linear-gradient(135deg,var(--gold),var(--terra));
+    display:flex; align-items:center; justify-content:center; font-size:1.6rem;
+  }
+  .logo-cta-text{flex:1 1 220px;}
+  .logo-cta-text h3{font-size:1.05rem; margin:0 0 4px;}
+  .logo-cta-text p{color:var(--muted); font-size:.88rem; margin:0;}
+  .logo-cta .btn{flex:0 0 auto;}
+  @media(max-width:560px){
+    .logo-cta{flex-direction:column; text-align:center; padding:22px 18px;}
+    .logo-cta .btn{width:100%;}
+  }
+
+  /* ---------- Tarifs ---------- */
+  .pricing-grid{
+    display:grid; gap:18px;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  }
+  .price-card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px; display:flex; flex-direction:column; gap:10px;
+  }
+  .price-card.featured{border-color:var(--gold); position:relative;}
+  .price-card.featured::before{
+    content:"Le plus demandé"; position:absolute; top:-12px; right:18px;
+    background:var(--gold); color:#1a1305; font-size:.7rem; font-weight:700;
+    padding:4px 10px; border-radius:999px; letter-spacing:.05em;
+  }
+  .price-card h3{font-size:1.05rem; margin-bottom:0;}
+  .price-card .price{
+    font-family:'Fraunces',serif; font-size:1.9rem; font-weight:800; color:var(--gold);
+  }
+  .price-card .price .unit{font-size:.85rem; color:var(--muted); font-weight:400; font-family:'Inter',sans-serif;}
+  .price-card ul{padding-left:0; list-style:none; margin:10px 0; color:var(--muted); font-size:.9rem; display:flex; flex-direction:column; gap:6px;}
+  .price-card ul li::before{content:"✓ "; color:var(--green);}
+  .price-note{
+    margin-top:24px; font-size:.85rem; color:var(--muted); text-align:center;
+  }
+
+  /* ---------- Paiement ---------- */
+  .pay-grid{
+    display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  }
+  .pay-card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px; text-align:center;
+  }
+  .pay-card .pay-icon{
+    width:56px; height:56px; border-radius:14px; margin:0 auto 14px;
+    display:flex; align-items:center; justify-content:center; font-size:1.6rem; font-weight:800;
+  }
+  .pay-orange{background:#FF6600; color:#fff;}
+  .pay-wave{background:#1DC1F0; color:#04222f;}
+  .pay-card h4{margin-bottom:6px; font-size:1.05rem;}
+  .pay-card .num{
+    font-family:'Fraunces',serif; font-weight:800; font-size:1.25rem; letter-spacing:.03em;
+    color:var(--text); margin:8px 0;
+  }
+  .pay-card p{color:var(--muted); font-size:.85rem; margin:0;}
+
+  /* ---------- Process ---------- */
+  .steps{
+    display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  }
+  .step{
+    border:1px solid var(--line); border-radius:var(--radius); padding:22px;
+    background:var(--card);
+  }
+  .step .step-num{
+    font-family:'Fraunces',serif; font-size:1.6rem; font-weight:800; color:var(--indigo);
+    margin-bottom:10px; display:block;
+  }
+  .step h4{font-size:1rem; margin-bottom:6px;}
+  .step p{color:var(--muted); font-size:.88rem; margin:0;}
+
+  /* ---------- Trust ---------- */
+  .trust-grid{
+    display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  }
+  .trust-card{
+    text-align:center; padding:24px; border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--card);
+  }
+  .trust-card .icon{font-size:1.8rem; margin-bottom:10px;}
+  .trust-card h4{font-size:.98rem; margin-bottom:6px;}
+  .trust-card p{color:var(--muted); font-size:.85rem; margin:0;}
+
+  /* ---------- Mise en page mobile compacte (2-3 colonnes) ---------- */
+  @media(max-width:680px){
+    .services-grid, .pricing-grid, .pay-grid, .steps, .trust-grid{
+      grid-template-columns:repeat(2,1fr) !important; gap:10px;
+    }
+    .service-card, .price-card, .pay-card, .step, .trust-card{
+      padding:14px; border-radius:14px;
+    }
+    .service-card .icon, .pay-card .pay-icon{
+      width:36px; height:36px; font-size:1.1rem; margin-bottom:8px; border-radius:9px;
+    }
+    .service-card h3, .step h4{font-size:.92rem; margin-bottom:4px;}
+    .service-card p, .step p, .trust-card p, .pay-card p{font-size:.78rem;}
+    .trust-card{padding:16px 12px;}
+    .trust-card .icon{font-size:1.4rem; margin-bottom:6px;}
+    .price-card{gap:6px;}
+    .price-card .price{font-size:1.5rem;}
+    .price-card.featured{grid-column:1 / -1;}
+    .price-card.featured::before{top:-10px; right:14px; font-size:.62rem;}
+    .pay-card .pay-icon{width:42px; height:42px; font-size:1.25rem; margin-bottom:8px;}
+    .pay-card .num{font-size:1.05rem;}
+    .step .step-num{font-size:1.25rem; margin-bottom:4px;}
+  }
+  @media(min-width:480px) and (max-width:680px){
+    .services-grid, .steps{grid-template-columns:repeat(3,1fr) !important;}
+  }
+
+  /* ---------- Partenaires (pub) ---------- */
+  .partners-wrap{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px;
+  }
+  .partners-label{
+    font-size:.75rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted);
+    margin-bottom:16px; text-align:center;
+  }
+  .partner-track{
+    display:flex; gap:16px; overflow-x:auto; padding-bottom:8px;
+    scrollbar-width:thin;
+  }
+  .partner-card{
+    flex:0 0 220px; border:1px solid var(--line); border-radius:12px; padding:16px;
+    background:var(--bg-soft); text-decoration:none; transition:border-color .2s;
+  }
+  .partner-card:hover{border-color:var(--gold);}
+  .partner-card .ph{
+    height:80px; border-radius:8px; background:linear-gradient(135deg,#2a2f3c,#1c1f29);
+    display:flex; align-items:center; justify-content:center; color:var(--muted);
+    font-size:.8rem; margin-bottom:10px;
+  }
+  .partner-card h5{margin:0 0 4px; font-size:.92rem;}
+  .partner-card p{margin:0; font-size:.78rem; color:var(--muted);}
+  .partner-cta{
+    margin-top:18px; text-align:center; font-size:.85rem; color:var(--muted);
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:grid; gap:24px;
+  }
+  @media(min-width:760px){
+    .contact-grid{grid-template-columns:1fr 1fr;}
+  }
+  .contact-card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:28px;
+  }
+  .contact-card h3{font-size:1.15rem; margin-bottom:14px;}
+  .contact-row{
+    display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .contact-row:last-child{border-bottom:none;}
+  .contact-row .ic{
+    width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    background:var(--bg-soft); font-size:1.1rem; flex:none;
+  }
+  .contact-row .info b{display:block; font-size:.95rem;}
+  .contact-row .info span{color:var(--muted); font-size:.85rem;}
+
+  form.contact-form{display:flex; flex-direction:column; gap:14px;}
+  form.contact-form input, form.contact-form select, form.contact-form textarea{
+    width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line);
+    background:var(--bg-soft); color:var(--text); font-family:inherit; font-size:.95rem;
+  }
+  form.contact-form input::placeholder, form.contact-form textarea::placeholder{color:var(--muted);}
+  form.contact-form label{font-size:.85rem; color:var(--muted); margin-bottom:-8px;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--line); padding:40px 0 30px; color:var(--muted); font-size:.85rem;
+  }
+  .footer-grid{
+    display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between; align-items:flex-start;
+  }
+  .footer-grid .logo{font-size:1.2rem;}
+  .footer-links{display:flex; gap:18px; flex-wrap:wrap;}
+  .footer-links a{text-decoration:none; color:var(--muted); font-size:.85rem;}
+  .footer-links a:hover{color:var(--gold);}
+  .footer-bottom{
+    margin-top:24px; padding-top:18px; border-top:1px solid var(--line);
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between;
+  }
+
+  /* ---------- Floating WhatsApp ---------- */
+  .float-whatsapp{
+    position:fixed; bottom:22px; right:22px; z-index:60;
+    width:58px; height:58px; border-radius:50%; background:#25D366;
+    display:flex; align-items:center; justify-content:center; font-size:1.6rem;
+    color:#04220f; text-decoration:none; box-shadow:0 8px 24px rgba(0,0,0,0.35);
+    transition:transform .2s;
+  }
+  .float-whatsapp:hover{transform:scale(1.08);}
+
+  .back-to-top{
+    position:fixed; bottom:92px; right:22px; z-index:60;
+    width:42px; height:42px; border-radius:50%; background:var(--card);
+    border:1px solid var(--line); color:var(--text); font-size:1.2rem;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    box-shadow:0 8px 24px rgba(0,0,0,0.35);
+    opacity:0; pointer-events:none; transform:translateY(10px);
+    transition:opacity .25s, transform .25s, border-color .2s;
+  }
+  .back-to-top.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+  .back-to-top:hover{border-color:var(--gold); color:var(--gold);}
+
+  /* ---------- Publicité flottante (non encombrante) ---------- */
+  .float-ad{
+    position:fixed; top:18px; right:18px; z-index:59;
+    width:260px; background:var(--card); border:1px solid var(--line);
+    border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    overflow:hidden; transition:opacity .2s, transform .2s;
+  }
+  .float-ad video{ display:block; width:100%; height:auto; }
+  .float-ad .ad-tag{
+    position:absolute; top:6px; left:6px; font-size:.6rem; letter-spacing:.04em;
+    background:rgba(0,0,0,0.55); color:#fff; padding:2px 6px; border-radius:6px;
+  }
+  .float-ad .ad-close{
+    position:absolute; top:4px; right:4px; width:20px; height:20px; border-radius:50%;
+    background:rgba(0,0,0,0.55); color:#fff; border:none; cursor:pointer;
+    font-size:.75rem; line-height:1; display:flex; align-items:center; justify-content:center;
+  }
+  .float-ad .ad-close:hover{ background:rgba(0,0,0,0.8); }
+  .float-ad.hidden{ display:none; }
+  @media (max-width: 640px){
+    .float-ad{ width:180px; top:10px; right:10px; }
+  }
+
+  /* ---------- Assistant IA (chat) ---------- */
+  .ai-toggle{
+    position:fixed; bottom:22px; left:22px; z-index:60;
+    width:58px; height:58px; border-radius:50%; background:var(--indigo);
+    display:flex; align-items:center; justify-content:center; font-size:1.5rem;
+    color:#fff; border:none; cursor:pointer; box-shadow:0 8px 24px rgba(0,0,0,0.35);
+    transition:transform .2s;
+  }
+  .ai-toggle:hover{transform:scale(1.08);}
+  .ai-panel{
+    position:fixed; bottom:90px; left:22px; z-index:61;
+    width:min(340px, 90vw); max-height:60vh; display:none; flex-direction:column;
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:0 16px 50px rgba(0,0,0,0.5); overflow:hidden;
+  }
+  .ai-panel.open{display:flex;}
+  .ai-head{
+    padding:14px 16px; background:var(--bg-soft); border-bottom:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .ai-head h4{margin:0; font-size:.95rem;}
+  .ai-head button{background:none; border:none; color:var(--muted); font-size:1.1rem; cursor:pointer;}
+  .ai-body{padding:14px 16px; overflow-y:auto; flex:1; font-size:.88rem; display:flex; flex-direction:column; gap:10px;}
+  .ai-msg{padding:10px 12px; border-radius:10px; max-width:85%;}
+  .ai-msg.bot{background:var(--bg-soft); align-self:flex-start;}
+  .ai-msg.user{background:var(--indigo); color:#fff; align-self:flex-end;}
+  .ai-quick{display:flex; flex-wrap:wrap; gap:6px; padding:0 16px 14px;}
+  .ai-quick button{
+    background:var(--bg-soft); border:1px solid var(--line); color:var(--text);
+    border-radius:999px; padding:6px 12px; font-size:.78rem; cursor:pointer;
+  }
+  .ai-quick button:hover{border-color:var(--gold);}
+
+  /* ---------- Reveal animation ---------- */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* Focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+    outline:2px solid var(--gold); outline-offset:2px;
+  }
+
+  .service-card[data-service], .service-trigger{cursor:pointer;}
+  .service-card[data-service]{position:relative;}
+  .service-card .service-action{margin-top:16px;}
+  .service-card[data-service]:focus-within, .service-card[data-service]:hover{outline:none;}
+
+  .service-modal{
+    position:fixed; inset:0; z-index:120; padding:24px;
+    display:none; align-items:center; justify-content:center;
+    background:radial-gradient(circle at 50% 20%, rgba(224,177,92,0.10), rgba(0,0,0,0.72) 60%);
+    backdrop-filter:blur(3px);
+  }
+  .service-modal.open{display:flex; animation:serviceModalFade .25s ease;}
+  @keyframes serviceModalFade{ from{opacity:0;} to{opacity:1;} }
+  .service-modal-card{
+    position:relative; width:min(560px, 100%); background:var(--card); border:1px solid var(--line);
+    border-radius:calc(var(--radius) + 6px); padding:32px 28px 28px;
+    box-shadow:0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(224,177,92,0.06);
+    text-align:center; overflow:hidden;
+    animation:serviceModalPop .32s cubic-bezier(.2,.9,.3,1.2);
+  }
+  @keyframes serviceModalPop{ from{opacity:0; transform:translateY(14px) scale(.96);} to{opacity:1; transform:translateY(0) scale(1);} }
+  .service-modal-card::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:5px;
+    background:linear-gradient(90deg, var(--gold), var(--terra), var(--gold));
+    background-size:200% 100%; animation:serviceModalShine 3.5s linear infinite;
+  }
+  @keyframes serviceModalShine{ from{background-position:0% 0;} to{background-position:200% 0;} }
+  .service-modal-icon{
+    width:56px; height:56px; margin:4px auto 14px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:1.6rem;
+    background:linear-gradient(135deg, rgba(224,177,92,0.22), rgba(224,177,92,0.06));
+    border:1px solid rgba(224,177,92,0.35);
+  }
+  .service-modal-card h3{
+    margin-bottom:10px; font-size:1.35rem; letter-spacing:.5px;
+    background:linear-gradient(90deg, var(--gold), var(--terra));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .service-modal-card p{color:var(--muted); margin:0 0 14px; line-height:1.5;}
+  .service-modal-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:22px; justify-content:center;}
+  .service-modal-actions .btn{min-width:130px;}
+  .service-note{
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:12px;
+    padding:14px 16px; color:var(--text); font-size:.92rem; text-align:left;
+  }
+  .service-note:empty{display:none; padding:0; border:none; margin:0;}
+
+  .ia-builder-grid{
+    display:grid; gap:24px;
+  }
+  @media(min-width:900px){
+    .ia-builder-grid{grid-template-columns:1fr 1fr;}
+  }
+  .preview-shell{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px;
+    display:flex; flex-direction:column; gap:16px; min-height:100%;
+  }
+  .preview-box{
+    position:relative; min-height:320px; border-radius:16px; overflow:hidden;
+    border:1px solid var(--line); background:linear-gradient(135deg,#202534,#161920);
+  }
+  .preview-box.blurred .preview-content{filter:blur(16px) saturate(0.85); transform:scale(1.03);}
+  .preview-content{transition:filter .25s ease, transform .25s ease; min-height:320px;}
+  .preview-lock{
+    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:24px; background:rgba(15,17,21,0.22); backdrop-filter:blur(1px);
+  }
+  .preview-box.unlocked .preview-lock{display:none;}
+  .mini-note{font-size:.82rem; color:var(--muted);}
+  .payment-list{display:flex; flex-direction:column; gap:10px; margin-top:10px;}
+  .payment-link{display:inline-block; text-decoration:none; font-weight:800;}
+  .auth-modal{
+    position:fixed; inset:0; background:rgba(0,0,0,0.68); z-index:120;
+    display:none; align-items:center; justify-content:center; padding:24px;
+  }
+  .auth-modal.open{display:flex;}
+  .auth-modal-card{
+    width:min(420px, 100%); background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); padding:32px; box-shadow:0 18px 50px rgba(0,0,0,0.45);
+    position:relative;
+  }
+  .auth-modal-card h2{margin-bottom:8px;}
+  .auth-modal-card p{color:var(--muted); margin:0 0 24px;}
+  .auth-method-toggle{display:flex; gap:8px; margin-bottom:2px;}
+  .auth-method-btn{
+    flex:1; padding:9px 10px; border-radius:10px; border:1px solid var(--line);
+    background:transparent; color:var(--muted); font-size:.85rem; font-weight:600;
+    cursor:pointer; transition:all .15s;
+  }
+  .auth-method-btn.active{background:var(--gold); color:#1a1206; border-color:var(--gold);}
+  .auth-form{display:flex; flex-direction:column; gap:14px;}
+  .auth-form input{
+    width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line);
+    background:var(--bg-soft); color:var(--text); font-family:inherit; font-size:.95rem;
+  }
+  .auth-form input::placeholder{color:var(--muted);}
+  .auth-form input:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(224,177,92,0.1);}
+  .auth-form button{width:100%; margin-top:8px;}
+  .auth-toggle{text-align:center; margin-top:16px; font-size:.9rem; color:var(--muted);}
+  .auth-toggle a{color:var(--gold); text-decoration:none; cursor:pointer;}
+  .auth-close{position:absolute; top:16px; right:16px; background:none; border:none; color:var(--muted); font-size:1.5rem; cursor:pointer;}
+  .auth-close:hover{color:var(--text);}
+  .auth-error{color:#e25555; font-size:.85rem; margin-top:8px;}
+
+</style>
+</head>
+<body>
+
+<div id="translateBar">Traduction en cours…</div>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="nav">
+    <div class="logo"><span class="mark">KMS</span> KMS</div>
+    <nav id="mainNav">
+      <ul>
+        <li><a href="#services" data-navlink="services">Services</a></li>
+        <li><a href="logo-studio.html" data-navlink="ia-logo">Logo Studio</a></li>
+        <li><a href="#tarifs" data-navlink="tarifs">Tarifs</a></li>
+        <li><a href="#process" data-navlink="process">Comment ça marche</a></li>
+        <li><a href="#paiement" data-navlink="paiement">Paiement</a></li>
+        <li><a href="#partenaires" data-navlink="partenaires">Annonceurs</a></li>
+        <li><a href="#contact" data-navlink="contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-controls">
+      <select class="lang-selector" id="langSelector" onchange="changeLanguage(this.value)">
+        <option value="fr">Français</option>
+      </select>
+      <button class="tts-toggle" id="ttsToggle" onclick="toggleTTS()" title="Activer la lecture à haute voix">🔊 Lecture</button>
+    </div>
+    
+    <div class="nav-cta" id="authButtons" style="display:flex; gap:12px; align-items:center;">
+      <button class="btn btn-outline btn-sm" onclick="showAuthModal('login')" style="cursor:pointer;">Se connecter</button>
+      <button class="btn btn-primary btn-sm" onclick="showAuthModal('register')" style="cursor:pointer;">Créer un compte</button>
+    </div>
+    <div class="nav-cta" id="userMenu" style="display:none; gap:12px; align-items:center;">
+      <span id="userName" style="font-size:0.95rem; font-weight:500;"></span>
+      <button class="btn btn-outline btn-sm" onclick="goToProfile()" style="cursor:pointer;">Profil</button>
+      <button class="btn btn-outline btn-sm" onclick="handleLogout()" style="cursor:pointer;">Déconnexion</button>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<!-- ================= BARRE DE LECTURE VOCALE ================= -->
+<div id="ttsBar" role="region" aria-label="Lecture à haute voix">
+  <button id="ttsPlayAll" title="Lire toute la page">▶️</button>
+  <button id="ttsPause" title="Pause / reprendre">⏸️</button>
+  <button id="ttsStop" title="Arrêter">⏹️</button>
+  <span id="ttsBarLabel">Cliquez sur un titre ou un paragraphe pour l'écouter</span>
+  <select id="ttsSpeed" title="Vitesse de lecture">
+    <option value="0.8">Lent</option>
+    <option value="1" selected>Normal</option>
+    <option value="1.25">Rapide</option>
+  </select>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="reveal visible">
+      <div class="eyebrow" data-cms="hero.eyebrow">Basé à Dédougou · Burkina Faso</div>
+      <h1 data-cms="hero.title">Vos documents, visuels et achats numériques, <em>livrés vite</em> et bien faits.</h1>
+      <p class="lead" data-cms="hero.lead">KMS propose la saisie de documents, la création de logos et affiches, la retouche photo, la vente de films et d'applications à prix réduit, ainsi que la création de comptes en ligne. Paiement simple via Orange Money ou Wave.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn btn-primary">Voir les services</a>
+        <a href="#contact" onclick="openGeneralWhatsApp(); return false;" class="btn btn-whatsapp">💬 Écrire sur WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-panel reveal visible">
+      <h3>Pourquoi choisir KMS ?</h3>
+      <p style="color:var(--muted); font-size:.92rem; margin:0;">Un service rapide, des tarifs clairs et un paiement local sécurisé — sans déplacement, directement depuis votre téléphone.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="num">6</div><div class="lbl">services proposés</div></div>
+        <div class="stat"><div class="num">24h</div><div class="lbl">délai moyen</div></div>
+        <div class="stat"><div class="num">2</div><div class="lbl">moyens de paiement</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Nos services</h2>
+      <p>Que vous soyez étudiant, enseignant, entrepreneur ou commerçant, KMS répond à vos besoins numériques du quotidien.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal" data-service="Saisie ultra rapide" data-flow="document" data-subtype="saisie">
+        <div class="icon" data-cms="services.saisie.icon">⌨️</div>
+        <h3 data-cms="services.saisie.title">Saisie ultra rapide</h3>
+        <p data-cms="services.saisie.desc">Saisie de documents manuscrits, rapports, mémoires et cours sous Word ou autre format, avec mise en forme soignée et délais courts.</p>
+        <div class="service-action"><a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Saisie ultra rapide" data-flow="document" data-subtype="saisie">Commander</a></div>
+      </div>
+      <div class="service-card reveal" data-service="Modification de polycopiés" data-flow="document" data-subtype="modification">
+        <div class="icon" data-cms="services.modification.icon">📄</div>
+        <h3 data-cms="services.modification.title">Modification de polycopiés</h3>
+        <p data-cms="services.modification.desc">Mise à jour, correction et réorganisation de vos polycopiés et supports de cours selon vos besoins exacts.</p>
+        <div class="service-action"><a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Modification de polycopiés" data-flow="document" data-subtype="modification">Commander</a></div>
+      </div>
+      <div class="service-card reveal" data-service="Modification de photos" data-flow="photo">
+        <div class="icon" data-cms="services.photo.icon">🖼️</div>
+        <h3 data-cms="services.photo.title">Modification de photos</h3>
+        <p data-cms="services.photo.desc">Retouche, recadrage, amélioration et personnalisation de vos photos pour réseaux sociaux ou usage personnel.</p>
+        <div class="service-action"><a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Modification de photos" data-flow="photo">Commander</a></div>
+      </div>
+      <div class="service-card reveal" data-service="Films & applications payantes" data-flow="film">
+        <div class="icon" data-cms="services.film.icon">🎬</div>
+        <h3 data-cms="services.film.title">Films & applications payantes</h3>
+        <p data-cms="services.film.desc">Accès à des films et applications payantes à un prix réduit, livrés rapidement après paiement.</p>
+        <div class="service-action"><a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Films & applications payantes" data-flow="film">Demander</a></div>
+      </div>
+      <div class="service-card reveal" data-service="Création de comptes" data-flow="generic">
+        <div class="icon" data-cms="services.compte.icon">👤</div>
+        <h3 data-cms="services.compte.title">Création de comptes</h3>
+        <p data-cms="services.compte.desc">Création et configuration de comptes sur diverses plateformes en ligne, avec accompagnement étape par étape.</p>
+        <div class="service-action"><a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Création de comptes" data-flow="generic">Commander</a></div>
+      </div>
+      <div class="service-card reveal" data-service="Livraison d'autres produits commerciaux" data-flow="delivery">
+        <div class="icon" data-cms="services.livraison.icon">🚚</div>
+        <h3 data-cms="services.livraison.title">Livraison d'autres produits commerciaux</h3>
+        <p data-cms="services.livraison.desc">Commandez un produit (autre que films/applications) et faites-vous livrer directement via WhatsApp, avec votre position Google Maps envoyée automatiquement.</p>
+        <div class="service-action"><a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Livraison d'autres produits commerciaux" data-flow="delivery">Commander</a></div>
+      </div>
+      <div class="service-card reveal" data-service="Service de lavage" data-flow="wash">
+        <div class="icon" data-cms="services.lavage.icon">🧼</div>
+        <h3 data-cms="services.lavage.title">Service de lavage</h3>
+        <p data-cms="services.lavage.desc">Lavage à domicile (linge, véhicule, moto) réservé directement via WhatsApp, avec votre position Google Maps envoyée automatiquement.</p>
+        <div class="service-action"><a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Service de lavage" data-flow="wash">Commander</a></div>
+      </div>
+    </div>
+
+    <div class="logo-cta reveal">
+      <div class="logo-cta-icon">🎨</div>
+      <div class="logo-cta-text">
+        <h3>Besoin d'un logo ou d'une affiche ?</h3>
+        <p>Créez votre visuel professionnel en quelques clics avec notre Studio Logo Pro dédié.</p>
+      </div>
+      <a href="logo-studio.html" class="btn btn-primary">Lancer le Studio Logo Pro</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TARIFS ================= -->
+<section id="tarifs" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Tarifs</h2>
+      <p>Tarifs indicatifs — modifiez les chiffres ci-dessous selon vos prix. Cherchez <code>class="price"</code> dans le fichier pour les retrouver facilement.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <h3 data-cms="services.saisie.title">Saisie de document</h3>
+        <div class="price"><span class="price" data-cms="tarifs.saisie.price">500</span> <span class="unit" data-cms="tarifs.saisie.unit">FCFA / page</span></div>
+        <ul>
+          <li>Mise en page incluse</li>
+          <li>Relecture orthographique</li>
+          <li>Livraison en .docx ou PDF</li>
+        </ul>
+        <a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Saisie de document" data-flow="document" data-subtype="saisie">Commander</a>
+      </div>
+      <div class="price-card featured reveal">
+        <h3 data-cms="services.logo.title">Logo ou affiche</h3>
+        <div class="price"><span class="price" data-cms="tarifs.logo.price">3 000</span> <span class="unit" data-cms="tarifs.logo.unit">FCFA</span></div>
+        <ul>
+          <li>2 propositions de design</li>
+          <li>1 retouche gratuite incluse</li>
+          <li>Fichiers HD livrés</li>
+        </ul>
+        <a href="logo-studio.html" class="btn btn-primary btn-sm">Créer mon logo</a>
+      </div>
+      <div class="price-card reveal">
+        <h3 data-cms="services.photo.title">Retouche photo</h3>
+        <div class="price"><span class="price" data-cms="tarifs.photo.price">500</span> <span class="unit" data-cms="tarifs.photo.unit">FCFA / photo</span></div>
+        <ul>
+          <li>Amélioration qualité</li>
+          <li>Recadrage et fond</li>
+          <li>Livraison rapide</li>
+        </ul>
+        <a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Retouche photo" data-flow="photo">Commander</a>
+      </div>
+      <div class="price-card reveal">
+        <h3 data-cms="services.film.title">Film / Application</h3>
+        <div class="price"><span class="price" data-cms="tarifs.film.price">À partir de 500</span> <span class="unit" data-cms="tarifs.film.unit">FCFA</span></div>
+        <ul>
+          <li>Prix selon le titre demandé</li>
+          <li>Livraison après paiement</li>
+          <li>Demande via WhatsApp</li>
+        </ul>
+        <a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Films et applications" data-flow="film">Demander</a>
+      </div>
+      <div class="price-card reveal">
+        <h3 data-cms="services.compte.title">Création de compte</h3>
+        <div class="price"><span class="price" data-cms="tarifs.compte.price">1 000</span> <span class="unit" data-cms="tarifs.compte.unit">FCFA</span></div>
+        <ul>
+          <li>Configuration complète</li>
+          <li>Guide d'utilisation fourni</li>
+          <li>Support après création</li>
+        </ul>
+        <a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Création de compte" data-flow="generic">Commander</a>
+      </div>
+      <div class="price-card reveal">
+        <h3 data-cms="services.livraison.title">Livraison de produits</h3>
+        <div class="price"><span class="price" data-cms="tarifs.livraison.price">Sur devis</span> <span class="unit" data-cms="tarifs.livraison.unit"></span></div>
+        <ul>
+          <li>Produit hors films/applications</li>
+          <li>Position Google Maps envoyée automatiquement</li>
+          <li>Livraison via WhatsApp</li>
+        </ul>
+        <a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Livraison d'autres produits commerciaux" data-flow="delivery">Commander</a>
+      </div>
+      <div class="price-card reveal">
+        <h3 data-cms="services.lavage.title">Service de lavage</h3>
+        <div class="price"><span class="price" data-cms="tarifs.lavage.price">Sur devis</span> <span class="unit" data-cms="tarifs.lavage.unit"></span></div>
+        <ul>
+          <li>Linge, véhicule ou moto</li>
+          <li>Position Google Maps envoyée automatiquement</li>
+          <li>Réservation via WhatsApp</li>
+        </ul>
+        <a href="#" class="btn btn-outline btn-sm service-trigger" data-service="Service de lavage" data-flow="wash">Commander</a>
+      </div>
+    </div>
+    <p class="price-note">Pour les modifications de polycopiés et les demandes spécifiques, contactez-nous pour un devis adapté à votre document.</p>
+  </div>
+</section>
+
+<!-- ================= COMMENT ÇA MARCHE ================= -->
+<section id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Comment ça marche</h2>
+      <p>Une commande passe par quatre étapes simples, sans rendez-vous ni déplacement.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="step-num">01</span>
+        <h4>Contact</h4>
+        <p>Vous décrivez votre besoin via WhatsApp ou le formulaire de contact.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">02</span>
+        <h4>Devis</h4>
+        <p>Vous recevez le prix et le délai avant toute confirmation.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">03</span>
+        <h4>Paiement</h4>
+        <p>Vous payez via Orange Money ou Wave, simplement et en sécurité.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">04</span>
+        <h4>Livraison</h4>
+        <p>Votre travail est livré dans le délai annoncé, prêt à l'emploi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAIEMENT ================= -->
+<section id="paiement" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Moyens de paiement</h2>
+      <p>Le paiement se fait directement par mobile money. Envoyez le montant correspondant au service, puis confirmez la transaction sur WhatsApp.</p>
+    </div>
+    <div class="pay-grid">
+      <div class="pay-card reveal">
+        <div class="pay-icon pay-orange">OM</div>
+        <h4>Orange Money</h4>
+        <div class="payment-list">
+          <div class="num"><a href="#" class="payment-link" data-pay-number="57828228" data-cms="payment.numbersDisplay.0">+226 57 82 82 28</a></div>
+          <div class="num"><a href="#" class="payment-link" data-pay-number="65343985" data-cms="payment.numbersDisplay.1">+226 65 34 39 85</a></div>
+        </div>
+        <p>Cliquez sur un numéro, saisissez le montant et votre téléphone composera automatiquement le code de paiement.</p>
+      </div>
+      <div class="pay-card reveal">
+        <div class="pay-icon pay-wave">W</div>
+        <h4>Wave</h4>
+        <div class="payment-list">
+          <div class="num"><a href="#" class="payment-link" data-pay-number="57828228" data-cms="payment.numbersDisplay.0">+226 57 82 82 28</a></div>
+          <div class="num"><a href="#" class="payment-link" data-pay-number="65343985" data-cms="payment.numbersDisplay.1">+226 65 34 39 85</a></div>
+        </div>
+        <p>Vous pouvez aussi utiliser ces mêmes numéros, puis envoyer la preuve du paiement sur WhatsApp pour un traitement rapide.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONFIANCE ================= -->
+<section id="confiance">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Pourquoi nous faire confiance</h2>
+      <p>Chaque commande est traitée avec sérieux, du premier message jusqu'à la livraison finale.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <div class="icon">✅</div>
+        <h4>Devis avant paiement</h4>
+        <p>Le prix est toujours communiqué et validé avant tout règlement.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="icon">🔒</div>
+        <h4>Paiement local sécurisé</h4>
+        <p>Orange Money et Wave, deux moyens reconnus et utilisés au quotidien.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="icon">⏱️</div>
+        <h4>Délais respectés</h4>
+        <p>Chaque commande reçoit un délai clair, communiqué dès la confirmation.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="icon">📞</div>
+        <h4>Suivi direct</h4>
+        <p>Deux contacts WhatsApp disponibles pour répondre plus vite à vos commandes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ESPACE PARTENAIRES (PUB) ================= -->
+<section id="partenaires" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Espace partenaires</h2>
+      <p>Les entreprises locales peuvent réserver un encart publicitaire discret ci-dessous. Contactez-nous pour y placer votre annonce.</p>
+    </div>
+    <div class="partners-wrap reveal">
+      <div class="partners-label">Annonces partenaires</div>
+      <div class="partner-track" id="partnerTrack">
+        <!-- ===== Exemple d'annonce — copiez ce bloc pour en ajouter ===== -->
+        <a class="partner-card" href="#contact">
+          <div class="ph" data-cms="partners.0.logo">Votre logo ici</div>
+          <h5 data-cms="partners.0.title">Votre entreprise</h5>
+          <p data-cms="partners.0.text">Réservez cet espace pour votre publicité.</p>
+        </a>
+        <a class="partner-card" href="#contact">
+          <div class="ph" data-cms="partners.1.logo">Espace disponible</div>
+          <h5 data-cms="partners.1.title">Annonce 2</h5>
+          <p data-cms="partners.1.text">Visible par tous les visiteurs du site KMS.</p>
+        </a>
+        <a class="partner-card" href="#contact">
+          <div class="ph" data-cms="partners.2.logo">Espace disponible</div>
+          <h5 data-cms="partners.2.title">Annonce 3</h5>
+          <p data-cms="partners.2.text">Format discret, sans gêner la navigation.</p>
+        </a>
+        <!-- ===== Fin exemple ===== -->
+      </div>
+      <p class="partner-cta">Intéressé par cet espace ? <a href="#contact" onclick="openGeneralWhatsApp(); return false;" style="color:var(--gold); text-decoration:none;">Contactez KMS sur WhatsApp</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Contact</h2>
+      <p>Pour toute demande, contactez-nous directement ou laissez un message via le formulaire.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <h3>Nos coordonnées</h3>
+        <div class="contact-row">
+          <div class="ic">💬</div>
+          <div class="info">
+            <b>WhatsApp 1</b>
+            <span data-cms="contact.whatsappDisplay.0">+226 06 12 12 97</span>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="ic">💬</div>
+          <div class="info">
+            <b>WhatsApp 2</b>
+            <span data-cms="contact.whatsappDisplay.1">+226 56 76 18 64</span>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="ic">✉️</div>
+          <div class="info">
+            <b>Email</b>
+            <span data-cms="contact.email">teegawinde1@gmail.com</span>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="ic">📍</div>
+          <div class="info">
+            <b>Localisation</b>
+            <span data-cms="contact.location">Dédougou, Burkina Faso</span>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="ic">💳</div>
+          <div class="info">
+            <b>Paiement</b>
+            <span>Orange Money / Wave : <span data-cms="payment.numbersDisplay.0">+226 57 82 82 28</span> ou <span data-cms="payment.numbersDisplay.1">+226 65 34 39 85</span></span>
+          </div>
+        </div>
+        <a href="#contact" onclick="openGeneralWhatsApp(); return false;" class="btn btn-whatsapp" style="margin-top:18px;">💬 Discuter sur WhatsApp</a>
+      </div>
+      <div class="contact-card reveal">
+        <h3>Envoyer une demande</h3>
+        <form class="contact-form" onsubmit="return handleContact(event)">
+      <input type="text" name="b_phone" style="display:none" tabindex="-1" autocomplete="off">
+          <label for="cname">Nom</label>
+          <input id="cname" type="text" placeholder="Votre nom" required>
+          <label for="cservice">Service souhaité</label>
+          <select id="cservice">
+            <option>Saisie ultra rapide</option>
+            <option>Modification de polycopié</option>
+            <option>Création d'affiche / logo avec aperçu IA</option>
+            <option>Modification de photo</option>
+            <option>Film / Application</option>
+            <option>Création de compte</option>
+            <option>Autre</option>
+          </select>
+          <label for="cmsg">Description de votre besoin</label>
+          <textarea id="cmsg" rows="4" placeholder="Décrivez votre demande..." required></textarea>
+          <button type="submit" class="btn btn-primary">Envoyer via WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<!-- ================= SÉCURITÉ ================= -->
+<section id="security" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Sécurité & Confiance</h2>
+      <p>Votre sécurité est notre priorité. Découvrez nos mesures de protection.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <div class="icon">🔒</div>
+        <h4>Chiffrement SSL</h4>
+        <p>Toutes vos données sont protégées par un chiffrement de niveau bancaire.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="icon">🛡️</div>
+        <h4>Anti-piratage</h4>
+        <p>Score de sécurité : <span style="color:var(--gold); font-weight:700;">92/100</span></p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="icon">✓</div>
+        <h4>Données Vérifiées</h4>
+        <p>Tous les contenus sont vérifiés avant livraison.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="icon">🔄</div>
+        <h4>Conformité RGPD</h4>
+        <p>Respect complet de la protection des données personnelles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABONNEMENTS ================= -->
+<section id="subscriptions">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Abonnements Premium</h2>
+      <p>Protégez votre appareil avec nos services premium.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <h3>Kaspersky Antivirus</h3>
+        <div class="price"><span class="unit">à partir de</span> 3 000 <span class="unit">F/mois</span></div>
+        <ul>
+          <li>Protection contre les virus</li>
+          <li>Firewall avancé</li>
+          <li>Support 24/7</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%; margin-top:12px;">Bientôt disponible</button>
+        <div class="price-note">Lancement prévu : Août 2026</div>
+      </div>
+      <div class="price-card reveal">
+        <h3>Ad Blocker Premium</h3>
+        <div class="price"><span class="unit">à partir de</span> 3 000 <span class="unit">F/mois</span></div>
+        <ul>
+          <li>Blocage total des publicités</li>
+          <li>Navigation plus rapide</li>
+          <li>Économies de données</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%; margin-top:12px;">Bientôt disponible</button>
+        <div class="price-note">Lancement prévu : Août 2026</div>
+      </div>
+      <div class="price-card reveal">
+        <h3>Recherche IA Illimitée</h3>
+        <div class="price"><span class="unit">à partir de</span> 200 <span class="unit">F/mois</span></div>
+        <ul>
+          <li>10 questions gratuites/jour</li>
+          <li>Résultats vérifiés</li>
+          <li>Accès illimité en premium</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%; margin-top:12px;">S'abonner</button>
+        <div class="price-note">Annuel : 2 000 F</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RECHERCHE IA ================= -->
+<section id="ia-search" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Recherche IA Intelligente</h2>
+      <p>Posez vos questions et obtenez des réponses vérifiées et précises.</p>
+    </div>
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:32px; max-width:600px; margin:0 auto;">
+      <div style="display:flex; gap:12px; margin-bottom:16px;">
+        <input type="text" id="aiSearchInput" placeholder="Posez votre question..." style="flex:1; padding:12px 14px; border-radius:10px; border:1px solid var(--line); background:var(--bg-soft); color:var(--text);">
+        <button class="btn btn-primary" onclick="submitAISearch()">Rechercher</button>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
+        <button class="btn btn-outline btn-sm" onclick="addAIFilter('santé')">Santé</button>
+        <button class="btn btn-outline btn-sm" onclick="addAIFilter('technologie')">Technologie</button>
+        <button class="btn btn-outline btn-sm" onclick="addAIFilter('éducation')">Éducation</button>
+        <button class="btn btn-outline btn-sm" onclick="addAIFilter('affaires')">Affaires</button>
+      </div>
+      <div id="aiResults" style="color:var(--muted); font-size:.9rem; min-height:60px; padding:16px; background:var(--bg-soft); border-radius:10px; border:1px solid var(--line);">
+        Vous avez <span id="aiQuotaLeft">10</span> questions gratuites aujourd'hui. Connectez-vous pour plus.
+      </div>
+      <p style="font-size:.72rem; color:var(--muted); margin:12px 0 0;">Réponses générées par IA avec recherche web en temps réel. Vérifiez toujours les sources citées avant de vous fier à une information sensible (santé, juridique, financier).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ESPACE JEU ================= -->
+<section id="games" class="games-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Espace Jeu</h2>
+      <p>Détendez-vous avec nos jeux en attendant votre commande. <strong>Difficulté augmente progressivement !</strong></p>
+    </div>
+    <div class="games-grid">
+      <div class="game-tile" style="--gtint:#e0b15c; --gtint-bg:rgba(224,177,92,.18); --gtint-border:rgba(224,177,92,.45);" onclick="launchGame('solitaire')">
+        <div class="game-tile-icon">🃏</div>
+        <div class="game-tile-name">Solitaire</div>
+        <div class="game-tile-tag">Classique</div>
+      </div>
+      <div class="game-tile" style="--gtint:#5b6cf0; --gtint-bg:rgba(91,108,240,.18); --gtint-border:rgba(91,108,240,.45);" onclick="launchGame('chess')">
+        <div class="game-tile-icon">♟️</div>
+        <div class="game-tile-name">Échecs</div>
+        <div class="game-tile-tag">Solo ou Duel</div>
+      </div>
+      <div class="game-tile" style="--gtint:#9a9aa5; --gtint-bg:rgba(154,154,165,.18); --gtint-border:rgba(154,154,165,.45);" onclick="launchGame('checkers')">
+        <div class="game-tile-icon">⚫</div>
+        <div class="game-tile-name">Dames</div>
+        <div class="game-tile-tag">Solo ou Duel</div>
+      </div>
+      <div class="game-tile" style="--gtint:#3fb68b; --gtint-bg:rgba(63,182,139,.18); --gtint-border:rgba(63,182,139,.45);" onclick="launchGame('scrabble')">
+        <div class="game-tile-icon">📝</div>
+        <div class="game-tile-name">Scrabble</div>
+        <div class="game-tile-tag">Mots</div>
+      </div>
+      <div class="game-tile" style="--gtint:#d97a55; --gtint-bg:rgba(217,122,85,.18); --gtint-border:rgba(217,122,85,.45);" onclick="launchGame('dino')">
+        <div class="game-tile-icon">🦖</div>
+        <div class="game-tile-name">Dino</div>
+        <div class="game-tile-tag">Arcade • Texture améliorée</div>
+      </div>
+      <div class="game-tile" style="--gtint:#e0c53f; --gtint-bg:rgba(224,197,63,.18); --gtint-border:rgba(224,197,63,.45);" onclick="launchGame('pacman')">
+        <div class="game-tile-icon">👾</div>
+        <div class="game-tile-name">Pac-Man</div>
+        <div class="game-tile-tag">Arcade • Texture améliorée</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FIDÉLITÉ ================= -->
+<section id="loyalty" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Programme de Fidélité</h2>
+      <p>Gagnez des points à chaque achat et profitez de récompenses exclusives.</p>
+    </div>
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:28px; max-width:600px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+        <div style="width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--terra)); display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:800;">⭐</div>
+        <div>
+          <h4 style="margin:0 0 4px; font-size:1.2rem;">Vos Points</h4>
+          <p style="margin:0; color:var(--muted);">Vous avez <span style="color:var(--gold); font-weight:700;">0 points</span></p>
+          <p style="margin:4px 0 0; font-size:.85rem; color:var(--muted);">1 point par service acheté/jour</p>
+        </div>
+      </div>
+      <div style="background:var(--bg-soft); padding:16px; border-radius:10px; border:1px solid var(--line);">
+        <p style="margin:0 0 12px; font-size:.9rem; color:var(--muted);"><b>Bonus :</b> Achetez 10 services différents le même jour = +1 point bonus</p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <span style="background:var(--gold); color:#1a1305; padding:4px 12px; border-radius:999px; font-size:.8rem; font-weight:600;">50 pts = 5 000 F</span>
+          <span style="background:var(--indigo); color:#fff; padding:4px 12px; border-radius:999px; font-size:.8rem; font-weight:600;">100 pts = 15 000 F</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMMENTAIRES ================= -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Avis Clients</h2>
+      <p>Découvrez ce que nos clients pensent de nos services.</p>
+    </div>
+    <div class="services-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+      <div class="service-card reveal" style="cursor:pointer;" onclick="toggleReviews(this)">
+        <h3>Saisie Ultra Rapide</h3>
+        <div style="display:flex; gap:4px; margin-bottom:12px;">
+          <span style="color:var(--gold);">★★★★★</span> <span style="color:var(--muted);">(24 avis)</span>
+        </div>
+        <p style="color:var(--muted); font-size:.9rem; margin:0;">Cliquez pour voir les avis détaillés ▼</p>
+        <div class="reviews-list" style="display:none; margin-top:16px; max-height:300px; overflow-y:auto;">
+          <div style="padding:12px; background:var(--bg-soft); border-radius:8px; margin-bottom:8px;">
+            <p style="margin:0 0 4px; font-size:.9rem;"><b>Excellent service</b> - ★★★★★</p>
+            <p style="margin:0; font-size:.85rem; color:var(--muted);">Très rapide et bien fait. Je recommande !</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SUGGESTIONS ================= -->
+<section id="suggestions" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Boîte à Suggestions</h2>
+      <p>Aidez-nous à améliorer KMS en partageant vos idées.</p>
+    </div>
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:28px; max-width:600px; margin:0 auto;">
+      <form onsubmit="submitSuggestion(event)">
+        <div style="margin-bottom:16px;">
+          <label style="display:block; margin-bottom:8px; color:var(--muted); font-size:.9rem;">Votre suggestion</label>
+          <textarea id="suggestionText" placeholder="Décrivez votre idée..." style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line); background:var(--bg-soft); color:var(--text); font-family:inherit; font-size:.95rem; resize:vertical; min-height:100px;"></textarea>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block; margin-bottom:8px; color:var(--muted); font-size:.9rem;">Catégorie</label>
+          <select style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line); background:var(--bg-soft); color:var(--text); font-family:inherit;">
+            <option>Nouveau service</option>
+            <option>Amélioration existante</option>
+            <option>Interface/UX</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Envoyer ma suggestion</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EMPLOI KMS ================= -->
+<section id="jobs">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Rejoignez l'Équipe KMS</h2>
+      <p>Découvrez les opportunités d'emploi chez KMS.</p>
+    </div>
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:28px; text-align:center;">
+      <h3 style="margin-bottom:12px;">Bientôt disponible</h3>
+      <p style="color:var(--muted); margin:0;">Nous préparez une section complète de recrutement. Revenez bientôt pour découvrir les postes disponibles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DEVISES ================= -->
+<section id="currencies" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Devises Acceptées</h2>
+      <p>Payez dans la devise de votre choix.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px;">
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px; text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">€</div>
+        <p style="margin:0; font-size:.9rem;">Euro</p>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px; text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">$</div>
+        <p style="margin:0; font-size:.9rem;">Dollar US</p>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px; text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">£</div>
+        <p style="margin:0; font-size:.9rem;">Livre Sterling</p>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px; text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">₱</div>
+        <p style="margin:0; font-size:.9rem;">Peso</p>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px; text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">₣</div>
+        <p style="margin:0; font-size:.9rem;">Franc CFA</p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo"><span class="mark" style="width:30px;height:30px;font-size:.68rem;">KMS</span> KMS</div>
+        <p style="margin:10px 0 0; max-width:280px;" data-cms="footer.tagline">Services de saisie, design et achats numériques à prix abordable, depuis Dédougou.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="logo-studio.html">Logo Studio</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="#process">Comment ça marche</a>
+        <a href="#paiement">Paiement</a>
+        <a href="#partenaires">Annonceurs</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> <span data-cms="footer.copyright">KMS — Tous droits réservés.</span></span>
+      <span>Dédougou, Burkina Faso · <span data-cms="contact.email">teegawinde1@gmail.com</span></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= FLOATING BUTTONS ================= -->
+<a class="float-whatsapp" href="#contact" onclick="openGeneralWhatsApp(); return false;" aria-label="Contacter sur WhatsApp">💬</a>
+<button class="back-to-top" id="backToTop" aria-label="Retour en haut de page">↑</button>
+
+<div class="float-ad" id="floatAd">
+  <span class="ad-tag">Pub</span>
+  <button class="ad-close" id="floatAdClose" aria-label="Fermer la publicité">✕</button>
+  <video src="media/pub-ad.mp4" autoplay muted loop playsinline></video>
+</div>
+
+<button class="ai-toggle" id="aiToggle" aria-label="Ouvrir l'assistant">🤖</button>
+<div class="ai-panel" id="aiPanel">
+  <div class="ai-head">
+    <h4>Assistant KMS</h4>
+    <button id="aiClose" aria-label="Fermer">✕</button>
+  </div>
+  <div class="ai-body" id="aiBody">
+    <div class="ai-msg bot">Bonjour 👋 Je peux vous aider à trouver le bon service ou répondre à vos questions sur KMS. Que recherchez-vous ?</div>
+  </div>
+  <div class="ai-quick" id="aiQuick">
+    <button data-q="services">Voir les services</button>
+    <button data-q="prix">Connaître les prix</button>
+    <button data-q="paiement">Comment payer ?</button>
+    <button data-q="contact">Contacter KMS</button>
+  </div>
+</div>
+
+<script>
+  // Année automatique
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Menu mobile
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav = document.getElementById('mainNav');
+  menuToggle.addEventListener('click', () => {
+    const isOpen = mainNav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    menuToggle.textContent = isOpen ? '✕' : '☰';
+  });
+  mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mainNav.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.textContent = '☰';
+  }));
+
+  // Surbrillance du lien actif dans le menu (scrollspy)
+  const navLinks = document.querySelectorAll('[data-navlink]');
+  const navSections = Array.from(navLinks)
+    .map(link => document.getElementById(link.getAttribute('data-navlink')))
+    .filter(Boolean);
+  if(navSections.length){
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`[data-navlink="${entry.target.id}"]`);
+          if(active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    navSections.forEach(sec => navObserver.observe(sec));
+  }
+
+  // Bouton retour en haut
+  const backToTop = document.getElementById('backToTop');
+  if(backToTop){
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('show', window.scrollY > 600);
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  }
+
+  // Publicité flottante
+  const floatAd = document.getElementById('floatAd');
+  const floatAdClose = document.getElementById('floatAdClose');
+  if(floatAdClose){
+    floatAdClose.addEventListener('click', () => floatAd.classList.add('hidden'));
+  }
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  let WHATSAPP_NUMBERS = ['22606121297', '22656761864'];
+  let SMS_NUMBERS = ['06121297', '56761864'];
+  let DOC_NOTE = "Pour un meilleur résultat, envoyez une photo nette, bien droite et complète, avec une page non inclinée et non courbée.";
+  let currentServicePayload = null;
+  let previewUnlocked = false;
+  let lastDesignSummary = '';
+
+  function pickRandom(list){
+    return list[Math.floor(Math.random() * list.length)];
+  }
+
+  function pickWhatsAppNumber(service){
+    return pickRandom(WHATSAPP_NUMBERS);
+  }
+
+  function openWhatsApp(number, text){
+    const url = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  }
+
+  function openSMS(number, text){
+    window.location.href = `sms:${number}?body=${encodeURIComponent(text)}`;
+  }
+
+  function openGeneralWhatsApp(){
+    const modal = ensureServiceModal();
+    currentServicePayload = { message: "" };
+    modal.querySelector('#serviceModalIcon').textContent = '👋';
+    modal.querySelector('#serviceModalTitle').textContent = 'BONJOUR';
+    modal.querySelector('#serviceModalIntro').textContent = 'Dites-nous tout, puis choisissez votre moyen de contact préféré.';
+    modal.querySelector('#serviceModalNote').textContent = '';
+    modal.classList.add('open');
+  }
+
+  function getServiceMessage(service, flow, subtype, mapsLink){
+    const base = "Bonjour bienvenue Merci de la confiance accordée.";
+    if(flow === 'film'){
+      return "Bonjour, je voudrais commander un film ou une application. Voici mes précisions : ";
+    }
+    if(flow === 'photo'){
+      return "Bonjour, je voudrais faire retoucher une photo. Je vous l'envoie juste après ce message.";
+    }
+    if(flow === 'document'){
+      if(subtype === 'modification'){
+        return "Bonjour, je voudrais faire modifier un document. Je vous l'envoie juste après ce message.";
+      }
+      return "Bonjour, je voudrais faire saisir un document. Je vous l'envoie juste après ce message.";
+    }
+    if(flow === 'delivery'){
+      let msg = "Bonjour, je voudrais me faire livrer un produit (hors films/applications).\n- Produit : \n- Quantité : \n- Lieu de livraison : ";
+      msg += mapsLink ? `\n📍 Ma position : ${mapsLink}` : "\n📍 Ma position : (à partager manuellement dans WhatsApp via 📎 > Position)";
+      return msg;
+    }
+    if(flow === 'wash'){
+      let msg = "Bonjour, je voudrais réserver un service de lavage.\n- Type (linge / véhicule / moto) : \n- Quantité ou description : \n- Lieu du lavage : ";
+      msg += mapsLink ? `\n📍 Ma position : ${mapsLink}` : "\n📍 Ma position : (à partager manuellement dans WhatsApp via 📎 > Position)";
+      return msg;
+    }
+    return `${base} Pour ${service}, envoyez-nous les détails de votre besoin.`;
+  }
+
+  function ensureServiceModal(){
+    let modal = document.getElementById('serviceModal');
+    if(modal) return modal;
+    modal = document.createElement('div');
+    modal.id = 'serviceModal';
+    modal.className = 'service-modal';
+    modal.innerHTML = `
+      <div class="service-modal-card">
+        <div class="service-modal-icon" id="serviceModalIcon">💬</div>
+        <h3 id="serviceModalTitle">Confirmer votre demande</h3>
+        <p id="serviceModalIntro">Préparez votre message, puis choisissez WhatsApp ou Messagerie.</p>
+        <div class="service-note" id="serviceModalNote"></div>
+        <div class="service-modal-actions" id="serviceMainActions">
+          <button class="btn btn-outline" type="button" id="serviceCancel">Fermer</button>
+          <button class="btn btn-primary" type="button" id="serviceConfirm">D'accord</button>
+        </div>
+        <div class="game-mode-select" id="channelSelect" style="display:none;">
+          <p>Comment souhaitez-vous nous contacter ?</p>
+          <div class="game-mode-buttons">
+            <button class="mode-btn" type="button" id="channelWhatsApp"><span class="mode-emoji">💬</span>WhatsApp</button>
+            <button class="mode-btn" type="button" id="channelSMS"><span class="mode-emoji">✉️</span>Messagerie (SMS)</button>
+          </div>
+          <button class="btn btn-outline btn-sm" type="button" id="channelBack" style="margin-top:6px;">← Retour</button>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+
+    function resetModalView(){
+      modal.querySelector('#serviceMainActions').style.display = 'flex';
+      modal.querySelector('#channelSelect').style.display = 'none';
+    }
+
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) { modal.classList.remove('open'); resetModalView(); }
+    });
+    modal.querySelector('#serviceCancel').addEventListener('click', () => {
+      modal.classList.remove('open');
+      resetModalView();
+    });
+    modal.querySelector('#serviceConfirm').addEventListener('click', () => {
+      if(!currentServicePayload) return;
+      modal.querySelector('#serviceMainActions').style.display = 'none';
+      modal.querySelector('#channelSelect').style.display = 'flex';
+    });
+    modal.querySelector('#channelBack').addEventListener('click', () => {
+      resetModalView();
+    });
+    modal.querySelector('#channelWhatsApp').addEventListener('click', () => {
+      if(!currentServicePayload) return;
+      modal.classList.remove('open');
+      resetModalView();
+      const number = pickRandom(WHATSAPP_NUMBERS);
+      openWhatsApp(number, currentServicePayload.message);
+    });
+    modal.querySelector('#channelSMS').addEventListener('click', () => {
+      if(!currentServicePayload) return;
+      modal.classList.remove('open');
+      resetModalView();
+      const number = pickRandom(SMS_NUMBERS);
+      openSMS(number, currentServicePayload.message);
+    });
+    return modal;
+  }
+
+  function openServiceFlow(service, flow, subtype){
+    const modal = ensureServiceModal();
+    modal.querySelector('#serviceModalIcon').textContent = '💬';
+    modal.querySelector('#serviceModalTitle').textContent = service;
+
+    if(flow === 'delivery' || flow === 'wash'){
+      currentServicePayload = { message: getServiceMessage(service, flow, subtype) };
+      modal.querySelector('#serviceModalIntro').textContent = 'Votre position Google Maps sera jointe automatiquement pour faciliter le service.';
+      modal.querySelector('#serviceModalNote').textContent = 'Récupération de votre position…';
+      modal.classList.add('open');
+
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const lat = pos.coords.latitude.toFixed(6);
+            const lng = pos.coords.longitude.toFixed(6);
+            const mapsLink = `https://www.google.com/maps?q=${lat},${lng}`;
+            currentServicePayload.message = getServiceMessage(service, flow, subtype, mapsLink);
+            modal.querySelector('#serviceModalNote').textContent = 'Position récupérée ✓ — elle sera incluse dans votre message.';
+          },
+          () => {
+            modal.querySelector('#serviceModalNote').textContent = "Position indisponible (accès refusé ou introuvable). Vous pourrez la partager manuellement une fois la discussion ouverte.";
+          },
+          { timeout: 8000 }
+        );
+      } else {
+        modal.querySelector('#serviceModalNote').textContent = "Géolocalisation non disponible sur cet appareil. Partagez votre position manuellement une fois la discussion ouverte.";
+      }
+      return;
+    }
+
+    const message = getServiceMessage(service, flow, subtype);
+    currentServicePayload = { message };
+    if(flow === 'film'){
+      modal.querySelector('#serviceModalIntro').textContent = 'Un message prêt à envoyer sera préparé. Choisissez ensuite votre moyen de contact préféré.';
+      modal.querySelector('#serviceModalNote').textContent = '';
+    } else if(flow === 'photo') {
+      modal.querySelector('#serviceModalIntro').textContent = 'Un message prêt à envoyer sera préparé. Choisissez ensuite votre moyen de contact préféré.';
+      modal.querySelector('#serviceModalNote').textContent = '';
+    } else if(flow === 'document') {
+      modal.querySelector('#serviceModalIntro').textContent = 'Lisez cette recommandation, puis choisissez votre moyen de contact préféré.';
+      modal.querySelector('#serviceModalNote').textContent = DOC_NOTE;
+    } else {
+      modal.querySelector('#serviceModalIntro').textContent = 'Un message prêt à envoyer sera préparé. Choisissez ensuite votre moyen de contact préféré.';
+      modal.querySelector('#serviceModalNote').textContent = 'Ajoutez le plus de détails possible afin que KMS puisse vous répondre rapidement et avec précision.';
+    }
+    modal.classList.add('open');
+  }
+
+  document.querySelectorAll('.service-trigger').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openServiceFlow(btn.dataset.service, btn.dataset.flow, btn.dataset.subtype);
+    });
+  });
+
+  document.querySelectorAll('.service-card[data-service]').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if(e.target.closest('a')) return;
+      const flow = card.dataset.flow;
+      if(flow === 'design-ai') {
+        document.getElementById('ia-logo').scrollIntoView({behavior:'smooth'});
+        return;
+      }
+      openServiceFlow(card.dataset.service, flow, card.dataset.subtype);
+    });
+  });
+
+  document.querySelectorAll('.payment-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const amount = prompt('Entrez le montant à payer en FCFA :');
+      if(!amount) return;
+      const cleanAmount = String(amount).replace(/\s+/g, '');
+      const confirmPay = confirm(`Voulez-vous initier un paiement de ${cleanAmount} FCFA vers KMS ?`);
+      if(!confirmPay) return;
+
+      window.location.href = `tel:*144*2*1*${link.dataset.payNumber}*${cleanAmount}%23`;
+    });
+  });
+
+
+  // Formulaire de contact -> ouvre WhatsApp avec message pré-rempli
+  function handleContact(e){
+    e.preventDefault();
+    
+    if(e.target.elements.b_phone && e.target.elements.b_phone.value !== "") return false;
+    const name = document.getElementById('cname').value.trim();
+    const service = document.getElementById('cservice').value;
+    const msg = document.getElementById('cmsg').value.trim();
+    const flow = /film|application/i.test(service) ? 'film' : (/photo/i.test(service) ? 'photo' : (/saisie|modification/i.test(service) ? 'document' : 'generic'));
+    const text = `Bonjour bienvenue Merci de la confiance accordée. Je suis ${name}. Service demandé : ${service}. Détails : ${msg}`;
+    openWhatsApp(pickWhatsAppNumber(service), text + (flow === 'document' ? ` ${DOC_NOTE}` : ''));
+    return false;
+  }
+
+  // ----- Assistant IA simple (réponses locales, sans connexion) -----
+  const aiToggle = document.getElementById('aiToggle');
+  const aiPanel = document.getElementById('aiPanel');
+  const aiClose = document.getElementById('aiClose');
+  const aiBody = document.getElementById('aiBody');
+  const aiQuick = document.getElementById('aiQuick');
+
+  aiToggle.addEventListener('click', () => aiPanel.classList.toggle('open'));
+  aiClose.addEventListener('click', () => aiPanel.classList.remove('open'));
+
+  const aiResponses = {
+    services: "KMS propose une large gamme de services : saisie ultra-rapide, création de logos professionnels, affiches publicitaires, retouche photo haute qualité, vente d'applications et de films, et création de comptes sécurisés.",
+    prix: "Nos tarifs sont très compétitifs. Par exemple : Saisie à partir de 200F, Logo Pro à 2500F, Affiche à 1500F. Consultez la section 'Nos Tarifs' pour le détail complet.",
+    paiement: "Nous acceptons Orange Money (+226 06121297) et Wave (+226 56761864). Cliquez sur les numéros dans la section paiement pour lancer l'opération.",
+    delai: "La plupart de nos services (saisie, logos simples) sont livrés en moins de 24h. Les projets complexes peuvent prendre 48h.",
+    localisation: "Nous sommes basés à Dédougou, Burkina Faso, mais nous servons des clients partout dans le monde via WhatsApp.",
+    prix: "Les tarifs sont affichés dans la section Tarifs. Pour un devis précis ou une demande spéciale, cliquez sur le service ou écrivez-nous sur WhatsApp.",
+    paiement: "Vous pouvez payer en cliquant sur l'un des numéros de paiement. Votre téléphone composera automatiquement le code avec le montant saisi.",
+    contact: "Deux WhatsApp sont disponibles : +226 06 12 12 97 et +226 56 76 18 64. Vous pouvez aussi écrire à teegawinde1@gmail.com."
+  };
+
+  function addMsg(text, who){
+    const div = document.createElement('div');
+    div.className = 'ai-msg ' + who;
+    div.textContent = text;
+    aiBody.appendChild(div);
+    aiBody.scrollTop = aiBody.scrollHeight;
+  }
+
+  aiQuick.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      addMsg(btn.textContent, 'user');
+      setTimeout(() => addMsg(aiResponses[btn.dataset.q], 'bot'), 350);
+    });
+  });
+
+  // ----- Chargement du contenu modifiable (content.json) -----
+  function getPath(obj, path){
+    return path.split('.').reduce((acc, key) => (acc == null ? undefined : acc[key]), obj);
+  }
+
+  function applyContent(data){
+    try{
+      if(data.meta){
+        if(data.meta.title){ document.title = data.meta.title; }
+        if(data.meta.description){ document.getElementById('pageDescription').setAttribute('content', data.meta.description); }
+      }
+      document.querySelectorAll('[data-cms]').forEach(el => {
+        const path = el.getAttribute('data-cms');
+        const val = getPath(data, path);
+        if(val === undefined || val === null) return;
+        if(el.tagName === 'H1' || path === 'hero.title'){
+          el.innerHTML = val;
+        } else {
+          el.textContent = val;
+        }
+      });
+      if(data.contact && Array.isArray(data.contact.whatsappNumbers) && data.contact.whatsappNumbers.length){
+        WHATSAPP_NUMBERS = data.contact.whatsappNumbers.slice();
+      }
+      document.querySelectorAll('.payment-link').forEach((link, idx) => {
+        if(data.payment && Array.isArray(data.payment.numbers) && data.payment.numbers[idx % data.payment.numbers.length]){
+          link.dataset.payNumber = data.payment.numbers[idx % data.payment.numbers.length];
+        }
+      });
+      const floatAd = document.getElementById('floatAd');
+      if(floatAd && data.ad){
+        if(data.ad.enabled === false){
+          floatAd.classList.add('hidden');
+        } else {
+          floatAd.classList.remove('hidden');
+        }
+        if(data.ad.video){
+          const vid = floatAd.querySelector('video');
+          if(vid && vid.getAttribute('src') !== data.ad.video){
+            vid.setAttribute('src', data.ad.video);
+          }
+        }
+      }
+      if(data.services){
+        aiResponses.services = "KMS propose " + Object.values(data.services).map(s => s.title.toLowerCase()).join(', ') + ".";
+      }
+      if(data.contact){
+        aiResponses.contact = `Deux WhatsApp sont disponibles : ${(data.contact.whatsappDisplay||[]).join(' et ')}. Vous pouvez aussi écrire à ${data.contact.email||''}.`;
+      }
+    } catch(err){
+      console.error('Erreur de chargement du contenu :', err);
+    }
+  }
+
+  fetch('content.json?v=' + Date.now())
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(data => applyContent(data))
+    .catch(err => console.warn('content.json introuvable ou invalide, contenu par défaut conservé.', err));
+</script>
+
+
+<!-- AUTH MODALS -->
+<div class="auth-modal" id="loginModal">
+  <div class="auth-modal-card">
+    <button class="auth-close" onclick="closeAuthModal('login')">✕</button>
+    <h2>Se connecter</h2>
+    <p>Accédez à votre compte KMS</p>
+    <div class="auth-method-toggle">
+      <button type="button" class="auth-method-btn active" id="loginMethodEmailBtn" onclick="setAuthMethod('login','email')">Email</button>
+      <button type="button" class="auth-method-btn" id="loginMethodPhoneBtn" onclick="setAuthMethod('login','phone')">Numéro mobile</button>
+    </div>
+    <form class="auth-form" onsubmit="handleLogin(event)">
+      <input type="email" id="loginEmail" placeholder="Votre email" required>
+      <input type="tel" id="loginPhone" placeholder="Votre numéro mobile (ex. 70 12 34 56)" style="display:none;">
+      <input type="password" id="loginPassword" placeholder="Mot de passe" required>
+      <button type="submit" class="btn btn-primary">Se connecter</button>
+      <div class="auth-error" id="loginError"></div>
+    </form>
+    <div class="auth-toggle">Pas encore de compte ? <a onclick="switchAuthModal('login', 'register')">Créer un compte</a></div>
+  </div>
+</div>
+
+<div class="auth-modal" id="registerModal">
+  <div class="auth-modal-card">
+    <button class="auth-close" onclick="closeAuthModal('register')">✕</button>
+    <h2>Créer un compte</h2>
+    <p>Rejoignez KMS en quelques secondes</p>
+    <div class="auth-method-toggle">
+      <button type="button" class="auth-method-btn active" id="registerMethodEmailBtn" onclick="setAuthMethod('register','email')">Email</button>
+      <button type="button" class="auth-method-btn" id="registerMethodPhoneBtn" onclick="setAuthMethod('register','phone')">Numéro mobile</button>
+    </div>
+    <form class="auth-form" onsubmit="handleRegister(event)">
+      <input type="text" id="registerName" placeholder="Votre nom complet" required>
+      <input type="email" id="registerEmail" placeholder="Votre email" required>
+      <input type="tel" id="registerPhone" placeholder="Votre numéro mobile (ex. 70 12 34 56)" style="display:none;">
+      <input type="password" id="registerPassword" placeholder="Mot de passe (min. 8 caractères)" minlength="8" required>
+      <button type="submit" class="btn btn-primary">Créer un compte</button>
+      <div class="auth-error" id="registerError"></div>
+    </form>
+    <div class="auth-toggle">Vous avez déjà un compte ? <a onclick="switchAuthModal('register', 'login')">Se connecter</a></div>
+  </div>
+</div>
+
+<script>
+
+function escapeHTML(str) {
+  if (!str) return "";
+  return str.replace(/[&<>"']/g, function(m) {
+    return {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[m];
+  });
+}
+
+// ===== AUTHENTICATION SYSTEM =====
+let currentUserAuth = null;
+
+function loadUserAuth() {
+  const stored = localStorage.getItem('kkUser');
+  if (stored) {
+    try {
+      currentUserAuth = JSON.parse(stored);
+      updateAuthUI();
+    if (currentUserAuth && !sessionStorage.getItem('kkWelcomeShown')) {
+      setTimeout(() => {
+        addMsg(`Ravi de vous revoir, ${currentUserAuth.name} ! Comment KMS peut vous aider aujourd'hui ?`, 'bot');
+        aiPanel.classList.add('open');
+        sessionStorage.setItem('kkWelcomeShown', 'true');
+      }, 2000);
+    }
+
+    } catch(e) {
+      console.error('Erreur chargement utilisateur:', e);
+    }
+  }
+}
+
+function saveUserAuth(user) {
+  currentUserAuth = user;
+  localStorage.setItem('kkUser', JSON.stringify(user));
+  updateAuthUI();
+    if (currentUserAuth && !sessionStorage.getItem('kkWelcomeShown')) {
+      setTimeout(() => {
+        addMsg(`Ravi de vous revoir, ${currentUserAuth.name} ! Comment KMS peut vous aider aujourd'hui ?`, 'bot');
+        aiPanel.classList.add('open');
+        sessionStorage.setItem('kkWelcomeShown', 'true');
+      }, 2000);
+    }
+
+}
+
+function updateAuthUI() {
+  const authButtons = document.getElementById('authButtons');
+  const userMenu = document.getElementById('userMenu');
+  
+  if (currentUserAuth) {
+    if(authButtons) authButtons.style.display = 'none';
+    if(userMenu) userMenu.style.display = 'flex';
+    const userNameEl = document.getElementById('userName');
+    if(userNameEl) userNameEl.textContent = escapeHTML(currentUserAuth.name);
+  } else {
+    if(authButtons) authButtons.style.display = 'flex';
+    if(userMenu) userMenu.style.display = 'none';
+  }
+}
+
+function showAuthModal(type) {
+  const modal = document.getElementById(type + 'Modal');
+  if(modal) modal.classList.add('open');
+}
+
+function closeAuthModal(type) {
+  const modal = document.getElementById(type + 'Modal');
+  if(modal) modal.classList.remove('open');
+}
+
+function switchAuthModal(from, to) {
+  closeAuthModal(from);
+  showAuthModal(to);
+}
+
+// ===== EMAIL / PHONE METHOD SWITCH =====
+let authMethod = { login: 'email', register: 'email' };
+
+function setAuthMethod(modalType, method) {
+  authMethod[modalType] = method;
+
+  const emailInput = document.getElementById(modalType + 'Email');
+  const phoneInput = document.getElementById(modalType + 'Phone');
+  const emailBtn = document.getElementById(modalType + 'MethodEmailBtn');
+  const phoneBtn = document.getElementById(modalType + 'MethodPhoneBtn');
+
+  if (method === 'phone') {
+    emailInput.style.display = 'none';
+    emailInput.required = false;
+    phoneInput.style.display = '';
+    phoneInput.required = true;
+    phoneBtn.classList.add('active');
+    emailBtn.classList.remove('active');
+  } else {
+    phoneInput.style.display = 'none';
+    phoneInput.required = false;
+    emailInput.style.display = '';
+    emailInput.required = true;
+    emailBtn.classList.add('active');
+    phoneBtn.classList.remove('active');
+  }
+}
+
+function normalizePhone(phone) {
+  return phone.replace(/[\s.\-]/g, '');
+}
+
+function handleRegister(e) {
+  e.preventDefault();
+  const name = document.getElementById('registerName').value;
+  const method = authMethod.register;
+  const email = method === 'email' ? document.getElementById('registerEmail').value : '';
+  const phone = method === 'phone' ? normalizePhone(document.getElementById('registerPhone').value) : '';
+  const identifier = method === 'email' ? email : phone;
+  const password = document.getElementById('registerPassword').value;
+  const errorDiv = document.getElementById('registerError');
+  
+  errorDiv.textContent = '';
+  
+  if (password.length < 8) {
+    errorDiv.textContent = 'Le mot de passe doit contenir au moins 8 caractères';
+    return;
+  }
+
+  if (method === 'phone' && phone.replace(/\D/g,'').length < 8) {
+    errorDiv.textContent = 'Numéro mobile invalide';
+    return;
+  }
+  
+  const users = JSON.parse(localStorage.getItem('kkUsers') || '[]');
+  if (users.find(u => (method === 'email' ? u.email === email : u.phone === phone))) {
+    errorDiv.textContent = method === 'email' ? 'Cet email est déjà utilisé' : 'Ce numéro mobile est déjà utilisé';
+    return;
+  }
+  
+  const user = {
+    id: Date.now(),
+    name,
+    email: email || null,
+    phone: phone || null,
+    authMethod: method,
+    password: btoa(password),
+    createdAt: new Date().toISOString()
+  };
+  
+  users.push(user);
+  localStorage.setItem('kkUsers', JSON.stringify(users));
+  
+  saveUserAuth({ id: user.id, name: user.name, email: user.email, phone: user.phone, createdAt: user.createdAt });
+  closeAuthModal('register');
+  alert('Compte créé avec succès !');
+  document.getElementById('registerName').value = '';
+  document.getElementById('registerEmail').value = '';
+  document.getElementById('registerPhone').value = '';
+  document.getElementById('registerPassword').value = '';
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const method = authMethod.login;
+  const email = method === 'email' ? document.getElementById('loginEmail').value : '';
+  const phone = method === 'phone' ? normalizePhone(document.getElementById('loginPhone').value) : '';
+  const password = document.getElementById('loginPassword').value;
+  const errorDiv = document.getElementById('loginError');
+  
+  errorDiv.textContent = '';
+  
+  const users = JSON.parse(localStorage.getItem('kkUsers') || '[]');
+  const user = users.find(u =>
+    (method === 'email' ? u.email === email : u.phone === phone) && u.password === btoa(password)
+  );
+  
+  if (!user) {
+    errorDiv.textContent = method === 'email' ? 'Email ou mot de passe incorrect' : 'Numéro mobile ou mot de passe incorrect';
+    return;
+  }
+  
+  saveUserAuth({ id: user.id, name: user.name, email: user.email, phone: user.phone, createdAt: user.createdAt });
+  closeAuthModal('login');
+  alert('Connexion réussie !');
+  document.getElementById('loginEmail').value = '';
+  document.getElementById('loginPhone').value = '';
+  document.getElementById('loginPassword').value = '';
+}
+
+function handleLogout() {
+  if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+    currentUserAuth = null;
+    localStorage.removeItem('kkUser');
+    updateAuthUI();
+    if (currentUserAuth && !sessionStorage.getItem('kkWelcomeShown')) {
+      setTimeout(() => {
+        addMsg(`Ravi de vous revoir, ${currentUserAuth.name} ! Comment KMS peut vous aider aujourd'hui ?`, 'bot');
+        aiPanel.classList.add('open');
+        sessionStorage.setItem('kkWelcomeShown', 'true');
+      }, 2000);
+    }
+
+    alert('Déconnexion réussie');
+  }
+}
+
+function goToProfile() {
+  if (currentUserAuth) {
+    const createdDate = new Date(currentUserAuth.createdAt).toLocaleDateString('fr-FR');
+    const contact = currentUserAuth.email ? ('Email: ' + currentUserAuth.email) : ('Téléphone: ' + currentUserAuth.phone);
+    alert('Profil de ' + currentUserAuth.name + '\n' + contact + '\nInscrit depuis: ' + createdDate);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadUserAuth);
+</script>
+
+
+<script>
+// ===== MULTILINGUE : traduction automatique réelle (via backend sécurisé) =====
+// ⚠️ Remplacez cette URL par celle de votre backend une fois déployé (voir README fourni).
+// Traduction gratuite via le service public de Google (aucune clé, aucun backend requis).
+// Certaines langues locales (ex: Mooré) ne sont pas encore couvertes par ce service ;
+// dans ce cas l'utilisateur est prévenu et la page reste en français.
+const GOOGLE_LANG_MAP = {
+  zh: 'zh-CN',
+  he: 'iw',
+  dyu: 'bm' // Dioula/Jula est très proche du Bambara, reconnu par Google sous ce code
+};
+const UNSUPPORTED_LANGUAGES = ['mos']; // Mooré : pas encore disponible via la traduction automatique
+
+function toGoogleLangCode(code){
+  return GOOGLE_LANG_MAP[code] || code;
+}
+
+// Liste large de langues, avec une place particulière pour les langues locales
+// du Burkina Faso (Mooré, Dioula, Fulfulde) en plus des grandes langues mondiales.
+const WORLD_LANGUAGES = [
+  { code: 'fr', name: 'Français' },
+  { code: 'mos', name: 'Mooré' },
+  { code: 'dyu', name: 'Dioula / Jula' },
+  { code: 'ff', name: 'Fulfulde (Peul)' },
+  { code: 'en', name: 'English' },
+  { code: 'es', name: 'Español' },
+  { code: 'pt', name: 'Português' },
+  { code: 'de', name: 'Deutsch' },
+  { code: 'it', name: 'Italiano' },
+  { code: 'nl', name: 'Nederlands' },
+  { code: 'ar', name: 'العربية' },
+  { code: 'zh', name: '中文' },
+  { code: 'ja', name: '日本語' },
+  { code: 'ko', name: '한국어' },
+  { code: 'ru', name: 'Русский' },
+  { code: 'hi', name: 'हिन्दी' },
+  { code: 'bn', name: 'বাংলা' },
+  { code: 'ur', name: 'اردو' },
+  { code: 'fa', name: 'فارسی' },
+  { code: 'tr', name: 'Türkçe' },
+  { code: 'sw', name: 'Kiswahili' },
+  { code: 'ha', name: 'Hausa' },
+  { code: 'yo', name: 'Yorùbá' },
+  { code: 'wo', name: 'Wolof' },
+  { code: 'am', name: 'አማርኛ' },
+  { code: 'so', name: 'Soomaali' },
+  { code: 'vi', name: 'Tiếng Việt' },
+  { code: 'th', name: 'ภาษาไทย' },
+  { code: 'id', name: 'Bahasa Indonesia' },
+  { code: 'pl', name: 'Polski' },
+  { code: 'uk', name: 'Українська' },
+  { code: 'el', name: 'Ελληνικά' },
+  { code: 'he', name: 'עברית' }
+];
+
+let pageOriginalTexts = null;
+let currentLangCode = 'fr';
+let translationInProgress = false;
+
+function populateLangSelector(){
+  const select = document.getElementById('langSelector');
+  select.innerHTML = '';
+  WORLD_LANGUAGES.forEach(l => {
+    const opt = document.createElement('option');
+    opt.value = l.code;
+    opt.textContent = l.name;
+    select.appendChild(opt);
+  });
+}
+
+function showTranslateOverlay(langName){
+  const bar = document.getElementById('translateBar');
+  bar.textContent = 'Traduction en cours (' + langName + ')…';
+  bar.classList.add('show');
+}
+function hideTranslateOverlay(){
+  document.getElementById('translateBar').classList.remove('show');
+}
+
+// Sélectionne les éléments de texte "feuilles" (sans enfant élément) des zones
+// statiques du site, en excluant les panneaux dynamiques (chat, jeux, résultats IA).
+function collectTranslatableElements(){
+  const roots = [
+    document.querySelector('header'),
+    ...Array.from(document.querySelectorAll('section')).filter(s => s.id !== 'ia-logo'),
+    document.querySelector('footer')
+  ].filter(Boolean);
+
+  const excludeClasses = ['logo', 'mark', 'icon', 'num', 'price', 'unit'];
+  const tags = 'h1,h2,h3,h4,p,li,a,button,label,span';
+  const seen = new Set();
+  const result = [];
+
+  roots.forEach(root => {
+    root.querySelectorAll(tags).forEach(el => {
+      if (el.closest('.game-modal') || el.closest('#aiPanel') || el.closest('#aiResults')) return;
+      if (el.children.length > 0) return;
+      if (excludeClasses.some(c => el.classList.contains(c))) return;
+      const text = el.textContent.trim();
+      if (!text || !/\p{L}/u.test(text)) return;
+      if (seen.has(el)) return;
+      seen.add(el);
+      result.push(el);
+    });
+  });
+  return result;
+}
+
+function captureOriginalTexts(){
+  if (pageOriginalTexts) return pageOriginalTexts;
+  pageOriginalTexts = new Map();
+  collectTranslatableElements().forEach(el => {
+    pageOriginalTexts.set(el, { type: 'text', value: el.textContent });
+  });
+  document.querySelectorAll('header input[placeholder], section input[placeholder]').forEach(el => {
+    if (el.closest('.game-modal')) return;
+    pageOriginalTexts.set(el, { type: 'placeholder', value: el.getAttribute('placeholder') });
+  });
+  return pageOriginalTexts;
+}
+
+async function translateOne(text, googleCode){
+  const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=fr&tl=' +
+    encodeURIComponent(googleCode) + '&dt=t&q=' + encodeURIComponent(text);
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('HTTP ' + response.status);
+  const data = await response.json();
+  if (!Array.isArray(data) || !Array.isArray(data[0])) throw new Error('Réponse inattendue');
+  return data[0].map(segment => segment[0] || '').join('');
+}
+
+async function translateBatch(texts, targetLangCode){
+  const googleCode = toGoogleLangCode(targetLangCode);
+  const CONCURRENCY = 6;
+  const results = new Array(texts.length);
+  let cursor = 0;
+  let firstError = null;
+
+  async function worker(){
+    while (cursor < texts.length){
+      const i = cursor++;
+      try {
+        results[i] = await translateOne(texts[i], googleCode);
+      } catch (err) {
+        if (!firstError) firstError = err;
+        results[i] = texts[i]; // en cas d'échec ponctuel, on garde le texte original
+      }
+    }
+  }
+
+  const workers = Array.from({ length: Math.min(CONCURRENCY, texts.length) }, worker);
+  await Promise.all(workers);
+
+  // Si absolument tout a échoué, on remonte l'erreur pour afficher le message d'indisponibilité.
+  if (firstError && results.every((r, i) => r === texts[i])) throw firstError;
+  return results;
+}
+
+async function changeLanguage(langCode){
+  const lang = WORLD_LANGUAGES.find(l => l.code === langCode);
+  if (!lang || translationInProgress) return;
+
+  const select = document.getElementById('langSelector');
+  document.documentElement.lang = langCode;
+
+  if (langCode === 'fr') {
+    const originals = captureOriginalTexts();
+    originals.forEach((data, el) => {
+      if (data.type === 'placeholder') el.setAttribute('placeholder', data.value);
+      else el.textContent = data.value;
+    });
+    currentLangCode = 'fr';
+    localStorage.setItem('kkLanguage', 'fr');
+    return;
+  }
+
+  if (UNSUPPORTED_LANGUAGES.includes(langCode)) {
+    alert("La traduction automatique n'est pas encore disponible pour le " + lang.name + ". La page reste en français.");
+    select.value = 'fr';
+    document.documentElement.lang = 'fr';
+    return;
+  }
+
+  const cacheKey = 'kkTranslateCache_' + langCode;
+  const cache = JSON.parse(localStorage.getItem(cacheKey) || '{}');
+  const originals = captureOriginalTexts();
+  const entries = Array.from(originals.entries());
+
+  const toTranslate = [];
+  entries.forEach(([, data]) => {
+    if (!cache[data.value] && !toTranslate.includes(data.value)) toTranslate.push(data.value);
+  });
+
+  translationInProgress = true;
+  showTranslateOverlay(lang.name);
+
+  try {
+    const BATCH_SIZE = 40;
+    for (let i = 0; i < toTranslate.length; i += BATCH_SIZE) {
+      const batch = toTranslate.slice(i, i + BATCH_SIZE);
+      const translations = await translateBatch(batch, langCode);
+      batch.forEach((orig, idx) => { cache[orig] = translations[idx] || orig; });
+    }
+    if (toTranslate.length) localStorage.setItem(cacheKey, JSON.stringify(cache));
+
+    entries.forEach(([el, data]) => {
+      const translated = cache[data.value] || data.value;
+      if (data.type === 'placeholder') el.setAttribute('placeholder', translated);
+      else el.textContent = translated;
+    });
+
+    currentLangCode = langCode;
+    localStorage.setItem('kkLanguage', langCode);
+  } catch (err) {
+    console.error('Erreur de traduction:', err);
+    alert("La traduction automatique est momentanément indisponible. Réessayez plus tard.");
+    select.value = 'fr';
+  } finally {
+    translationInProgress = false;
+    hideTranslateOverlay();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  populateLangSelector();
+  const saved = localStorage.getItem('kkLanguage');
+  if (saved && saved !== 'fr') {
+    document.getElementById('langSelector').value = saved;
+    changeLanguage(saved);
+  }
+});
+
+// ===== LECTURE À HAUTE VOIX (gratuite, via le navigateur) =====
+const TTS = (() => {
+  const supported = 'speechSynthesis' in window;
+  let enabled = false;
+  let queue = [];
+  let queueIndex = 0;
+  let currentEl = null;
+  let speed = 1;
+  let voiceFR = null;
+
+  const bar = document.getElementById('ttsBar');
+  const barLabel = document.getElementById('ttsBarLabel');
+  const toggleBtn = document.getElementById('ttsToggle');
+  const playAllBtn = document.getElementById('ttsPlayAll');
+  const pauseBtn = document.getElementById('ttsPause');
+  const stopBtn = document.getElementById('ttsStop');
+  const speedSelect = document.getElementById('ttsSpeed');
+
+  function pickVoice(){
+    if (!supported) return;
+    const voices = speechSynthesis.getVoices();
+    voiceFR = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('fr')) || null;
+  }
+  if (supported) {
+    pickVoice();
+    speechSynthesis.onvoiceschanged = pickVoice;
+  }
+
+  function clearHighlight(){
+    if (currentEl) currentEl.classList.remove('tts-reading');
+    currentEl = null;
+  }
+
+  function speakText(text, el, onEnd){
+    if (!supported || !text) { if (onEnd) onEnd(); return; }
+    speechSynthesis.cancel();
+    clearHighlight();
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'fr-FR';
+    if (voiceFR) utt.voice = voiceFR;
+    utt.rate = speed;
+    if (el) {
+      currentEl = el;
+      el.classList.add('tts-reading');
+      el.scrollIntoView({behavior:'smooth', block:'center'});
+      barLabel.textContent = text.length > 60 ? text.slice(0,60) + '…' : text;
+    }
+    utt.onend = () => { clearHighlight(); if (onEnd) onEnd(); };
+    utt.onerror = () => { clearHighlight(); if (onEnd) onEnd(); };
+    speechSynthesis.speak(utt);
+  }
+
+  function collectReadableElements(){
+    const selector = 'main h1, main h2, main h3, main p, .hero h1, .hero p, ' +
+      'section h1, section h2, section h3, section p, .service-card h3, .service-card p, ' +
+      '.section-head h2, .section-head p';
+    const nodes = Array.from(document.querySelectorAll(selector))
+      .filter(el => el.offsetParent !== null && el.textContent.trim().length > 1);
+    // Dédupliquer (un enfant déjà couvert par son parent) et marquer comme lisible
+    nodes.forEach(el => el.classList.add('tts-readable'));
+    return nodes;
+  }
+
+  function playQueueFrom(index){
+    if (!supported) return;
+    queue = collectReadableElements();
+    queueIndex = index;
+    if (queueIndex >= queue.length) { stop(); return; }
+    const el = queue[queueIndex];
+    speakText(el.textContent.trim(), el, () => playQueueFrom(queueIndex + 1));
+  }
+
+  function playAll(){
+    if (!enabled) enable(true);
+    playQueueFrom(0);
+  }
+
+  function pauseResume(){
+    if (!supported) return;
+    if (speechSynthesis.speaking && !speechSynthesis.paused) {
+      speechSynthesis.pause();
+    } else if (speechSynthesis.paused) {
+      speechSynthesis.resume();
+    }
+  }
+
+  function stop(){
+    if (supported) speechSynthesis.cancel();
+    clearHighlight();
+    barLabel.textContent = "Cliquez sur un titre ou un paragraphe pour l'écouter";
+  }
+
+  function enable(force){
+    enabled = force !== undefined ? force : !enabled;
+    document.body.classList.toggle('tts-mode', enabled);
+    toggleBtn.classList.toggle('active', enabled);
+    bar.classList.toggle('open', enabled);
+    localStorage.setItem('kkTtsEnabled', enabled ? '1' : '0');
+    if (enabled) {
+      collectReadableElements();
+    } else {
+      stop();
+    }
+  }
+
+  function init(){
+    if (!supported) {
+      toggleBtn.title = "Lecture vocale non disponible sur ce navigateur";
+      toggleBtn.disabled = true;
+      return;
+    }
+    if (localStorage.getItem('kkTtsEnabled') === '1') enable(true);
+
+    document.addEventListener('click', (e) => {
+      const el = e.target.closest('.tts-readable');
+      if (el && enabled) {
+        e.preventDefault();
+        speechSynthesis.cancel();
+        speakText(el.textContent.trim(), el, () => {});
+      }
+    });
+
+    playAllBtn.addEventListener('click', playAll);
+    pauseBtn.addEventListener('click', pauseResume);
+    stopBtn.addEventListener('click', stop);
+    speedSelect.addEventListener('change', () => { speed = parseFloat(speedSelect.value); });
+  }
+
+  return { init, enable, toggle: () => enable(!enabled) };
+})();
+
+function toggleTTS(){ TTS.toggle(); }
+document.addEventListener('DOMContentLoaded', () => TTS.init());
+
+// ===== RECHERCHE IA / VÉRIFICATION D'INFORMATION (réelle, via backend sécurisé) =====
+// ⚠️ Remplacez cette URL par celle de votre backend une fois déployé (voir README fourni).
+// Ne mettez JAMAIS une clé API Anthropic/OpenAI directement dans ce fichier HTML.
+const AI_VERIFY_ENDPOINT = 'https://VOTRE-BACKEND.vercel.app/api/verify';
+
+const AI_QUOTA_FREE_PER_DAY = 10;
+
+function getAIQuotaState() {
+  const today = new Date().toISOString().slice(0, 10);
+  let state = JSON.parse(localStorage.getItem('kkAiQuota') || 'null');
+  if (!state || state.date !== today) {
+    state = { date: today, used: 0 };
+  }
+  return state;
+}
+
+function saveAIQuotaState(state) {
+  localStorage.setItem('kkAiQuota', JSON.stringify(state));
+}
+
+function refreshAIQuotaDisplay() {
+  const state = getAIQuotaState();
+  const left = Math.max(0, AI_QUOTA_FREE_PER_DAY - state.used);
+  const el = document.getElementById('aiQuotaLeft');
+  if (el) el.textContent = left;
+  return left;
+}
+
+async function submitAISearch() {
+  const input = document.getElementById('aiSearchInput');
+  const query = input.value.trim();
+  const resultsEl = document.getElementById('aiResults');
+  if (!query) return;
+
+  if (query.length > 400) {
+    resultsEl.innerHTML = '<p style="color:var(--terra);">Question trop longue (400 caractères max).</p>';
+    return;
+  }
+
+  // Quota gratuit (indicatif — un vrai contrôle anti-abus doit être fait côté serveur)
+  const quotaState = getAIQuotaState();
+  const isPremium = !!(currentUserAuth && currentUserAuth.premium);
+  if (!isPremium && quotaState.used >= AI_QUOTA_FREE_PER_DAY) {
+    resultsEl.innerHTML = '<p style="color:var(--terra);">Quota gratuit atteint pour aujourd\'hui. Abonnez-vous à "Recherche IA Illimitée" pour continuer.</p>';
+    return;
+  }
+
+  resultsEl.innerHTML = '<p style="color:var(--gold);">Recherche en cours (analyse + vérification web)...</p>';
+
+  try {
+    const response = await fetch(AI_VERIFY_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query })
+    });
+
+    if (!response.ok) {
+      throw new Error('Réponse serveur invalide (' + response.status + ')');
+    }
+
+    const data = await response.json();
+
+    if (data.error) {
+      resultsEl.innerHTML = '<p style="color:var(--terra);">' + escapeHTML(data.error) + '</p>';
+      return;
+    }
+
+    if (!isPremium) {
+      quotaState.used += 1;
+      saveAIQuotaState(quotaState);
+      refreshAIQuotaDisplay();
+    }
+
+    const answerHTML = '<p style="white-space:pre-wrap;">' + escapeHTML(data.answer || 'Aucune réponse disponible.') + '</p>';
+    let sourcesHTML = '';
+    if (Array.isArray(data.sources) && data.sources.length) {
+      sourcesHTML = '<div style="margin-top:10px;font-size:.8rem;"><b>Sources :</b><ul style="margin:6px 0 0 18px;padding:0;">' +
+        data.sources.slice(0, 5).map(src => '<li><a href="' + encodeURI(src) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(src) + '</a></li>').join('') +
+        '</ul></div>';
+    }
+    resultsEl.innerHTML = answerHTML + sourcesHTML;
+  } catch (err) {
+    console.error('Erreur recherche IA:', err);
+    resultsEl.innerHTML = '<p style="color:var(--terra);">Le service de vérification est momentanément indisponible. Réessayez plus tard.</p>';
+  }
+}
+
+function addAIFilter(filter) {
+  const input = document.getElementById('aiSearchInput');
+  input.value = 'Donne-moi des informations fiables et récentes sur : ' + filter;
+  submitAISearch();
+}
+
+document.addEventListener('DOMContentLoaded', refreshAIQuotaDisplay);
+
+// ===== JEUX AMÉLIORÉS : Textures + Difficulté progressive =====
+let activeGame = null;
+let gameRAF = null;
+let gameKeyHandler = null;
+let gameTouchCleanup = null;
+
+function stopGameLoop(){
+  if (gameRAF) cancelAnimationFrame(gameRAF);
+  gameRAF = null;
+}
+
+function closeGameModal(){
+  stopGameLoop();
+  if (gameKeyHandler) { document.removeEventListener('keydown', gameKeyHandler); gameKeyHandler = null; }
+  if (gameTouchCleanup) { gameTouchCleanup(); gameTouchCleanup = null; }
+  document.getElementById('gameModal').classList.remove('open');
+  document.getElementById('gameDpad').classList.remove('show');
+  activeGame = null;
+}
+
+function openGameModal(title, hint, showDpad){
+  closeGameModal();
+  document.getElementById('gameModalTitle').textContent = title;
+  document.getElementById('gameModalHint').textContent = hint;
+  document.getElementById('gameScoreVal').textContent = '0';
+  document.getElementById('gameExtraInfo').textContent = '';
+  document.getElementById('gameDpad').classList.toggle('show', !!showDpad);
+  document.getElementById('gameModeSelect').style.display = 'none';
+  document.getElementById('gameCanvas').style.display = '';
+  document.getElementById('gameModal').classList.add('open');
+}
+
+function showModeSelect(game, title){
+  closeGameModal();
+  document.getElementById('gameModalTitle').textContent = title;
+  document.getElementById('gameModalHint').textContent = '';
+  document.getElementById('gameScoreVal').textContent = '0';
+  document.getElementById('gameExtraInfo').textContent = '';
+  document.getElementById('gameDpad').classList.remove('show');
+  document.getElementById('gameCanvas').style.display = 'none';
+  const sel = document.getElementById('gameModeSelect');
+  sel.style.display = 'flex';
+  document.getElementById('gameModal').classList.add('open');
+
+  const soloBtn = document.getElementById('modeSoloBtn');
+  const duelBtn = document.getElementById('modeDuelBtn');
+  const pick = (mode) => {
+    sel.style.display = 'none';
+    document.getElementById('gameCanvas').style.display = '';
+    if (game === 'checkers') {
+      document.getElementById('gameModalHint').textContent = mode === 'solo'
+        ? 'Touchez une pièce puis une destination. Affrontez l’IA !'
+        : 'Touchez une pièce puis une destination. À vous deux de jouer !';
+      startCheckersGame(mode);
+    } else if (game === 'chess') {
+      document.getElementById('gameModalHint').textContent = mode === 'solo'
+        ? 'Touchez une pièce puis une case. Capturez le roi adverse pour gagner !'
+        : 'Touchez une pièce puis une case. Le roi capturé met fin à la partie !';
+      startChessGame(mode);
+    }
+  };
+  soloBtn.onclick = () => pick('solo');
+  duelBtn.onclick = () => pick('duel');
+}
+
+function launchGame(game) {
+  if (game === 'dino') {
+    openGameModal('🦖 Dino Runner', "Touchez / Espace pour sauter. Difficulté augmente en douceur !", false);
+    startDinoGame();
+  } else if (game === 'pacman') {
+    openGameModal('👾 Pac-Man', 'Flèches / D-pad pour bouger. Les fantômes accélèrent tout doucement !', true);
+    startPacmanGame();
+  } else if (game === 'checkers') {
+    showModeSelect('checkers', '⚫ Dames');
+  } else if (game === 'chess') {
+    showModeSelect('chess', '♟️ Échecs');
+  } else {
+    alert('Lancement du jeu : ' + game + ' (Bientôt disponible)');
+  }
+}
+
+// --------- DINO AMÉLIORÉ (textures + difficulté) ---------
+function startDinoGame(){
+  activeGame = 'dino';
+  const canvas = document.getElementById('gameCanvas');
+  canvas.width = 380; canvas.height = 160;
+  const ctx = canvas.getContext('2d', { alpha: true });
+  const W = canvas.width, H = canvas.height;
+  const groundY = H - 28;
+
+  let player, obstacles, clouds, speed, frame, score, started, gameOver, difficultyLevel = 1;
+
+  function reset(){
+    player = { x: 32, y: groundY - 28, w: 24, h: 28, vy: 0, jumping: false };
+    obstacles = [];
+    clouds = [{ x: 80, y: 28, s: 1.1 }, { x: 190, y: 45, s: 0.8 }, { x: 300, y: 22, s: 1 }];
+    speed = 4.2;
+    frame = 0;
+    score = 0;
+    started = false;
+    gameOver = false;
+    difficultyLevel = 1;
+    document.getElementById('gameScoreVal').textContent = '0';
+  }
+  reset();
+
+  function jump(){
+    if (gameOver) { reset(); return; }
+    started = true;
+    if (!player.jumping) { player.vy = -13.8; player.jumping = true; }
+  }
+
+  function spawnObstacle(){
+    const types = ['cactus', 'bird'];
+    const type = types[Math.floor(Math.random() * types.length)];
+    const h = type === 'bird' ? 18 : 22 + Math.random() * 14;
+    obstacles.push({ x: W + 20, y: type === 'bird' ? groundY - 55 - Math.random()*20 : groundY - h, w: type === 'bird' ? 22 : 14 + Math.random() * 12, h, type });
+  }
+
+  function update(){
+    frame++;
+    if (!started || gameOver) return;
+
+    // Augmentation progressive de difficulté
+    if (frame % 280 === 0) {
+      difficultyLevel = Math.min(5, difficultyLevel + 0.6);
+      speed = 4.2 + difficultyLevel * 0.75;
+    }
+
+    player.vy += 0.92;
+    player.y += player.vy;
+    if (player.y >= groundY - player.h) { 
+      player.y = groundY - player.h; 
+      player.vy = 0; 
+      player.jumping = false; 
+    }
+
+    clouds.forEach(cl => { cl.x -= speed * 0.28; if (cl.x < -50) cl.x = W + 40 + Math.random() * 90; });
+
+    if (frame % Math.max(38, 82 - Math.floor(difficultyLevel * 9)) === 0) spawnObstacle();
+
+    obstacles.forEach(o => o.x -= speed);
+    obstacles = obstacles.filter(o => o.x + o.w > -20);
+
+    score += 0.8 + difficultyLevel * 0.2;
+    document.getElementById('gameScoreVal').textContent = Math.floor(score);
+
+    for (const o of obstacles) {
+      if (player.x < o.x + o.w - 4 && player.x + player.w > o.x + 4 && 
+          player.y < o.y + o.h - 4 && player.y + player.h > o.y + 4) {
+        gameOver = true;
+      }
+    }
+  }
+
+  function drawBackground(){
+    // Ciel amélioré
+    const sky = ctx.createLinearGradient(0, 0, 0, groundY);
+    sky.addColorStop(0, '#0f1626');
+    sky.addColorStop(1, '#1f2a44');
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, W, groundY);
+
+    // Nuages plus détaillés
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = 'rgba(255,255,255,0.25)';
+    clouds.forEach(cl => {
+      ctx.globalAlpha = 0.45;
+      ctx.fillStyle = '#e0e4f0';
+      ctx.beginPath();
+      ctx.ellipse(cl.x, cl.y, 18*cl.s, 9*cl.s, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(cl.x + 13*cl.s, cl.y + 1, 12*cl.s, 7*cl.s, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+    ctx.shadowBlur = 0;
+  }
+
+  function drawGround(){
+    ctx.fillStyle = '#11140f';
+    ctx.fillRect(0, groundY, W, H - groundY);
+    ctx.strokeStyle = '#3a2f1f';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(0, groundY + 2);
+    ctx.lineTo(W, groundY + 2);
+    ctx.stroke();
+
+    // Lignes de texture sol
+    ctx.strokeStyle = 'rgba(224,177,92,0.35)';
+    ctx.lineWidth = 1.5;
+    for (let x = (frame * speed % 42) - 42; x < W; x += 42) {
+      ctx.beginPath();
+      ctx.moveTo(x, groundY + 8);
+      ctx.lineTo(x + 18, groundY + 8);
+      ctx.stroke();
+    }
+  }
+
+  function drawDino(){
+    const leg = Math.floor(frame / 5) % 2;
+    ctx.save();
+    ctx.translate(player.x, player.y);
+
+    // Ombre
+    ctx.fillStyle = 'rgba(0,0,0,0.4)';
+    ctx.beginPath();
+    ctx.ellipse(14, 29, 11, 4, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Corps texturé
+    ctx.fillStyle = '#d4a23a';
+    ctx.fillRect(4, 6, 19, 14);
+    ctx.fillRect(18, 2, 9, 9); // tête
+
+    // Détails texture
+    ctx.fillStyle = '#b88a2e';
+    ctx.fillRect(6, 9, 4, 3);
+    ctx.fillRect(13, 11, 5, 3);
+
+    // Queue
+    ctx.fillRect(1, 12, 6, 5);
+
+    // Pattes améliorées
+    ctx.fillStyle = '#c19335';
+    if (!player.jumping) {
+      ctx.fillRect(leg === 0 ? 7 : 6, 19, 5, 8);
+      ctx.fillRect(leg === 1 ? 14 : 13, 19, 5, 8);
+    } else {
+      ctx.fillRect(7, 19, 5, 7);
+      ctx.fillRect(14, 19, 5, 7);
+    }
+
+    // Œil + pupille
+    ctx.fillStyle = '#1c1408';
+    ctx.fillRect(22, 6, 4, 4);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(23, 7, 2, 2);
+
+    ctx.restore();
+  }
+
+  function drawObstacle(o){
+    ctx.save();
+    ctx.translate(o.x, o.y);
+    if (o.type === 'cactus') {
+      ctx.fillStyle = '#2e7a4f';
+      ctx.fillRect(0, 0, o.w, o.h);
+      ctx.fillRect(o.w*0.3, -o.h*0.35, o.w*0.4, o.h*0.45);
+      ctx.fillStyle = '#1f5a3a';
+      ctx.fillRect(3, 4, o.w-6, 5);
+    } else { // bird
+      ctx.fillStyle = '#6b4e9e';
+      ctx.beginPath();
+      ctx.ellipse(o.w/2, o.h/2, o.w/2, o.h/2.2, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle = '#4a2e7a';
+      ctx.fillRect(o.w*0.6, o.h*0.3, o.w*0.35, 4);
+    }
+    ctx.restore();
+  }
+
+  function draw(){
+    drawBackground();
+    drawGround();
+    drawDino();
+    obstacles.forEach(drawObstacle);
+
+    ctx.fillStyle = '#f0e6c8';
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 13px monospace';
+    if (!started) {
+      ctx.fillText('APPUIE / TOUCHE POUR COMMENCER', W/2, H/2 - 10);
+    } else if (gameOver) {
+      ctx.fillStyle = 'rgba(20,10,5,0.75)';
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#ffdd88';
+      ctx.fillText('GAME OVER — Score: ' + Math.floor(score), W/2, H/2 - 12);
+      ctx.font = '12px monospace';
+      ctx.fillText('Touchez pour rejouer', W/2, H/2 + 18);
+    }
+  }
+
+  function loop(){
+    update();
+    draw();
+    gameRAF = requestAnimationFrame(loop);
+  }
+  loop();
+
+  const onTap = (e) => { e.preventDefault(); jump(); };
+  canvas.addEventListener('touchstart', onTap, { passive: false });
+  canvas.addEventListener('mousedown', onTap);
+  gameTouchCleanup = () => {
+    canvas.removeEventListener('touchstart', onTap);
+    canvas.removeEventListener('mousedown', onTap);
+  };
+  gameKeyHandler = (e) => { if (e.code === 'Space') { e.preventDefault(); jump(); } };
+  document.addEventListener('keydown', gameKeyHandler);
+}
+
+// --------- PAC-MAN AMÉLIORÉ ---------
+function startPacmanGame(){
+  activeGame = 'pacman';
+  const canvas = document.getElementById('gameCanvas');
+  const cell = 19;
+  const maze = [
+    '#############',
+    '#.....#.....#',
+    '#.###.#.###.#',
+    '#...........#',
+    '#.###.#.###.#',
+    '#.....#.....#',
+    '##.##.#.##.##',
+    '#.....#.....#',
+    '#.###.#.###.#',
+    '#...........#',
+    '#.###.#.###.#',
+    '#.....#.....#',
+    '#############'
+  ];
+  const rows = maze.length, cols = maze[0].length;
+  canvas.width = cols * cell; canvas.height = rows * cell + 4;
+  const ctx = canvas.getContext('2d');
+
+  let grid, dotsLeft, player, ghosts, score, gameOver, win, difficulty = 1, frameCount = 0;
+
+  function isWall(r, c){ return r < 0 || c < 0 || r >= rows || c >= cols || grid[r][c] === '#'; }
+
+  function restart(){
+    grid = maze.map(row => row.split(''));
+    dotsLeft = 0;
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) if (grid[r][c] === '.') dotsLeft++;
+    player = { r: 1, c: 1, dir: 'right', next: null };
+    ghosts = [
+      { r: 5, c: 5, color: '#ff5555', lastDir: 'left' },
+      { r: 5, c: 7, color: '#55aaff', lastDir: 'right' }
+    ];
+    score = 0; gameOver = false; win = false; difficulty = 1;
+    document.getElementById('gameScoreVal').textContent = '0';
+  }
+  restart();
+
+  function step(){
+    if (gameOver || win) return;
+    frameCount++;
+
+    if (frameCount % 220 === 0) difficulty = Math.min(2, difficulty + 0.12);
+
+    if (player.next && !isWall(player.r + (player.next==='up'?-1:player.next==='down'?1:0), player.c + (player.next==='left'?-1:player.next==='right'?1:0))) {
+      player.dir = player.next;
+    }
+    const dr = player.dir === 'up' ? -1 : player.dir === 'down' ? 1 : 0;
+    const dc = player.dir === 'left' ? -1 : player.dir === 'right' ? 1 : 0;
+    if (!isWall(player.r + dr, player.c + dc)) {
+      player.r += dr;
+      player.c += dc;
+    }
+
+    if (grid[player.r][player.c] === '.') {
+      grid[player.r][player.c] = ' ';
+      score += 12;
+      dotsLeft--;
+      document.getElementById('gameScoreVal').textContent = score;
+      if (dotsLeft <= 0) win = true;
+    }
+
+    // Ghosts plus agressifs
+    ghosts.forEach(g => {
+      let dirs = ['up','down','left','right'].filter(d => {
+        let nr = g.r + (d==='up'?-1:d==='down'?1:0);
+        let nc = g.c + (d==='left'?-1:d==='right'?1:0);
+        return !isWall(nr, nc);
+      });
+      if (dirs.length > 1 && Math.random() < 0.35 + difficulty*0.06) {
+        // Bias vers joueur
+        const best = dirs.sort((a,b) => {
+          const da = Math.abs((g.r + (a==='up'?-1:a==='down'?1:0)) - player.r) + Math.abs((g.c + (a==='left'?-1:a==='right'?1:0)) - player.c);
+          const db = Math.abs((g.r + (b==='up'?-1:b==='down'?1:0)) - player.r) + Math.abs((g.c + (b==='left'?-1:b==='right'?1:0)) - player.c);
+          return da - db;
+        })[0];
+        tryMove(g, best);
+      } else if (dirs.length) {
+        tryMove(g, dirs[Math.floor(Math.random()*dirs.length)]);
+      }
+    });
+
+    ghosts.forEach(g => { 
+      if (g.r === player.r && g.c === player.c) gameOver = true; 
+    });
+  }
+
+  function tryMove(entity, dir){
+    let r = entity.r, c = entity.c;
+    if (dir === 'up') r--; else if (dir === 'down') r++; else if (dir === 'left') c--; else if (dir === 'right') c++;
+    if (!isWall(r, c)) { entity.r = r; entity.c = c; entity.lastDir = dir; return true; }
+    return false;
+  }
+
+  function draw(){
+    ctx.fillStyle = '#0a0c14';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const x = c * cell, y = r * cell;
+        if (grid[r][c] === '#') {
+          const grad = ctx.createLinearGradient(x, y, x+cell, y+cell);
+          grad.addColorStop(0, '#3a4a8f');
+          grad.addColorStop(1, '#22285a');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.roundRect ? ctx.roundRect(x+1, y+1, cell-2, cell-2, 4) : ctx.rect(x+1, y+1, cell-2, cell-2);
+          ctx.fill();
+        } else if (grid[r][c] === '.') {
+          ctx.fillStyle = '#ffdd77';
+          ctx.shadowColor = 'rgba(255,221,119,0.7)';
+          ctx.shadowBlur = 4;
+          ctx.beginPath();
+          ctx.arc(x + cell/2, y + cell/2, 3.5, 0, Math.PI*2);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      }
+    }
+
+    // Pac-Man texturé
+    const mouth = Math.sin(frameCount / 3) * 0.35 + 0.15;
+    const angle = {right:0, left:Math.PI, up: -Math.PI/2, down: Math.PI/2}[player.dir] || 0;
+    ctx.save();
+    ctx.translate(player.c*cell + cell/2, player.r*cell + cell/2);
+    ctx.rotate(angle);
+    ctx.fillStyle = '#ffeb3b';
+    ctx.shadowColor = 'rgba(255,235,59,0.8)';
+    ctx.shadowBlur = 8;
+    ctx.beginPath();
+    ctx.arc(0, 0, cell/2 - 2, mouth*Math.PI, (2-mouth)*Math.PI);
+    ctx.lineTo(0,0);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.restore();
+
+    // Ghosts améliorés
+    ghosts.forEach((g,i) => {
+      const gx = g.c * cell + cell/2, gy = g.r * cell + cell/2;
+      ctx.fillStyle = g.color;
+      ctx.beginPath();
+      ctx.arc(gx, gy-2, cell/2 - 3, Math.PI, 0);
+      ctx.lineTo(gx + cell/2 - 3, gy + cell/2 - 5);
+      for (let k = 0; k < 4; k++) {
+        ctx.quadraticCurveTo(gx + (k-1.5)*(cell/2 - 3)/2, gy + cell/2 - 2, gx + (k-2)*(cell/2 - 3)/2, gy + cell/2 - 5);
+      }
+      ctx.fill();
+
+      // Yeux
+      ctx.fillStyle = '#fff';
+      ctx.beginPath(); ctx.arc(gx-5, gy-3, 4, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(gx+5, gy-3, 4, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#112';
+      ctx.beginPath(); ctx.arc(gx-5 + (player.c > g.c ? 1 : -1), gy-3, 1.8, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(gx+5 + (player.c > g.c ? 1 : -1), gy-3, 1.8, 0, Math.PI*2); ctx.fill();
+
+      // Petit sourire mignon
+      ctx.strokeStyle = 'rgba(0,0,0,0.35)';
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.arc(gx, gy+2, 4, 0.15*Math.PI, 0.85*Math.PI);
+      ctx.stroke();
+    });
+
+    if (gameOver || win) {
+      ctx.fillStyle = 'rgba(0,0,0,0.7)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = win ? '#aaff88' : '#ff8866';
+      ctx.font = 'bold 17px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(win ? 'VICTOIRE !' : 'GAME OVER', canvas.width/2, canvas.height/2 - 8);
+      ctx.font = '13px sans-serif';
+      ctx.fillStyle = '#ddd';
+      ctx.fillText('Touchez pour recommencer', canvas.width/2, canvas.height/2 + 22);
+    }
+  }
+
+  let lastTick = 0;
+  function loop(ts){
+    if (!lastTick) lastTick = ts;
+    if (ts - lastTick > 230 - difficulty*14) {
+      step();
+      lastTick = ts;
+    }
+    draw();
+    gameRAF = requestAnimationFrame(loop);
+  }
+  gameRAF = requestAnimationFrame(loop);
+
+  function setDir(d){
+    if (gameOver || win) { restart(); return; }
+    player.next = d;
+  }
+
+  gameKeyHandler = (e) => {
+    const m = {ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right'};
+    if (m[e.key]) { e.preventDefault(); setDir(m[e.key]); }
+  };
+  document.addEventListener('keydown', gameKeyHandler);
+
+  const dpad = document.querySelectorAll('#gameDpad button');
+  dpad.forEach(b => b.addEventListener('click', (e)=>{ e.preventDefault(); setDir(b.dataset.dir); }));
+
+  const onTap = () => { if(gameOver || win) restart(); };
+  canvas.addEventListener('click', onTap);
+
+  gameTouchCleanup = () => {
+    dpad.forEach(b => b.removeEventListener('click', () => {})); // cleanup simplifié
+    canvas.removeEventListener('click', onTap);
+  };
+}
+
+// --------- DAMES (Solo vs IA ou Duel à 2, rendu plus charmant) ---------
+function startCheckersGame(mode){
+  mode = mode === 'solo' ? 'solo' : 'duel';
+  activeGame = 'checkers';
+  const canvas = document.getElementById('gameCanvas');
+  const size = 8, cell = 38;
+  canvas.width = size * cell; canvas.height = size * cell;
+  const ctx = canvas.getContext('2d');
+
+  let board, turn, selected, validTargets, gameOver, winner, aiThinking = false;
+
+  function inBounds(r, c){ return r >= 0 && r < size && c >= 0 && c < size; }
+
+  function countPieces(p){
+    let n = 0;
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) if (board[r][c] && board[r][c].player === p) n++;
+    return n;
+  }
+
+  function movesFor(r, c){
+    const piece = board[r][c];
+    if (!piece) return [];
+    const dirs = piece.king ? [[-1,-1],[-1,1],[1,-1],[1,1]] : (piece.player === 1 ? [[-1,-1],[-1,1]] : [[1,-1],[1,1]]);
+    const moves = [];
+    dirs.forEach(([dr, dc]) => {
+      const nr = r + dr, nc = c + dc;
+      if (inBounds(nr, nc) && !board[nr][nc]) moves.push({ r: nr, c: nc, capture: null });
+      const jr = r + dr * 2, jc = c + dc * 2;
+      if (inBounds(jr, jc) && !board[jr][jc] && board[nr][nc] && board[nr][nc].player !== piece.player) {
+        moves.push({ r: jr, c: jc, capture: { r: nr, c: nc } });
+      }
+    });
+    return moves;
+  }
+
+  function initBoard(){
+    board = Array.from({ length: size }, () => Array(size).fill(null));
+    for (let r = 0; r < 3; r++) for (let c = 0; c < size; c++) if ((r + c) % 2 === 1) board[r][c] = { player: 2, king: false };
+    for (let r = size - 3; r < size; r++) for (let c = 0; c < size; c++) if ((r + c) % 2 === 1) board[r][c] = { player: 1, king: false };
+    turn = 1;
+    selected = null;
+    validTargets = [];
+    gameOver = false;
+    winner = null;
+    aiThinking = false;
+    updateStatus();
+  }
+
+  function updateStatus(){
+    document.getElementById('gameScoreVal').textContent = countPieces(1) + ' - ' + countPieces(2);
+    if (gameOver) {
+      const who = mode === 'solo' ? (winner === 1 ? 'Vous gagnez 🎉' : 'L’IA gagne') : ('Joueur ' + winner + ' gagne !');
+      document.getElementById('gameExtraInfo').textContent = who;
+    } else if (mode === 'solo' && turn === 2) {
+      document.getElementById('gameExtraInfo').textContent = "L'IA réfléchit…";
+    } else {
+      document.getElementById('gameExtraInfo').textContent = mode === 'solo' ? 'À vous de jouer' : ('Tour Joueur ' + turn);
+    }
+  }
+
+  function select(r, c){
+    const piece = board[r][c];
+    if (!piece || piece.player !== turn) { selected = null; validTargets = []; return; }
+    let moves = movesFor(r, c);
+    const captures = moves.filter(m => m.capture);
+    if (captures.length) moves = captures;
+    selected = { r, c };
+    validTargets = moves;
+  }
+
+  function move(target){
+    const piece = board[selected.r][selected.c];
+    board[selected.r][selected.c] = null;
+    if (target.capture) board[target.capture.r][target.capture.c] = null;
+    if ((piece.player === 1 && target.r === 0) || (piece.player === 2 && target.r === size - 1)) piece.king = true;
+    board[target.r][target.c] = piece;
+    selected = null; validTargets = [];
+
+    if (countPieces(1) === 0) { gameOver = true; winner = 2; }
+    else if (countPieces(2) === 0) { gameOver = true; winner = 1; }
+    else {
+      turn = turn === 1 ? 2 : 1;
+    }
+    updateStatus();
+
+    if (!gameOver && mode === 'solo' && turn === 2) {
+      aiThinking = true;
+      setTimeout(aiMove, 550);
+    }
+  }
+
+  function aiMove(){
+    aiThinking = false;
+    if (gameOver || turn !== 2) return;
+    const all = [];
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) {
+      if (board[r][c] && board[r][c].player === 2) {
+        movesFor(r, c).forEach(m => all.push({ from: { r, c }, to: m }));
+      }
+    }
+    if (!all.length) { gameOver = true; winner = 1; updateStatus(); return; }
+    const captures = all.filter(m => m.to.capture);
+    const pool = captures.length ? captures : all;
+    const chosen = pool[Math.floor(Math.random() * pool.length)];
+    selected = chosen.from;
+    move(chosen.to);
+  }
+
+  function draw(){
+    for (let r = 0; r < size; r++) {
+      for (let c = 0; c < size; c++) {
+        const x = c * cell, y = r * cell;
+        ctx.fillStyle = (r + c) % 2 === 1 ? '#3a2a20' : '#e8d3a0';
+        ctx.fillRect(x, y, cell, cell);
+      }
+    }
+    if (selected) {
+      ctx.fillStyle = 'rgba(224,177,92,0.5)';
+      ctx.fillRect(selected.c * cell, selected.r * cell, cell, cell);
+    }
+    validTargets.forEach(m => {
+      ctx.fillStyle = m.capture ? 'rgba(224,90,90,0.85)' : 'rgba(90,224,160,0.85)';
+      ctx.beginPath();
+      ctx.arc(m.c*cell + cell/2, m.r*cell + cell/2, 9, 0, Math.PI*2);
+      ctx.fill();
+    });
+
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) {
+      const p = board[r][c];
+      if (!p) continue;
+      const x = c*cell + cell/2, y = r*cell + cell/2;
+      const rad = cell/2 - 5;
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = 'rgba(0,0,0,0.6)';
+      const grad = ctx.createRadialGradient(x-4, y-5, 2, x, y, rad);
+      if (p.player === 1) {
+        grad.addColorStop(0, '#ffe9b8'); grad.addColorStop(1, '#d99a3f');
+      } else {
+        grad.addColorStop(0, '#a9b3ff'); grad.addColorStop(1, '#4b58c9');
+      }
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(x, y, rad, 0, Math.PI*2);
+      ctx.fill();
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+      if (p.king) {
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 20px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('♔', x, y+7);
+      }
+    }
+  }
+
+  initBoard();
+
+  function loop(){ draw(); gameRAF = requestAnimationFrame(loop); }
+  loop();
+
+  const onTap = (e) => {
+    if (gameOver) { initBoard(); return; }
+    if (mode === 'solo' && (turn === 2 || aiThinking)) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+    const c = Math.floor(x / cell), r = Math.floor(y / cell);
+    if (selected) {
+      const tgt = validTargets.find(m => m.r === r && m.c === c);
+      if (tgt) { move(tgt); return; }
+    }
+    select(r, c);
+  };
+  canvas.addEventListener('click', onTap);
+  gameTouchCleanup = () => canvas.removeEventListener('click', onTap);
+}
+// --------- ÉCHECS (Solo vs IA ou Duel à 2) ---------
+function startChessGame(mode){
+  mode = mode === 'solo' ? 'solo' : 'duel';
+  activeGame = 'chess';
+  const canvas = document.getElementById('gameCanvas');
+  const size = 8, cell = 38;
+  canvas.width = size * cell; canvas.height = size * cell;
+  const ctx = canvas.getContext('2d');
+
+  const VALUES = { p:1, n:3, b:3, r:5, q:9, k:1000 };
+  const WHITE_GLYPH = { k:'♔', q:'♕', r:'♖', b:'♗', n:'♘', p:'♙' };
+  const BLACK_GLYPH = { k:'♚', q:'♛', r:'♜', b:'♝', n:'♞', p:'♟' };
+
+  let board, turn, selected, validTargets, gameOver, winner, aiThinking = false;
+
+  function inBounds(r, c){ return r >= 0 && r < size && c >= 0 && c < size; }
+
+  function initBoard(){
+    board = Array.from({ length: size }, () => Array(size).fill(null));
+    const back = ['r','n','b','q','k','b','n','r'];
+    for (let c = 0; c < size; c++) {
+      board[0][c] = { type: back[c], player: 2 };
+      board[1][c] = { type: 'p', player: 2 };
+      board[6][c] = { type: 'p', player: 1 };
+      board[7][c] = { type: back[c], player: 1 };
+    }
+    turn = 1; selected = null; validTargets = []; gameOver = false; winner = null; aiThinking = false;
+    updateStatus();
+  }
+
+  function hasKing(player){
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) if (board[r][c] && board[r][c].type === 'k' && board[r][c].player === player) return true;
+    return false;
+  }
+
+  function countMaterial(player){
+    let s = 0;
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) { const p = board[r][c]; if (p && p.player === player && p.type !== 'k') s += VALUES[p.type]; }
+    return s;
+  }
+
+  function slideMoves(r, c, dirs, piece){
+    const moves = [];
+    dirs.forEach(([dr, dc]) => {
+      let nr = r + dr, nc = c + dc;
+      while (inBounds(nr, nc)) {
+        const t = board[nr][nc];
+        if (!t) { moves.push({ r: nr, c: nc, capture: null }); }
+        else { if (t.player !== piece.player) moves.push({ r: nr, c: nc, capture: { r: nr, c: nc } }); break; }
+        nr += dr; nc += dc;
+      }
+    });
+    return moves;
+  }
+
+  function movesFor(r, c){
+    const piece = board[r][c];
+    if (!piece) return [];
+    const moves = [];
+    if (piece.type === 'p') {
+      const dir = piece.player === 1 ? -1 : 1;
+      const startRow = piece.player === 1 ? 6 : 1;
+      const oneR = r + dir;
+      if (inBounds(oneR, c) && !board[oneR][c]) {
+        moves.push({ r: oneR, c, capture: null });
+        const twoR = r + dir * 2;
+        if (r === startRow && !board[twoR][c]) moves.push({ r: twoR, c, capture: null });
+      }
+      [c - 1, c + 1].forEach(nc => {
+        if (inBounds(oneR, nc)) {
+          const t = board[oneR][nc];
+          if (t && t.player !== piece.player) moves.push({ r: oneR, c: nc, capture: { r: oneR, c: nc } });
+        }
+      });
+    } else if (piece.type === 'n') {
+      [[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]].forEach(([dr, dc]) => {
+        const nr = r + dr, nc = c + dc;
+        if (inBounds(nr, nc)) {
+          const t = board[nr][nc];
+          if (!t) moves.push({ r: nr, c: nc, capture: null });
+          else if (t.player !== piece.player) moves.push({ r: nr, c: nc, capture: { r: nr, c: nc } });
+        }
+      });
+    } else if (piece.type === 'b') {
+      moves.push(...slideMoves(r, c, [[-1,-1],[-1,1],[1,-1],[1,1]], piece));
+    } else if (piece.type === 'r') {
+      moves.push(...slideMoves(r, c, [[-1,0],[1,0],[0,-1],[0,1]], piece));
+    } else if (piece.type === 'q') {
+      moves.push(...slideMoves(r, c, [[-1,-1],[-1,1],[1,-1],[1,1],[-1,0],[1,0],[0,-1],[0,1]], piece));
+    } else if (piece.type === 'k') {
+      [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]].forEach(([dr, dc]) => {
+        const nr = r + dr, nc = c + dc;
+        if (inBounds(nr, nc)) {
+          const t = board[nr][nc];
+          if (!t) moves.push({ r: nr, c: nc, capture: null });
+          else if (t.player !== piece.player) moves.push({ r: nr, c: nc, capture: { r: nr, c: nc } });
+        }
+      });
+    }
+    return moves;
+  }
+
+  function updateStatus(){
+    document.getElementById('gameScoreVal').textContent = countMaterial(1) + ' - ' + countMaterial(2);
+    if (gameOver) {
+      const who = mode === 'solo' ? (winner === 1 ? 'Vous gagnez 🎉' : 'L’IA gagne') : ('Joueur ' + winner + ' gagne !');
+      document.getElementById('gameExtraInfo').textContent = who;
+    } else if (mode === 'solo' && turn === 2) {
+      document.getElementById('gameExtraInfo').textContent = "L'IA réfléchit…";
+    } else {
+      document.getElementById('gameExtraInfo').textContent = mode === 'solo' ? 'À vous de jouer' : ('Tour Joueur ' + turn);
+    }
+  }
+
+  function select(r, c){
+    const piece = board[r][c];
+    if (!piece || piece.player !== turn) { selected = null; validTargets = []; return; }
+    selected = { r, c };
+    validTargets = movesFor(r, c);
+  }
+
+  function applyMove(from, target){
+    const piece = board[from.r][from.c];
+    board[from.r][from.c] = null;
+    board[target.r][target.c] = piece;
+    if (piece.type === 'p' && (target.r === 0 || target.r === size - 1)) piece.type = 'q';
+    selected = null; validTargets = [];
+
+    if (!hasKing(1)) { gameOver = true; winner = 2; }
+    else if (!hasKing(2)) { gameOver = true; winner = 1; }
+    else { turn = turn === 1 ? 2 : 1; }
+    updateStatus();
+
+    if (!gameOver && mode === 'solo' && turn === 2) {
+      aiThinking = true;
+      setTimeout(aiMove, 550);
+    }
+  }
+
+  function move(target){ applyMove(selected, target); }
+
+  function aiMove(){
+    aiThinking = false;
+    if (gameOver || turn !== 2) return;
+    const all = [];
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) {
+      if (board[r][c] && board[r][c].player === 2) {
+        movesFor(r, c).forEach(m => all.push({ from: { r, c }, to: m }));
+      }
+    }
+    if (!all.length) { gameOver = true; winner = 1; updateStatus(); return; }
+    let best = -1, bestMoves = [];
+    all.forEach(m => {
+      let score = m.to.capture ? VALUES[board[m.to.capture.r][m.to.capture.c].type] : 0;
+      score += Math.random() * 0.6;
+      if (score > best) { best = score; bestMoves = [m]; }
+      else if (score === best) bestMoves.push(m);
+    });
+    const chosen = bestMoves[Math.floor(Math.random() * bestMoves.length)];
+    applyMove(chosen.from, chosen.to);
+  }
+
+  function draw(){
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) {
+      const x = c * cell, y = r * cell;
+      ctx.fillStyle = (r + c) % 2 === 1 ? '#4a5a3a' : '#eee6cf';
+      ctx.fillRect(x, y, cell, cell);
+    }
+    if (selected) {
+      ctx.fillStyle = 'rgba(224,177,92,0.5)';
+      ctx.fillRect(selected.c * cell, selected.r * cell, cell, cell);
+    }
+    validTargets.forEach(m => {
+      ctx.fillStyle = m.capture ? 'rgba(224,90,90,0.85)' : 'rgba(90,224,160,0.8)';
+      ctx.beginPath();
+      ctx.arc(m.c*cell + cell/2, m.r*cell + cell/2, 8, 0, Math.PI*2);
+      ctx.fill();
+    });
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) {
+      const p = board[r][c];
+      if (!p) continue;
+      const x = c*cell + cell/2, y = r*cell + cell/2;
+      const glyph = p.player === 1 ? WHITE_GLYPH[p.type] : BLACK_GLYPH[p.type];
+      ctx.font = '30px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.shadowBlur = 4;
+      ctx.shadowColor = p.player === 1 ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.25)';
+      ctx.fillStyle = p.player === 1 ? '#fdf6e3' : '#20232b';
+      ctx.fillText(glyph, x, y + 2);
+      ctx.shadowBlur = 0;
+    }
+  }
+
+  initBoard();
+
+  function loop(){ draw(); gameRAF = requestAnimationFrame(loop); }
+  loop();
+
+  const onTap = (e) => {
+    if (gameOver) { initBoard(); return; }
+    if (mode === 'solo' && (turn === 2 || aiThinking)) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+    const c = Math.floor(x / cell), r = Math.floor(y / cell);
+    if (selected) {
+      const tgt = validTargets.find(m => m.r === r && m.c === c);
+      if (tgt) { move(tgt); return; }
+    }
+    select(r, c);
+  };
+  canvas.addEventListener('click', onTap);
+  gameTouchCleanup = () => canvas.removeEventListener('click', onTap);
+}
+// ===== Autres fonctions existantes (reviews, suggestions...) =====
+function toggleReviews(element) {
+  const list = element.querySelector('.reviews-list');
+  if (list) list.style.display = list.style.display === 'none' ? 'block' : 'none';
+}
+
+function submitSuggestion(e) {
+  e.preventDefault();
+  const text = document.getElementById('suggestionText').value;
+  if (text) {
+    alert('Merci pour votre suggestion ! Elle a été prise en compte.');
+    document.getElementById('suggestionText').value = '';
+  }
+}
+</script>
+
+<!-- ================= MODALE JEUX ================= -->
+<div class="game-modal" id="gameModal">
+  <div class="game-modal-inner">
+    <div class="game-modal-header">
+      <h3 id="gameModalTitle">Jeu</h3>
+      <button class="game-modal-close" onclick="closeGameModal()">✕</button>
+    </div>
+    <div class="game-modal-score">
+      <span>Score : <b id="gameScoreVal">0</b></span>
+      <span id="gameExtraInfo"></span>
+    </div>
+    <div class="game-mode-select" id="gameModeSelect" style="display:none;">
+      <p>Choisissez un mode de jeu :</p>
+      <div class="game-mode-buttons">
+        <button class="mode-btn" type="button" id="modeSoloBtn"><span class="mode-emoji">🤖</span>Solo (vs IA)</button>
+        <button class="mode-btn" type="button" id="modeDuelBtn"><span class="mode-emoji">🧑‍🤝‍🧑</span>Duel (2 joueurs)</button>
+      </div>
+    </div>
+    <canvas id="gameCanvas" width="320" height="180"></canvas>
+    <p class="game-modal-hint" id="gameModalHint">Touchez l'écran ou appuyez sur Espace pour sauter</p>
+    <div class="game-dpad" id="gameDpad">
+      <button class="dpad-up" data-dir="up">▲</button>
+      <button class="dpad-left" data-dir="left">◀</button>
+      <button class="dpad-right" data-dir="right">▶</button>
+      <button class="dpad-down" data-dir="down">▼</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
