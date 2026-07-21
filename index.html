@@ -260,6 +260,24 @@
     max-width:100%; touch-action:none; image-rendering:pixelated;
   }
   .game-modal-hint{font-size:.78rem; color:var(--muted); text-align:center; margin:0;}
+
+  .game-mode-select{
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+    padding:18px 6px 24px;
+  }
+  .game-mode-select p{margin:0; color:var(--muted); font-size:.9rem;}
+  .game-mode-buttons{display:flex; gap:12px; flex-wrap:wrap; justify-content:center;}
+  .mode-btn{
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:14px;
+    padding:16px 20px; cursor:pointer; color:var(--text); font-weight:600; font-size:.88rem;
+    transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .mode-btn .mode-emoji{font-size:1.7rem;}
+  .mode-btn:hover{transform:translateY(-3px); border-color:var(--gold); box-shadow:0 10px 24px rgba(0,0,0,0.35);}
+  .mode-btn:active{transform:translateY(-1px) scale(.97);}
+
+  #gameCanvas{border-radius:10px;}
   .game-dpad{
     display:none; grid-template-columns:repeat(3,44px); grid-template-rows:repeat(3,44px);
     gap:4px; margin-top:4px;
@@ -280,14 +298,17 @@
     display:inline-flex; align-items:center; gap:8px;
     padding:12px 22px; border-radius:999px;
     font-weight:600; font-size:.95rem; text-decoration:none;
-    border:1px solid transparent; cursor:pointer; transition:transform .15s, opacity .15s;
+    border:1px solid transparent; cursor:pointer;
+    transition:transform .18s ease, opacity .18s ease, box-shadow .18s ease;
+    position:relative; overflow:hidden;
   }
   .btn:active{transform:scale(0.97);}
-  .btn-primary{background:var(--gold); color:#1a1305;}
-  .btn-primary:hover{opacity:.9;}
+  .btn-primary{background:linear-gradient(135deg,#f0c477,var(--gold)); color:#1a1305; box-shadow:0 6px 18px rgba(224,177,92,0.28);}
+  .btn-primary:hover{opacity:1; transform:translateY(-2px); box-shadow:0 10px 24px rgba(224,177,92,0.4);}
   .btn-outline{border-color:var(--line); color:var(--text); background:transparent;}
-  .btn-outline:hover{border-color:var(--gold); color:var(--gold);}
-  .btn-whatsapp{background:#25D366; color:#04220f;}
+  .btn-outline:hover{border-color:var(--gold); color:var(--gold); transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.25);}
+  .btn-whatsapp{background:linear-gradient(135deg,#2fe37e,#1fb866); color:#04220f; box-shadow:0 6px 18px rgba(37,211,102,0.3);}
+  .btn-whatsapp:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(37,211,102,0.42);}
   .btn-sm{padding:9px 16px; font-size:.85rem;}
 
   /* ---------- Hero ---------- */
@@ -327,7 +348,7 @@
 
   .hero-panel{
     background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    padding:28px;
+    padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.35);
   }
   .hero-panel h3{font-size:1.05rem; margin-bottom:14px;}
   .stat-row{
@@ -343,7 +364,11 @@
   /* ---------- Sections ---------- */
   section{padding:70px 0; scroll-margin-top:84px;}
   .section-head{margin-bottom:40px; max-width:640px;}
-  .section-head h2{font-size:clamp(1.7rem,4vw,2.4rem);}
+  .section-head h2{font-size:clamp(1.7rem,4vw,2.4rem); position:relative; padding-bottom:14px;}
+  .section-head h2::after{
+    content:""; position:absolute; left:0; bottom:0; height:3px; width:56px;
+    background:linear-gradient(90deg,var(--gold),var(--terra)); border-radius:3px;
+  }
   .section-head p{color:var(--muted); margin:0;}
   .alt{background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
 
@@ -354,14 +379,16 @@
   }
   .service-card{
     background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    padding:26px; transition:border-color .2s, transform .2s;
+    padding:26px; transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+    cursor:pointer;
   }
-  .service-card:hover{border-color:var(--gold); transform:translateY(-3px);}
+  .service-card:hover{border-color:var(--gold); transform:translateY(-5px); box-shadow:0 16px 34px rgba(0,0,0,0.35);}
   .service-card .icon{
     width:46px; height:46px; border-radius:12px;
     display:flex; align-items:center; justify-content:center;
     font-size:1.4rem; margin-bottom:16px;
-    background:rgba(224,177,92,0.12); color:var(--gold);
+    background:linear-gradient(135deg, rgba(224,177,92,0.22), rgba(224,177,92,0.06));
+    color:var(--gold); border:1px solid rgba(224,177,92,0.25);
   }
   .service-card h3{font-size:1.1rem; margin-bottom:8px;}
   .service-card p{color:var(--muted); font-size:.92rem; margin:0;}
@@ -1302,12 +1329,12 @@
       <div class="game-tile" style="--gtint:#5b6cf0; --gtint-bg:rgba(91,108,240,.18); --gtint-border:rgba(91,108,240,.45);" onclick="launchGame('chess')">
         <div class="game-tile-icon">♟️</div>
         <div class="game-tile-name">Échecs</div>
-        <div class="game-tile-tag">Stratégie</div>
+        <div class="game-tile-tag">Solo ou Duel</div>
       </div>
       <div class="game-tile" style="--gtint:#9a9aa5; --gtint-bg:rgba(154,154,165,.18); --gtint-border:rgba(154,154,165,.45);" onclick="launchGame('checkers')">
         <div class="game-tile-icon">⚫</div>
         <div class="game-tile-name">Dames</div>
-        <div class="game-tile-tag">2 joueurs</div>
+        <div class="game-tile-tag">Solo ou Duel</div>
       </div>
       <div class="game-tile" style="--gtint:#3fb68b; --gtint-bg:rgba(63,182,139,.18); --gtint-border:rgba(63,182,139,.45);" onclick="launchGame('scrabble')">
         <div class="game-tile-icon">📝</div>
@@ -1569,27 +1596,35 @@
   revealEls.forEach(el => observer.observe(el));
 
   let WHATSAPP_NUMBERS = ['22606121297', '22656761864'];
+  let SMS_NUMBERS = ['06121297', '56761864'];
   let DOC_NOTE = "Pour un meilleur résultat, envoyez une photo nette, bien droite et complète, avec une page non inclinée et non courbée.";
   let currentServicePayload = null;
   let previewUnlocked = false;
   let lastDesignSummary = '';
 
+  function pickRandom(list){
+    return list[Math.floor(Math.random() * list.length)];
+  }
+
   function pickWhatsAppNumber(service){
-    return WHATSAPP_NUMBERS[Math.floor(Math.random() * WHATSAPP_NUMBERS.length)];
+    return pickRandom(WHATSAPP_NUMBERS);
   }
 
   function openWhatsApp(number, text){
-    const url = `https://wa.me/\( {number}?text= \){encodeURIComponent(text)}`;
+    const url = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
+  }
+
+  function openSMS(number, text){
+    window.location.href = `sms:${number}?body=${encodeURIComponent(text)}`;
   }
 
   function openGeneralWhatsApp(){
     const modal = ensureServiceModal();
-    const number = WHATSAPP_NUMBERS[0];
-    currentServicePayload = { number, message: "" };
+    currentServicePayload = { message: "" };
     modal.querySelector('#serviceModalIcon').textContent = '👋';
     modal.querySelector('#serviceModalTitle').textContent = 'BONJOUR';
-    modal.querySelector('#serviceModalIntro').textContent = 'Dites-nous toutes vos procurations.';
+    modal.querySelector('#serviceModalIntro').textContent = 'Dites-nous tout, puis choisissez votre moyen de contact préféré.';
     modal.querySelector('#serviceModalNote').textContent = '';
     modal.classList.add('open');
   }
@@ -1631,34 +1666,67 @@
       <div class="service-modal-card">
         <div class="service-modal-icon" id="serviceModalIcon">💬</div>
         <h3 id="serviceModalTitle">Confirmer votre demande</h3>
-        <p id="serviceModalIntro">Préparez votre message avant l'ouverture de WhatsApp.</p>
+        <p id="serviceModalIntro">Préparez votre message, puis choisissez WhatsApp ou Messagerie.</p>
         <div class="service-note" id="serviceModalNote"></div>
-        <div class="service-modal-actions">
+        <div class="service-modal-actions" id="serviceMainActions">
           <button class="btn btn-outline" type="button" id="serviceCancel">Fermer</button>
           <button class="btn btn-primary" type="button" id="serviceConfirm">D'accord</button>
         </div>
+        <div class="game-mode-select" id="channelSelect" style="display:none;">
+          <p>Comment souhaitez-vous nous contacter ?</p>
+          <div class="game-mode-buttons">
+            <button class="mode-btn" type="button" id="channelWhatsApp"><span class="mode-emoji">💬</span>WhatsApp</button>
+            <button class="mode-btn" type="button" id="channelSMS"><span class="mode-emoji">✉️</span>Messagerie (SMS)</button>
+          </div>
+          <button class="btn btn-outline btn-sm" type="button" id="channelBack" style="margin-top:6px;">← Retour</button>
+        </div>
       </div>`;
     document.body.appendChild(modal);
+
+    function resetModalView(){
+      modal.querySelector('#serviceMainActions').style.display = 'flex';
+      modal.querySelector('#channelSelect').style.display = 'none';
+    }
+
     modal.addEventListener('click', (e) => {
-      if(e.target === modal) modal.classList.remove('open');
+      if(e.target === modal) { modal.classList.remove('open'); resetModalView(); }
     });
-    modal.querySelector('#serviceCancel').addEventListener('click', () => modal.classList.remove('open'));
+    modal.querySelector('#serviceCancel').addEventListener('click', () => {
+      modal.classList.remove('open');
+      resetModalView();
+    });
     modal.querySelector('#serviceConfirm').addEventListener('click', () => {
       if(!currentServicePayload) return;
+      modal.querySelector('#serviceMainActions').style.display = 'none';
+      modal.querySelector('#channelSelect').style.display = 'flex';
+    });
+    modal.querySelector('#channelBack').addEventListener('click', () => {
+      resetModalView();
+    });
+    modal.querySelector('#channelWhatsApp').addEventListener('click', () => {
+      if(!currentServicePayload) return;
       modal.classList.remove('open');
-      openWhatsApp(currentServicePayload.number, currentServicePayload.message);
+      resetModalView();
+      const number = pickRandom(WHATSAPP_NUMBERS);
+      openWhatsApp(number, currentServicePayload.message);
+    });
+    modal.querySelector('#channelSMS').addEventListener('click', () => {
+      if(!currentServicePayload) return;
+      modal.classList.remove('open');
+      resetModalView();
+      const number = pickRandom(SMS_NUMBERS);
+      openSMS(number, currentServicePayload.message);
     });
     return modal;
   }
 
   function openServiceFlow(service, flow, subtype){
     const modal = ensureServiceModal();
-    const number = pickWhatsAppNumber(service);
     modal.querySelector('#serviceModalIcon').textContent = '💬';
     modal.querySelector('#serviceModalTitle').textContent = service;
 
     if(flow === 'delivery' || flow === 'wash'){
-      currentServicePayload = { number, message: getServiceMessage(service, flow, subtype) };
+      currentServicePayload = { message: getServiceMessage(service, flow, subtype) };
       modal.querySelector('#serviceModalIntro').textContent = 'Votre position Google Maps sera jointe automatiquement pour faciliter le service.';
       modal.querySelector('#serviceModalNote').textContent = 'Récupération de votre position…';
       modal.classList.add('open');
@@ -1668,34 +1736,34 @@
           (pos) => {
             const lat = pos.coords.latitude.toFixed(6);
             const lng = pos.coords.longitude.toFixed(6);
-            const mapsLink = `https://www.google.com/maps?q=\( {lat}, \){lng}`;
+            const mapsLink = `https://www.google.com/maps?q=${lat},${lng}`;
             currentServicePayload.message = getServiceMessage(service, flow, subtype, mapsLink);
-            modal.querySelector('#serviceModalNote').textContent = 'Position récupérée ✓ — elle sera incluse dans votre message WhatsApp.';
+            modal.querySelector('#serviceModalNote').textContent = 'Position récupérée ✓ — elle sera incluse dans votre message.';
           },
           () => {
-            modal.querySelector('#serviceModalNote').textContent = "Position indisponible (accès refusé ou introuvable). Vous pourrez la partager manuellement dans WhatsApp via 📎 > Position.";
+            modal.querySelector('#serviceModalNote').textContent = "Position indisponible (accès refusé ou introuvable). Vous pourrez la partager manuellement une fois la discussion ouverte.";
           },
           { timeout: 8000 }
         );
       } else {
-        modal.querySelector('#serviceModalNote').textContent = "Géolocalisation non disponible sur cet appareil. Partagez votre position manuellement dans WhatsApp via 📎 > Position.";
+        modal.querySelector('#serviceModalNote').textContent = "Géolocalisation non disponible sur cet appareil. Partagez votre position manuellement une fois la discussion ouverte.";
       }
       return;
     }
 
     const message = getServiceMessage(service, flow, subtype);
-    currentServicePayload = { number, message };
+    currentServicePayload = { message };
     if(flow === 'film'){
-      modal.querySelector('#serviceModalIntro').textContent = 'Un message prêt à envoyer va s’ouvrir dans WhatsApp.';
+      modal.querySelector('#serviceModalIntro').textContent = 'Un message prêt à envoyer sera préparé. Choisissez ensuite votre moyen de contact préféré.';
       modal.querySelector('#serviceModalNote').textContent = '';
     } else if(flow === 'photo') {
-      modal.querySelector('#serviceModalIntro').textContent = 'Un message prêt à envoyer va s’ouvrir dans WhatsApp.';
+      modal.querySelector('#serviceModalIntro').textContent = 'Un message prêt à envoyer sera préparé. Choisissez ensuite votre moyen de contact préféré.';
       modal.querySelector('#serviceModalNote').textContent = '';
     } else if(flow === 'document') {
-      modal.querySelector('#serviceModalIntro').textContent = 'Lisez cette recommandation avant d’ouvrir WhatsApp.';
+      modal.querySelector('#serviceModalIntro').textContent = 'Lisez cette recommandation, puis choisissez votre moyen de contact préféré.';
       modal.querySelector('#serviceModalNote').textContent = DOC_NOTE;
     } else {
-      modal.querySelector('#serviceModalIntro').textContent = 'Un message prêt à envoyer va s’ouvrir dans WhatsApp.';
+      modal.querySelector('#serviceModalIntro').textContent = 'Un message prêt à envoyer sera préparé. Choisissez ensuite votre moyen de contact préféré.';
       modal.querySelector('#serviceModalNote').textContent = 'Ajoutez le plus de détails possible afin que KMS puisse vous répondre rapidement et avec précision.';
     }
     modal.classList.add('open');
@@ -1729,7 +1797,7 @@
       const confirmPay = confirm(`Voulez-vous initier un paiement de ${cleanAmount} FCFA vers KMS ?`);
       if(!confirmPay) return;
 
-      window.location.href = `tel:*144*2*1*\( {link.dataset.payNumber}* \){cleanAmount}%23`;
+      window.location.href = `tel:*144*2*1*${link.dataset.payNumber}*${cleanAmount}%23`;
     });
   });
 
@@ -2596,19 +2664,55 @@ function openGameModal(title, hint, showDpad){
   document.getElementById('gameScoreVal').textContent = '0';
   document.getElementById('gameExtraInfo').textContent = '';
   document.getElementById('gameDpad').classList.toggle('show', !!showDpad);
+  document.getElementById('gameModeSelect').style.display = 'none';
+  document.getElementById('gameCanvas').style.display = '';
   document.getElementById('gameModal').classList.add('open');
+}
+
+function showModeSelect(game, title){
+  closeGameModal();
+  document.getElementById('gameModalTitle').textContent = title;
+  document.getElementById('gameModalHint').textContent = '';
+  document.getElementById('gameScoreVal').textContent = '0';
+  document.getElementById('gameExtraInfo').textContent = '';
+  document.getElementById('gameDpad').classList.remove('show');
+  document.getElementById('gameCanvas').style.display = 'none';
+  const sel = document.getElementById('gameModeSelect');
+  sel.style.display = 'flex';
+  document.getElementById('gameModal').classList.add('open');
+
+  const soloBtn = document.getElementById('modeSoloBtn');
+  const duelBtn = document.getElementById('modeDuelBtn');
+  const pick = (mode) => {
+    sel.style.display = 'none';
+    document.getElementById('gameCanvas').style.display = '';
+    if (game === 'checkers') {
+      document.getElementById('gameModalHint').textContent = mode === 'solo'
+        ? 'Touchez une pièce puis une destination. Affrontez l’IA !'
+        : 'Touchez une pièce puis une destination. À vous deux de jouer !';
+      startCheckersGame(mode);
+    } else if (game === 'chess') {
+      document.getElementById('gameModalHint').textContent = mode === 'solo'
+        ? 'Touchez une pièce puis une case. Capturez le roi adverse pour gagner !'
+        : 'Touchez une pièce puis une case. Le roi capturé met fin à la partie !';
+      startChessGame(mode);
+    }
+  };
+  soloBtn.onclick = () => pick('solo');
+  duelBtn.onclick = () => pick('duel');
 }
 
 function launchGame(game) {
   if (game === 'dino') {
-    openGameModal('🦖 Dino Runner', "Touchez / Espace pour sauter. Difficulté augmente !", false);
+    openGameModal('🦖 Dino Runner', "Touchez / Espace pour sauter. Difficulté augmente en douceur !", false);
     startDinoGame();
   } else if (game === 'pacman') {
-    openGameModal('👾 Pac-Man', 'Flèches / D-pad pour bouger. Fantômes plus rapides avec le temps !', true);
+    openGameModal('👾 Pac-Man', 'Flèches / D-pad pour bouger. Les fantômes accélèrent tout doucement !', true);
     startPacmanGame();
   } else if (game === 'checkers') {
-    openGameModal('⚫ Dames', 'Touchez pièce puis destination. IA plus agressive.', false);
-    startCheckersGame();
+    showModeSelect('checkers', '⚫ Dames');
+  } else if (game === 'chess') {
+    showModeSelect('chess', '♟️ Échecs');
   } else {
     alert('Lancement du jeu : ' + game + ' (Bientôt disponible)');
   }
@@ -2882,7 +2986,7 @@ function startPacmanGame(){
     if (gameOver || win) return;
     frameCount++;
 
-    if (frameCount % 90 === 0) difficulty = Math.min(4.5, difficulty + 0.3);
+    if (frameCount % 220 === 0) difficulty = Math.min(2, difficulty + 0.12);
 
     if (player.next && !isWall(player.r + (player.next==='up'?-1:player.next==='down'?1:0), player.c + (player.next==='left'?-1:player.next==='right'?1:0))) {
       player.dir = player.next;
@@ -2909,7 +3013,7 @@ function startPacmanGame(){
         let nc = g.c + (d==='left'?-1:d==='right'?1:0);
         return !isWall(nr, nc);
       });
-      if (dirs.length > 1 && Math.random() < 0.6 + difficulty*0.08) {
+      if (dirs.length > 1 && Math.random() < 0.35 + difficulty*0.06) {
         // Bias vers joueur
         const best = dirs.sort((a,b) => {
           const da = Math.abs((g.r + (a==='up'?-1:a==='down'?1:0)) - player.r) + Math.abs((g.c + (a==='left'?-1:a==='right'?1:0)) - player.c);
@@ -2942,13 +3046,21 @@ function startPacmanGame(){
       for (let c = 0; c < cols; c++) {
         const x = c * cell, y = r * cell;
         if (grid[r][c] === '#') {
-          ctx.fillStyle = '#223366';
-          ctx.fillRect(x+1, y+1, cell-2, cell-2);
+          const grad = ctx.createLinearGradient(x, y, x+cell, y+cell);
+          grad.addColorStop(0, '#3a4a8f');
+          grad.addColorStop(1, '#22285a');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.roundRect ? ctx.roundRect(x+1, y+1, cell-2, cell-2, 4) : ctx.rect(x+1, y+1, cell-2, cell-2);
+          ctx.fill();
         } else if (grid[r][c] === '.') {
           ctx.fillStyle = '#ffdd77';
+          ctx.shadowColor = 'rgba(255,221,119,0.7)';
+          ctx.shadowBlur = 4;
           ctx.beginPath();
           ctx.arc(x + cell/2, y + cell/2, 3.5, 0, Math.PI*2);
           ctx.fill();
+          ctx.shadowBlur = 0;
         }
       }
     }
@@ -2960,10 +3072,13 @@ function startPacmanGame(){
     ctx.translate(player.c*cell + cell/2, player.r*cell + cell/2);
     ctx.rotate(angle);
     ctx.fillStyle = '#ffeb3b';
+    ctx.shadowColor = 'rgba(255,235,59,0.8)';
+    ctx.shadowBlur = 8;
     ctx.beginPath();
     ctx.arc(0, 0, cell/2 - 2, mouth*Math.PI, (2-mouth)*Math.PI);
     ctx.lineTo(0,0);
     ctx.fill();
+    ctx.shadowBlur = 0;
     ctx.restore();
 
     // Ghosts améliorés
@@ -2985,6 +3100,13 @@ function startPacmanGame(){
       ctx.fillStyle = '#112';
       ctx.beginPath(); ctx.arc(gx-5 + (player.c > g.c ? 1 : -1), gy-3, 1.8, 0, Math.PI*2); ctx.fill();
       ctx.beginPath(); ctx.arc(gx+5 + (player.c > g.c ? 1 : -1), gy-3, 1.8, 0, Math.PI*2); ctx.fill();
+
+      // Petit sourire mignon
+      ctx.strokeStyle = 'rgba(0,0,0,0.35)';
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.arc(gx, gy+2, 4, 0.15*Math.PI, 0.85*Math.PI);
+      ctx.stroke();
     });
 
     if (gameOver || win) {
@@ -3003,7 +3125,7 @@ function startPacmanGame(){
   let lastTick = 0;
   function loop(ts){
     if (!lastTick) lastTick = ts;
-    if (ts - lastTick > 160 - difficulty*18) {
+    if (ts - lastTick > 230 - difficulty*14) {
       step();
       lastTick = ts;
     }
@@ -3035,16 +3157,16 @@ function startPacmanGame(){
   };
 }
 
-// --------- DAMES (déjà bonne, légère amélioration IA) ---------
-function startCheckersGame(){
-  // (code checkers conservé avec légère amélioration IA déjà présente)
+// --------- DAMES (Solo vs IA ou Duel à 2, rendu plus charmant) ---------
+function startCheckersGame(mode){
+  mode = mode === 'solo' ? 'solo' : 'duel';
   activeGame = 'checkers';
   const canvas = document.getElementById('gameCanvas');
   const size = 8, cell = 38;
   canvas.width = size * cell; canvas.height = size * cell;
   const ctx = canvas.getContext('2d');
 
-  let board, turn, selected, validTargets, gameOver, winner;
+  let board, turn, selected, validTargets, gameOver, winner, aiThinking = false;
 
   function inBounds(r, c){ return r >= 0 && r < size && c >= 0 && c < size; }
 
@@ -3079,15 +3201,19 @@ function startCheckersGame(){
     validTargets = [];
     gameOver = false;
     winner = null;
+    aiThinking = false;
     updateStatus();
   }
 
   function updateStatus(){
     document.getElementById('gameScoreVal').textContent = countPieces(1) + ' - ' + countPieces(2);
     if (gameOver) {
-      document.getElementById('gameExtraInfo').textContent = 'Joueur ' + winner + ' gagne !';
+      const who = mode === 'solo' ? (winner === 1 ? 'Vous gagnez 🎉' : 'L’IA gagne') : ('Joueur ' + winner + ' gagne !');
+      document.getElementById('gameExtraInfo').textContent = who;
+    } else if (mode === 'solo' && turn === 2) {
+      document.getElementById('gameExtraInfo').textContent = "L'IA réfléchit…";
     } else {
-      document.getElementById('gameExtraInfo').textContent = 'Tour Joueur ' + turn;
+      document.getElementById('gameExtraInfo').textContent = mode === 'solo' ? 'À vous de jouer' : ('Tour Joueur ' + turn);
     }
   }
 
@@ -3115,13 +3241,35 @@ function startCheckersGame(){
       turn = turn === 1 ? 2 : 1;
     }
     updateStatus();
+
+    if (!gameOver && mode === 'solo' && turn === 2) {
+      aiThinking = true;
+      setTimeout(aiMove, 550);
+    }
+  }
+
+  function aiMove(){
+    aiThinking = false;
+    if (gameOver || turn !== 2) return;
+    const all = [];
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) {
+      if (board[r][c] && board[r][c].player === 2) {
+        movesFor(r, c).forEach(m => all.push({ from: { r, c }, to: m }));
+      }
+    }
+    if (!all.length) { gameOver = true; winner = 1; updateStatus(); return; }
+    const captures = all.filter(m => m.to.capture);
+    const pool = captures.length ? captures : all;
+    const chosen = pool[Math.floor(Math.random() * pool.length)];
+    selected = chosen.from;
+    move(chosen.to);
   }
 
   function draw(){
     for (let r = 0; r < size; r++) {
       for (let c = 0; c < size; c++) {
         const x = c * cell, y = r * cell;
-        ctx.fillStyle = (r + c) % 2 === 1 ? '#1f252f' : '#e8d9b8';
+        ctx.fillStyle = (r + c) % 2 === 1 ? '#3a2a20' : '#e8d3a0';
         ctx.fillRect(x, y, cell, cell);
       }
     }
@@ -3130,7 +3278,7 @@ function startCheckersGame(){
       ctx.fillRect(selected.c * cell, selected.r * cell, cell, cell);
     }
     validTargets.forEach(m => {
-      ctx.fillStyle = m.capture ? '#e05a5a' : '#5ae0a0';
+      ctx.fillStyle = m.capture ? 'rgba(224,90,90,0.85)' : 'rgba(90,224,160,0.85)';
       ctx.beginPath();
       ctx.arc(m.c*cell + cell/2, m.r*cell + cell/2, 9, 0, Math.PI*2);
       ctx.fill();
@@ -3140,26 +3288,40 @@ function startCheckersGame(){
       const p = board[r][c];
       if (!p) continue;
       const x = c*cell + cell/2, y = r*cell + cell/2;
+      const rad = cell/2 - 5;
       ctx.shadowBlur = 6;
       ctx.shadowColor = 'rgba(0,0,0,0.6)';
-      ctx.fillStyle = p.player === 1 ? '#e8c070' : '#7a88ff';
+      const grad = ctx.createRadialGradient(x-4, y-5, 2, x, y, rad);
+      if (p.player === 1) {
+        grad.addColorStop(0, '#ffe9b8'); grad.addColorStop(1, '#d99a3f');
+      } else {
+        grad.addColorStop(0, '#a9b3ff'); grad.addColorStop(1, '#4b58c9');
+      }
+      ctx.fillStyle = grad;
       ctx.beginPath();
-      ctx.arc(x, y, cell/2 - 5, 0, Math.PI*2);
+      ctx.arc(x, y, rad, 0, Math.PI*2);
       ctx.fill();
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+      ctx.stroke();
       ctx.shadowBlur = 0;
       if (p.king) {
         ctx.fillStyle = '#fff';
-        ctx.font = 'bold 22px sans-serif';
-        ctx.fillText('♔', x-7, y+8);
+        ctx.font = 'bold 20px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('♔', x, y+7);
       }
     }
   }
+
+  initBoard();
 
   function loop(){ draw(); gameRAF = requestAnimationFrame(loop); }
   loop();
 
   const onTap = (e) => {
     if (gameOver) { initBoard(); return; }
+    if (mode === 'solo' && (turn === 2 || aiThinking)) return;
     const rect = canvas.getBoundingClientRect();
     const x = (e.clientX - rect.left) * (canvas.width / rect.width);
     const y = (e.clientY - rect.top) * (canvas.height / rect.height);
@@ -3172,10 +3334,222 @@ function startCheckersGame(){
   };
   canvas.addEventListener('click', onTap);
   gameTouchCleanup = () => canvas.removeEventListener('click', onTap);
+}
+// --------- ÉCHECS (Solo vs IA ou Duel à 2) ---------
+function startChessGame(mode){
+  mode = mode === 'solo' ? 'solo' : 'duel';
+  activeGame = 'chess';
+  const canvas = document.getElementById('gameCanvas');
+  const size = 8, cell = 38;
+  canvas.width = size * cell; canvas.height = size * cell;
+  const ctx = canvas.getContext('2d');
+
+  const VALUES = { p:1, n:3, b:3, r:5, q:9, k:1000 };
+  const WHITE_GLYPH = { k:'♔', q:'♕', r:'♖', b:'♗', n:'♘', p:'♙' };
+  const BLACK_GLYPH = { k:'♚', q:'♛', r:'♜', b:'♝', n:'♞', p:'♟' };
+
+  let board, turn, selected, validTargets, gameOver, winner, aiThinking = false;
+
+  function inBounds(r, c){ return r >= 0 && r < size && c >= 0 && c < size; }
+
+  function initBoard(){
+    board = Array.from({ length: size }, () => Array(size).fill(null));
+    const back = ['r','n','b','q','k','b','n','r'];
+    for (let c = 0; c < size; c++) {
+      board[0][c] = { type: back[c], player: 2 };
+      board[1][c] = { type: 'p', player: 2 };
+      board[6][c] = { type: 'p', player: 1 };
+      board[7][c] = { type: back[c], player: 1 };
+    }
+    turn = 1; selected = null; validTargets = []; gameOver = false; winner = null; aiThinking = false;
+    updateStatus();
+  }
+
+  function hasKing(player){
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) if (board[r][c] && board[r][c].type === 'k' && board[r][c].player === player) return true;
+    return false;
+  }
+
+  function countMaterial(player){
+    let s = 0;
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) { const p = board[r][c]; if (p && p.player === player && p.type !== 'k') s += VALUES[p.type]; }
+    return s;
+  }
+
+  function slideMoves(r, c, dirs, piece){
+    const moves = [];
+    dirs.forEach(([dr, dc]) => {
+      let nr = r + dr, nc = c + dc;
+      while (inBounds(nr, nc)) {
+        const t = board[nr][nc];
+        if (!t) { moves.push({ r: nr, c: nc, capture: null }); }
+        else { if (t.player !== piece.player) moves.push({ r: nr, c: nc, capture: { r: nr, c: nc } }); break; }
+        nr += dr; nc += dc;
+      }
+    });
+    return moves;
+  }
+
+  function movesFor(r, c){
+    const piece = board[r][c];
+    if (!piece) return [];
+    const moves = [];
+    if (piece.type === 'p') {
+      const dir = piece.player === 1 ? -1 : 1;
+      const startRow = piece.player === 1 ? 6 : 1;
+      const oneR = r + dir;
+      if (inBounds(oneR, c) && !board[oneR][c]) {
+        moves.push({ r: oneR, c, capture: null });
+        const twoR = r + dir * 2;
+        if (r === startRow && !board[twoR][c]) moves.push({ r: twoR, c, capture: null });
+      }
+      [c - 1, c + 1].forEach(nc => {
+        if (inBounds(oneR, nc)) {
+          const t = board[oneR][nc];
+          if (t && t.player !== piece.player) moves.push({ r: oneR, c: nc, capture: { r: oneR, c: nc } });
+        }
+      });
+    } else if (piece.type === 'n') {
+      [[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]].forEach(([dr, dc]) => {
+        const nr = r + dr, nc = c + dc;
+        if (inBounds(nr, nc)) {
+          const t = board[nr][nc];
+          if (!t) moves.push({ r: nr, c: nc, capture: null });
+          else if (t.player !== piece.player) moves.push({ r: nr, c: nc, capture: { r: nr, c: nc } });
+        }
+      });
+    } else if (piece.type === 'b') {
+      moves.push(...slideMoves(r, c, [[-1,-1],[-1,1],[1,-1],[1,1]], piece));
+    } else if (piece.type === 'r') {
+      moves.push(...slideMoves(r, c, [[-1,0],[1,0],[0,-1],[0,1]], piece));
+    } else if (piece.type === 'q') {
+      moves.push(...slideMoves(r, c, [[-1,-1],[-1,1],[1,-1],[1,1],[-1,0],[1,0],[0,-1],[0,1]], piece));
+    } else if (piece.type === 'k') {
+      [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]].forEach(([dr, dc]) => {
+        const nr = r + dr, nc = c + dc;
+        if (inBounds(nr, nc)) {
+          const t = board[nr][nc];
+          if (!t) moves.push({ r: nr, c: nc, capture: null });
+          else if (t.player !== piece.player) moves.push({ r: nr, c: nc, capture: { r: nr, c: nc } });
+        }
+      });
+    }
+    return moves;
+  }
+
+  function updateStatus(){
+    document.getElementById('gameScoreVal').textContent = countMaterial(1) + ' - ' + countMaterial(2);
+    if (gameOver) {
+      const who = mode === 'solo' ? (winner === 1 ? 'Vous gagnez 🎉' : 'L’IA gagne') : ('Joueur ' + winner + ' gagne !');
+      document.getElementById('gameExtraInfo').textContent = who;
+    } else if (mode === 'solo' && turn === 2) {
+      document.getElementById('gameExtraInfo').textContent = "L'IA réfléchit…";
+    } else {
+      document.getElementById('gameExtraInfo').textContent = mode === 'solo' ? 'À vous de jouer' : ('Tour Joueur ' + turn);
+    }
+  }
+
+  function select(r, c){
+    const piece = board[r][c];
+    if (!piece || piece.player !== turn) { selected = null; validTargets = []; return; }
+    selected = { r, c };
+    validTargets = movesFor(r, c);
+  }
+
+  function applyMove(from, target){
+    const piece = board[from.r][from.c];
+    board[from.r][from.c] = null;
+    board[target.r][target.c] = piece;
+    if (piece.type === 'p' && (target.r === 0 || target.r === size - 1)) piece.type = 'q';
+    selected = null; validTargets = [];
+
+    if (!hasKing(1)) { gameOver = true; winner = 2; }
+    else if (!hasKing(2)) { gameOver = true; winner = 1; }
+    else { turn = turn === 1 ? 2 : 1; }
+    updateStatus();
+
+    if (!gameOver && mode === 'solo' && turn === 2) {
+      aiThinking = true;
+      setTimeout(aiMove, 550);
+    }
+  }
+
+  function move(target){ applyMove(selected, target); }
+
+  function aiMove(){
+    aiThinking = false;
+    if (gameOver || turn !== 2) return;
+    const all = [];
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) {
+      if (board[r][c] && board[r][c].player === 2) {
+        movesFor(r, c).forEach(m => all.push({ from: { r, c }, to: m }));
+      }
+    }
+    if (!all.length) { gameOver = true; winner = 1; updateStatus(); return; }
+    let best = -1, bestMoves = [];
+    all.forEach(m => {
+      let score = m.to.capture ? VALUES[board[m.to.capture.r][m.to.capture.c].type] : 0;
+      score += Math.random() * 0.6;
+      if (score > best) { best = score; bestMoves = [m]; }
+      else if (score === best) bestMoves.push(m);
+    });
+    const chosen = bestMoves[Math.floor(Math.random() * bestMoves.length)];
+    applyMove(chosen.from, chosen.to);
+  }
+
+  function draw(){
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) {
+      const x = c * cell, y = r * cell;
+      ctx.fillStyle = (r + c) % 2 === 1 ? '#4a5a3a' : '#eee6cf';
+      ctx.fillRect(x, y, cell, cell);
+    }
+    if (selected) {
+      ctx.fillStyle = 'rgba(224,177,92,0.5)';
+      ctx.fillRect(selected.c * cell, selected.r * cell, cell, cell);
+    }
+    validTargets.forEach(m => {
+      ctx.fillStyle = m.capture ? 'rgba(224,90,90,0.85)' : 'rgba(90,224,160,0.8)';
+      ctx.beginPath();
+      ctx.arc(m.c*cell + cell/2, m.r*cell + cell/2, 8, 0, Math.PI*2);
+      ctx.fill();
+    });
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) {
+      const p = board[r][c];
+      if (!p) continue;
+      const x = c*cell + cell/2, y = r*cell + cell/2;
+      const glyph = p.player === 1 ? WHITE_GLYPH[p.type] : BLACK_GLYPH[p.type];
+      ctx.font = '30px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.shadowBlur = 4;
+      ctx.shadowColor = p.player === 1 ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.25)';
+      ctx.fillStyle = p.player === 1 ? '#fdf6e3' : '#20232b';
+      ctx.fillText(glyph, x, y + 2);
+      ctx.shadowBlur = 0;
+    }
+  }
 
   initBoard();
-}
 
+  function loop(){ draw(); gameRAF = requestAnimationFrame(loop); }
+  loop();
+
+  const onTap = (e) => {
+    if (gameOver) { initBoard(); return; }
+    if (mode === 'solo' && (turn === 2 || aiThinking)) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+    const c = Math.floor(x / cell), r = Math.floor(y / cell);
+    if (selected) {
+      const tgt = validTargets.find(m => m.r === r && m.c === c);
+      if (tgt) { move(tgt); return; }
+    }
+    select(r, c);
+  };
+  canvas.addEventListener('click', onTap);
+  gameTouchCleanup = () => canvas.removeEventListener('click', onTap);
+}
 // ===== Autres fonctions existantes (reviews, suggestions...) =====
 function toggleReviews(element) {
   const list = element.querySelector('.reviews-list');
@@ -3202,6 +3576,13 @@ function submitSuggestion(e) {
     <div class="game-modal-score">
       <span>Score : <b id="gameScoreVal">0</b></span>
       <span id="gameExtraInfo"></span>
+    </div>
+    <div class="game-mode-select" id="gameModeSelect" style="display:none;">
+      <p>Choisissez un mode de jeu :</p>
+      <div class="game-mode-buttons">
+        <button class="mode-btn" type="button" id="modeSoloBtn"><span class="mode-emoji">🤖</span>Solo (vs IA)</button>
+        <button class="mode-btn" type="button" id="modeDuelBtn"><span class="mode-emoji">🧑‍🤝‍🧑</span>Duel (2 joueurs)</button>
+      </div>
     </div>
     <canvas id="gameCanvas" width="320" height="180"></canvas>
     <p class="game-modal-hint" id="gameModalHint">Touchez l'écran ou appuyez sur Espace pour sauter</p>
