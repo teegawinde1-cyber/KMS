@@ -1597,16 +1597,16 @@
   function getServiceMessage(service, flow, subtype, mapsLink){
     const base = "Bonjour bienvenue Merci de la confiance accordée.";
     if(flow === 'film'){
-      return "Salut je voudrais";
+      return "Bonjour, je voudrais commander un film ou une application. Voici mes précisions : ";
     }
     if(flow === 'photo'){
-      return "Salut je voudrais modifier cette image";
+      return "Bonjour, je voudrais faire retoucher une photo. Je vous l'envoie juste après ce message.";
     }
     if(flow === 'document'){
       if(subtype === 'modification'){
-        return "Salut je voudrais modifier ce document";
+        return "Bonjour, je voudrais faire modifier un document. Je vous l'envoie juste après ce message.";
       }
-      return "Salut je voudrais saisir ce document";
+      return "Bonjour, je voudrais faire saisir un document. Je vous l'envoie juste après ce message.";
     }
     if(flow === 'delivery'){
       let msg = "Bonjour, je voudrais me faire livrer un produit (hors films/applications).\n- Produit : \n- Quantité : \n- Lieu de livraison : ";
